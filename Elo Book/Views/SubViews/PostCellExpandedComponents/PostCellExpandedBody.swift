@@ -14,7 +14,7 @@ struct PostCellExpandedBody: View {
         if let caption = post.caption {
             HStack {
                 Text(caption)
-                    .font(.footnote)
+                    .font(.subheadline)
                     .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     
                 Spacer()

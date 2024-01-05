@@ -16,14 +16,14 @@ struct PostCellBody: View {
             Group {
                 if caption.count > 200 {
                     Text("\(String(caption.prefix(125)))")
-                        .font(.footnote)
+                        .font(.subheadline)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                         
                     Button {
                         expandPost.toggle()
                     } label: {
                         Text("... Tap to expand.")
-                            .font(.footnote)
+                            .font(.subheadline)
                             .foregroundColor(.blue)
                     }
                     
@@ -33,7 +33,7 @@ struct PostCellBody: View {
                 } else {
                     HStack {
                         Text(caption)
-                            .font(.footnote)
+                            .font(.subheadline)
                             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                             
                         Spacer()

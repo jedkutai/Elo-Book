@@ -65,7 +65,7 @@ struct CommentCell: View {
                                         commentDeleted.toggle()
                                     } label: {
                                         Label("Delete", systemImage: "trash")
-                                            .font(.footnote)
+                                            .font(.subheadline)
                                             .foregroundStyle(Color(.red))
                                     }
                                 }
@@ -75,7 +75,7 @@ struct CommentCell: View {
                             
                             HStack {
                                 Text(comment.caption)
-                                    .font(.footnote)
+                                    .font(.subheadline)
                                     .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                                 
                                 Spacer()
@@ -86,7 +86,7 @@ struct CommentCell: View {
                         
                         VStack {
                             Text(DateFormatter.shortDate(timestamp: comment.timestamp))
-                                .font(.footnote)
+                                .font(.subheadline)
                                 .foregroundColor(.gray)
                             Button {
                                 Task {
@@ -115,7 +115,7 @@ struct CommentCell: View {
                                     }
                                     
                                     Text("\(likes.count)")
-                                        .font(.footnote)
+                                        .font(.subheadline)
                                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                                     
                                 }

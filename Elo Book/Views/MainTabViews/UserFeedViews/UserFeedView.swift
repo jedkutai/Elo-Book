@@ -28,7 +28,9 @@ struct UserFeedView: View {
                 VStack {
                     HStack {
                         Text("elo")
-                            .font(.headline)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                             .padding(.horizontal, 30)
                         
                         Spacer()
@@ -38,6 +40,7 @@ struct UserFeedView: View {
                         LazyVStack {
                             ForEach(userFeedPosts, id: \.id) { post in
                                 PostCell(user: user, post: post)
+                                    .padding(.top, 1)
                             }
                             
                             if userFeedPosts.count >= 20 {
@@ -95,19 +98,19 @@ struct UserFeedView: View {
                             showCreatePostView.toggle()
                         } label: {
                             Circle()
-                                .fill(Color.white)
-                                .frame(width: 30, height: 30)
+                                .fill(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                                .frame(width: 40, height: 40)
                                 .overlay(
                                     Image(systemName: "square.and.pencil.circle.fill")
                                         .resizable()
                                         .scaledToFit()
                                         .foregroundColor(Color(.systemBlue))
-                                        .frame(width: 28, height: 28)
+                                        .frame(width: 38, height: 38)
                                 )
                             
                         }
                     }
-                    .padding(10)
+                    .padding(20)
                 }
             }
             

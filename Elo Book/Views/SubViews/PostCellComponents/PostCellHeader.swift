@@ -59,8 +59,8 @@ struct PostCellHeader: View {
                     Button {
                         showMore.toggle()
                     } label: {
-                        Image(systemName: showMore ? "diamond" : "plus")
-                            .foregroundStyle(Theme.buttonColor)
+                        Image(systemName: "plus")
+                            .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                     }
                 }
             }

@@ -95,7 +95,7 @@ struct SelectFavoriteSportsView: View {
                     HStack {
                         Spacer()
                         Text("The sports you select will appear the most on your discover page.")
-                            .font(.footnote)
+                            .font(.subheadline)
                             .foregroundStyle(Color(.systemGray))
                         Spacer()
                     }

@@ -85,7 +85,7 @@ struct AltProfileHeader: View {
                 if let bio = viewedUser.bio {
                     HStack {
                         Text("\(bio)")
-                            .font(.footnote)
+                            .font(.subheadline)
                             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                         Spacer()
                     }

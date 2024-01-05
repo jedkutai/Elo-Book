@@ -21,7 +21,7 @@ struct PostCellExpandedTextBox: View {
             
             TextField("Comment", text: $caption, axis: .vertical)
                 .autocapitalization(.none)
-                .font(.footnote)
+                .font(.subheadline)
                 
             
             Spacer()
@@ -49,12 +49,12 @@ struct PostCellExpandedTextBox: View {
                         
                     } label: {
                         Text("Post")
-                            .font(.footnote)
+                            .font(.subheadline)
                             .foregroundStyle(Color(.systemBlue))
                     }
                 } else {
                     Text("Post")
-                        .font(.footnote)
+                        .font(.subheadline)
                         .foregroundStyle(Color(.systemRed))
                 }
             }

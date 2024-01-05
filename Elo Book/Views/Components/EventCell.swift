@@ -31,12 +31,12 @@ struct EventCell: View {
                 
                 VStack {
                     Text(event.title)
-                        .font(.footnote)
+                        .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     
                     Text("\(DateFormatter.longDate(timestamp: event.timestamp))")
-                        .font(.footnote)
+                        .font(.subheadline)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 }
                 
