@@ -1,0 +1,93 @@
+//
+//  ExpandedPostCell.swift
+//  EloBookv1
+//
+//  Created by Jed Kutai on 12/28/23.
+//
+
+import SwiftUI
+
+struct ExpandedPostCell: View {
+    @State var user: User
+    @State var postUser: User
+    @State var post: Post
+    @Binding var comments: [Comment]
+    @Binding var likes: [PostLike]
+    
+    @State private var events: [Event]?
+    @State private var posting: Bool = false
+    @State private var caption: String = ""
+    @StateObject private var viewModel = UploadComment()
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        NavigationStack {
+            VStack {
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                    }
+                    
+                    if let events = events {
+                        if !events.isEmpty {
+                            EventsHorizontalScroll(user: $user, events: events)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                }
+                .padding(.leading)
+                .padding(.bottom, 5)
+                
+                ScrollView {
+                    VStack {
+                        PostCellExpandedHeader(user: $user, postUser: $postUser)
+                        PostCellExpandedBody(post: $post)
+                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes)
+                    }
+                    .padding(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color(.gray).opacity(0.5), lineWidth: 2)
+                    )
+                    .padding(.horizontal)
+                    
+                    
+                    ForEach(comments, id: \.id) { comment in
+                        CommentCell(user: user, comment: comment)
+                    }
+                    .padding(10)
+                }
+                .refreshable {
+                    likes = []
+                    comments = []
+                    events = []
+                    Task {
+                        if let eventIds = post.eventIds {
+                            events = try await FetchService.fetchEventsByEventIds(eventIds: eventIds)
+                        }
+                        likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
+                        comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
+                    }
+                }
+                
+                PostCellExpandedTextBox(user: $user, post: $post, likes: $likes, comments: $comments, posting: $posting, caption: $caption, viewModel: viewModel)
+            }
+            .onTapGesture {
+                hideKeyboard()
+            }
+            .onAppear {
+                Task {
+                    if let eventIds = post.eventIds {
+                        events = try await FetchService.fetchEventsByEventIds(eventIds: eventIds)
+                    }
+                }
+            }
+        }
+    }
+}
+

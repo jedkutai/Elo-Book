@@ -1,61 +1,48 @@
 //
 //  ContentView.swift
-//  Elo Book
+//  EloBookv1
 //
-//  Created by Jed Kutai on 1/4/24.
+//  Created by Jed Kutai on 12/23/23.
 //
 
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @EnvironmentObject var x: X
+    
+    @State private var userId = ""
+    @State private var user: User?
+    
+    @State private var loggedIn = false
+    @State private var failedLogin = false
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        if x.email.isEmpty || failedLogin {
+            FirstOpenView()
+        }
+        else if let loggedInUser = user {
+            MainTabControllerView(user: loggedInUser)
+        }
+        else {
+            LogoView()
+                .onAppear {
+                    Task {
+                        userId = try await AuthService.login(withEmail: x.email, password: x.password)
+                        if !userId.hasPrefix("Error:") {
+                            user = try await AuthService.fetchUserById(withUid: userId)
+                            loggedIn = true
+                        } else {
+                            failedLogin = true
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
         }
     }
+    
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

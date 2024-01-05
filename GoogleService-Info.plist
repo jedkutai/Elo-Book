@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAJJ45nNB2ynYxwC24zzcoPG_Uj2clKZ-U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>355132506916</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.elobook.Elo-Book</string>
+	<key>PROJECT_ID</key>
+	<string>elobookapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>elobookapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:355132506916:ios:dc60b74bf4ec5a56e429b1</string>
+</dict>
+</plist>
