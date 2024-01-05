@@ -96,11 +96,11 @@ struct SettingsView: View {
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             .frame(height: 32)
-                            .background(.white)
+                            .background(colorScheme == .dark ? Theme.buttonColor : Theme.buttonColorDarkMode)
                             .foregroundStyle(Color(.systemRed))
                             .cornerRadius(6)
                             .overlay(RoundedRectangle(cornerRadius: 6)
-                                .stroke(.black, lineWidth: 1))
+                                .stroke(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor, lineWidth: 1))
                             .padding(.top)
                     }
                 }

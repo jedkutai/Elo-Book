@@ -18,6 +18,7 @@ struct ExpandedPostCell: View {
     @State private var events: [Event]?
     @State private var posting: Bool = false
     @State private var loadingMorePosts: Bool = false
+    @State private var swipeStarted = false
     @State private var caption: String = ""
     @StateObject private var viewModel = UploadComment()
     @Environment(\.dismiss) private var dismiss
@@ -29,13 +30,16 @@ struct ExpandedPostCell: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: "chevron.down")
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                     }
                     
                     if let events = events {
                         if !events.isEmpty {
                             EventsHorizontalScroll(user: $user, events: events)
+                        } else {
+                            Text("Invisible Invisible")
+                                .foregroundColor(colorScheme == .dark ? Theme.buttonColor : Theme.buttonColorDarkMode)
                         }
                     }
                     
@@ -117,6 +121,18 @@ struct ExpandedPostCell: View {
                     }
                 }
             }
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.startLocation.y < 40 {
+                            self.swipeStarted = true
+                        }
+                    }
+                    .onEnded { _ in
+                        self.swipeStarted = false
+                        dismiss()
+                    }
+            )
         }
     }
 }

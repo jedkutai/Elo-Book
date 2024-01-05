@@ -10,13 +10,14 @@ import SwiftUI
 struct EventView: View {
     @State var user: User
     @State var event: Event
-    
+    @State private var posts: [Post] = []
     @State private var loadingMorePosts = false
     @State private var sortByScore = true
     @State private var showCreatePostView = false
     @State private var postCreated = false
+    @State private var swipeStarted = false
     
-    @State private var posts: [Post] = []
+    
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -63,6 +64,7 @@ struct EventView: View {
                         LazyVStack {
                             ForEach(posts, id: \.id) { post in
                                 PostCell(user: user, post: post)
+                                    .padding(.top, 1)
                             }
                             
                             if posts.count >= 20 {
@@ -133,6 +135,18 @@ struct EventView: View {
             }
             
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    if value.startLocation.y < 40 {
+                        self.swipeStarted = true
+                    }
+                }
+                .onEnded { _ in
+                    self.swipeStarted = false
+                    dismiss()
+                }
+        )
         .fullScreenCover(isPresented: $showCreatePostView) {
             CreatePostController(user: user, postCreated: $postCreated, events: [event])
         }

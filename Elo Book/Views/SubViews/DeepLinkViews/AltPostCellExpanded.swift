@@ -21,6 +21,7 @@ struct AltPostCellExpanded: View {
     @State private var caption = ""
     @State private var posting = false
     @State private var loadingMorePosts = false
+    @State private var swipeStarted = false
     @StateObject private var viewModel = UploadComment()
     @Environment(\.dismiss) private var dismiss
     
@@ -34,12 +35,15 @@ struct AltPostCellExpanded: View {
                         Button {
                             dismiss()
                         } label: {
-                            Image(systemName: "chevron.left")
+                            Image(systemName: "chevron.down")
                                 .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                         }
                         
                         if let events = events {
                             EventsHorizontalScroll(user: $user, events: events)
+                        } else {
+                            Text("Invisible Invisible")
+                                .foregroundColor(colorScheme == .dark ? Theme.buttonColor : Theme.buttonColorDarkMode)
                         }
                         
                     }
@@ -118,6 +122,18 @@ struct AltPostCellExpanded: View {
             .onTapGesture {
                 hideKeyboard()
             }
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.startLocation.y < 40 {
+                            self.swipeStarted = true
+                        }
+                    }
+                    .onEnded { _ in
+                        self.swipeStarted = false
+                        dismiss()
+                    }
+            )
             
         }
     }
