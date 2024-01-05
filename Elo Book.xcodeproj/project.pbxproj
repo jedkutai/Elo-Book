@@ -21,7 +21,6 @@
 		A74BA8842B4779BF00F62D08 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A74BA8832B4779BF00F62D08 /* Kingfisher */; };
 		A74BA8872B4779DB00F62D08 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = A74BA8862B4779DB00F62D08 /* CropViewController */; };
 		A74BA8892B4779DB00F62D08 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = A74BA8882B4779DB00F62D08 /* TOCropViewController */; };
-		A74BA88C2B4779E800F62D08 /* ImageCropper in Frameworks */ = {isa = PBXBuildFile; productRef = A74BA88B2B4779E800F62D08 /* ImageCropper */; };
 		A74BA8942B477A6E00F62D08 /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA8912B477A6E00F62D08 /* Dimensions.swift */; };
 		A74BA8952B477A6E00F62D08 /* IGTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA8922B477A6E00F62D08 /* IGTextFieldModifier.swift */; };
 		A74BA8962B477A6E00F62D08 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA8932B477A6E00F62D08 /* Theme.swift */; };
@@ -242,7 +241,6 @@
 				A74BA8872B4779DB00F62D08 /* CropViewController in Frameworks */,
 				A752E2F52B4775880007842A /* FirebaseRemoteConfig in Frameworks */,
 				A752E2D12B4775880007842A /* FirebaseAppDistribution-Beta in Frameworks */,
-				A74BA88C2B4779E800F62D08 /* ImageCropper in Frameworks */,
 				A752E2D52B4775880007842A /* FirebaseAuthCombine-Community in Frameworks */,
 				A752E2F32B4775880007842A /* FirebasePerformance in Frameworks */,
 				A752E2EB2B4775880007842A /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -637,7 +635,6 @@
 				A74BA8832B4779BF00F62D08 /* Kingfisher */,
 				A74BA8862B4779DB00F62D08 /* CropViewController */,
 				A74BA8882B4779DB00F62D08 /* TOCropViewController */,
-				A74BA88B2B4779E800F62D08 /* ImageCropper */,
 			);
 			productName = "Elo Book";
 			productReference = A752E2B02B4773550007842A /* Elo Book.app */;
@@ -1046,11 +1043,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A74BA8852B4779DB00F62D08 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
-		};
-		A74BA88B2B4779E800F62D08 /* ImageCropper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A74BA88A2B4779E800F62D08 /* XCRemoteSwiftPackageReference "ImageCropper" */;
-			productName = ImageCropper;
 		};
 		A752E2C62B4775880007842A /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
