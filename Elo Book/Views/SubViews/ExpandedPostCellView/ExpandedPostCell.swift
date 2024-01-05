@@ -13,9 +13,11 @@ struct ExpandedPostCell: View {
     @State var post: Post
     @Binding var comments: [Comment]
     @Binding var likes: [PostLike]
+    @Binding var commentCount: Int
     
     @State private var events: [Event]?
     @State private var posting: Bool = false
+    @State private var loadingMorePosts: Bool = false
     @State private var caption: String = ""
     @StateObject private var viewModel = UploadComment()
     @Environment(\.dismiss) private var dismiss
@@ -47,7 +49,7 @@ struct ExpandedPostCell: View {
                     VStack {
                         PostCellExpandedHeader(user: $user, postUser: $postUser)
                         PostCellExpandedBody(post: $post)
-                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes)
+                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }
                     .padding(10)
                     .background(
@@ -61,6 +63,33 @@ struct ExpandedPostCell: View {
                         CommentCell(user: user, comment: comment)
                     }
                     .padding(10)
+                    
+                    if comments.count >= 20 {
+                        Button {
+                            if !loadingMorePosts {
+                                loadingMorePosts.toggle()
+                                Task {
+                                    comments = try await FetchService.fetchMoreCommentsByPostId(postId: post.id, limit: comments.count)
+                                    loadingMorePosts.toggle()
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Spacer()
+                                
+                                if loadingMorePosts {
+                                    ProgressView()
+                                } else {
+                                    Text("Load more")
+                                        .font(.footnote)
+                                        .foregroundStyle(Color(.gray).opacity(0.3))
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                    }
+                    
                 }
                 .refreshable {
                     likes = []
@@ -72,6 +101,7 @@ struct ExpandedPostCell: View {
                         }
                         likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
                         comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
+                        commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                     }
                 }
                 

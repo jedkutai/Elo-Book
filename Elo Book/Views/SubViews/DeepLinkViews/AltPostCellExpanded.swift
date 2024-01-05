@@ -12,13 +12,15 @@ struct AltPostCellExpanded: View {
     @State var user: User
     @State var postUser: User
     @State var post: Post
-    @State var comments: [Comment]
+    @State private var comments: [Comment] = []
     
+    @State private var commentCount: Int = 0
     @State private var likes: [PostLike] = []
     
     @State private var events: [Event]?
     @State private var caption = ""
     @State private var posting = false
+    @State private var loadingMorePosts = false
     @StateObject private var viewModel = UploadComment()
     @Environment(\.dismiss) private var dismiss
     
@@ -48,7 +50,7 @@ struct AltPostCellExpanded: View {
                         
                         PostCellExpandedBody(post: $post)
                         
-                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes)
+                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }
                     .padding(10)
                     .frame(width: UIScreen.main.bounds.width - 20)
@@ -58,7 +60,34 @@ struct AltPostCellExpanded: View {
                     )
                     
                     
-                    PostCellExpandedComments(user: $user, comments: $comments)
+                    ForEach(comments, id: \.id) { comment in
+                        CommentCell(user: user, comment: comment)
+                    }
+                    
+                    if comments.count >= 20 {
+                        Button {
+                            if !loadingMorePosts {
+                                loadingMorePosts.toggle()
+                                Task {
+                                    comments = try await FetchService.fetchMoreCommentsByPostId(postId: post.id, limit: comments.count)
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Spacer()
+                                
+                                if loadingMorePosts {
+                                    ProgressView()
+                                } else {
+                                    Text("Load more")
+                                        .font(.footnote)
+                                        .foregroundStyle(Color(.gray).opacity(0.3))
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                    }
                 }
                 .refreshable {
                     likes = []
@@ -70,6 +99,7 @@ struct AltPostCellExpanded: View {
                         }
                         likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
                         comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
+                        commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                     }
                 }
                 
@@ -82,6 +112,7 @@ struct AltPostCellExpanded: View {
                     }
                     likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
                     comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
+                    commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 }
             }
             .onTapGesture {

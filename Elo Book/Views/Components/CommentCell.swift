@@ -102,16 +102,10 @@ struct CommentCell: View {
                                 HStack {
                                     if likes.contains(where: { $0.userId == user.id }) {
                                         Image(systemName: "square.stack.3d.up")
-                                            .resizable()
-                                            .scaledToFit()
                                             .foregroundColor(Theme.buttonColorInteracted)
-                                            .frame(height: Dimensions.buttonHeight)
                                     } else {
                                         Image(systemName: "square.stack.3d.up")
-                                            .resizable()
-                                            .scaledToFit()
                                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                                            .frame(height: Dimensions.buttonHeight)
                                     }
                                     
                                     Text("\(likes.count)")

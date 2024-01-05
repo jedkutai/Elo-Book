@@ -23,7 +23,6 @@ struct DeepLinkControllerView: View {
     
     @State private var post: Post?
     @State private var postUser: User?
-    @State private var comments: [Comment]?
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -34,8 +33,8 @@ struct DeepLinkControllerView: View {
         } else {
             if let viewedUser = viewedUser {
                 AltUserProfileView(user: user, viewedUser: viewedUser)
-            } else if let post = post, let postUser = postUser, let comments = comments {
-                AltPostCellExpanded(user: user, postUser: postUser, post: post, comments: comments)
+            } else if let post = post, let postUser = postUser {
+                AltPostCellExpanded(user: user, postUser: postUser, post: post)
             }
         }
     }
@@ -65,7 +64,7 @@ struct DeepLinkControllerView: View {
                     post = try await FetchService.fetchPostByPostId(postId: deepLinkId)
                     if let post = post {
                         postUser = try await FetchService.fetchUserById(withUid: post.userId)
-                        comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
+                        
                         loading = false
                     } else {
                         dismiss()

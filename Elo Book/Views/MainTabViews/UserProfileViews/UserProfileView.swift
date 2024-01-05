@@ -49,7 +49,7 @@ struct UserProfileView: View {
                             PostCell(user: user, post: post, postUser: user)
                         }
                         
-                        if !userProfilePosts.isEmpty {
+                        if userProfilePosts.count >= 20 {
                             Button {
                                 if !loadingMorePosts {
                                     loadingMorePosts.toggle()

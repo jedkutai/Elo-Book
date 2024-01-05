@@ -17,10 +17,10 @@ struct Theme {
     static var blackLogoString: String = "elo_logo_black"
     
     static var buttonColor: Color = Color.black
-    static var buttonColorDarkMode: Color = Color(.white).opacity(0.85)
+    static var buttonColorDarkMode: Color = Color.white
     
     
     static var textColor: Color = Color.black //
-    static var textColorDarkMode: Color = Color(.white).opacity(0.85)
+    static var textColorDarkMode: Color = Color.white
     
 }

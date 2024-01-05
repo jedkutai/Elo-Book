@@ -42,9 +42,6 @@ struct AltUserProfileView: View {
                             if !shareLink.isEmpty {
                                 ShareLink(item: shareLink) {
                                     Image(systemName: "square.and.arrow.up")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: Dimensions.buttonHeight)
                                         .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                                 }
                             } else {
@@ -52,9 +49,6 @@ struct AltUserProfileView: View {
                                     shareLink = DeepLink.createUserProfileLink(user: viewedUser)
                                 } label: {
                                     Image(systemName: "square.and.arrow.up")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: Dimensions.buttonHeight)
                                         .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                                 }
                             }
@@ -70,7 +64,7 @@ struct AltUserProfileView: View {
                             PostCell(user: user, post: post, postUser: viewedUser)
                         }
                         
-                        if !userProfilePosts.isEmpty {
+                        if userProfilePosts.count >= 20 {
                             Button {
                                 if !loadingMorePosts {
                                     loadingMorePosts.toggle()

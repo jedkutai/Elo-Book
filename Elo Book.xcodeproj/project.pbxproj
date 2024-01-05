@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A731B7982B48407100DAD87A /* elo_book_app_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = A731B7972B48407100DAD87A /* elo_book_app_icon5.png */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA8782B4779A200F62D08 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86D2B4779A100F62D08 /* Thread.swift */; };
 		A74BA8792B4779A200F62D08 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86E2B4779A100F62D08 /* Message.swift */; };
@@ -125,6 +126,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A731B7972B48407100DAD87A /* elo_book_app_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elo_book_app_icon5.png; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86D2B4779A100F62D08 /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		A74BA86E2B4779A100F62D08 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 		A752E2A72B4773550007842A = {
 			isa = PBXGroup;
 			children = (
+				A731B7972B48407100DAD87A /* elo_book_app_icon5.png */,
 				A752E2C32B4775510007842A /* GoogleService-Info.plist */,
 				A752E2B22B4773550007842A /* Elo Book */,
 				A752E2B12B4773550007842A /* Products */,
@@ -684,6 +687,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A731B7982B48407100DAD87A /* elo_book_app_icon5.png in Resources */,
 				A752E2BD2B4773560007842A /* Preview Assets.xcassets in Resources */,
 				A752E2BA2B4773560007842A /* Assets.xcassets in Resources */,
 				A752E2C42B4775510007842A /* GoogleService-Info.plist in Resources */,

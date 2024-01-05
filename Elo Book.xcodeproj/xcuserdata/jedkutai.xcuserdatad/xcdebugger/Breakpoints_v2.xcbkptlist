@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "74BB5209-B9E2-46FA-B6CE-D91028503F74"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3D38F61C-476F-422F-9A62-D49731193F56"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Elo Book/Views/SubViews/PostCellComponents/PostCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "postCell"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "3D38F61C-476F-422F-9A62-D49731193F56 - 2de8291dfad5a13e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in closure #2 () -&gt; () in Elo_Book.PostCell.postCell.getter : some"
+                  moduleName = "Elo Book"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/JEDAGAIN/Elo%20Book/Elo%20Book/Views/SubViews/PostCellComponents/PostCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "476">
+               </Location>
+               <Location
+                  uuid = "3D38F61C-476F-422F-9A62-D49731193F56 - 842be4ea950e1c2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for closure #1 @Sendable () async throws -&gt; () in closure #2 () -&gt; () in Elo_Book.PostCell.postCell.getter : some"
+                  moduleName = "Elo Book"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/JEDAGAIN/Elo%20Book/Elo%20Book/Views/SubViews/PostCellComponents/PostCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "3D38F61C-476F-422F-9A62-D49731193F56 - 713c6612206ce538"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in closure #2 () -&gt; () in Elo_Book.PostCell.postCell.getter : some"
+                  moduleName = "Elo Book"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/JEDAGAIN/Elo%20Book/Elo%20Book/Views/SubViews/PostCellComponents/PostCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "3D38F61C-476F-422F-9A62-D49731193F56 - 17cbe40c75196d34"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(9) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in closure #2 () -&gt; () in Elo_Book.PostCell.postCell.getter : some"
+                  moduleName = "Elo Book"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/JEDAGAIN/Elo%20Book/Elo%20Book/Views/SubViews/PostCellComponents/PostCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

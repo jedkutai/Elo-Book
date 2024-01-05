@@ -116,14 +116,14 @@ struct EventView: View {
                             showCreatePostView.toggle()
                         } label: {
                             Circle()
-                                .fill(Color.white)
-                                .frame(width: 30, height: 30)
+                                .fill(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                                .frame(width: 40, height: 40)
                                 .overlay(
                                     Image(systemName: "square.and.pencil.circle.fill")
                                         .resizable()
                                         .scaledToFit()
                                         .foregroundColor(Color(.systemBlue))
-                                        .frame(width: 28, height: 28)
+                                        .frame(width: 38, height: 38)
                                 )
                             
                         }

@@ -13,6 +13,7 @@ struct PostCellFooter: View {
     @Binding var likes: [PostLike]
     @Binding var comments: [Comment]
     @Binding var expandPost: Bool
+    @Binding var commentCount: Int
     
     @State private var shareLink = ""
     @Environment(\.colorScheme) var colorScheme
@@ -38,16 +39,10 @@ struct PostCellFooter: View {
                 HStack {
                     if likes.contains(where: { $0.userId == user.id }) { // if post is liked
                         Image(systemName: "square.stack.3d.up.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: Dimensions.buttonHeight)
                             .foregroundColor(Theme.buttonColorInteracted)
                             
                     } else {
                         Image(systemName: "square.stack.3d.up")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: Dimensions.buttonHeight)
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                             
                         
@@ -67,11 +62,11 @@ struct PostCellFooter: View {
             } label: {
                 HStack {
                     Image(systemName: "bubble")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: Dimensions.buttonHeight)
                         .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                        
+                    
+                    Text("\(commentCount)")
+                        .font(.footnote)
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 }
             }
             Spacer()
@@ -79,9 +74,6 @@ struct PostCellFooter: View {
             if !shareLink.isEmpty {
                 ShareLink(item: shareLink) {
                     Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: Dimensions.buttonHeight)
                         .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                 }
             } else {
@@ -89,9 +81,6 @@ struct PostCellFooter: View {
                     shareLink = DeepLink.createPostLink(post: post)
                 } label: {
                     Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: Dimensions.buttonHeight)
                         .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                 }
             }

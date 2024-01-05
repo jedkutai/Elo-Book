@@ -15,6 +15,7 @@ struct PostCell: View {
     
     @State private var likes: [PostLike] = []
     @State private var comments: [Comment] = []
+    @State private var commentCount: Int = 0
     
     @State private var expandPost = false
     @State private var postDeleted = false
@@ -38,10 +39,10 @@ struct PostCell: View {
                     
                     PostCellBody(post: $post, expandPost: $expandPost)
                     
-                    PostCellFooter(user: $user, post: $post, likes: $likes, comments: $comments, expandPost: $expandPost)
+                    PostCellFooter(user: $user, post: $post, likes: $likes, comments: $comments, expandPost: $expandPost, commentCount: $commentCount)
                 }
                 .fullScreenCover(isPresented: $expandPost) {
-                    ExpandedPostCell(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes)
+                    ExpandedPostCell(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount)
                 }
                 .padding(10)
                 .frame(width: UIScreen.main.bounds.width - 20)
@@ -55,6 +56,7 @@ struct PostCell: View {
         .onAppear {
             Task {
                 postUser = try await FetchService.fetchUserById(withUid: post.userId)
+                commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
                 comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
             }

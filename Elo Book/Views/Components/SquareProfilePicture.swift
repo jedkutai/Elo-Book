@@ -42,16 +42,18 @@ struct SquareProfilePicture: View {
     let user: User
     let size: ProfileImageSize
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         if let profileImageUrl = user.profileImageUrl {
             KFImage(URL(string: profileImageUrl))
                 .resizable()
                 .scaledToFit()
                 .frame(width: size.dimension, height: size.dimension)
-                .clipShape(RoundedRectangle(cornerRadius: size.dimension / 8)) // Adjust the corner radius as needed
+                .clipShape(RoundedRectangle(cornerRadius: size.dimension / 8))
                 .overlay(
-                    RoundedRectangle(cornerRadius: size.dimension / 8) // Same corner radius as above
-                        .stroke(Color.gray, lineWidth: size.dimension / 8 * 0.3) // Customize border color and width
+                    RoundedRectangle(cornerRadius: size.dimension / 8)
+                        .stroke(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor, lineWidth: size.dimension / 8 * 0.3)
                 )
 
         } else {
@@ -59,12 +61,9 @@ struct SquareProfilePicture: View {
                 .resizable()
                 .frame(width: size.dimension, height: size.dimension)
                 .clipped()
-                .foregroundColor(Color(.systemGray4))
+                .foregroundStyle(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
         }
         
     }
 }
 
-#Preview {
-    SquareProfilePicture(user: User.MOCK_USER, size: .small)
-}

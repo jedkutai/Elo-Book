@@ -13,6 +13,7 @@ struct PostCellExpanded: View {
     @State var postUser: User
     @State var post: Post
     @Binding var comments: [Comment]
+    @Binding var commentCount: Int
     
     @State private var likes: [PostLike] = []
     
@@ -48,7 +49,7 @@ struct PostCellExpanded: View {
                         
                         PostCellExpandedBody(post: $post)
                         
-                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes)
+                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }
                     .padding(10)
                     .frame(width: UIScreen.main.bounds.width - 20)

@@ -10,6 +10,14 @@ import Firebase
 import FirebaseFirestore
 
 struct FetchService {
+    
+    static func fetchCommentCountByPost(postId: String) async throws -> Int {
+        let query = Firestore.firestore().collection("posts").document(postId).collection("comments")
+        let snapshot = try await query.getDocuments()
+        
+        return snapshot.count
+    }
+    
     static func fetchEmptyFeedUsers(user: User) async throws -> [User] {
         var returnedUsers: [User] = []
         
@@ -167,6 +175,18 @@ struct FetchService {
         let query = Firestore.firestore().collection("posts").document(postId).collection("comments")
             .order(by: "score", descending: true)
             .limit(to: 20)
+            
+        let snapshot = try await query.getDocuments()
+        let comments = snapshot.documents.compactMap({ try? $0.data(as: Comment.self) })
+        
+        return comments
+    }
+    
+    static func fetchMoreCommentsByPostId(postId: String, limit: Int) async throws -> [Comment] {
+        
+        let query = Firestore.firestore().collection("posts").document(postId).collection("comments")
+            .order(by: "score", descending: true)
+            .limit(to: limit)
             
         let snapshot = try await query.getDocuments()
         let comments = snapshot.documents.compactMap({ try? $0.data(as: Comment.self) })

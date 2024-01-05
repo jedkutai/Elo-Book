@@ -27,11 +27,11 @@ struct UserFeedView: View {
             ZStack {
                 VStack {
                     HStack {
-                        Text("elo")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                            .padding(.horizontal, 30)
+                        Image(colorScheme == .dark ? "elo_white" : "elo_black")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 30)
+                            .padding(.horizontal)
                         
                         Spacer()
                     }

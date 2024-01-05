@@ -35,9 +35,15 @@ struct CreatePostView: View {
                     
                     Spacer()
                     
-                    Text("\(1000 - caption.count)")
-                        .foregroundStyle(caption.count < 1000 ? Theme.textColor : Color(.systemRed))
-                        .fontWeight(.semibold)
+                    if caption.count >= 1000 {
+                        Text("\(1000 - caption.count)")
+                            .foregroundColor(Color(.systemRed))
+                            .fontWeight(.semibold)
+                    } else {
+                        Text("\(1000 - caption.count)")
+                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                            .fontWeight(.semibold)
+                    }
                     
                     Spacer()
                     
@@ -101,7 +107,7 @@ struct CreatePostView: View {
                 .ignoresSafeArea()
                 .photosPickerDisabledCapabilities(.selectionActions)
                 .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
-                .frame(height: screenHeight * 0.5)
+                .frame(maxHeight: screenHeight * 0.5)
                 
             }
             .ignoresSafeArea(.keyboard)
