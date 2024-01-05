@@ -1,0 +1,41 @@
+# Xcode
+## Build generated
+build/
+DerivedData/
+
+## Playgrounds
+timeline.xctimeline
+xcuserdata/
+
+## xcworkspace
+*.xcworkspace
+
+## User-specific files
+.xcuserdatad/
+
+## IDE settings
+.idea/
+*.swiftpm/
+*.playground/
+*.xccheckout
+
+## Swift Package Manager
+.build/
+
+## Google service info plist
+GoogleService-Info.plist
+
+# Firebase configuration files
+.firebase/
+firebase.json
+.firebaserc
+
+# Firebase SDK and CLI artifacts
+firebase-debug.log
+
+# Node.js dependencies (if you are using Firebase Cloud Functions)
+node_modules/
+
+# Local development environment
+.env
+/venv
