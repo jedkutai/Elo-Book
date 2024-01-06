@@ -61,6 +61,7 @@ struct PostCellExpanded: View {
                     
                     PostCellExpandedComments(user: $user, comments: $comments)
                 }
+                .scrollDismissesKeyboard(.immediately)
                 .refreshable {
                     likes = []
                     comments = []
@@ -85,9 +86,9 @@ struct PostCellExpanded: View {
                     comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
                 }
             }
-            .onTapGesture {
-                hideKeyboard()
-            }
+//            .onTapGesture {
+//                hideKeyboard()
+//            }
             
         }
     }

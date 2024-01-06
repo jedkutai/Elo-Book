@@ -100,6 +100,7 @@ struct ExpandedPostCell: View {
                     }
                     
                 }
+                .scrollDismissesKeyboard(.immediately)
                 .refreshable {
                     likes = []
                     comments = []
@@ -116,9 +117,9 @@ struct ExpandedPostCell: View {
                 
                 PostCellExpandedTextBox(user: $user, post: $post, likes: $likes, comments: $comments, posting: $posting, caption: $caption, viewModel: viewModel)
             }
-            .onTapGesture {
-                hideKeyboard()
-            }
+//            .onTapGesture {
+//                hideKeyboard()
+//            }
             .onAppear {
                 Task {
                     if let eventIds = post.eventIds {

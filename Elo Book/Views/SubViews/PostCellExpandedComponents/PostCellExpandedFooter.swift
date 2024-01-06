@@ -86,6 +86,7 @@ struct PostCellExpandedFooter: View {
             
             Spacer()
         }
+        .padding(.top, 5)
         .padding(.horizontal, 8.0)
         .onAppear {
             shareLink = DeepLink.createPostLink(post: post)

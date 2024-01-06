@@ -93,6 +93,7 @@ struct AltPostCellExpanded: View {
                         }
                     }
                 }
+                .scrollDismissesKeyboard(.immediately)
                 .refreshable {
                     likes = []
                     comments = []
@@ -119,9 +120,9 @@ struct AltPostCellExpanded: View {
                     commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 }
             }
-            .onTapGesture {
-                hideKeyboard()
-            }
+//            .onTapGesture {
+//                hideKeyboard()
+//            }
             .gesture(
                 DragGesture()
                     .onChanged { value in

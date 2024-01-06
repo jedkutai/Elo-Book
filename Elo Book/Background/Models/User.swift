@@ -29,5 +29,5 @@ struct User: Identifiable, Hashable, Codable {
 }
 
 extension User {
-    static var MOCK_USER: User = .init(id: "MOCKID", email: "mockemail@email.com", dateOfBirth: Timestamp(), username: "mockusername", profileImageUrl: "", fullname: "Mock User", bio: "I'm a yankee doodle dandee")
+    static var MOCK_USER: User = .init(id: "", email: "", dateOfBirth: Timestamp(), username: "", profileImageUrl: "", fullname: "", bio: "")
 }

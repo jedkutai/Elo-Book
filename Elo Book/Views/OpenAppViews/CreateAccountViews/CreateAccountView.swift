@@ -58,7 +58,7 @@ struct CreateAccountView: View {
                     Text("Enter Date of Birth:")
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 }
-                .padding(.horizontal, 25)
+                .padding(25)
 
                 
                 Text("You'll use this email to sign in to your account.")
