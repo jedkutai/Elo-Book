@@ -25,7 +25,12 @@ struct ProfileHeader: View {
                         ProgressView()
                             .frame(width: 80, height: 80)
                     } else {
-                        SquareProfilePicture(user: user, size: .large)
+                        Button {
+                            editProfile = true
+                        } label: {
+                            SquareProfilePicture(user: user, size: .large)
+                        }
+                        
                     }
                     
                     VStack {

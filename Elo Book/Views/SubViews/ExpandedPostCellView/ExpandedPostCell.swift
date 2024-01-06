@@ -58,8 +58,13 @@ struct ExpandedPostCell: View {
                     .padding(10)
                     .background(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color(.gray).opacity(0.5), lineWidth: 2)
+                            .foregroundStyle(Color(.gray).opacity(0.15))
                     )
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 15)
+//                            .stroke(Color(.gray).opacity(0.5), lineWidth: 2)
+//                    )
+                    .padding(.top, 2)
                     .padding(.horizontal)
                     
                     

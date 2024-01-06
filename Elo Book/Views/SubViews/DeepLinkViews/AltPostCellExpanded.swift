@@ -62,7 +62,7 @@ struct AltPostCellExpanded: View {
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundStyle(Color(.gray).opacity(0.15))
                     )
-                    
+                    .padding(.top, 2)
                     
                     ForEach(comments, id: \.id) { comment in
                         CommentCell(user: user, comment: comment)

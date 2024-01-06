@@ -35,7 +35,7 @@ struct SelectFavoriteSportsView: View {
                     
                     Spacer()
                     
-                    if userFavorites != selectedFavorites {
+                    if userFavorites != selectedFavorites && !selectedFavorites.isEmpty {
                         Button {
                             dismiss()
                             Task {
