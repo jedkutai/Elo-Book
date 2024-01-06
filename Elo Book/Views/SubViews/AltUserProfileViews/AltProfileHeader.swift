@@ -12,6 +12,7 @@ struct AltProfileHeader: View {
     @Binding var viewedUser: User
     @State private var followingCount: Int?
     @State private var followersCount: Int?
+    @State private var postCount: Int?
     @State private var userProfilePosts: [Post] = []
     
     @State private var reloading = false
@@ -45,7 +46,7 @@ struct AltProfileHeader: View {
                             VStack {
                                 
                                 HStack{
-                                    Text(userProfilePosts.count < 20 ? "Posts: \(userProfilePosts.count)" : "Posts: who cares")
+                                    Text("Posts: \(postCount ?? 0)")
                                         .font(.footnote)
                                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                                     
@@ -53,20 +54,28 @@ struct AltProfileHeader: View {
                                 }
                                 
                                 
-                                HStack {
-                                    Text("Following: \(followingCount ?? 0)")
-                                        .font(.footnote)
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    
-                                    Spacer()
+                                NavigationLink {
+                                    FollowingView(user: user, viewedUser: viewedUser).navigationBarBackButtonHidden()
+                                } label: {
+                                    HStack {
+                                        Text("Following: \(followingCount ?? 0)")
+                                            .font(.footnote)
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                        
+                                        Spacer()
+                                    }
                                 }
                                 
-                                HStack {
-                                    Text("Followers: \(followersCount ?? 0)")
-                                        .font(.footnote)
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    
-                                    Spacer()
+                                NavigationLink {
+                                    FollowersView(user: user, viewedUser: viewedUser).navigationBarBackButtonHidden()
+                                } label: {
+                                    HStack {
+                                        Text("Followers: \(followersCount ?? 0)")
+                                            .font(.footnote)
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                        
+                                        Spacer()
+                                    }
                                 }
 
                             }
@@ -150,6 +159,7 @@ struct AltProfileHeader: View {
                     following = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: viewedUser.id)
                     followersCount = try await FetchService.fetchFollowersCount(userId: viewedUser.id)
                     followingCount = try await FetchService.fetchFollowingCount(userId: viewedUser.id)
+                    postCount = try await FetchService.fetchPostCount(userId: viewedUser.id)
                     userProfilePosts = try await FetchService.fetchUserProfilePostsByUserId(uid: viewedUser.id)
                 }
             }

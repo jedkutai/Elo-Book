@@ -12,11 +12,14 @@ struct ProfileHeader: View {
     
     @State private var followingCount: Int?
     @State private var followersCount: Int?
+    @State private var postCount: Int?
     @State private var userProfilePosts: [Post] = []
     
     @State private var reloading = false
     @State private var editProfile = false
+    
     @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -48,7 +51,7 @@ struct ProfileHeader: View {
                             VStack {
                                 
                                 HStack{
-                                    Text(userProfilePosts.count < 20 ? "Posts: \(userProfilePosts.count)" : "Posts: who cares")
+                                    Text("Posts: \(postCount ?? 0)")
                                         .font(.footnote)
                                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                                     
@@ -56,20 +59,28 @@ struct ProfileHeader: View {
                                 }
                                 
                                 
-                                HStack {
-                                    Text("Following: \(followingCount ?? 0)")
-                                        .font(.footnote)
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    
-                                    Spacer()
+                                NavigationLink {
+                                    FollowingView(user: user, viewedUser: user).navigationBarBackButtonHidden()
+                                } label: {
+                                    HStack {
+                                        Text("Following: \(followingCount ?? 0)")
+                                            .font(.footnote)
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                        
+                                        Spacer()
+                                    }
                                 }
                                 
-                                HStack {
-                                    Text("Followers: \(followersCount ?? 0)")
-                                        .font(.footnote)
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    
-                                    Spacer()
+                                NavigationLink {
+                                    FollowersView(user: user, viewedUser: user).navigationBarBackButtonHidden()
+                                } label: {
+                                    HStack {
+                                        Text("Followers: \(followersCount ?? 0)")
+                                            .font(.footnote)
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                        
+                                        Spacer()
+                                    }
                                 }
 
                             }
@@ -115,6 +126,7 @@ struct ProfileHeader: View {
                 Task {
                     followersCount = try await FetchService.fetchFollowersCount(userId: user.id)
                     followingCount = try await FetchService.fetchFollowingCount(userId: user.id)
+                    postCount = try await FetchService.fetchPostCount(userId: user.id)
                     userProfilePosts = try await FetchService.fetchUserProfilePostsByUserId(uid: user.id)
                 }
             }

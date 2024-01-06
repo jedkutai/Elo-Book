@@ -15,7 +15,7 @@ struct EmptyFeedView: View {
         NavigationStack {
             HStack {
                 Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
+                ScrollView(.horizontal) {
                     HStack {
                         ForEach(emptyUsers, id: \.id) { viewedUser in
                             EmptyFeedUserCell(user: user, viewedUser: viewedUser)

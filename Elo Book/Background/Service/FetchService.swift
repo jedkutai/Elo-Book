@@ -10,6 +10,51 @@ import Firebase
 import FirebaseFirestore
 
 struct FetchService {
+    static func fetchFollowingByUser(user: User) async throws -> [User] {
+        var users: [User] = []
+        
+        let query = Firestore.firestore().collection("follows")
+            .whereField("followerId", isEqualTo: user.id)
+        
+        let snapshot = try await query.getDocuments()
+        let follows = snapshot.documents.compactMap({ try? $0.data(as: Follow.self) })
+        
+        for follow in follows {
+            let user = try await self.fetchUserById(withUid: follow.followingId)
+            users.append(user)
+        }
+        
+        let sortedUsers = users.sorted { (user1, user2) in
+            let username1 = user1.username ?? "" // Provide a default value if username is nil
+            let username2 = user2.username ?? "" // Provide a default value if username is nil
+            return username1.localizedCaseInsensitiveCompare(username2) == .orderedAscending
+        }
+        
+        return sortedUsers
+    }
+    
+    static func fetchFollowersByUser(user: User) async throws -> [User] {
+        var users: [User] = []
+        
+        let query = Firestore.firestore().collection("follows")
+            .whereField("followingId", isEqualTo: user.id)
+        
+        let snapshot = try await query.getDocuments()
+        let follows = snapshot.documents.compactMap({ try? $0.data(as: Follow.self) })
+        
+        for follow in follows {
+            let user = try await self.fetchUserById(withUid: follow.followerId)
+            users.append(user)
+        }
+        
+        let sortedUsers = users.sorted { (user1, user2) in
+            let username1 = user1.username ?? "" // Provide a default value if username is nil
+            let username2 = user2.username ?? "" // Provide a default value if username is nil
+            return username1.localizedCaseInsensitiveCompare(username2) == .orderedAscending
+        }
+        
+        return sortedUsers
+    }
     
     static func fetchCommentCountByPost(postId: String) async throws -> Int {
         let query = Firestore.firestore().collection("posts").document(postId).collection("comments")
@@ -518,6 +563,14 @@ struct FetchService {
     static func fetchFollowingCount(userId: String) async throws -> Int {
         let snapshot = try await Firestore.firestore().collection("follows")
             .whereField("followerId", isEqualTo: userId)
+            .getDocuments()
+        
+        return snapshot.count
+    }
+    
+    static func fetchPostCount(userId: String) async throws -> Int {
+        let snapshot = try await Firestore.firestore().collection("posts")
+            .whereField("userId", isEqualTo: userId)
             .getDocuments()
         
         return snapshot.count

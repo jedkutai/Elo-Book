@@ -48,7 +48,7 @@ struct SelectFavoriteSportsView: View {
                         }
                     } else {
                         Text("Update")
-                            .foregroundStyle(Color(.systemRed))
+                            .foregroundStyle(Color(.systemGray))
                     }
                 }
                 .padding(.horizontal)

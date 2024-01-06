@@ -118,7 +118,7 @@ struct EditProfileView: View {
                         }
                     } else {
                         Text("Update")
-                            .foregroundStyle(Color(.systemRed))
+                            .foregroundStyle(Color(.systemGray))
                     }
                 }
             }

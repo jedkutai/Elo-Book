@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A70651B02B49E1C000A6CE3A /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70651AF2B49E1C000A6CE3A /* FollowersView.swift */; };
+		A70651B22B49F16800A6CE3A /* FollowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70651B12B49F16800A6CE3A /* FollowingView.swift */; };
+		A70651B42B4A02F000A6CE3A /* FollowsResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70651B32B4A02F000A6CE3A /* FollowsResultCell.swift */; };
 		A731B7982B48407100DAD87A /* elo_book_app_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = A731B7972B48407100DAD87A /* elo_book_app_icon5.png */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA8782B4779A200F62D08 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86D2B4779A100F62D08 /* Thread.swift */; };
@@ -126,6 +129,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A70651AF2B49E1C000A6CE3A /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
+		A70651B12B49F16800A6CE3A /* FollowingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingView.swift; sourceTree = "<group>"; };
+		A70651B32B4A02F000A6CE3A /* FollowsResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsResultCell.swift; sourceTree = "<group>"; };
 		A731B7972B48407100DAD87A /* elo_book_app_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elo_book_app_icon5.png; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86D2B4779A100F62D08 /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
@@ -257,6 +263,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A70651AD2B49E17900A6CE3A /* FollowingViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FollowingViews;
+			sourceTree = "<group>";
+		};
+		A70651AE2B49E18000A6CE3A /* FollowsViews */ = {
+			isa = PBXGroup;
+			children = (
+				A70651AF2B49E1C000A6CE3A /* FollowersView.swift */,
+				A70651B12B49F16800A6CE3A /* FollowingView.swift */,
+				A70651B32B4A02F000A6CE3A /* FollowsResultCell.swift */,
+			);
+			path = FollowsViews;
+			sourceTree = "<group>";
+		};
 		A74BA86A2B47797F00F62D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +449,8 @@
 		A74BA9132B478F3700F62D08 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A70651AE2B49E18000A6CE3A /* FollowsViews */,
+				A70651AD2B49E17900A6CE3A /* FollowingViews */,
 				A74BA9412B47903F00F62D08 /* SettingsViews */,
 				A74BA9142B478F4D00F62D08 /* AltUserProfileViews */,
 				A74BA9192B478F6B00F62D08 /* DeepLinkViews */,
@@ -755,6 +780,7 @@
 				A74BA8B72B477ADD00F62D08 /* ErrorMessageStrings.swift in Sources */,
 				A74BA90F2B478F0700F62D08 /* SelectUsernameAltView.swift in Sources */,
 				A74BA8952B477A6E00F62D08 /* IGTextFieldModifier.swift in Sources */,
+				A70651B22B49F16800A6CE3A /* FollowingView.swift in Sources */,
 				A74BA8A92B477AB400F62D08 /* UploadProfileImage.swift in Sources */,
 				A74BA9312B478FFE00F62D08 /* PostCellHeader.swift in Sources */,
 				A752E3022B4777170007842A /* ContentView.swift in Sources */,
@@ -766,6 +792,7 @@
 				A74BA89F2B477A9B00F62D08 /* UserService.swift in Sources */,
 				A74BA8AA2B477AB400F62D08 /* ImageUploader.swift in Sources */,
 				A74BA8B52B477ADD00F62D08 /* HideKeyboard.swift in Sources */,
+				A70651B42B4A02F000A6CE3A /* FollowsResultCell.swift in Sources */,
 				A74BA8812B4779A200F62D08 /* PostLike.swift in Sources */,
 				A74BA9092B478EF200F62D08 /* SelectUsernameView.swift in Sources */,
 				A74BA89D2B477A9B00F62D08 /* PostService.swift in Sources */,
@@ -775,6 +802,7 @@
 				A74BA9252B478FB800F62D08 /* EventView.swift in Sources */,
 				A74BA8B22B477ADD00F62D08 /* Checks.swift in Sources */,
 				A74BA8B62B477ADD00F62D08 /* CropProfileImageViewController.swift in Sources */,
+				A70651B02B49E1C000A6CE3A /* FollowersView.swift in Sources */,
 				A74BA8FB2B478EA500F62D08 /* UserProfileView.swift in Sources */,
 				A74BA87F2B4779A200F62D08 /* GroupMessageSettings.swift in Sources */,
 				A74BA87B2B4779A200F62D08 /* Comment.swift in Sources */,

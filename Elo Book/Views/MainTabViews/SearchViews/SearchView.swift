@@ -14,12 +14,38 @@ struct SearchView: View {
     @State private var searchDatabaseText = ""
     
     @State private var someUsers: [User] = []
-    @State private var allEvents: [Event] = []
     @State private var usernameSearchResults: [User] = []
+    
+    
     @State private var eventSearchResults: [Event] = []
     @State private var discoverEvents: [Event] = []
     
-    @State private var followedTeams: [Team] = []
+    var filteredDiscoverEvents: [Event] {
+        guard !searchText.isEmpty else { return discoverEvents }
+        return discoverEvents.filter { event in
+            return event.title.localizedCaseInsensitiveContains(searchText) || event.sport.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+    
+    var filteredUsers: [User] {
+        guard !searchText.isEmpty else { return x.users }
+        return x.users.filter { user in
+            if let username = user.username {
+                return username.localizedCaseInsensitiveContains(searchText)
+            }
+            return false
+        }
+    }
+    
+//    var filteredFollowers: [User] {
+//        guard !searchText.isEmpty else { return followers }
+//        return followers.filter { user in
+//            if let username = user.username {
+//                return username.localizedCaseInsensitiveContains(searchText)
+//            }
+//            return false
+//        }
+//    }
     
     @EnvironmentObject var x: X
     @Environment(\.dismiss) private var dismiss
@@ -60,20 +86,8 @@ struct SearchView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack {
-                        if searchText.isEmpty {
-                            ForEach(discoverEvents, id: \.id) { event in
-                                NavigationLink {
-                                    EventView(user: user, event: event).navigationBarBackButtonHidden()
-                                } label: {
-                                    VStack {
-                                        EventCell(event: event)
-                                        Divider()
-                                            .frame(height: 1)
-                                    }
-                                }
-                            }
-                        } else {
-                            ForEach(usernameSearchResults, id: \.id) { searchUser in
+                        if !searchText.isEmpty {
+                            ForEach(Array(filteredUsers.prefix(5)), id: \.id) { searchUser in
                                 NavigationLink {
                                     AltUserProfileView(user: user, viewedUser: searchUser).navigationBarBackButtonHidden()
                                 } label: {
@@ -84,19 +98,18 @@ struct SearchView: View {
                                     }
                                 }
                             }
-                            
-                            ForEach(eventSearchResults, id: \.id) { event in
-                                NavigationLink {
-                                    EventView(user: user, event: event).navigationBarBackButtonHidden()
-                                } label: {
-                                    VStack {
-                                        EventCell(event: event)
-                                        Divider()
-                                            .frame(height: 1)
-                                    }
+                        }
+                        
+                        ForEach(filteredDiscoverEvents, id: \.id) { event in
+                            NavigationLink {
+                                EventView(user: user, event: event).navigationBarBackButtonHidden()
+                            } label: {
+                                VStack {
+                                    EventCell(event: event)
+                                    Divider()
+                                        .frame(height: 1)
                                 }
                             }
-                            
                         }
                     }
                     
