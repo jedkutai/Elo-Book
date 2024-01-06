@@ -12,6 +12,7 @@ struct SettingsView: View {
     
     @Binding var refresh: Bool
     
+    @State private var swipeStarted = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -27,10 +28,11 @@ struct SettingsView: View {
                     
                     Spacer()
                     
-                    Text("Settings & Privacy")
+                    Text("Settings")
                         .font(.headline)
                     
                     Spacer()
+                    
                 }
                 
                 Divider()
@@ -107,6 +109,18 @@ struct SettingsView: View {
                 
             }
             .padding(.horizontal)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.startLocation.y < 40 {
+                            self.swipeStarted = true
+                        }
+                    }
+                    .onEnded { _ in
+                        self.swipeStarted = false
+                        dismiss()
+                    }
+            )
         }
         
     }

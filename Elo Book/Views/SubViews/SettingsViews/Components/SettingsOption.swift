@@ -25,5 +25,6 @@ struct SettingsOption: View {
                 .foregroundStyle(Color(.systemGray))
         }
         .padding(.top, 10)
+        
     }
 }

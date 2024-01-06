@@ -10,6 +10,7 @@ import SwiftUI
 struct AccountInfoView: View {
     @Binding var user: User
     
+    @State private var swipeStarted = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -25,12 +26,12 @@ struct AccountInfoView: View {
                     
                     Spacer()
                     
-                    Text("Account & Privacy")
+                    Text("Account Info")
                         .font(.headline)
                     
                     Spacer()
+                    
                 }
-                
                 
                 Divider()
                     .frame(height: 1)
@@ -74,6 +75,18 @@ struct AccountInfoView: View {
                 }
             }
             .padding(.horizontal)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.startLocation.y < 40 {
+                            self.swipeStarted = true
+                        }
+                    }
+                    .onEnded { _ in
+                        self.swipeStarted = false
+                        dismiss()
+                    }
+            )
         }
     }
 }

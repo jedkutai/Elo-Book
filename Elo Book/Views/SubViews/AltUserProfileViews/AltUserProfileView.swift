@@ -14,6 +14,7 @@ struct AltUserProfileView: View {
     @State private var userProfilePosts: [Post] = []
     
     @State private var loadingMorePosts = false
+    @State private var swipeStarted = false
     @State private var shareLink = ""
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -110,6 +111,18 @@ struct AltUserProfileView: View {
                 
                 Spacer()
             }
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.startLocation.y < 40 {
+                            self.swipeStarted = true
+                        }
+                    }
+                    .onEnded { _ in
+                        self.swipeStarted = false
+                        dismiss()
+                    }
+            )
             
         }
         .padding(.vertical, 1)

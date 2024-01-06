@@ -14,7 +14,7 @@ struct SelectFavoriteSportsView: View {
     @State var userFavorites: [String] = []
     @State var selectedFavorites: [String] = []
     @State private var allSports: [String] = ["Baseball", "Basketball", "Football", "Hockey", "Soccer"]
-    
+    @State private var swipeStarted = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -109,5 +109,17 @@ struct SelectFavoriteSportsView: View {
                 selectedFavorites = favorites
             }
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    if value.startLocation.y < 40 {
+                        self.swipeStarted = true
+                    }
+                }
+                .onEnded { _ in
+                    self.swipeStarted = false
+                    dismiss()
+                }
+        )
     }
 }
