@@ -57,7 +57,7 @@ struct CreatePostView: View {
                         }
                     } else {
                         Text("Continue")
-                            .foregroundColor(.red)
+                            .foregroundColor(Color(.systemGray))
                     }
                 }
                 .padding(.horizontal)

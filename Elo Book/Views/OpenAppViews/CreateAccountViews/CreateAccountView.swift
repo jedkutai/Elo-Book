@@ -54,11 +54,14 @@ struct CreateAccountView: View {
                     .fontWeight(.bold)
                     .padding()
                 
-                DatePicker(selection: $dateOfBirth, in: ...Date.now, displayedComponents: .date) {
-                    Text("Enter Date of Birth:")
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                }
-                .padding(25)
+                Text("Enter Date of Birth:")
+                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                    .padding(.horizontal, 25)
+                
+                DatePicker("", selection: $dateOfBirth, displayedComponents: .date)
+                    .datePickerStyle(.wheel)
+                    .padding(.horizontal, 25)
+                
 
                 
                 Text("You'll use this email to sign in to your account.")

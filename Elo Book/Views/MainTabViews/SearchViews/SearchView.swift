@@ -123,10 +123,10 @@ struct SearchView: View {
                 hideKeyboard()
             }
             .onChange(of: searchText) {
-                if searchText.count < 2 {
+                if searchText.count < 1 {
                     searchDatabaseText = ""
                     usernameSearchResults = []
-                } else if searchText.count >= 2 {
+                } else if searchText.count >= 1 {
                     searchDatabaseText = String(searchText.prefix(2))
                 }
                 
