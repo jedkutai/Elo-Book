@@ -21,7 +21,7 @@ struct AuthService {
     static func setUsername(uid: String, username: String) async {
         let userRef = Firestore.firestore().collection("users").document(uid)
         do {
-            try await userRef.updateData(["username": username])
+            try await userRef.updateData(["username": username.lowercased()])
             
         } catch {
             print("Error updating username: \(error.localizedDescription)")

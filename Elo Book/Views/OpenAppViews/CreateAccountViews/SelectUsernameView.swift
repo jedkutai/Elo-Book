@@ -42,7 +42,7 @@ struct SelectUsernameView: View {
                 if usernameAvailable {
                     Button {
                         Task {
-                            await AuthService.setUsername(uid: userId, username: username)
+                            await AuthService.setUsername(uid: userId, username: username.lowercased())
                             viewShown = .welcome
                         }
                     } label: {
