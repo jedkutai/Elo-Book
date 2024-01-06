@@ -80,7 +80,8 @@ struct EmptyFeedUserCell: View {
                 
                 
             }
-            .frame(width: 250)
+            .padding(.top, 3)
+            .frame(width: 150)
         }
     }
 }

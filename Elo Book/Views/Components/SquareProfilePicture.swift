@@ -61,7 +61,7 @@ struct SquareProfilePicture: View {
                 .resizable()
                 .frame(width: size.dimension, height: size.dimension)
                 .clipped()
-                .foregroundStyle(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
         }
         
     }

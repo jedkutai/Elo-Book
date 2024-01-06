@@ -16,9 +16,11 @@ struct EmptyFeedView: View {
             HStack {
                 Spacer()
                 ScrollView(.horizontal, showsIndicators: false) {
-                    ForEach(emptyUsers, id: \.id) { viewedUser in
-                        EmptyFeedUserCell(user: user, viewedUser: viewedUser)
-                            
+                    HStack {
+                        ForEach(emptyUsers, id: \.id) { viewedUser in
+                            EmptyFeedUserCell(user: user, viewedUser: viewedUser)
+                                
+                        }
                     }
                 }
                 .padding(.horizontal)
