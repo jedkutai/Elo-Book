@@ -13,9 +13,6 @@ import Kingfisher
 struct PostImageView: View {
     @State var imageUrls: [String]
     
-    @State private var showImages = false
-    
-    
     private let imageWidth = UIScreen.main.bounds.width * 0.85
     var body: some View {
         Group {

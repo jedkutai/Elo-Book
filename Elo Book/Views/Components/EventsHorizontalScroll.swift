@@ -18,7 +18,7 @@ struct EventsHorizontalScroll: View {
                     NavigationLink {
                         EventView(user: user, event: event).navigationBarBackButtonHidden()
                     } label: {
-                        EventCell(event: event)
+                        MiniEventCell(event: event)
                             .padding(5)
                             .background(
                                 RoundedRectangle(cornerRadius: 2.5)
@@ -28,7 +28,7 @@ struct EventsHorizontalScroll: View {
                 }
             }
         }
-        .frame(height: 50)
+        .frame(height: 35)
         .padding(.horizontal)
     }
 }

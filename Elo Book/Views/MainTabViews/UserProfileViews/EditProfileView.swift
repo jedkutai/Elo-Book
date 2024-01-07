@@ -85,6 +85,7 @@ struct EditProfileView: View {
                         dismiss()
                     } label: {
                         Text("Cancel")
+                            .foregroundStyle(Color(.systemRed))
                     }
                 }
                 

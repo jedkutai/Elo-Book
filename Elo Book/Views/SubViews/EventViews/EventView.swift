@@ -148,7 +148,7 @@ struct EventView: View {
                 }
         )
         .fullScreenCover(isPresented: $showCreatePostView) {
-            CreatePostController(user: user, postCreated: $postCreated, events: [event])
+            CreatePostMasterView(user: user, postCreated: $postCreated, selectedEvents: [event])
         }
         .onAppear {
             Task {

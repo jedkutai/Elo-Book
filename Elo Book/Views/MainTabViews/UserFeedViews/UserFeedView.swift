@@ -137,7 +137,8 @@ struct UserFeedView: View {
             }
         }
         .fullScreenCover(isPresented: $showCreatePostView) {
-            CreatePostController(user: user, postCreated: $postCreated)
+//            CreatePostController(user: user, postCreated: $postCreated)
+            CreatePostMasterView(user: user, postCreated: $postCreated)
         }
         .refreshable {
             localRefresh()

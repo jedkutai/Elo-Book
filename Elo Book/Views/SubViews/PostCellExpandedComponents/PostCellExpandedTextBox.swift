@@ -55,7 +55,7 @@ struct PostCellExpandedTextBox: View {
                 } else {
                     Text("Post")
                         .font(.subheadline)
-                        .foregroundStyle(Color(.systemRed))
+                        .foregroundStyle(Color(.systemGray))
                 }
             }
             .padding(.horizontal, 5)

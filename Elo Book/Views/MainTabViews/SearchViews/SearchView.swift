@@ -13,6 +13,9 @@ struct SearchView: View {
     @State var searchText = ""
     @State private var searchDatabaseText = ""
     
+    @State private var selectedFavorites: [String] = []
+    @State private var allSports: [String] = ["Baseball", "Basketball", "Football", "Hockey", "Soccer"]
+    
     @State private var someUsers: [User] = []
     @State private var usernameSearchResults: [User] = []
     
@@ -37,15 +40,6 @@ struct SearchView: View {
         }
     }
     
-//    var filteredFollowers: [User] {
-//        guard !searchText.isEmpty else { return followers }
-//        return followers.filter { user in
-//            if let username = user.username {
-//                return username.localizedCaseInsensitiveContains(searchText)
-//            }
-//            return false
-//        }
-//    }
     
     @EnvironmentObject var x: X
     @Environment(\.dismiss) private var dismiss
