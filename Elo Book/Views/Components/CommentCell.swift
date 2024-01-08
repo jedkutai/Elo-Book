@@ -17,6 +17,7 @@ struct CommentCell: View {
     
     @State private var showDelete = false
     @State private var commentDeleted = false
+    @State private var showMore = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         if commentDeleted {
@@ -56,30 +57,70 @@ struct CommentCell: View {
                                 }
                                 
                                 
-                                
-                                if showDelete {
-                                    Button {
-                                        Task {
-                                            try await CommentService.deleteComment(comment: comment)
+                                if user.id == commentUser.id {
+                                    if showDelete {
+                                        Button {
+                                            Task {
+                                                try await CommentService.deleteComment(comment: comment)
+                                            }
+                                            commentDeleted.toggle()
+                                        } label: {
+                                            Label("Delete", systemImage: "trash")
+                                                .font(.subheadline)
+                                                .foregroundStyle(Color(.red))
                                         }
-                                        commentDeleted.toggle()
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                            .font(.subheadline)
-                                            .foregroundStyle(Color(.red))
+                                    } else {
+                                        Button {
+                                            showDelete.toggle()
+                                        } label: {
+                                            Image(systemName: "ellipsis")
+                                                .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                        }
                                     }
                                 }
+                                
                                 
                                 Spacer()
                             }
                             
-                            HStack {
+                            if showMore {
                                 Text(comment.caption)
                                     .font(.subheadline)
                                     .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    .multilineTextAlignment(.leading)
                                 
-                                Spacer()
+                                Button {
+                                    showMore.toggle()
+                                } label: {
+                                    Text("show less")
+                                        .font(.subheadline)
+                                        .foregroundColor(.blue)
+                                }
+                                
+                            } else {
+                                if comment.caption.count <= 100 {
+                                    HStack {
+                                        Text(comment.caption)
+                                            .font(.subheadline)
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        Spacer()
+                                    }
+                                } else {
+                                    
+                                    Button {
+                                        showMore.toggle()
+                                    } label: {
+                                        Text("\(String(comment.caption.prefix(75)))... SHOW MORE")
+                                            .font(.subheadline)
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                }
                             }
+                            
+                            
                         }
                         
                         
@@ -123,16 +164,6 @@ struct CommentCell: View {
                         .frame(height: 1)
                 }
                 .padding(.horizontal, 18)
-                .onLongPressGesture {
-                    if user.id == commentUser.id {
-                        showDelete.toggle()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            if showDelete {
-                                showDelete.toggle()
-                            }
-                        }
-                    }
-                }
             }
         }
         .onAppear {

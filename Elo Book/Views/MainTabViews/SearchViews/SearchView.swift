@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SearchView: View {
     @Binding var user: User
@@ -19,13 +20,20 @@ struct SearchView: View {
     @State private var someUsers: [User] = []
     @State private var usernameSearchResults: [User] = []
     
+    @State private var filters: [String] = []
     
-    @State private var eventSearchResults: [Event] = []
-    @State private var discoverEvents: [Event] = []
+    let fourHoursAgo = Calendar.current.date(byAdding: .hour, value: -4, to: Date()) ?? Date()
+    
+    var displayedEvents: [Event] {
+        guard !filters.isEmpty else { return x.events }
+        return x.events.filter { event in
+            return filters.contains(event.sport) && event.timestamp.dateValue() >= fourHoursAgo
+        }
+    }
     
     var filteredDiscoverEvents: [Event] {
-        guard !searchText.isEmpty else { return discoverEvents }
-        return discoverEvents.filter { event in
+        guard !searchText.isEmpty else { return displayedEvents }
+        return x.events.filter { event in
             return event.title.localizedCaseInsensitiveContains(searchText) || event.sport.localizedCaseInsensitiveContains(searchText)
         }
     }
@@ -110,20 +118,27 @@ struct SearchView: View {
                 }
                 .scrollDismissesKeyboard(.immediately)
                 .refreshable {
+                    if let favorites = user.favorites {
+                        filters = favorites
+                    }
                     Task {
                         user = try await FetchService.fetchUserById(withUid: user.id)
-                        discoverEvents = try await FetchService.fetchUserFavorites(user: user)
+//                        discoverEvents = try await FetchService.fetchUserFavorites(user: user)
                     }
                 }
             }
             .onAppear {
+                if let favorites = user.favorites {
+                    filters = favorites
+                }
+                
                 Task {
                     if x.firstEventSearch {
                         x.firstEventSearch.toggle()
                         x.events = try await FetchService.fetchRecentEvents()
                     }
                     user = try await FetchService.fetchUserById(withUid: user.id)
-                    discoverEvents = try await FetchService.fetchUserFavorites(user: user)
+//                    discoverEvents = try await FetchService.fetchUserFavorites(user: user)
                 }
             }
             .onTapGesture {
@@ -138,7 +153,7 @@ struct SearchView: View {
                 }
                 
                 usernameSearchResults = SearchService.searchLocallyForUsernames(searchText: searchText, users: x.users, limit: 10)
-                eventSearchResults = SearchService.searchLocallyForEvents(in: x.events, for: searchText)
+                
 
             }
             .onChange(of: searchDatabaseText) {

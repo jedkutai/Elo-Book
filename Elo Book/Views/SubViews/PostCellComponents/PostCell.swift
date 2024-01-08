@@ -17,7 +17,6 @@ struct PostCell: View {
     @State private var comments: [Comment] = []
     @State private var commentCount: Int = 0
     
-    @State private var expandPost = false
     @State private var postDeleted = false
     @State private var showMore = false
     
@@ -38,12 +37,9 @@ struct PostCell: View {
                 VStack {
                     PostCellHeader(user: $user, postUser: postUser, post: $post, showMore: $showMore, postDeleted: $postDeleted)
                     
-                    PostCellBody(post: $post, expandPost: $expandPost)
+                    PostCellBody2(user: user, viewedUser: postUser, post: post)
                     
-                    PostCellFooter(user: $user, post: $post, likes: $likes, comments: $comments, expandPost: $expandPost, commentCount: $commentCount)
-                }
-                .fullScreenCover(isPresented: $expandPost) {
-                    ExpandedPostCell(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount)
+                    PostCellFooter2(user: $user, postUser: postUser, post: $post, likes: $likes, comments: $comments, commentCount: $commentCount)
                 }
                 .padding(10)
                 .frame(width: UIScreen.main.bounds.width - 20)

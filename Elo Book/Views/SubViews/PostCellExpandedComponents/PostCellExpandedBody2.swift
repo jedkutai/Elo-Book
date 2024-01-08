@@ -1,13 +1,15 @@
 //
-//  PostCellExpandedBody.swift
-//  EloBookv1
+//  PostCellExpandedBody2.swift
+//  Elo Book
 //
-//  Created by Jed Kutai on 12/23/23.
+//  Created by Jed Kutai on 1/7/24.
 //
 
 import SwiftUI
 
-struct PostCellExpandedBody: View {
+struct PostCellExpandedBody2: View {
+    @Binding var user: User
+    @Binding var viewUser: User
     @Binding var post: Post
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -23,8 +25,8 @@ struct PostCellExpandedBody: View {
             
         }
             
-        if let imageUrls = post.imageUrls {
-            PostImageView(imageUrls: imageUrls)
+        if post.imageUrls != nil {
+            PostImageView3(user: $user, viewedUser: $viewUser, post: $post)
         }
     }
 }

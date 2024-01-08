@@ -14,6 +14,7 @@ struct PostPreviewImages: View {
     @ObservedObject var viewModel: UploadPost
     private let imageWidth = UIScreen.main.bounds.width * 0.85
     
+    
     var body: some View {
         Group {
             if viewModel.uiImages.count == 1 {

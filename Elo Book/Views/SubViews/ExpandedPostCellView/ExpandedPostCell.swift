@@ -30,16 +30,13 @@ struct ExpandedPostCell: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "chevron.down")
+                        Image(systemName: "chevron.left")
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                     }
                     
                     if let events = events {
                         if !events.isEmpty {
                             EventsHorizontalScroll(user: $user, events: events)
-                        } else {
-                            Text("Invisible Invisible")
-                                .foregroundColor(colorScheme == .dark ? Theme.buttonColor : Theme.buttonColorDarkMode)
                         }
                     }
                     
@@ -52,7 +49,8 @@ struct ExpandedPostCell: View {
                 ScrollView {
                     VStack {
                         PostCellExpandedHeader(user: $user, postUser: $postUser)
-                        PostCellExpandedBody(post: $post)
+//                        PostCellExpandedBody(post: $post)
+                        PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }
                     .padding(10)
@@ -60,10 +58,6 @@ struct ExpandedPostCell: View {
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundStyle(Color(.gray).opacity(0.15))
                     )
-//                    .background(
-//                        RoundedRectangle(cornerRadius: 15)
-//                            .stroke(Color(.gray).opacity(0.5), lineWidth: 2)
-//                    )
                     .padding(.top, 2)
                     .padding(.horizontal)
                     
@@ -117,9 +111,6 @@ struct ExpandedPostCell: View {
                 
                 PostCellExpandedTextBox(user: $user, post: $post, likes: $likes, comments: $comments, posting: $posting, caption: $caption, viewModel: viewModel)
             }
-//            .onTapGesture {
-//                hideKeyboard()
-//            }
             .onAppear {
                 Task {
                     if let eventIds = post.eventIds {

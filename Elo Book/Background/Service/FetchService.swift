@@ -160,13 +160,14 @@ struct FetchService {
         var events: [Event] = []
         
         let currentTime = Timestamp(date: Date())
+        let fourHoursAgo = Timestamp(date: Calendar.current.date(byAdding: .hour, value: -4, to: currentTime.dateValue())!)
         
         if let favoriteSports = user.favorites {
             
             let query2 = Firestore.firestore()
                 .collection("events")
                 .whereField("sport", in: favoriteSports)
-                .whereField("timestamp", isGreaterThan: currentTime)
+                .whereField("timestamp", isGreaterThan: fourHoursAgo)
                 .order(by: "timestamp")
                 .limit(to: 20)
             

@@ -43,6 +43,7 @@ struct AltPostCellExpanded: View {
                             EventsHorizontalScroll(user: $user, events: events)
                         } else {
                             Text("Invisible Invisible")
+                                .font(.title2)
                                 .foregroundColor(colorScheme == .dark ? Theme.buttonColor : Theme.buttonColorDarkMode)
                         }
                         
@@ -52,7 +53,7 @@ struct AltPostCellExpanded: View {
                     LazyVStack {
                         PostCellExpandedHeader(user: $user, postUser: $postUser)
                         
-                        PostCellExpandedBody(post: $post)
+                        PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         
                         PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }
@@ -120,9 +121,7 @@ struct AltPostCellExpanded: View {
                     commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 }
             }
-//            .onTapGesture {
-//                hideKeyboard()
-//            }
+
             .gesture(
                 DragGesture()
                     .onChanged { value in

@@ -20,7 +20,6 @@ struct PostCellExpandedTextBox: View {
         HStack {
             
             TextField("Comment", text: $caption, axis: .vertical)
-                .autocapitalization(.none)
                 .font(.subheadline)
                 
             
@@ -29,8 +28,10 @@ struct PostCellExpandedTextBox: View {
                 ProgressView()
             }
             
+            ProgressWheel(characterCount: caption.count, maxCharacterCount: 300)
+            
             Group {
-                if Checks.isValidCaption(caption) || (caption.isEmpty && viewModel.postImage != nil) {
+                if Checks.isValidCommentCaption(caption) || (caption.isEmpty && viewModel.postImage != nil) {
                     Button {
                         posting.toggle()
                         hideKeyboard()

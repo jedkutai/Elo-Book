@@ -1,18 +1,18 @@
 //
-//  PostCellFooter.swift
-//  EloBookv1
+//  PostCellFooter2.swift
+//  Elo Book
 //
-//  Created by Jed Kutai on 12/23/23.
+//  Created by Jed Kutai on 1/7/24.
 //
 
 import SwiftUI
 
-struct PostCellFooter: View {
+struct PostCellFooter2: View {
     @Binding var user: User
+    @State var postUser: User
     @Binding var post: Post
     @Binding var likes: [PostLike]
     @Binding var comments: [Comment]
-    @Binding var expandPost: Bool
     @Binding var commentCount: Int
     
     @State private var shareLink = ""
@@ -57,8 +57,9 @@ struct PostCellFooter: View {
             
             Spacer()
             
-            Button {
-                expandPost.toggle()
+            NavigationLink {
+                ExpandedPostCell(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount)
+                    .navigationBarBackButtonHidden()
             } label: {
                 HStack {
                     Image(systemName: "bubble")

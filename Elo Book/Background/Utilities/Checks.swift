@@ -66,6 +66,23 @@ class Checks {
         return true
     }
     
+    static func isValidCommentCaption(_ caption: String) -> Bool {
+        guard !caption.isEmpty else {
+            return false
+        }
+        
+        let trimmedCaption = caption.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedCaption.isEmpty else {
+            return false
+        }
+        
+        guard caption.count <= 300 else {
+                return false
+            }
+        
+        return true
+    }
+    
     static func isUserOver18(_ birthDate: Date) -> Bool {
         let calendar = Calendar.current
         if let date18YearsAgo = calendar.date(byAdding: .year, value: -18, to: Date()) {
