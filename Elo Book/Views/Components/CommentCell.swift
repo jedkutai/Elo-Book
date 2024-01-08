@@ -89,14 +89,6 @@ struct CommentCell: View {
                                     .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                                     .multilineTextAlignment(.leading)
                                 
-                                Button {
-                                    showMore.toggle()
-                                } label: {
-                                    Text("show less")
-                                        .font(.subheadline)
-                                        .foregroundColor(.blue)
-                                }
-                                
                             } else {
                                 if comment.caption.count <= 100 {
                                     HStack {
@@ -112,10 +104,16 @@ struct CommentCell: View {
                                     Button {
                                         showMore.toggle()
                                     } label: {
-                                        Text("\(String(comment.caption.prefix(75)))... SHOW MORE")
-                                            .font(.subheadline)
-                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                            .multilineTextAlignment(.leading)
+                                        Group {
+                                            Text("\(String(comment.caption.prefix(75)))")
+                                                .font(.subheadline)
+                                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            
+                                            + Text("...Show more.")
+                                                .font(.subheadline)
+                                                .foregroundStyle(Color(.systemBlue))
+                                        }
+                                        .multilineTextAlignment(.leading)
                                     }
                                 }
                             }

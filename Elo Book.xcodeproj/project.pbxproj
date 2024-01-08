@@ -17,6 +17,7 @@
 		A70651C02B4A5A7200A6CE3A /* MiniEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70651BF2B4A5A7200A6CE3A /* MiniEventCell.swift */; };
 		A70651C42B4A619800A6CE3A /* CreatePostMasterTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70651C32B4A619800A6CE3A /* CreatePostMasterTextBox.swift */; };
 		A731B7982B48407100DAD87A /* elo_book_app_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = A731B7972B48407100DAD87A /* elo_book_app_icon5.png */; };
+		A742A9C12B4BCE9500F956B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA8782B4779A200F62D08 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86D2B4779A100F62D08 /* Thread.swift */; };
 		A74BA8792B4779A200F62D08 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86E2B4779A100F62D08 /* Message.swift */; };
@@ -92,7 +93,6 @@
 		A752E2B42B4773550007842A /* Elo_BookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A752E2B32B4773550007842A /* Elo_BookApp.swift */; };
 		A752E2BA2B4773560007842A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A752E2B92B4773560007842A /* Assets.xcassets */; };
 		A752E2BD2B4773560007842A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A752E2BC2B4773560007842A /* Preview Assets.xcassets */; };
-		A752E2C42B4775510007842A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A752E2C32B4775510007842A /* GoogleService-Info.plist */; };
 		A752E2C72B4775880007842A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A752E2C62B4775880007842A /* FirebaseAnalytics */; };
 		A752E2C92B4775880007842A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = A752E2C82B4775880007842A /* FirebaseAnalyticsOnDeviceConversion */; };
 		A752E2CB2B4775880007842A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A752E2CA2B4775880007842A /* FirebaseAnalyticsSwift */; };
@@ -144,6 +144,8 @@
 		A70651BF2B4A5A7200A6CE3A /* MiniEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniEventCell.swift; sourceTree = "<group>"; };
 		A70651C32B4A619800A6CE3A /* CreatePostMasterTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostMasterTextBox.swift; sourceTree = "<group>"; };
 		A731B7972B48407100DAD87A /* elo_book_app_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elo_book_app_icon5.png; sourceTree = "<group>"; };
+		A742A9BF2B4BAABF00F956B7 /* Elo Book.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Elo Book.entitlements"; sourceTree = "<group>"; };
+		A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86D2B4779A100F62D08 /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		A74BA86E2B4779A100F62D08 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -218,7 +220,6 @@
 		A752E2B32B4773550007842A /* Elo_BookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elo_BookApp.swift; sourceTree = "<group>"; };
 		A752E2B92B4773560007842A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A752E2BC2B4773560007842A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A752E2C32B4775510007842A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A752E2FC2B4777160007842A /* LogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		A752E2FE2B4777170007842A /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A752E3062B4778020007842A /* X.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X.swift; sourceTree = "<group>"; };
@@ -577,7 +578,6 @@
 			isa = PBXGroup;
 			children = (
 				A731B7972B48407100DAD87A /* elo_book_app_icon5.png */,
-				A752E2C32B4775510007842A /* GoogleService-Info.plist */,
 				A752E2B22B4773550007842A /* Elo Book */,
 				A752E2B12B4773550007842A /* Products */,
 				A74BA86A2B47797F00F62D08 /* Frameworks */,
@@ -595,6 +595,8 @@
 		A752E2B22B4773550007842A /* Elo Book */ = {
 			isa = PBXGroup;
 			children = (
+				A742A9BF2B4BAABF00F956B7 /* Elo Book.entitlements */,
+				A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */,
 				A74BA94B2B47920C00F62D08 /* Elo-Book-Info.plist */,
 				A752E2B32B4773550007842A /* Elo_BookApp.swift */,
 				A752E2FE2B4777170007842A /* ContentView.swift */,
@@ -744,9 +746,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A731B7982B48407100DAD87A /* elo_book_app_icon5.png in Resources */,
+				A742A9C12B4BCE9500F956B7 /* GoogleService-Info.plist in Resources */,
 				A752E2BD2B4773560007842A /* Preview Assets.xcassets in Resources */,
 				A752E2BA2B4773560007842A /* Assets.xcassets in Resources */,
-				A752E2C42B4775510007842A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +979,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Elo Book/Elo Book.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Elo Book/Preview Content\"";
@@ -1013,6 +1016,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Elo Book/Elo Book.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Elo Book/Preview Content\"";

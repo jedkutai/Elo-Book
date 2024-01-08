@@ -22,13 +22,13 @@ struct PostCellBody2: View {
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                         
                     
-                    Button {
-                        showMore.toggle()
-                    } label: {
-                        Text("show less")
-                            .font(.subheadline)
-                            .foregroundColor(.blue)
-                    }
+//                    Button {
+//                        showMore.toggle()
+//                    } label: {
+//                        Text("show less")
+//                            .font(.subheadline)
+//                            .foregroundColor(.blue)
+//                    }
                     
                 } else {
                     if caption.count > 200 {
@@ -36,10 +36,16 @@ struct PostCellBody2: View {
                         Button {
                             showMore.toggle()
                         } label: {
-                            Text("\(String(caption.prefix(125)))...SHOW MORE")
-                                .font(.subheadline)
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .multilineTextAlignment(.leading)
+                            Group {
+                                Text("\(String(caption.prefix(125)))")
+                                    .font(.subheadline)
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    
+                                + Text("...Show more.")
+                                    .font(.subheadline)
+                                    .foregroundStyle(Color(.systemBlue))
+                            }
+                            .multilineTextAlignment(.leading)
                         }
                         
                             
