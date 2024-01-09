@@ -13,6 +13,7 @@ struct FollowingView: View {
     
     @State private var following: [User] = []
     @State private var searchText: String = ""
+    @State private var swipeStarted = false
     
     var filteredFollowers: [User] {
         guard !searchText.isEmpty else { return following }
@@ -115,5 +116,17 @@ struct FollowingView: View {
             Spacer()
             
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    if value.startLocation.y < 40 {
+                        self.swipeStarted = true
+                    }
+                }
+                .onEnded { _ in
+                    self.swipeStarted = false
+                    dismiss()
+                }
+        )
     }
 }

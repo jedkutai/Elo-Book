@@ -90,33 +90,21 @@ struct PostPreview: View {
             PostPreviewImages(viewModel: viewModel)
             
             // footer
-            HStack(spacing: 8) {
-                Spacer()
-                
-                Image(systemName: "square.stack.3d.up")
-                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                
-                Spacer()
-                
-                Image(systemName: "bubble")
-                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                
-                Spacer()
-
-                Image(systemName: "square.and.arrow.up")
-                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                
-                Spacer()
-                
-                
-                Text("Now")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                
-                
-            }
-            .padding(.top, 5)
-            .padding(.horizontal, 8.0)
+//            if caption.isEmpty && viewModel.uiImages.isEmpty {
+//                HStack(spacing: 8) {
+//                    Spacer()
+//                    
+//                    Text("Preview")
+//                        .font(.title)
+//                        .fontWeight(.bold)
+//                        .foregroundColor(.gray)
+//                    
+//                    Spacer()
+//                    
+//                    
+//                }
+//                .padding(.horizontal, 8.0)
+//            }
             
         }
         .padding(10)

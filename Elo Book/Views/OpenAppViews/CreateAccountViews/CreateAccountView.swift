@@ -20,6 +20,7 @@ struct CreateAccountView: View {
     @State private var over18 = true
     @State private var attemptingCreation = false
     @State private var emailUnavailable = false
+    @State private var didTheyTouch = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
@@ -121,40 +122,39 @@ struct CreateAccountView: View {
                     
                     
                     if Checks.isValidSignUp(email, password, passwordConfirm) {
-                        Button {
-                            if Checks.isUserOver18(dateOfBirth) {
-                                over18 = true
-                                attemptingCreation = true
-                                Task {
-                                    userId = try await AuthService.createAccount(email: email, password: password, dateOfBirth: dateOfBirth)
-                                    if userId == ErrorMessageStrings.emailInUse {
-                                        emailUnavailable.toggle()
-                                        userId = ""
-                                    } else {
-                                        viewShown = .selectUsername
+                        if !attemptingCreation {
+                            Button {
+                                if Checks.isUserOver18(dateOfBirth) {
+                                    over18 = true
+                                    attemptingCreation = true
+                                    Task {
+                                        userId = try await AuthService.createAccount(email: email, password: password, dateOfBirth: dateOfBirth)
+                                        if userId == ErrorMessageStrings.emailInUse {
+                                            emailUnavailable.toggle()
+                                            userId = ""
+                                        } else {
+                                            viewShown = .selectUsername
+                                        }
+                                        
+                                        attemptingCreation = false
                                     }
-                                    
-                                    attemptingCreation = false
+                                } else {
+                                    over18 = false
                                 }
-                            } else {
-                                over18 = false
+                            } label: {
+                                
+                                Text("Create Account")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 360, height: 44)
+                                    .background(Color(.systemBlue))
+                                    .cornerRadius(8)
+                                    .padding(.top, 20)
                             }
-                        } label: {
                             
-                            Text("Create Account")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                                .frame(width: 360, height: 44)
-                                .background(Color(.systemBlue))
-                                .cornerRadius(8)
-                                .padding(.top, 20)
-                        }
-                    } else {
-                        if attemptingCreation {
-                            ProgressView()
                         } else {
-                            Text("Create Account")
+                            Text(didTheyTouch ? "DON'T TOUCH" : "Don't touch")
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
@@ -162,7 +162,19 @@ struct CreateAccountView: View {
                                 .background(Color(.systemGray4))
                                 .cornerRadius(8)
                                 .padding(.top, 20)
+                                .onTapGesture {
+                                    didTheyTouch = true
+                                }
                         }
+                    } else {
+                        Text("Create Account")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(width: 360, height: 44)
+                            .background(Color(.systemGray4))
+                            .cornerRadius(8)
+                            .padding(.top, 20)
                         
                     }
                     

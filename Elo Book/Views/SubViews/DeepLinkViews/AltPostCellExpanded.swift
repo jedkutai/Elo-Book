@@ -121,7 +121,6 @@ struct AltPostCellExpanded: View {
                     commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 }
             }
-
             .gesture(
                 DragGesture()
                     .onChanged { value in

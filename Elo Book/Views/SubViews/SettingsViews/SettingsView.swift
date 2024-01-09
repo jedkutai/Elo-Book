@@ -59,12 +59,9 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
-                        // notifications
+                        NotificationsSettingsView(user: user, refresh: $refresh).navigationBarBackButtonHidden()
                     } label: {
                         SettingsOption(systemName: "bell", text: "Notifications")
-                        Text("not made")
-                            .font(.footnote)
-                            .foregroundStyle(Color(.systemGray))
                     }
                     
                     NavigationLink {

@@ -164,6 +164,13 @@ struct CommentCell: View {
                 .padding(.horizontal, 18)
             }
         }
+        .onChange(of: showDelete) {
+            if showDelete {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showDelete = false
+                }
+            }
+        }
         .onAppear {
             Task {
                 commentUser  = try await FetchService.fetchUserById(withUid: comment.userId)

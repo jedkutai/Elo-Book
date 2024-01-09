@@ -20,15 +20,7 @@ struct PostCellBody2: View {
                     Text(caption)
                         .font(.subheadline)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        
-                    
-//                    Button {
-//                        showMore.toggle()
-//                    } label: {
-//                        Text("show less")
-//                            .font(.subheadline)
-//                            .foregroundColor(.blue)
-//                    }
+                      
                     
                 } else {
                     if caption.count > 200 {
@@ -47,6 +39,7 @@ struct PostCellBody2: View {
                             }
                             .multilineTextAlignment(.leading)
                         }
+                        
                         
                             
                         
@@ -71,8 +64,8 @@ struct PostCellBody2: View {
         }
         
         if post.imageUrls != nil {
-//            PostImageView2(user: $user, viewedUser: $viewedUser, post: $post)
             PostImageView3(user: $user, viewedUser: $viewedUser, post: $post)
         }
     }
 }
+

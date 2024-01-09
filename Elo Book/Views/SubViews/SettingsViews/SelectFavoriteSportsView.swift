@@ -28,6 +28,9 @@ struct SelectFavoriteSportsView: View {
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                     }
                     
+                    Text("Back")
+                        .foregroundColor(Color.clear) // invisible
+                    
                     Spacer()
                     
                     Text("Favorite Sports")
