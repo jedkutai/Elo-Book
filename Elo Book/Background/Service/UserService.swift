@@ -83,6 +83,10 @@ struct UserService {
         try await userRef.setData(data, merge: true)
     }
     
-    
+    static func startUserNotificationSettings(user: User) async {
+        let notificationSettings = UserNotificationSettings(id: user.id, followAlerts: true, likedPostAlerts: true, commentedPostAlerts: true, likedCommentAlerts: true, communityInviteAlerts: true, communityMessageAlerts: true)
+        guard let encodedNotificationSettings = try? Firestore.Encoder().encode(notificationSettings) else { return }
+        try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("notificationSettings").setData(encodedNotificationSettings)
+    }
     
 }

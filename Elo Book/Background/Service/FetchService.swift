@@ -10,6 +10,12 @@ import Firebase
 import FirebaseFirestore
 
 struct FetchService {
+    
+    static func fetchNotificationSettings(user: User) async throws -> UserNotificationSettings {
+        let snapshot = try await Firestore.firestore().collection("users").document(user.id).collection("settings").document("notificationSettings").getDocument()
+        return try snapshot.data(as: UserNotificationSettings.self)
+    }
+    
     static func fetchFollowingByUser(user: User) async throws -> [User] {
         var users: [User] = []
         

@@ -20,6 +20,7 @@
 		A742A9C12B4BCE9500F956B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */; };
 		A742A9C32B4C93FE00F956B7 /* NewUserWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C22B4C93FE00F956B7 /* NewUserWelcomeView.swift */; };
 		A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C42B4CD3AA00F956B7 /* NotificationsSettingsView.swift */; };
+		A742A9C72B4D20CE00F956B7 /* UserNotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA8782B4779A200F62D08 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86D2B4779A100F62D08 /* Thread.swift */; };
 		A74BA8792B4779A200F62D08 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86E2B4779A100F62D08 /* Message.swift */; };
@@ -150,6 +151,7 @@
 		A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A742A9C22B4C93FE00F956B7 /* NewUserWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserWelcomeView.swift; sourceTree = "<group>"; };
 		A742A9C42B4CD3AA00F956B7 /* NotificationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsView.swift; sourceTree = "<group>"; };
+		A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationSettings.swift; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86D2B4779A100F62D08 /* Thread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		A74BA86E2B4779A100F62D08 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				A74BA8752B4779A100F62D08 /* Team.swift */,
 				A74BA86D2B4779A100F62D08 /* Thread.swift */,
 				A74BA86C2B4779A100F62D08 /* User.swift */,
+				A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				A70651BC2B4A2A4E00A6CE3A /* PostPreviewImages.swift in Sources */,
 				A74BA87F2B4779A200F62D08 /* GroupMessageSettings.swift in Sources */,
 				A74BA87B2B4779A200F62D08 /* Comment.swift in Sources */,
+				A742A9C72B4D20CE00F956B7 /* UserNotificationSettings.swift in Sources */,
 				A74BA9102B478F0700F62D08 /* LoginView.swift in Sources */,
 				A74BA87D2B4779A200F62D08 /* CommentLike.swift in Sources */,
 				A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */,
