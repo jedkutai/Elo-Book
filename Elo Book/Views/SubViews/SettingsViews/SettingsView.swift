@@ -47,7 +47,7 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
-                        
+                        SelectBadgesView(user: user, refresh: $refresh).navigationBarBackButtonHidden()
                     } label: {
                         SettingsOption(systemName: "checkmark.seal.fill", text: "Badges")
                     }
@@ -63,26 +63,6 @@ struct SettingsView: View {
                     } label: {
                         SettingsOption(systemName: "bell", text: "Notifications")
                     }
-                    
-                    NavigationLink {
-                        // blocked
-                    } label: {
-                        SettingsOption(systemName: "circle.slash", text: "Blocked")
-                        Text("not made")
-                            .font(.footnote)
-                            .foregroundStyle(Color(.systemGray))
-                    }
-                    
-                    NavigationLink {
-                        // muted
-                    } label: {
-                        SettingsOption(systemName: "speaker.slash", text: "Muted")
-                        Text("not made")
-                            .font(.footnote)
-                            .foregroundStyle(Color(.systemGray))
-                    }
-                    
-                    
                     
                     NavigationLink {
                         FirstOpenView().navigationBarBackButtonHidden()

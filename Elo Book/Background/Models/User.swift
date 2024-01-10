@@ -20,9 +20,8 @@ struct User: Identifiable, Hashable, Codable {
     var profileImageId: String?
     var fullname: String?
     var bio: String?
+    var phoneNumber: String?
     var displayedBadge: String?
-    var allBadges: [String]?
-    var favorites: [String]?
     
     var score: Int = 0
     var timestamp: Timestamp = Timestamp()

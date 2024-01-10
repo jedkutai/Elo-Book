@@ -31,6 +31,10 @@ struct PostCellExpandedHeader: View {
                             .font(.footnote)
                             .foregroundColor(Color(.systemGray))
                     }
+                    
+                    if let badge = postUser.displayedBadge {
+                        BadgeDiplayer(badge: badge)
+                    }
                 }
             }
             

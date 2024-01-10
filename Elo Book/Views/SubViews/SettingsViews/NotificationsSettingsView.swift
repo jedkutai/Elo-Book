@@ -9,10 +9,9 @@ import SwiftUI
 
 struct NotificationsSettingsView: View {
     @State var user: User
-    
     @Binding var refresh: Bool
     
-    @State var notificationSettings: UserNotificationSettings?
+    @State private var notificationSettings: UserNotificationSettings?
     
     @State private var followAlerts: Bool = true
     @State private var likedPostAlerts: Bool = true
@@ -21,7 +20,6 @@ struct NotificationsSettingsView: View {
     @State private var communityInviteAlerts: Bool = true
     @State private var communityMessageAlerts: Bool = true
     
-    @State private var pageLoading = true
     
     @State private var swipeStarted = false
     @Environment(\.dismiss) private var dismiss
@@ -33,6 +31,12 @@ struct NotificationsSettingsView: View {
                 HStack {
                     Button {
                         dismiss()
+                        Task {
+                            await UserService.updateUserNotificationSettings(user: user, followAlerts: followAlerts, likedPostAlerts: likedPostAlerts, commentedPostAlerts: commentedPostAlerts, likedCommentAlerts: likedCommentAlerts, communityInviteAlerts: communityInviteAlerts, communityMessageAlerts: communityMessageAlerts)
+                            
+                            refresh.toggle()
+                        }
+                        
                     } label: {
                         Image(systemName: "chevron.left")
                             .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
@@ -43,6 +47,7 @@ struct NotificationsSettingsView: View {
                     
                     Text("Notifications")
                         .font(.headline)
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     
                     Spacer()
                     
@@ -251,32 +256,31 @@ struct NotificationsSettingsView: View {
                 }
                 
                 if let notificationSettings = notificationSettings {
-                    if let followAlerts_ = notificationSettings.followAlerts {
-                        followAlerts = followAlerts_
+                    if let followAlerts = notificationSettings.followAlerts {
+                        self.followAlerts = followAlerts
                     }
                     
-                    if let likedPostAlerts_ = notificationSettings.likedPostAlerts {
-                        likedPostAlerts = likedPostAlerts_
+                    if let likedPostAlerts = notificationSettings.likedPostAlerts {
+                        self.likedPostAlerts = likedPostAlerts
                     }
                     
-                    if let commentedPostAlerts_ = notificationSettings.commentedPostAlerts {
-                        commentedPostAlerts = commentedPostAlerts_
+                    if let commentedPostAlerts = notificationSettings.commentedPostAlerts {
+                        self.commentedPostAlerts = commentedPostAlerts
                     }
                     
-                    if let likedCommentAlerts_ = notificationSettings.likedCommentAlerts {
-                        likedCommentAlerts = likedCommentAlerts_
+                    if let likedCommentAlerts = notificationSettings.likedCommentAlerts {
+                        self.likedCommentAlerts = likedCommentAlerts
                     }
                     
-                    if let communityInviteAlerts_ = notificationSettings.communityInviteAlerts {
-                        communityInviteAlerts = communityInviteAlerts_
+                    if let communityInviteAlerts = notificationSettings.communityInviteAlerts {
+                        self.communityInviteAlerts = communityInviteAlerts
                     }
                     
-                    if let communityMessageAlerts_ = notificationSettings.communityMessageAlerts {
-                        communityMessageAlerts = communityMessageAlerts_
+                    if let communityMessageAlerts = notificationSettings.communityMessageAlerts {
+                        self.communityMessageAlerts = communityMessageAlerts
                     }
                 }
                 
-                pageLoading = false
             }
         }
         .gesture(

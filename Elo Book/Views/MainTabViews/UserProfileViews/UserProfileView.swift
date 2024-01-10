@@ -28,6 +28,10 @@ struct UserProfileView: View {
                                     .fontWeight(.bold)
                             }
                             
+                            if let badge = user.displayedBadge {
+                                BadgeDiplayer(badge: badge)
+                            }
+                            
                             
                             Spacer()
                             

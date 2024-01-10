@@ -77,11 +77,6 @@ struct UserService {
         }
     }
     
-    static func updateUserFavorites(user: User, favorites: [String]) async throws {
-        let userRef = Firestore.firestore().collection("users").document(user.id)
-        let data: [String: Any] = ["favorites": favorites]
-        try await userRef.setData(data, merge: true)
-    }
     
     static func startUserNotificationSettings(user: User) async {
         let notificationSettings = UserNotificationSettings(id: user.id, followAlerts: true, likedPostAlerts: true, commentedPostAlerts: true, likedCommentAlerts: true, communityInviteAlerts: true, communityMessageAlerts: true)
@@ -89,4 +84,33 @@ struct UserService {
         try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("notificationSettings").setData(encodedNotificationSettings)
     }
     
+    static func updateUserNotificationSettings(user: User, followAlerts: Bool, likedPostAlerts: Bool, commentedPostAlerts: Bool, likedCommentAlerts: Bool, communityInviteAlerts: Bool, communityMessageAlerts: Bool) async {
+        let notificationSettings = UserNotificationSettings(id: user.id, followAlerts: followAlerts, likedPostAlerts: likedPostAlerts, commentedPostAlerts: commentedPostAlerts, likedCommentAlerts: likedCommentAlerts, communityInviteAlerts: communityInviteAlerts, communityMessageAlerts: communityMessageAlerts)
+        guard let encodedNotificationSettings = try? Firestore.Encoder().encode(notificationSettings) else { return }
+        try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("notificationSettings").setData(encodedNotificationSettings)
+    }
+    
+    static func startUserFavoriteSportsSettings(user: User) async throws {
+        let favoriteSpotsSettings = UserFavoriteSports(id: user.id, baseball: true, basketball: true, football: true, hockey: true, soccer: true)
+        guard let encodedNotificationSettings = try? Firestore.Encoder().encode(favoriteSpotsSettings) else { return }
+        try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("favoriteSportsSettings").setData(encodedNotificationSettings)
+    }
+    
+    static func updateUserFavoriteSportsSettings(user: User, baseball: Bool, basketball: Bool, football: Bool, hockey: Bool, soccer: Bool) async throws {
+        let favoriteSpotsSettings = UserFavoriteSports(id: user.id, baseball: baseball, basketball: basketball, football: football, hockey: hockey, soccer: soccer)
+        guard let encodedNotificationSettings = try? Firestore.Encoder().encode(favoriteSpotsSettings) else { return }
+        try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("favoriteSportsSettings").setData(encodedNotificationSettings)
+    }
+    
+    static func startUserBadges(user: User) async throws {
+        let userBadges = UserBadgeSettings(id: user.id, publicFigure: false, alphaTester: false, degenerate: false)
+        guard let encodedBadges = try? Firestore.Encoder().encode(userBadges) else { return }
+        try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("badges").setData(encodedBadges)
+    }
+    
+    static func updateDisplayedBadge(user: User, displayedBadge: String) async throws {
+        let userRef = Firestore.firestore().collection("users").document(user.id)
+        let data: [String: Any] = ["displayedBadge": displayedBadge]
+        try await userRef.setData(data, merge: true)
+    }
 }

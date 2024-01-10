@@ -31,7 +31,8 @@ struct MainTabControllerView: View {
                     .tag(Tab.home)
                 
 
-                SearchView(user: $user)
+//                SearchView(user: $user)
+                SearchView2(user: $user)
                     .tabItem {
                         VStack {
                             Image(systemName: "magnifyingglass")

@@ -11,9 +11,60 @@ import FirebaseFirestore
 
 struct FetchService {
     
+    
+    static func fetchFavoriteSportsSettingsAsStringArray(user: User) async throws -> [String] {
+        var favoriteSports: [String] = []
+        // Baseball Basketball Football Hockey Soccer
+        do {
+            let favoriteSportsSettings = try await self.fetchFavoriteSportsSettings(user: user)
+            
+            if let baseball = favoriteSportsSettings.baseball {
+                if baseball {
+                    favoriteSports.append("Baseball")
+                }
+            }
+            
+            if let basketball = favoriteSportsSettings.basketball {
+                if basketball {
+                    favoriteSports.append("Basketball")
+                }
+            }
+            
+            if let football = favoriteSportsSettings.football {
+                if football {
+                    favoriteSports.append("Football")
+                }
+            }
+            
+            if let hockey = favoriteSportsSettings.hockey {
+                if hockey {
+                    favoriteSports.append("Hockey")
+                }
+            }
+            
+            if let soccer = favoriteSportsSettings.soccer {
+                if soccer {
+                    favoriteSports.append("Soccer")
+                }
+            }
+            
+        }
+        return favoriteSports
+    }
+    
     static func fetchNotificationSettings(user: User) async throws -> UserNotificationSettings {
         let snapshot = try await Firestore.firestore().collection("users").document(user.id).collection("settings").document("notificationSettings").getDocument()
         return try snapshot.data(as: UserNotificationSettings.self)
+    }
+    
+    static func fetchUserBadges(user: User) async throws -> UserBadgeSettings {
+        let snapshot = try await Firestore.firestore().collection("users").document(user.id).collection("settings").document("badges").getDocument()
+        return try snapshot.data(as: UserBadgeSettings.self)
+    }
+    
+    static func fetchFavoriteSportsSettings(user: User) async throws -> UserFavoriteSports {
+        let snapshot = try await Firestore.firestore().collection("users").document(user.id).collection("settings").document("favoriteSportsSettings").getDocument()
+        return try snapshot.data(as: UserFavoriteSports.self)
     }
     
     static func fetchFollowingByUser(user: User) async throws -> [User] {
@@ -160,66 +211,6 @@ struct FetchService {
         
         return posts[0]
     }
-    
-    
-    static func fetchUserFavorites(user: User) async throws -> [Event] {
-        var events: [Event] = []
-        
-        let currentTime = Timestamp(date: Date())
-        let fourHoursAgo = Timestamp(date: Calendar.current.date(byAdding: .hour, value: -4, to: currentTime.dateValue())!)
-        
-        if let favoriteSports = user.favorites {
-            
-            let query2 = Firestore.firestore()
-                .collection("events")
-                .whereField("sport", in: favoriteSports)
-                .whereField("timestamp", isGreaterThan: fourHoursAgo)
-                .order(by: "timestamp")
-                .limit(to: 20)
-            
-            
-            let snapshot2 = try await query2.getDocuments()
-            events = snapshot2.documents.compactMap({ try? $0.data(as: Event.self) })
-        }
-        
-        var uniqueEvents: [Event] = []
-        
-        for event in events {
-            if !uniqueEvents.contains(where: { $0.id == event.id }) {
-                uniqueEvents.append(event)
-            }
-        }
-        
-        events = uniqueEvents
-        
-        if events.count < 20 {
-            let query4 = Firestore.firestore()
-                .collection("events")
-                .whereField("timestamp", isGreaterThan: currentTime)
-                .order(by: "timestamp")
-                .limit(to: 20 - events.count)
-            
-            let snapshot4 = try await query4.getDocuments()
-            
-            let events4 = snapshot4.documents.compactMap({ try? $0.data(as: Event.self) })
-            events += events4
-        }
-        
-        uniqueEvents = []
-        
-        for event in events {
-            if !uniqueEvents.contains(where: { $0.id == event.id }) {
-                uniqueEvents.append(event)
-            }
-        }
-        
-        events = uniqueEvents
-        
-        events.sort { $0.timestamp.dateValue() < $1.timestamp.dateValue() }
-        return Array(events.prefix(20))
-    }
-    
-    
     
     
     static func fetchCommentsByPostId(postId: String) async throws -> [Comment] {

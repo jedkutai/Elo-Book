@@ -37,6 +37,9 @@ struct AltUserProfileView: View {
                                     .fontWeight(.bold)
                             }
                             
+                            if let badge = viewedUser.displayedBadge {
+                                BadgeDiplayer(badge: badge)
+                            }
                             
                             Spacer()
                             

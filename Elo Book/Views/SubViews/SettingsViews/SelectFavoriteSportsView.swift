@@ -11,9 +11,15 @@ struct SelectFavoriteSportsView: View {
     @State var user: User
     @Binding var refresh: Bool
     
-    @State var userFavorites: [String] = []
-    @State var selectedFavorites: [String] = []
-    @State private var allSports: [String] = ["Baseball", "Basketball", "Football", "Hockey", "Soccer"]
+    @State private var favoriteSportsSettings: UserFavoriteSports?
+    
+    @State private var baseball: Bool = true
+    @State private var basketball: Bool = true
+    @State private var football: Bool = true
+    @State private var hockey: Bool = true
+    @State private var soccer: Bool = true
+    
+    
     @State private var swipeStarted = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -23,13 +29,14 @@ struct SelectFavoriteSportsView: View {
                 HStack {
                     Button {
                         dismiss()
+                        Task {
+                            try await UserService.updateUserFavoriteSportsSettings(user: user, baseball: baseball, basketball: basketball, football: football, hockey: hockey, soccer: soccer)
+                            refresh.toggle()
+                        }
                     } label: {
                         Image(systemName: "chevron.left")
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                     }
-                    
-                    Text("Back")
-                        .foregroundColor(Color.clear) // invisible
                     
                     Spacer()
                     
@@ -38,79 +45,179 @@ struct SelectFavoriteSportsView: View {
                     
                     Spacer()
                     
-                    if userFavorites != selectedFavorites && !selectedFavorites.isEmpty {
-                        Button {
-                            dismiss()
-                            Task {
-                                try await UserService.updateUserFavorites(user: user, favorites: selectedFavorites)
-                            }
-                            refresh.toggle()
-                        } label: {
-                            Text("Update")
-                                .foregroundStyle(Color(.systemBlue))
-                        }
-                    } else {
-                        Text("Update")
-                            .foregroundStyle(Color(.systemGray))
-                    }
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color.clear) // invisible
                 }
                 .padding(.horizontal)
                 
                 Divider()
                     .frame(height: 1)
                 
-                ScrollView {
-                    ForEach(allSports, id: \.self) { sport in
-                        if let indexToRemove = selectedFavorites.firstIndex(of: sport) {
+                if favoriteSportsSettings != nil {
+                    ScrollView {
+                        HStack {
                             Button {
-                                selectedFavorites.remove(at: indexToRemove)
+                                baseball.toggle()
                             } label: {
-                                HStack {
-                                    Text(sport)
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    
+                                Text("Baseball")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                
+                                Spacer()
+                                
+                                if baseball {
                                     Image(systemName: "checkmark.circle.fill")
                                         .foregroundStyle(Color(.green))
-                                    
-                                    Spacer()
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                                 }
-                                .padding(.horizontal)
-                            }
-                        } else {
-                            Button {
-                                selectedFavorites.append(sport)
-                                selectedFavorites.sort()
-                            } label: {
-                                HStack {
-                                    
-                                    Text(sport)
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    
-                                    Spacer()
-                                }
-                                .padding(.horizontal)
                             }
                         }
+                        
                         Divider()
                             .frame(height: 1)
-                    }
-                    
-                    HStack {
-                        Spacer()
+                        
+                        HStack {
+                            Button {
+                                basketball.toggle()
+                            } label: {
+                                Text("Basketball")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                
+                                Spacer()
+                                
+                                if basketball {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(Color(.green))
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                            .frame(height: 1)
+                        
+                        HStack {
+                            Button {
+                                football.toggle()
+                            } label: {
+                                Text("Football")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                
+                                Spacer()
+                                
+                                if football {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(Color(.green))
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                            .frame(height: 1)
+                        
+                        HStack {
+                            Button {
+                                hockey.toggle()
+                            } label: {
+                                Text("Hockey")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                
+                                Spacer()
+                                
+                                if hockey {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(Color(.green))
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                            .frame(height: 1)
+                        
+                        
+                        HStack {
+                            Button {
+                                soccer.toggle()
+                            } label: {
+                                Text("Soccer")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                
+                                Spacer()
+                                
+                                if soccer {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .foregroundStyle(Color(.green))
+                                } else {
+                                    Image(systemName: "circle")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                            .frame(height: 1)
+                        
                         Text("The sports you select will appear the most on your discover page.")
                             .font(.subheadline)
                             .foregroundStyle(Color(.systemGray))
-                        Spacer()
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        
                     }
-                    .padding()
+                    .padding(.horizontal)
+                } else {
+                    Spacer()
+                    ProgressView()
                 }
+                
+                Spacer()
             }
         }
         .onAppear {
-            if let favorites = user.favorites {
-                userFavorites = favorites
-                selectedFavorites = favorites
+            Task {
+                do {
+                    favoriteSportsSettings = try await FetchService.fetchFavoriteSportsSettings(user: user)
+                } catch {
+                    favoriteSportsSettings = nil
+                }
+                
+                if favoriteSportsSettings == nil {
+                    try await UserService.startUserFavoriteSportsSettings(user: user)
+                    favoriteSportsSettings = try await FetchService.fetchFavoriteSportsSettings(user: user)
+                }
+                
+                if let favoriteSportsSettings = favoriteSportsSettings {
+                    if let baseball = favoriteSportsSettings.baseball {
+                        self.baseball = baseball
+                    }
+                    
+                    if let basketball = favoriteSportsSettings.basketball {
+                        self.basketball = basketball
+                    }
+                    
+                    if let football = favoriteSportsSettings.football {
+                        self.football = football
+                    }
+                    
+                    if let hockey = favoriteSportsSettings.hockey {
+                        self.hockey = hockey
+                    }
+                    
+                    if let soccer = favoriteSportsSettings.soccer {
+                        self.soccer = soccer
+                    }
+                }
             }
+            
         }
         .gesture(
             DragGesture()

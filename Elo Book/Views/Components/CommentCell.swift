@@ -53,6 +53,10 @@ struct CommentCell: View {
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(Color(.systemGray))
                                         }
+                                        
+                                        if let badge = commentUser.displayedBadge {
+                                            BadgeDiplayer(badge: badge)
+                                        }
                                     }
                                 }
                                 
