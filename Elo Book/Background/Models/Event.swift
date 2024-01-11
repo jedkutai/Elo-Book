@@ -22,4 +22,5 @@ struct Event: Identifiable, Hashable, Codable {
     var team1_ID: String
     var team2_ID: String
     
+    var score: Int?
 }

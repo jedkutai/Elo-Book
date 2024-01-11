@@ -110,7 +110,16 @@ struct UserService {
     
     static func updateDisplayedBadge(user: User, displayedBadge: String) async throws {
         let userRef = Firestore.firestore().collection("users").document(user.id)
-        let data: [String: Any] = ["displayedBadge": displayedBadge]
+        let data: [String: String] = ["displayedBadge": displayedBadge]
         try await userRef.setData(data, merge: true)
+    }
+    
+    static func uploadFCMToken(user: User) async throws {
+        let userRef = Firestore.firestore().collection("users").document(user.id)
+        if let fcmToken = UserDefaults.standard.string(forKey: "fcmToken") {
+            let data: [String: String] = ["fcmToken": fcmToken]
+            guard let encodedToken = try? Firestore.Encoder().encode(data) else { return }
+            try await userRef.setData(encodedToken, merge: true)
+        }
     }
 }

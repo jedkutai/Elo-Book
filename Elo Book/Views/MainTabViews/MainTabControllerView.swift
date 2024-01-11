@@ -11,12 +11,15 @@ enum Tab {
     case home
     case search
     case profile
+    case messages
 }
 
 struct MainTabControllerView: View {
     @State var user: User
-//    @State private var tabSelection = 1
+
     @State private var refresh = false
+    
+    @EnvironmentObject var x: X
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
@@ -31,7 +34,6 @@ struct MainTabControllerView: View {
                     .tag(Tab.home)
                 
 
-//                SearchView(user: $user)
                 SearchView2(user: $user)
                     .tabItem {
                         VStack {
@@ -41,6 +43,14 @@ struct MainTabControllerView: View {
                     }
                     .tag(Tab.search)
                 
+                MessageView(user: $user)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "pencil.and.scribble")
+                            Text("Messages")
+                        }
+                    }
+                    .tag(Tab.messages)
                 
                 UserProfileView(user: $user, refresh: $refresh)
                     .tabItem {

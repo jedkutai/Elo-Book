@@ -9,8 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct PostCell: View {
-    @State var user: User
-    @State var post: Post
+    @Binding var user: User // changed
+    @Binding var post: Post // changed
     @State var postUser: User?
     
     @State private var likes: [PostLike] = []
@@ -67,6 +67,3 @@ struct PostCell: View {
     }
 }
 
-#Preview {
-    PostCell(user: User.MOCK_USER, post: Post.MOCK_POST)
-}

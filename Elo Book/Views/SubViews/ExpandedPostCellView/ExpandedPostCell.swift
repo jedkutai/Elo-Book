@@ -49,7 +49,6 @@ struct ExpandedPostCell: View {
                 ScrollView {
                     VStack {
                         PostCellExpandedHeader(user: $user, postUser: $postUser)
-//                        PostCellExpandedBody(post: $post)
                         PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }

@@ -15,21 +15,26 @@ struct PostCellExpandedFooter: View {
     @Binding var commentCount: Int
     @Environment(\.colorScheme) var colorScheme
     @State private var shareLink = ""
+    @State private var likeCoolDown = false
     var body: some View {
         HStack(spacing: 8) {
             Spacer()
             Button {
-                Task {
-                    if likes.contains(where: { $0.userId == user.id }) { // already liked so unlike
-                        try await PostService.unlikePost(postId: post.id, userId: user.id)
-                        if let indexToRemove = likes.firstIndex(where: {$0.userId == user.id}) {
-                            likes.remove(at: indexToRemove)
+                if !likeCoolDown {
+                    likeCoolDown = true
+                    Task {
+                        if likes.contains(where: { $0.userId == user.id }) { // already liked so unlike
+                            try await PostService.unlikePost(postId: post.id, userId: user.id)
+                            if let indexToRemove = likes.firstIndex(where: {$0.userId == user.id}) {
+                                likes.remove(at: indexToRemove)
+                            }
+                        } else {
+                            try await PostService.likePost(postId: post.id, userId: user.id)
+                            likes.append(PostLike(id: "", postId: post.id, userId: user.id))
                         }
-                    } else {
-                        try await PostService.likePost(postId: post.id, userId: user.id)
-                        likes.append(PostLike(id: "", postId: post.id, userId: user.id))
+                        likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
+                        likeCoolDown = false
                     }
-                    likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
                 }
 
             } label: {

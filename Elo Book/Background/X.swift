@@ -39,7 +39,7 @@ class X: ObservableObject {
         self.firstOpenSelectFavorites = true
         self.firstEventSearch = true
         self.events = []
-        self.users = []
+//        self.users = []
         self.teams = []
         
         // deep link stuff

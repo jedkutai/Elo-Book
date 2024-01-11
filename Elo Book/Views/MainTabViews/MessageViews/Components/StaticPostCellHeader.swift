@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct StaticPostCellHeader: View {
+    @Binding var postUser: User
+    @Binding var post: Post
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            HStack {
+                SquareProfilePicture(user: postUser, size: .xSmall)
+                
+                if let fullname = postUser.fullname {
+                    Text("\(fullname)")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                }
+                
+                if let username = postUser.username {
+                    Text("\(username)")
+                        .font(.footnote)
+                        .foregroundColor(Color(.systemGray))
+                }
+            }
+            
+            Spacer()
+            
+        }
+        .padding(.horizontal, 8)
     }
-}
-
-#Preview {
-    StaticPostCellHeader()
 }

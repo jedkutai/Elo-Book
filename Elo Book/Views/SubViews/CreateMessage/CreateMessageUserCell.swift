@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct CreateMessageUserCell: View {
+    @State var user: User
+    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            SquareProfilePicture(user: user, size: .xSmall)
+            
+            if let fullname = user.fullname {
+                Text("\(fullname)")
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+            }
+            
+            if let username = user.username {
+                Text("\(username)")
+                    .font(.footnote)
+                    .foregroundStyle(Color(.systemGray))
+            }
+            
+            Spacer()
+        }
+        .padding(.horizontal, 10)
     }
-}
-
-#Preview {
-    CreateMessageUserCell()
 }

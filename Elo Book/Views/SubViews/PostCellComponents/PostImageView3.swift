@@ -44,6 +44,13 @@ struct PostImageView3: View {
                     
                 } else {
                     KFImage(URL(string: imageUrls[0]))
+                        .placeholder {
+                            Image("elo_book_app_icon5")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: imageWidth, height: imageWidth * 0.5 + 5)
+                                .padding(.horizontal, 8)
+                        }
                         .resizable()
                         .scaledToFill()
                         .frame(width: imageWidth, height: imageWidth * 0.5 + 5)
@@ -68,6 +75,14 @@ struct PostImageView3: View {
                 } else {
                     HStack {
                         KFImage(URL(string: imageUrls[0]))
+                            .placeholder {
+                                Image("elo_book_app_icon5")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: imageWidth * 0.5 - 0.5, height: imageWidth * 0.5 + 5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .padding(.leading, 8)
+                            }
                             .resizable()
                             .scaledToFill()
                             .frame(width: imageWidth * 0.5 - 0.5, height: imageWidth * 0.5 + 5)
@@ -82,6 +97,15 @@ struct PostImageView3: View {
                         Spacer()
                         
                         KFImage(URL(string: imageUrls[1]))
+                            .placeholder {
+                                Image("elo_book_app_icon5")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: imageWidth * 0.5 - 0.5, height: imageWidth * 0.5 + 5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .padding(.trailing, 8)
+                                
+                            }
                             .resizable()
                             .scaledToFill()
                             .frame(width: imageWidth * 0.5 - 0.5, height: imageWidth * 0.5 + 5)
@@ -108,6 +132,14 @@ struct PostImageView3: View {
                 } else {
                     HStack {
                         KFImage(URL(string: imageUrls[0]))
+                            .placeholder {
+                                Image("elo_book_app_icon5")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.5 + 5)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .padding(.leading, 8)
+                            }
                             .resizable()
                             .scaledToFill()
                             .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.5 + 5)
@@ -123,6 +155,13 @@ struct PostImageView3: View {
                         
                         VStack {
                             KFImage(URL(string: imageUrls[1]))
+                                .placeholder {
+                                    Image("elo_book_app_icon5")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25 - 0.25)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                }
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25 - 0.25)
@@ -136,6 +175,13 @@ struct PostImageView3: View {
                             Spacer()
                             
                             KFImage(URL(string: imageUrls[2]))
+                                .placeholder {
+                                    Image("elo_book_app_icon5")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25 - 0.25)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                }
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25 - 0.25)
@@ -164,6 +210,14 @@ struct PostImageView3: View {
                     VStack {
                         HStack {
                             KFImage(URL(string: imageUrls[0]))
+                                .placeholder {
+                                    Image("elo_book_app_icon5")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding(.leading, 8)
+                                }
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
@@ -178,6 +232,14 @@ struct PostImageView3: View {
                             Spacer()
                             
                             KFImage(URL(string: imageUrls[1]))
+                                .placeholder {
+                                    Image("elo_book_app_icon5")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding(.trailing, 8)
+                                }
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
@@ -194,6 +256,14 @@ struct PostImageView3: View {
                         
                         HStack {
                             KFImage(URL(string: imageUrls[2]))
+                                .placeholder {
+                                    Image("elo_book_app_icon5")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding(.leading, 8)
+                                }
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
@@ -207,6 +277,15 @@ struct PostImageView3: View {
                             Spacer()
                             
                             KFImage(URL(string: imageUrls[3]))
+                                .placeholder {
+                                    Image("elo_book_app_icon5")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding(.trailing, 8)
+                                    
+                                }
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)

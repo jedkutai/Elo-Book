@@ -92,8 +92,8 @@
             filePath = "Elo Book/Views/MainTabViews/SearchViews/SearchView2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "SearchView2"
             landmarkType = "14">
          </BreakpointContent>
@@ -108,8 +108,8 @@
             filePath = "Elo Book/Views/MainTabViews/SearchViews/SearchView2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "displayedEvents"
             landmarkType = "24">
          </BreakpointContent>

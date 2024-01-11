@@ -62,8 +62,8 @@ struct EventView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack {
-                            ForEach(posts, id: \.id) { post in
-                                PostCell(user: user, post: post)
+                            ForEach($posts, id: \.id) { post in
+                                PostCell(user: $user, post: post)
                                     .padding(.top, 1)
                             }
                             

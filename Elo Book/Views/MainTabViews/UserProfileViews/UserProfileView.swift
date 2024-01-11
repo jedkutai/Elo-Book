@@ -49,8 +49,8 @@ struct UserProfileView: View {
                         ProfileHeader(user: $user)
                         
                         
-                        ForEach(userProfilePosts, id: \.id) { (post) in
-                            PostCell(user: user, post: post, postUser: user)
+                        ForEach($userProfilePosts, id: \.id) { (post) in
+                            PostCellWithStaticHeader(user: $user, post: post, postUser: user)
                         }
                         
                         if userProfilePosts.count >= 20 {

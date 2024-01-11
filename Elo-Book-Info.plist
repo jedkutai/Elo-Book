@@ -7,8 +7,6 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLIconFile</key>
-			<string>/Volumes/JEDAGAIN/Images/elo_book_app_icon5.png</string>
 			<key>CFBundleURLName</key>
 			<string>org.elobook.Elo-Book</string>
 			<key>CFBundleURLSchemes</key>
@@ -20,7 +18,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
-		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 </dict>

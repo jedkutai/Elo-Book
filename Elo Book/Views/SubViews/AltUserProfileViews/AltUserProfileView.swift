@@ -64,8 +64,8 @@ struct AltUserProfileView: View {
                         AltProfileHeader(user: $user, viewedUser: $viewedUser)
                         
                         
-                        ForEach(userProfilePosts, id: \.id) { (post) in
-                            PostCell(user: user, post: post, postUser: viewedUser)
+                        ForEach($userProfilePosts, id: \.id) { (post) in
+                            PostCellWithStaticHeader(user: $user, post: post, postUser: viewedUser)
                         }
                         
                         if userProfilePosts.count >= 20 {

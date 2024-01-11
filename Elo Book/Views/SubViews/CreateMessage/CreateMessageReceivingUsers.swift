@@ -8,11 +8,41 @@
 import SwiftUI
 
 struct CreateMessageReceivingUsers: View {
+    @Binding var recievingUsers: [User]
+    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if !recievingUsers.isEmpty {
+            HStack {
+                Text("To:")
+                    .padding(.horizontal, 5)
+                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                    .font(.footnote)
+                    .fontWeight(.bold)
+                
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(Array(recievingUsers.enumerated()), id: \.0) { index, user in
+                            Button {
+                                recievingUsers.remove(at: index)
+                            } label: {
+                                CreateMessageUserCell(user: user)
+                                    .padding(5)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 2.5)
+                                            .stroke(Color(.systemBlue), lineWidth: 1)
+                                    )
+                            }
+                        }
+                    }
+                }
+                .frame(height: 30)
+                
+                Spacer()
+                
+            }
+            .padding(.horizontal)
+        }
     }
-}
-
-#Preview {
-    CreateMessageReceivingUsers()
 }

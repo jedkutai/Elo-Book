@@ -12,7 +12,7 @@ struct UserFeedView: View {
     @EnvironmentObject var x: X
     
     @State private var userFeedPosts: [Post] = []
-    @State private var emptyUsers: [User] = []
+    @State private var emptyUsers: [User] = [] // for when userfeed is empty
     
     @State private var loadingMorePosts = false
     @State private var showCreatePostView = false
@@ -38,8 +38,8 @@ struct UserFeedView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack {
-                            ForEach(userFeedPosts, id: \.id) { post in
-                                PostCell(user: user, post: post)
+                            ForEach($userFeedPosts, id: \.id) { post in
+                                PostCell(user: $user, post: post)
                                     .padding(.top, 1)
                             }
                             
@@ -119,6 +119,9 @@ struct UserFeedView: View {
         .padding(.bottom, 1)
         .onAppear {
             if x.firstOpenUserFeed {
+                Task {
+                    try await UserService.uploadFCMToken(user: user)
+                }
                 localRefresh()
                 x.firstOpenUserFeed.toggle()
             }
@@ -137,10 +140,10 @@ struct UserFeedView: View {
             }
         }
         .fullScreenCover(isPresented: $showCreatePostView) {
-//            CreatePostController(user: user, postCreated: $postCreated)
             CreatePostMasterView(user: user, postCreated: $postCreated)
         }
         .refreshable {
+            userFeedPosts = []
             localRefresh()
         }
         .onChange(of: postCreated) {

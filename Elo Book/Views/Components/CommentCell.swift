@@ -14,7 +14,7 @@ struct CommentCell: View {
     
     
     @State private var likes: [CommentLike] = []
-    
+    @State private var likeCooldown = false
     @State private var showDelete = false
     @State private var commentDeleted = false
     @State private var showMore = false
@@ -132,19 +132,24 @@ struct CommentCell: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             Button {
-                                Task {
-                                    if likes.contains(where: { $0.userId == user.id }) {
-                                        try await CommentService.unlikeComment(comment: comment, userId: user.id)
-                                        
-                                    } else {
-                                        try await CommentService.likeComment(comment: comment, userId: user.id)
+                                if !likeCooldown {
+                                    likeCooldown = true
+                                    Task {
+                                        if likes.contains(where: { $0.userId == user.id }) {
+                                            try await CommentService.unlikeComment(comment: comment, userId: user.id)
+                                            
+                                        } else {
+                                            try await CommentService.likeComment(comment: comment, userId: user.id)
+                                        }
+                                        likes = try await FetchService.fetchCommentLikesByCommentId(comment: comment)
+                                        likeCooldown = false
                                     }
-                                    likes = try await FetchService.fetchCommentLikesByCommentId(comment: comment)
+                                    
                                 }
                             } label: {
                                 HStack {
                                     if likes.contains(where: { $0.userId == user.id }) {
-                                        Image(systemName: "square.stack.3d.up")
+                                        Image(systemName: "square.stack.3d.up.fill")
                                             .foregroundColor(Theme.buttonColorInteracted)
                                     } else {
                                         Image(systemName: "square.stack.3d.up")

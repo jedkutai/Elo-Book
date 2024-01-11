@@ -16,6 +16,7 @@ struct SearchView2: View {
     
     
     @State private var filters: [String] = [] // create a usefavorites array
+    @State private var someUsers: [User] = []
     
     let fourHoursAgo = Calendar.current.date(byAdding: .hour, value: -4, to: Date()) ?? Date()
     
@@ -33,9 +34,19 @@ struct SearchView2: View {
         }
     }
     
+//    var filteredUsers: [User] {
+//        guard !searchText.isEmpty else { return x.users }
+//        return x.users.filter { user in
+//            if let username = user.username {
+//                return username.localizedCaseInsensitiveContains(searchText)
+//            }
+//            return false
+//        }
+//    }
+    
     var filteredUsers: [User] {
-        guard !searchText.isEmpty else { return x.users }
-        return x.users.filter { user in
+        guard !searchText.isEmpty else { return someUsers }
+        return someUsers.filter { user in
             if let username = user.username {
                 return username.localizedCaseInsensitiveContains(searchText)
             }
@@ -157,11 +168,11 @@ struct SearchView2: View {
                 if !searchDatabaseText.isEmpty {
                     if Checks.isValidSearch(searchDatabaseText) {
                         Task {
-                            let someUsers = try await SearchService.searchDatabaseForUsernames(searchTerm: searchDatabaseText)
-                            x.users = x.mergeArraysAndRemoveDuplicates(x.users, someUsers, keyPath: \.id)
+                            someUsers = try await SearchService.searchDatabaseForUsernames(searchTerm: searchDatabaseText)
                         }
                     }
-                }             }
+                }
+            }
             .onSubmit {
                 hideKeyboard()
             }

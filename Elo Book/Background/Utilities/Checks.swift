@@ -83,9 +83,9 @@ class Checks {
         return true
     }
     
-    static func isUserOver18(_ birthDate: Date) -> Bool {
+    static func isUserOver21(_ birthDate: Date) -> Bool {
         let calendar = Calendar.current
-        if let date18YearsAgo = calendar.date(byAdding: .year, value: -18, to: Date()) {
+        if let date18YearsAgo = calendar.date(byAdding: .year, value: -21, to: Date()) {
             return birthDate <= date18YearsAgo
         }
         return false

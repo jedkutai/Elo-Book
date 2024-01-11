@@ -22,6 +22,7 @@ struct User: Identifiable, Hashable, Codable {
     var bio: String?
     var phoneNumber: String?
     var displayedBadge: String?
+    var fcmToken: String?
     
     var score: Int = 0
     var timestamp: Timestamp = Timestamp()

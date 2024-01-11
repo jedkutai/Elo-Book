@@ -17,7 +17,7 @@ struct CreateAccountView: View {
     @State private var password = ""
     @State private var passwordConfirm = ""
     @State private var dateOfBirth = Date.now
-    @State private var over18 = true
+    @State private var over21 = true
     @State private var attemptingCreation = false
     @State private var emailUnavailable = false
     @State private var didTheyTouch = false
@@ -39,7 +39,7 @@ struct CreateAccountView: View {
                     .padding(.horizontal)
                     
                     Spacer()
-                    if !over18 {
+                    if !over21 {
                         Text("This isn't a day care.")
                             .foregroundStyle(Color(.red))
                     }
@@ -124,8 +124,8 @@ struct CreateAccountView: View {
                     if Checks.isValidSignUp(email, password, passwordConfirm) {
                         if !attemptingCreation {
                             Button {
-                                if Checks.isUserOver18(dateOfBirth) {
-                                    over18 = true
+                                if Checks.isUserOver21(dateOfBirth) {
+                                    over21 = true
                                     attemptingCreation = true
                                     Task {
                                         userId = try await AuthService.createAccount(email: email, password: password, dateOfBirth: dateOfBirth)
@@ -139,7 +139,7 @@ struct CreateAccountView: View {
                                         attemptingCreation = false
                                     }
                                 } else {
-                                    over18 = false
+                                    over21 = false
                                 }
                             } label: {
                                 

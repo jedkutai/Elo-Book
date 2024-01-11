@@ -56,6 +56,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
       print("Firebase registration token: \(String(describing: fcmToken))")
 
       let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        if let userToken = fcmToken {
+            UserDefaults.standard.set(userToken, forKey: "fcmToken")
+        }
       NotificationCenter.default.post(
         name: Notification.Name("FCMToken"),
         object: nil,
