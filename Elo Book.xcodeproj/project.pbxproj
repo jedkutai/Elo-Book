@@ -147,7 +147,6 @@
 		A7ACF81D2B4EF48400192B72 /* PostCellWithStaticHeaderHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF81C2B4EF48400192B72 /* PostCellWithStaticHeaderHeader.swift */; };
 		A7ACF8202B4EF60800192B72 /* ExpandedPostCellWithStaticHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF81F2B4EF60800192B72 /* ExpandedPostCellWithStaticHeader.swift */; };
 		A7ACF8232B4EF62F00192B72 /* ExpandedPostCellWithStaticHeaderHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF8222B4EF62F00192B72 /* ExpandedPostCellWithStaticHeaderHeader.swift */; };
-		A7ACF8252B4EFF0300192B72 /* elo_book_app_icon5.png in Resources */ = {isa = PBXBuildFile; fileRef = A7ACF8242B4EFF0300192B72 /* elo_book_app_icon5.png */; };
 		A7C833EF2B4F2909005B9AB7 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C833EE2B4F2909005B9AB7 /* MessageService.swift */; };
 		A7C833F22B4F69DA005B9AB7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C833F12B4F69DA005B9AB7 /* MessageView.swift */; };
 		A7C833F42B4F7117005B9AB7 /* UploadMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C833F32B4F7117005B9AB7 /* UploadMessage.swift */; };
@@ -301,7 +300,6 @@
 		A7ACF81C2B4EF48400192B72 /* PostCellWithStaticHeaderHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellWithStaticHeaderHeader.swift; sourceTree = "<group>"; };
 		A7ACF81F2B4EF60800192B72 /* ExpandedPostCellWithStaticHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPostCellWithStaticHeader.swift; sourceTree = "<group>"; };
 		A7ACF8222B4EF62F00192B72 /* ExpandedPostCellWithStaticHeaderHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPostCellWithStaticHeaderHeader.swift; sourceTree = "<group>"; };
-		A7ACF8242B4EFF0300192B72 /* elo_book_app_icon5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = elo_book_app_icon5.png; path = ../Images/elo_book_app_icon5.png; sourceTree = "<group>"; };
 		A7C833EE2B4F2909005B9AB7 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		A7C833F12B4F69DA005B9AB7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		A7C833F32B4F7117005B9AB7 /* UploadMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadMessage.swift; sourceTree = "<group>"; };
@@ -704,7 +702,6 @@
 		A752E2A72B4773550007842A = {
 			isa = PBXGroup;
 			children = (
-				A7ACF8242B4EFF0300192B72 /* elo_book_app_icon5.png */,
 				A752E2B22B4773550007842A /* Elo Book */,
 				A752E2B12B4773550007842A /* Products */,
 				A74BA86A2B47797F00F62D08 /* Frameworks */,
@@ -988,7 +985,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A742A9C12B4BCE9500F956B7 /* GoogleService-Info.plist in Resources */,
-				A7ACF8252B4EFF0300192B72 /* elo_book_app_icon5.png in Resources */,
 				A752E2BD2B4773560007842A /* Preview Assets.xcassets in Resources */,
 				A752E2BA2B4773560007842A /* Assets.xcassets in Resources */,
 			);
@@ -1301,6 +1297,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1338,6 +1335,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
