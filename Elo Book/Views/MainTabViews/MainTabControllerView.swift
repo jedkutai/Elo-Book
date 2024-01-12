@@ -24,7 +24,7 @@ struct MainTabControllerView: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
-            TabView(selection: $selectedTab) {
+            TabView(selection: $x.selectedTab) {
                 UserFeedView(user: $user)
                     .tabItem {
                         VStack {

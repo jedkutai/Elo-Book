@@ -141,6 +141,10 @@
 		A7CAC3662B51523A00199A19 /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC3652B51523A00199A19 /* CreateNewMessageView.swift */; };
 		A7CAC3692B5157B000199A19 /* CreateNewMessageViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC3682B5157B000199A19 /* CreateNewMessageViewHeader.swift */; };
 		A7CAC36C2B51588900199A19 /* MessageViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC36B2B51588900199A19 /* MessageViewHeader.swift */; };
+		A7CAC36E2B51C70B00199A19 /* CreateNewMessageViewReceivingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC36D2B51C70B00199A19 /* CreateNewMessageViewReceivingUsers.swift */; };
+		A7CAC3702B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC36F2B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift */; };
+		A7CAC3722B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC3712B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift */; };
+		A7CAC3752B51E4B300199A19 /* MessageThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC3742B51E4B300199A19 /* MessageThreadCell.swift */; };
 		A7EF1F532B4B24EB00B0F12C /* PostImageExpandedView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F522B4B24EB00B0F12C /* PostImageExpandedView2.swift */; };
 		A7EF1F562B4B27FF00B0F12C /* PostImageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F552B4B27FF00B0F12C /* PostImageView2.swift */; };
 		A7EF1F582B4B298B00B0F12C /* PostCellBody2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F572B4B298B00B0F12C /* PostCellBody2.swift */; };
@@ -259,6 +263,10 @@
 		A7CAC3652B51523A00199A19 /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
 		A7CAC3682B5157B000199A19 /* CreateNewMessageViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewHeader.swift; sourceTree = "<group>"; };
 		A7CAC36B2B51588900199A19 /* MessageViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewHeader.swift; sourceTree = "<group>"; };
+		A7CAC36D2B51C70B00199A19 /* CreateNewMessageViewReceivingUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewReceivingUsers.swift; sourceTree = "<group>"; };
+		A7CAC36F2B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewSearchResults.swift; sourceTree = "<group>"; };
+		A7CAC3712B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewSearchBar.swift; sourceTree = "<group>"; };
+		A7CAC3742B51E4B300199A19 /* MessageThreadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThreadCell.swift; sourceTree = "<group>"; };
 		A7EF1F522B4B24EB00B0F12C /* PostImageExpandedView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageExpandedView2.swift; sourceTree = "<group>"; };
 		A7EF1F552B4B27FF00B0F12C /* PostImageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView2.swift; sourceTree = "<group>"; };
 		A7EF1F572B4B298B00B0F12C /* PostCellBody2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellBody2.swift; sourceTree = "<group>"; };
@@ -764,6 +772,9 @@
 			isa = PBXGroup;
 			children = (
 				A7CAC3682B5157B000199A19 /* CreateNewMessageViewHeader.swift */,
+				A7CAC36D2B51C70B00199A19 /* CreateNewMessageViewReceivingUsers.swift */,
+				A7CAC36F2B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift */,
+				A7CAC3712B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift */,
 			);
 			path = CreateNewMessageViewComponents;
 			sourceTree = "<group>";
@@ -772,6 +783,7 @@
 			isa = PBXGroup;
 			children = (
 				A7CAC36B2B51588900199A19 /* MessageViewHeader.swift */,
+				A7CAC3742B51E4B300199A19 /* MessageThreadCell.swift */,
 			);
 			path = MessageViewComponents;
 			sourceTree = "<group>";
@@ -921,6 +933,7 @@
 				A7EF1F562B4B27FF00B0F12C /* PostImageView2.swift in Sources */,
 				A70651C42B4A619800A6CE3A /* CreatePostMasterTextBox.swift in Sources */,
 				A752E3002B4777170007842A /* LogoView.swift in Sources */,
+				A7CAC3752B51E4B300199A19 /* MessageThreadCell.swift in Sources */,
 				A74BA8F02B478E6E00F62D08 /* UserFeedView.swift in Sources */,
 				A74BA91C2B478F7800F62D08 /* AltPostCellExpanded.swift in Sources */,
 				A74BA8C72B477C4700F62D08 /* EventCell.swift in Sources */,
@@ -996,11 +1009,14 @@
 				A7ACF8182B4EE92A00192B72 /* NotificationService.swift in Sources */,
 				A742A9C72B4D20CE00F956B7 /* UserNotificationSettings.swift in Sources */,
 				A74BA9102B478F0700F62D08 /* LoginView.swift in Sources */,
+				A7CAC36E2B51C70B00199A19 /* CreateNewMessageViewReceivingUsers.swift in Sources */,
+				A7CAC3702B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift in Sources */,
 				A7CAC36C2B51588900199A19 /* MessageViewHeader.swift in Sources */,
 				A74BA87D2B4779A200F62D08 /* CommentLike.swift in Sources */,
 				A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */,
 				A74BA93B2B47902300F62D08 /* PostCellExpandedTextBox.swift in Sources */,
 				A74BA93D2B47902300F62D08 /* PostCellExpandedFooter.swift in Sources */,
+				A7CAC3722B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

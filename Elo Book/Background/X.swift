@@ -30,6 +30,9 @@ class X: ObservableObject {
     @Published var deepLinkType: String = ""
     @Published var deepLinkId: String = ""
     
+    // tab view controller
+    @Published var selectedTab: Tab = .home
+    
     
     func clearAll() {
         

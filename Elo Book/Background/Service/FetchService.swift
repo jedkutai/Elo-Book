@@ -10,7 +10,19 @@ import Firebase
 import FirebaseFirestore
 
 struct FetchService {
-    
+    static func fetchMessageThreadsByUser(user: User) async throws -> [Thread] {
+        
+        let query = Firestore.firestore().collection("threads")
+            .whereField("memberIds", arrayContains: user.id)
+            .order(by: "lastMessageTimeStamp", descending: true)
+            .limit(to: 20)
+        
+        let snapshot = try await query.getDocuments()
+        
+        let threads = snapshot.documents.compactMap({ try? $0.data(as: Thread.self) })
+        
+        return threads
+    }
     
     static func fetchFavoriteSportsSettingsAsStringArray(user: User) async throws -> [String] {
         var favoriteSports: [String] = []

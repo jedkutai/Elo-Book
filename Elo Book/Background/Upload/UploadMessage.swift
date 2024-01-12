@@ -43,7 +43,7 @@ class UploadMessage: ObservableObject {
 
         // check to see if a thread already exists with these exact users
         let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", isEqualTo: threadUserIdsSorted)
+            .whereField("memberIds", isEqualTo: threadUserIdsSorted)
         
         let querySnapshot = try await query.getDocuments()
         
@@ -113,7 +113,7 @@ class UploadMessage: ObservableObject {
 
             // check to see if a thread already exists with these exact users
             let query = Firestore.firestore().collection("threads")
-                .whereField("userIds", isEqualTo: threadUserIdsSorted)
+                .whereField("memberIds", isEqualTo: threadUserIdsSorted)
             
             let querySnapshot = try await query.getDocuments()
             
@@ -173,7 +173,7 @@ class UploadMessage: ObservableObject {
 
         // check to see if a thread already exists with these exact users
         let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", isEqualTo: threadUserIdsSorted)
+            .whereField("memberIds", isEqualTo: threadUserIdsSorted)
         
         let querySnapshot = try await query.getDocuments()
         
@@ -232,7 +232,7 @@ class UploadMessage: ObservableObject {
 
         // check to see if a thread already exists with these exact users
         let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", isEqualTo: threadUserIdsSorted)
+            .whereField("memberIds", isEqualTo: threadUserIdsSorted)
         
         let querySnapshot = try await query.getDocuments()
         

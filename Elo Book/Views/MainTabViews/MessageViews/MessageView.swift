@@ -20,11 +20,12 @@ struct MessageView: View {
                 Divider()
                     .frame(height: 1)
                 
+                // Body
                 ScrollView {
                     if let threads = threads {
                         LazyVStack {
                             ForEach(threads, id: \.id) { thread in
-                                // probably gonna want to make a group chat version and a regular 1 on 1 chat version again
+                                MessageThreadCell(user: $user, thread: thread)
                             }
                         }
                         .padding(.top, 5)
@@ -51,7 +52,7 @@ struct MessageView: View {
         threads = nil
         // refresh action, fetch threads and update user etc
         Task {
-            
+            threads = try await FetchService.fetchMessageThreadsByUser(user: user)
         }
     }
 }
