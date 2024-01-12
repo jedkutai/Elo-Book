@@ -43,7 +43,8 @@ struct MainTabControllerView: View {
                     }
                     .tag(Tab.search)
                 
-                MessageView(user: $user)
+                Text("Under Construction")
+                    .accentColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     .tabItem {
                         VStack {
                             Image(systemName: "pencil.and.scribble")

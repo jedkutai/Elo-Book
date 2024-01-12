@@ -80,7 +80,7 @@ struct CreateStandardMessageTextBox: View {
                     } else {
                         Text("Send")
                             .font(.footnote)
-                            .foregroundStyle(Color(.systemRed))
+                            .foregroundStyle(Color(.systemGray))
                     }
                 }
                 .padding(.horizontal, 5)
