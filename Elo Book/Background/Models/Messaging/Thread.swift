@@ -1,8 +1,8 @@
 //
 //  Thread.swift
-//  EloBook
+//  Elo Book
 //
-//  Created by Jed Kutai on 12/9/23.
+//  Created by Jed Kutai on 1/12/24.
 //
 
 import Foundation
@@ -10,17 +10,17 @@ import Firebase
 
 struct Thread: Identifiable, Hashable, Codable {
     let id: String
-    let founderId: String
     
-    var userIds: [String]
+    var ownerId: String
     
-    var mutedBy: [String]?
+    var memberIds: [String]?
+    var mutedByIds: [String]?
     var threadName: String?
     var imageId: String?
     var imageUrl: String?
-    
     var timestamp: Timestamp = Timestamp()
-    var lastMessageTimeStamp: Timestamp?
-    var lastMessageId: String?
+    var lastMessageTimeStamp: Timestamp = Timestamp()
     
 }
+
+

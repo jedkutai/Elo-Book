@@ -2,7 +2,7 @@
 //  UploadMessage.swift
 //  Elo Book
 //
-//  Created by Jed Kutai on 1/10/24.
+//  Created by Jed Kutai on 1/12/24.
 //
 
 import Foundation
@@ -28,161 +28,252 @@ class UploadMessage: ObservableObject {
         }
     }
     
-    // either "standard" or "sharedPost" or "sharedProfile"
-    func uploadMessage(user: User, recievingUsers: [User], caption: String) async throws {
-        var filenames: [String] = []
-        var imageUrls: [String] = []
+    
+    func uploadMessageCaption(user: User, receivingUsers: [User], caption: String) async throws {
+        let allThreadUsers: [User] = receivingUsers + [user] // add sender and receiving users
         
-        for uiImage in uiImages {
-            let filename = NSUUID().uuidString
-            guard let imageUrl = try await ImageUploader.uploadMessageImage(uid: user.id, image: uiImage, filename: filename) else { return }
-            filenames.append(filename)
-            imageUrls.append(imageUrl)
-        }
-        
-        let recievingUsers3 = recievingUsers + [user]
-        var recievingUsers2: [User] = []
-        for user in recievingUsers3 {
-            if !recievingUsers2.contains(where: { $0.id == user.id}) {
-                recievingUsers2.append(user)
+        var threadUsersNoDuplicates: [User] = [] // make sure each user is only in here once
+        for oneUser in allThreadUsers {
+            if !threadUsersNoDuplicates.contains(where: { $0.id == oneUser.id}) {
+                threadUsersNoDuplicates.append(oneUser)
             }
         }
         
-        let recievingUserIds = recievingUsers2.map { $0.id }.sorted()
+        let threadUserIdsSorted = threadUsersNoDuplicates.map { $0.id }.sorted() // put all ids in array and sort them
+
+        // check to see if a thread already exists with these exact users
         let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", isEqualTo: recievingUserIds)
+            .whereField("userIds", isEqualTo: threadUserIdsSorted)
+        
         let querySnapshot = try await query.getDocuments()
         
-        
-        
         if let threadRef = querySnapshot.documents.first {
-            // thread exists
+            // thread exists so upload message
+            
             let threadDocId = threadRef.documentID
             
-            let messageRef = Firestore.firestore().collection("threads").document(threadDocId).collection("messages").document()
-            let messageDocId = messageRef.documentID
-            let message = Message(id: messageDocId, threadId: threadDocId, userId: user.id, messageType: "standard", shareId: "", caption: caption, imageUrls: imageUrls, imageIds: filenames, messageSeenBy: [user.id])
-            guard let encodedMessage = try? Firestore.Encoder().encode(message) else { return }
-            try await messageRef.setData(encodedMessage)
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
             
-            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": message.timestamp])
-            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageId": message.id])
+            let messageDocId = messageRef.documentID
+            
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, caption: caption, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+            
         } else {
-            // create new thread
+            // thread doesnt exist so create thread then upload message
             let threadRef = Firestore.firestore().collection("threads").document()
             let threadDocId = threadRef.documentID
-            let thread = Thread(id: threadDocId, founderId: user.id, userIds: recievingUserIds)
+            let thread = Thread(id: threadDocId, ownerId: user.id, memberIds: threadUserIdsSorted)
             guard let encodedThread = try? Firestore.Encoder().encode(thread) else { return }
             try await threadRef.setData(encodedThread)
+        
+            // pasted code from second half if if statement
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
             
-            let messageRef = Firestore.firestore().collection("threads").document(threadDocId).collection("messages").document()
             let messageDocId = messageRef.documentID
-            let message = Message(id: messageDocId, threadId: threadDocId, userId: user.id, messageType: "standard", shareId: "", caption: caption, imageUrls: imageUrls, imageIds: filenames, messageSeenBy: [user.id])
-            guard let encodedMessage = try? Firestore.Encoder().encode(message) else { return }
-            try await messageRef.setData(encodedMessage)
             
-            try await threadRef.updateData(["lastMessageTimeStamp": message.timestamp])
-            try await threadRef.updateData(["lastMessageId": message.id])
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, caption: caption, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+            
         }
-        
-        
     }
     
-    // either "standard" or "sharedPost" or "sharedProfile"
-    func uploadSharedPost(user: User, post: Post, recievingUsers: [User], caption: String) async throws {
-        let recievingUsers3 = recievingUsers + [user]
-        var recievingUsers2: [User] = []
-        for user in recievingUsers3 {
-            if !recievingUsers2.contains(where: { $0.id == user.id}) {
-                recievingUsers2.append(user)
+    func uploadMessageImages(user: User, receivingUsers: [User]) async throws {
+        if !uiImages.isEmpty {
+            var filenames: [String] = [] // for deleting images late
+            var imageUrls: [String] = [] // for showing image
+            
+            for uiImage in uiImages {
+                let filename = NSUUID().uuidString
+                guard let imageUrl = try await ImageUploader.uploadMessageImage(uid: user.id, image: uiImage, filename: filename) else { return }
+                filenames.append(filename)
+                imageUrls.append(imageUrl)
             }
-        }
-        
-        let recievingUserIds = recievingUsers2.map { $0.id }.sorted()
-        let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", isEqualTo: recievingUserIds)
-        let querySnapshot = try await query.getDocuments()
-        
-        
-        
-        if let threadRef = querySnapshot.documents.first {
-            let threadDocId = threadRef.documentID
             
-            let messageRef = Firestore.firestore().collection("threads").document(threadDocId).collection("messages").document()
-            let messageDocId = messageRef.documentID
-            let message = Message(id: messageDocId, threadId: threadDocId, userId: user.id, messageType: "sharedPost", shareId: post.id, caption: caption, imageUrls: [], imageIds: [], messageSeenBy: [user.id])
-            guard let encodedMessage = try? Firestore.Encoder().encode(message) else { return }
-            try await messageRef.setData(encodedMessage)
+            let allThreadUsers: [User] = receivingUsers + [user] // add sender and receiving users
             
-            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": message.timestamp])
-            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageId": message.id])
-        } else {
+            var threadUsersNoDuplicates: [User] = [] // make sure each user is only in here once
+            for oneUser in allThreadUsers {
+                if !threadUsersNoDuplicates.contains(where: { $0.id == oneUser.id}) {
+                    threadUsersNoDuplicates.append(oneUser)
+                }
+            }
             
-            let threadRef = Firestore.firestore().collection("threads").document()
-            let threadDocId = threadRef.documentID
-            let thread = Thread(id: threadDocId, founderId: user.id, userIds: recievingUserIds)
-            guard let encodedThread = try? Firestore.Encoder().encode(thread) else { return }
-            try await threadRef.setData(encodedThread)
-            
-            let messageRef = Firestore.firestore().collection("threads").document(threadDocId).collection("messages").document()
-            let messageDocId = messageRef.documentID
-            let message = Message(id: messageDocId, threadId: threadDocId, userId: user.id, messageType: "sharedPost", shareId: post.id, caption: caption, imageUrls: [], imageIds: [], messageSeenBy: [user.id])
-            guard let encodedMessage = try? Firestore.Encoder().encode(message) else { return }
-            try await messageRef.setData(encodedMessage)
-            
-            try await threadRef.updateData(["lastMessageTimeStamp": message.timestamp])
-            try await threadRef.updateData(["lastMessageId": message.id])
-        }
-        
-        
-    }
+            let threadUserIdsSorted = threadUsersNoDuplicates.map { $0.id }.sorted() // put all ids in array and sort them
 
-    // either "standard" or "sharedPost" or "sharedProfile"
-    func uploadSharedProfile(user: User, sharedUser: User, recievingUsers: [User], caption: String) async throws {
-        let recievingUsers3 = recievingUsers + [user]
-        var recievingUsers2: [User] = []
-        for user in recievingUsers3 {
-            if !recievingUsers2.contains(where: { $0.id == user.id}) {
-                recievingUsers2.append(user)
+            // check to see if a thread already exists with these exact users
+            let query = Firestore.firestore().collection("threads")
+                .whereField("userIds", isEqualTo: threadUserIdsSorted)
+            
+            let querySnapshot = try await query.getDocuments()
+            
+            if let threadRef = querySnapshot.documents.first {
+                // thread exists so upload message
+                
+                let threadDocId = threadRef.documentID
+                
+                let messageRef = Firestore.firestore()
+                    .collection("threads")
+                    .document(threadDocId)
+                    .collection("messages").document()
+                
+                let messageDocId = messageRef.documentID
+                
+                let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, imageUrls: imageUrls, imageIds: filenames, messageSeenBy: [user.id]) // create the message
+                guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+                try await messageRef.setData(encodedMessage) // upload the message
+                try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+                
+            } else {
+                // thread doesnt exist so create thread then upload message
+                let threadRef = Firestore.firestore().collection("threads").document()
+                let threadDocId = threadRef.documentID
+                let thread = Thread(id: threadDocId, ownerId: user.id, memberIds: threadUserIdsSorted)
+                guard let encodedThread = try? Firestore.Encoder().encode(thread) else { return }
+                try await threadRef.setData(encodedThread)
+            
+                // pasted code from second half if if statement
+                let messageRef = Firestore.firestore()
+                    .collection("threads")
+                    .document(threadDocId)
+                    .collection("messages").document()
+                
+                let messageDocId = messageRef.documentID
+                
+                let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, imageUrls: imageUrls, imageIds: filenames, messageSeenBy: [user.id]) // create the message
+                guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+                try await messageRef.setData(encodedMessage) // upload the message
+                try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+                
+            }
+        }
+    }
+    
+    func uploadMessageSharedProfile(user: User, receivingUsers: [User], sharedUser: User) async throws {
+        let allThreadUsers: [User] = receivingUsers + [user] // add sender and receiving users
+        
+        var threadUsersNoDuplicates: [User] = [] // make sure each user is only in here once
+        for oneUser in allThreadUsers {
+            if !threadUsersNoDuplicates.contains(where: { $0.id == oneUser.id}) {
+                threadUsersNoDuplicates.append(oneUser)
             }
         }
         
-        let recievingUserIds = recievingUsers2.map { $0.id }.sorted()
+        let threadUserIdsSorted = threadUsersNoDuplicates.map { $0.id }.sorted() // put all ids in array and sort them
+
+        // check to see if a thread already exists with these exact users
         let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", isEqualTo: recievingUserIds)
+            .whereField("userIds", isEqualTo: threadUserIdsSorted)
+        
         let querySnapshot = try await query.getDocuments()
         
-        
-        
         if let threadRef = querySnapshot.documents.first {
+            // thread exists so upload message
+            
             let threadDocId = threadRef.documentID
             
-            let messageRef = Firestore.firestore().collection("threads").document(threadDocId).collection("messages").document()
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
+            
             let messageDocId = messageRef.documentID
-            let message = Message(id: messageDocId, threadId: threadDocId, userId: user.id, messageType: "sharedProfile", shareId: sharedUser.id, caption: caption, imageUrls: [], imageIds: [], messageSeenBy: [user.id])
-            guard let encodedMessage = try? Firestore.Encoder().encode(message) else { return }
-            try await messageRef.setData(encodedMessage)
             
-            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": message.timestamp])
-            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageId": message.id])
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, sharedUserId: sharedUser.id, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+            
         } else {
-            
+            // thread doesnt exist so create thread then upload message
             let threadRef = Firestore.firestore().collection("threads").document()
             let threadDocId = threadRef.documentID
-            let thread = Thread(id: threadDocId, founderId: user.id, userIds: recievingUserIds)
+            let thread = Thread(id: threadDocId, ownerId: user.id, memberIds: threadUserIdsSorted)
             guard let encodedThread = try? Firestore.Encoder().encode(thread) else { return }
             try await threadRef.setData(encodedThread)
+        
+            // pasted code from second half if if statement
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
             
-            let messageRef = Firestore.firestore().collection("threads").document(threadDocId).collection("messages").document()
             let messageDocId = messageRef.documentID
-            let message = Message(id: messageDocId, threadId: threadDocId, userId: user.id, messageType: "sharedProfile", shareId: sharedUser.id, caption: caption, imageUrls: [], imageIds: [], messageSeenBy: [user.id])
-            guard let encodedMessage = try? Firestore.Encoder().encode(message) else { return }
-            try await messageRef.setData(encodedMessage)
             
-            try await threadRef.updateData(["lastMessageTimeStamp": message.timestamp])
-            try await threadRef.updateData(["lastMessageId": message.id])
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, sharedUserId: sharedUser.id, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+            
+        }
+    }
+    
+    func uploadMessageSharedPost(user: User, receivingUsers: [User], sharedPost: Post) async throws {
+        let allThreadUsers: [User] = receivingUsers + [user] // add sender and receiving users
+        
+        var threadUsersNoDuplicates: [User] = [] // make sure each user is only in here once
+        for oneUser in allThreadUsers {
+            if !threadUsersNoDuplicates.contains(where: { $0.id == oneUser.id}) {
+                threadUsersNoDuplicates.append(oneUser)
+            }
         }
         
+        let threadUserIdsSorted = threadUsersNoDuplicates.map { $0.id }.sorted() // put all ids in array and sort them
+
+        // check to see if a thread already exists with these exact users
+        let query = Firestore.firestore().collection("threads")
+            .whereField("userIds", isEqualTo: threadUserIdsSorted)
         
+        let querySnapshot = try await query.getDocuments()
+        
+        if let threadRef = querySnapshot.documents.first {
+            // thread exists so upload message
+            
+            let threadDocId = threadRef.documentID
+            
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
+            
+            let messageDocId = messageRef.documentID
+            
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, sharedPostId: sharedPost.id, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+            
+        } else {
+            // thread doesnt exist so create thread then upload message
+            let threadRef = Firestore.firestore().collection("threads").document()
+            let threadDocId = threadRef.documentID
+            let thread = Thread(id: threadDocId, ownerId: user.id, memberIds: threadUserIdsSorted)
+            guard let encodedThread = try? Firestore.Encoder().encode(thread) else { return }
+            try await threadRef.setData(encodedThread)
+        
+            // pasted code from second half if if statement
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
+            
+            let messageDocId = messageRef.documentID
+            
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, sharedPostId: sharedPost.id, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+            
+        }
     }
 }

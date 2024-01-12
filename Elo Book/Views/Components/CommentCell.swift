@@ -87,37 +87,39 @@ struct CommentCell: View {
                                 Spacer()
                             }
                             
-                            if showMore {
-                                Text(comment.caption)
-                                    .font(.subheadline)
-                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    .multilineTextAlignment(.leading)
-                                
-                            } else {
-                                if comment.caption.count <= 100 {
-                                    HStack {
-                                        Text(comment.caption)
-                                            .font(.subheadline)
-                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                            .multilineTextAlignment(.leading)
-                                        
-                                        Spacer()
-                                    }
-                                } else {
+                            if let caption = comment.caption {
+                                if showMore {
+                                    Text(caption)
+                                        .font(.subheadline)
+                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                        .multilineTextAlignment(.leading)
                                     
-                                    Button {
-                                        showMore.toggle()
-                                    } label: {
-                                        Group {
-                                            Text("\(String(comment.caption.prefix(75)))")
+                                } else {
+                                    if caption.count <= 100 {
+                                        HStack {
+                                            Text(caption)
                                                 .font(.subheadline)
                                                 .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                                .multilineTextAlignment(.leading)
                                             
-                                            + Text("...Show more.")
-                                                .font(.subheadline)
-                                                .foregroundStyle(Color(.systemBlue))
+                                            Spacer()
                                         }
-                                        .multilineTextAlignment(.leading)
+                                    } else {
+                                        
+                                        Button {
+                                            showMore.toggle()
+                                        } label: {
+                                            Group {
+                                                Text("\(String(caption.prefix(75)))")
+                                                    .font(.subheadline)
+                                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                                
+                                                + Text("...Show more.")
+                                                    .font(.subheadline)
+                                                    .foregroundStyle(Color(.systemBlue))
+                                            }
+                                            .multilineTextAlignment(.leading)
+                                        }
                                     }
                                 }
                             }

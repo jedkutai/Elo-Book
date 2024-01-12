@@ -17,6 +17,7 @@ struct Post: Identifiable, Hashable, Codable {
     var imageUrls: [String]?
     var imageIds: [String]?
     var eventIds: [String]?
+    var taggedUsers: [String]?
     var timestamp: Timestamp = Timestamp()
     
     var score: Int = 0

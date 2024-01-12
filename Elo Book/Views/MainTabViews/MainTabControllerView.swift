@@ -16,14 +16,15 @@ enum Tab {
 
 struct MainTabControllerView: View {
     @State var user: User
-
+    
+    @State var selectedTab: Tab = .home
     @State private var refresh = false
     
     @EnvironmentObject var x: X
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
-            TabView {
+            TabView(selection: $selectedTab) {
                 UserFeedView(user: $user)
                     .tabItem {
                         VStack {
@@ -43,7 +44,7 @@ struct MainTabControllerView: View {
                     }
                     .tag(Tab.search)
                 
-                Text("Under Construction")
+                MessageView(user: $user)
                     .accentColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     .tabItem {
                         VStack {
@@ -57,7 +58,7 @@ struct MainTabControllerView: View {
                     .tabItem {
                         VStack {
                             Image(systemName: "person.fill")
-                            Text("Me")
+                            Text("Profile")
                         }
                     }
                     .tag(Tab.profile)

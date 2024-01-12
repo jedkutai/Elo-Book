@@ -14,7 +14,8 @@ struct Comment: Identifiable, Hashable, Codable {
     let postId: String
     let userId: String
     
-    var caption: String
+    var caption: String?
+    var taggedUsers: [String]?
     
     var score: Int = 0
     var timestamp: Timestamp = Timestamp()

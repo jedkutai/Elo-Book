@@ -11,47 +11,6 @@ import FirebaseFirestore
 
 struct FetchService {
     
-    static func fetchMoreMessagesByTime(thread: Thread, lastMessage: Message?) async throws -> [Message] {
-        var messages: [Message] = []
-        
-        if let message = lastMessage {
-            let query = Firestore.firestore().collection("threads").document(thread.id).collection("messages")
-                .whereField("timestamp", isLessThan: message.timestamp)
-                .order(by: "timestamp", descending: true)
-                .limit(to: 20)
-            
-            let snapshot = try await query.getDocuments()
-            messages = snapshot.documents.compactMap({ try? $0.data(as: Message.self) })
-        }
-        
-        return messages
-    }
-    
-    static func fetchMessagesByThreadId(threadId: String) async throws -> [Message] {
-        let query = Firestore.firestore().collection("threads").document(threadId).collection("messages")
-            .order(by: "timestamp", descending: true)
-            .limit(to: 20)
-        
-        let snapshot = try await query.getDocuments()
-        
-        let messages = snapshot.documents.compactMap({ try? $0.data(as: Message.self) })
-        
-        return messages
-    }
-    
-    static func fetchMessageThreadsByUser(user: User) async throws -> [Thread] {
-        let query = Firestore.firestore().collection("threads")
-            .whereField("userIds", arrayContains: user.id)
-            .order(by: "lastMessageTimeStamp", descending: true)
-            .limit(to: 20)
-        
-        let snapshot = try await query.getDocuments()
-        
-        let threads = snapshot.documents.compactMap({ try? $0.data(as: Thread.self) })
-        
-        return threads
-    }
-    
     
     static func fetchFavoriteSportsSettingsAsStringArray(user: User) async throws -> [String] {
         var favoriteSports: [String] = []
@@ -108,10 +67,10 @@ struct FetchService {
         return try snapshot.data(as: UserFavoriteSports.self)
     }
     
-    static func fetchLastMessageByThreadAndMessageId(threadId: String, lastMessageId: String) async throws -> Message {
-        let snapshot = try await Firestore.firestore().collection("threads").document(threadId).collection("messages").document(lastMessageId).getDocument()
-        return try snapshot.data(as: Message.self)
-    }
+//    static func fetchLastMessageByThreadAndMessageId(threadId: String, lastMessageId: String) async throws -> Message {
+//        let snapshot = try await Firestore.firestore().collection("threads").document(threadId).collection("messages").document(lastMessageId).getDocument()
+//        return try snapshot.data(as: Message.self)
+//    }
     
     static func fetchFollowingByUser(user: User) async throws -> [User] {
         var users: [User] = []
@@ -389,31 +348,7 @@ struct FetchService {
         return users
     }
     
-    static func fetchMessageUserByThread(thread: Thread, user: User) async throws -> User {
-        var userIdToFetch = ""
-        
-        if thread.userIds.count == 2 {
-            if thread.userIds[0] != user.id {
-                userIdToFetch = thread.userIds[0]
-            } else {
-                userIdToFetch = thread.userIds[1]
-            }
-        }
-        
-        return try await self.fetchUserById(withUid: userIdToFetch)
-    }
-    
-    static func fetchGroupMessageUsersByThread(thread: Thread, user: User) async throws -> [User] {
-        var userIdsToFetch: [String] = []
-        
-        for userId in thread.userIds {
-            if userId != user.id {
-                userIdsToFetch.append(userId)
-            }
-        }
-        
-        return try await self.fetchUsersByUserIds(userIds: userIdsToFetch)
-    }
+
     
     static func fetchFeedPostsByFollowing(uid: String, following: [Follow]) async throws -> [Post] {
         let uids = following.map { $0.followingId }
