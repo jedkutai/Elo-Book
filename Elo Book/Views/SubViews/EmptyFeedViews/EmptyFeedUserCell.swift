@@ -24,6 +24,11 @@ struct EmptyFeedUserCell: View {
                         .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                } else {
+                    Text("")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 }
                 
                 if let username = viewedUser.username {

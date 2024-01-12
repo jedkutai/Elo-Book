@@ -28,6 +28,10 @@ struct CreateMessageUserCell: View {
                     .foregroundStyle(Color(.systemGray))
             }
             
+            if let displayedBadge = user.displayedBadge {
+                BadgeDiplayer(badge: displayedBadge)
+            }
+            
             Spacer()
         }
         .padding(.horizontal, 10)

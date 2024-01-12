@@ -32,6 +32,10 @@ struct UserResultCell: View {
                             .font(.footnote)
                             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                         
+                        if let displayedBadge = user.displayedBadge {
+                            BadgeDiplayer(badge: displayedBadge)
+                        }
+                        
                         Spacer()
                     }
                 }

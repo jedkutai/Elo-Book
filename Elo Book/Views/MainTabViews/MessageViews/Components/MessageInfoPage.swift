@@ -11,6 +11,8 @@ struct MessageInfoPage: View {
     @State var user: User
     @State var viewedUser: User
     
+    @State private var swipeStarted = false
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -54,5 +56,17 @@ struct MessageInfoPage: View {
                 Spacer()
             }
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    if value.startLocation.y < 40 {
+                        self.swipeStarted = true
+                    }
+                }
+                .onEnded { _ in
+                    self.swipeStarted = false
+                    dismiss()
+                }
+        )
     }
 }

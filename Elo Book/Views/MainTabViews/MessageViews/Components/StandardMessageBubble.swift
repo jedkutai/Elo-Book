@@ -25,13 +25,16 @@ struct StandardMessageBubble: View {
                         MessageImageView(imageUrls: message.imageUrls)
                     }
                     
-                    Text("\(message.caption)")
-                        .foregroundStyle(Color(.white))
-                        .padding(5)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(Color(.systemBlue))
-                        )
+                    if !message.caption.isEmpty {
+                        Spacer()
+                        Text("\(message.caption)")
+                            .foregroundStyle(Color(.white))
+                            .padding(5)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundStyle(Color(.systemBlue))
+                            )
+                    }
                 }
             }
             
@@ -43,13 +46,17 @@ struct StandardMessageBubble: View {
                         MessageImageView(imageUrls: message.imageUrls)
                     }
                     
-                    Text("\(message.caption)")
-                        .foregroundStyle(Color(.black))
-                        .padding(5)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(Color(.gray).opacity(0.15))
-                        )
+                    if !message.caption.isEmpty {
+                        HStack {
+                            Text("\(message.caption)")
+                                .foregroundStyle(Color(.black))
+                                .padding(5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundStyle(Color(.lightGray))
+                                )
+                        }
+                    }
                 }
                 
                 Spacer()

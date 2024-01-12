@@ -48,7 +48,7 @@ struct MessageView: View {
                             ForEach(threads, id: \.id) { thread in
                                 if thread.userIds.count > 2 {
                                     NavigationLink {
-    //                                    GroupMessageThreadView(thread: thread, user: user).navigationBarBackButtonHidden()
+                                        GroupMessageThreadView(thread: thread, user: user).navigationBarBackButtonHidden()
                                     } label: {
                                         GroupMessageThreadCell(thread: thread, user: user)
                                     }

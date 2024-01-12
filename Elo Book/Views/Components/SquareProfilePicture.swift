@@ -62,6 +62,10 @@ struct SquareProfilePicture: View {
                 .frame(width: size.dimension, height: size.dimension)
                 .clipped()
                 .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: size.dimension / 8)
+                        .stroke(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor, lineWidth: size.dimension / 8 * 0.3)
+                )
         }
         
     }

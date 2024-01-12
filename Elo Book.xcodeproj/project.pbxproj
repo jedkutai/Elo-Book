@@ -129,6 +129,15 @@
 		A7693AAE2B4DE28600286344 /* SearchView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AAD2B4DE28600286344 /* SearchView2.swift */; };
 		A7693AB02B4E03EA00286344 /* UserBadgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AAF2B4E03EA00286344 /* UserBadgeSettings.swift */; };
 		A7693AB22B4E098E00286344 /* SelectBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AB12B4E098E00286344 /* SelectBadgesView.swift */; };
+		A77D88832B5078B200CB0054 /* GroupMessageThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D88822B5078B200CB0054 /* GroupMessageThreadView.swift */; };
+		A77D88852B50898D00CB0054 /* GroupMessageInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D88842B50898D00CB0054 /* GroupMessageInfoPage.swift */; };
+		A77D88872B50900800CB0054 /* AddUsersToGroupChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D88862B50900800CB0054 /* AddUsersToGroupChatView.swift */; };
+		A77D888B2B509DE200CB0054 /* GroupMessageThreadViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D888A2B509DE200CB0054 /* GroupMessageThreadViewHeader.swift */; };
+		A77D888D2B50A1E100CB0054 /* GroupMessageThreadViewBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D888C2B50A1E100CB0054 /* GroupMessageThreadViewBody.swift */; };
+		A77D888F2B50A34400CB0054 /* GroupMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D888E2B50A34400CB0054 /* GroupMessageCell.swift */; };
+		A77D88912B50A36F00CB0054 /* StandardGroupMessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D88902B50A36F00CB0054 /* StandardGroupMessageBubble.swift */; };
+		A77D88932B50A46A00CB0054 /* SharedPostGroupMessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D88922B50A46A00CB0054 /* SharedPostGroupMessageBubble.swift */; };
+		A77D88952B50A59200CB0054 /* SharedUserGroupMessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D88942B50A59200CB0054 /* SharedUserGroupMessageBubble.swift */; };
 		A7800E3B2B4E262E00AF8492 /* AlphaTesterBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */; };
 		A7800E3D2B4E263A00AF8492 /* PublicFigureBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */; };
 		A7800E3F2B4E264500AF8492 /* DegenerateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */; };
@@ -274,6 +283,15 @@
 		A7693AAD2B4DE28600286344 /* SearchView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView2.swift; sourceTree = "<group>"; };
 		A7693AAF2B4E03EA00286344 /* UserBadgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBadgeSettings.swift; sourceTree = "<group>"; };
 		A7693AB12B4E098E00286344 /* SelectBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBadgesView.swift; sourceTree = "<group>"; };
+		A77D88822B5078B200CB0054 /* GroupMessageThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMessageThreadView.swift; sourceTree = "<group>"; };
+		A77D88842B50898D00CB0054 /* GroupMessageInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMessageInfoPage.swift; sourceTree = "<group>"; };
+		A77D88862B50900800CB0054 /* AddUsersToGroupChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersToGroupChatView.swift; sourceTree = "<group>"; };
+		A77D888A2B509DE200CB0054 /* GroupMessageThreadViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMessageThreadViewHeader.swift; sourceTree = "<group>"; };
+		A77D888C2B50A1E100CB0054 /* GroupMessageThreadViewBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMessageThreadViewBody.swift; sourceTree = "<group>"; };
+		A77D888E2B50A34400CB0054 /* GroupMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMessageCell.swift; sourceTree = "<group>"; };
+		A77D88902B50A36F00CB0054 /* StandardGroupMessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardGroupMessageBubble.swift; sourceTree = "<group>"; };
+		A77D88922B50A46A00CB0054 /* SharedPostGroupMessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPostGroupMessageBubble.swift; sourceTree = "<group>"; };
+		A77D88942B50A59200CB0054 /* SharedUserGroupMessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUserGroupMessageBubble.swift; sourceTree = "<group>"; };
 		A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaTesterBadge.swift; sourceTree = "<group>"; };
 		A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFigureBadge.swift; sourceTree = "<group>"; };
 		A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegenerateBadge.swift; sourceTree = "<group>"; };
@@ -860,6 +878,15 @@
 		A7EF1F542B4B27E500B0F12C /* Building */ = {
 			isa = PBXGroup;
 			children = (
+				A77D88822B5078B200CB0054 /* GroupMessageThreadView.swift */,
+				A77D88842B50898D00CB0054 /* GroupMessageInfoPage.swift */,
+				A77D88862B50900800CB0054 /* AddUsersToGroupChatView.swift */,
+				A77D888A2B509DE200CB0054 /* GroupMessageThreadViewHeader.swift */,
+				A77D888C2B50A1E100CB0054 /* GroupMessageThreadViewBody.swift */,
+				A77D888E2B50A34400CB0054 /* GroupMessageCell.swift */,
+				A77D88902B50A36F00CB0054 /* StandardGroupMessageBubble.swift */,
+				A77D88922B50A46A00CB0054 /* SharedPostGroupMessageBubble.swift */,
+				A77D88942B50A59200CB0054 /* SharedUserGroupMessageBubble.swift */,
 			);
 			path = Building;
 			sourceTree = "<group>";
@@ -997,11 +1024,13 @@
 				A74BA8942B477A6E00F62D08 /* Dimensions.swift in Sources */,
 				A7EF1F5E2B4B3AAA00B0F12C /* PostImageExpandedCell.swift in Sources */,
 				A7C834202B4FB9D9005B9AB7 /* StaticPostImageView.swift in Sources */,
+				A77D88852B50898D00CB0054 /* GroupMessageInfoPage.swift in Sources */,
 				A7693AB22B4E098E00286344 /* SelectBadgesView.swift in Sources */,
 				A74BA87E2B4779A200F62D08 /* Post.swift in Sources */,
 				A74BA9212B478FA100F62D08 /* EmptyFeedView.swift in Sources */,
 				A7693AAE2B4DE28600286344 /* SearchView2.swift in Sources */,
 				A74BA9452B47905300F62D08 /* SelectFavoriteSportsView.swift in Sources */,
+				A77D88832B5078B200CB0054 /* GroupMessageThreadView.swift in Sources */,
 				A74BA9282B478FE100F62D08 /* ExpandedPostCell.swift in Sources */,
 				A7EF1F562B4B27FF00B0F12C /* PostImageView2.swift in Sources */,
 				A70651C42B4A619800A6CE3A /* CreatePostMasterTextBox.swift in Sources */,
@@ -1015,6 +1044,7 @@
 				A74BA8C82B477C4700F62D08 /* SquareProfilePicture.swift in Sources */,
 				A74BA8FD2B478EA500F62D08 /* ProfileHeader.swift in Sources */,
 				A74BA9072B478EF200F62D08 /* CreateAccountView.swift in Sources */,
+				A77D88932B50A46A00CB0054 /* SharedPostGroupMessageBubble.swift in Sources */,
 				A7C834162B4FB705005B9AB7 /* MessageThreadTextBoxView.swift in Sources */,
 				A74BA91D2B478F7800F62D08 /* DeepLinkControllerView.swift in Sources */,
 				A7ACF8232B4EF62F00192B72 /* ExpandedPostCellWithStaticHeaderHeader.swift in Sources */,
@@ -1026,12 +1056,15 @@
 				A74BA8A72B477AB400F62D08 /* UploadComment.swift in Sources */,
 				A7C833F42B4F7117005B9AB7 /* UploadMessage.swift in Sources */,
 				A74BA9322B478FFE00F62D08 /* PostCell.swift in Sources */,
+				A77D88872B50900800CB0054 /* AddUsersToGroupChatView.swift in Sources */,
 				A7C834222B4FBA30005B9AB7 /* PostImageExpandedView.swift in Sources */,
 				A74BA8962B477A6E00F62D08 /* Theme.swift in Sources */,
 				A7800E3B2B4E262E00AF8492 /* AlphaTesterBadge.swift in Sources */,
 				A74BA9112B478F0700F62D08 /* LoginControllerView.swift in Sources */,
 				A74BA8772B4779A200F62D08 /* User.swift in Sources */,
+				A77D88912B50A36F00CB0054 /* StandardGroupMessageBubble.swift in Sources */,
 				A7C833F22B4F69DA005B9AB7 /* MessageView.swift in Sources */,
+				A77D888F2B50A34400CB0054 /* GroupMessageCell.swift in Sources */,
 				A74BA8EC2B478E2C00F62D08 /* MainTabControllerView.swift in Sources */,
 				A74BA9402B47902300F62D08 /* PostCellExpandedHeader.swift in Sources */,
 				A74BA8B32B477ADD00F62D08 /* CropImageViewController.swift in Sources */,
@@ -1068,6 +1101,7 @@
 				A70651BE2B4A418F00A6CE3A /* ProgressWheel.swift in Sources */,
 				A7C834182B4FB854005B9AB7 /* SharedPostMessageBubble.swift in Sources */,
 				A74BA8B42B477ADD00F62D08 /* DateFormatter.swift in Sources */,
+				A77D888B2B509DE200CB0054 /* GroupMessageThreadViewHeader.swift in Sources */,
 				A7C8340C2B4FB279005B9AB7 /* MessageThreadBodyView.swift in Sources */,
 				A74BA89F2B477A9B00F62D08 /* UserService.swift in Sources */,
 				A7ACF81D2B4EF48400192B72 /* PostCellWithStaticHeaderHeader.swift in Sources */,
@@ -1078,11 +1112,13 @@
 				A74BA8812B4779A200F62D08 /* PostLike.swift in Sources */,
 				A70651C02B4A5A7200A6CE3A /* MiniEventCell.swift in Sources */,
 				A74BA9092B478EF200F62D08 /* SelectUsernameView.swift in Sources */,
+				A77D888D2B50A1E100CB0054 /* GroupMessageThreadViewBody.swift in Sources */,
 				A74BA89D2B477A9B00F62D08 /* PostService.swift in Sources */,
 				A74BA9082B478EF200F62D08 /* CreateAccountControllerView.swift in Sources */,
 				A742A9C32B4C93FE00F956B7 /* NewUserWelcomeView.swift in Sources */,
 				A74BA9122B478F0700F62D08 /* WelcomeAltView.swift in Sources */,
 				A74BA9462B47905300F62D08 /* AccountInfoView.swift in Sources */,
+				A77D88952B50A59200CB0054 /* SharedUserGroupMessageBubble.swift in Sources */,
 				A74BA9252B478FB800F62D08 /* EventView.swift in Sources */,
 				A74BA8B22B477ADD00F62D08 /* Checks.swift in Sources */,
 				A74BA8B62B477ADD00F62D08 /* CropProfileImageViewController.swift in Sources */,

@@ -18,49 +18,51 @@ struct FollowsResultCell: View {
         HStack {
             UserResultCell(user: viewedUser)
             
-            if isFollowing {
-                Button {
-                    if !followCooldown {
-                        followCooldown.toggle()
-                        Task {
-                            try await UserService.unFollowUser(userId: user.id, userToUnfollow: viewedUser.id)
-                            isFollowing = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: viewedUser.id)
+            if user.id != viewedUser.id {
+                if isFollowing {
+                    Button {
+                        if !followCooldown {
                             followCooldown.toggle()
+                            Task {
+                                try await UserService.unFollowUser(userId: user.id, userToUnfollow: viewedUser.id)
+                                isFollowing = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: viewedUser.id)
+                                followCooldown.toggle()
+                            }
                         }
+                    } label: {
+                        Text("Following")
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal)
+                            .frame(height: 20)
+                            .background(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            .cornerRadius(6)
+                            .overlay(RoundedRectangle(cornerRadius: 6)
+                                .stroke(.gray, lineWidth: 1))
                     }
-                } label: {
-                    Text("Following")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal)
-                        .frame(height: 20)
-                        .background(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        .cornerRadius(6)
-                        .overlay(RoundedRectangle(cornerRadius: 6)
-                            .stroke(.gray, lineWidth: 1))
-                }
-            } else {
-                Button {
-                    if !followCooldown {
-                        followCooldown.toggle()
-                        Task {
-                            try await UserService.followUser(userId: user.id, userToFollowId: viewedUser.id)
-                            isFollowing = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: viewedUser.id)
+                } else {
+                    Button {
+                        if !followCooldown {
                             followCooldown.toggle()
+                            Task {
+                                try await UserService.followUser(userId: user.id, userToFollowId: viewedUser.id)
+                                isFollowing = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: viewedUser.id)
+                                followCooldown.toggle()
+                            }
                         }
+                    } label: {
+                        Text("Follow")
+                            .font(.footnote)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal)
+                            .frame(height: 20)
+                            .background(Color(.systemBlue))
+                            .foregroundStyle(Color(.white))
+                            .cornerRadius(6)
+                            .overlay(RoundedRectangle(cornerRadius: 6)
+                                .stroke(.clear, lineWidth: 1))
                     }
-                } label: {
-                    Text("Follow")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .padding(.horizontal)
-                        .frame(height: 20)
-                        .background(Color(.systemBlue))
-                        .foregroundStyle(Color(.white))
-                        .cornerRadius(6)
-                        .overlay(RoundedRectangle(cornerRadius: 6)
-                            .stroke(.clear, lineWidth: 1))
                 }
             }
         }

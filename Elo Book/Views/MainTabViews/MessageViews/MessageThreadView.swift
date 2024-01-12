@@ -27,7 +27,7 @@ struct MessageThreadView: View {
     @State private var messageRefreshTicker = false
     @State private var canTick = false
     @State private var tickCount = 0
-    
+    @State private var swipeStarted = false
     @StateObject private var viewModel = UploadMessage()
     @Environment(\.dismiss) private var dismiss
     var body: some View {
@@ -46,10 +46,20 @@ struct MessageThreadView: View {
                 }
                 
                 
-                
-                
             }
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    if value.startLocation.y < 40 {
+                        self.swipeStarted = true
+                    }
+                }
+                .onEnded { _ in
+                    self.swipeStarted = false
+                    dismiss()
+                }
+        )
         .onAppear {
             Task {
                 receivingUser = try await FetchService.fetchMessageUserByThread(thread: thread, user: user)
@@ -62,6 +72,20 @@ struct MessageThreadView: View {
             Task {
                 receivingUser = try await FetchService.fetchMessageUserByThread(thread: thread, user: user)
                 messages = try await FetchService.fetchMessagesByThreadId(threadId: thread.id)
+            }
+        }
+        .onChange(of: messageRefreshTicker) {
+            if canTick { // change false to can tick after done making the page
+                Task {
+                    receivingUser = try await FetchService.fetchMessageUserByThread(thread: thread, user: user)
+                    messages = try await FetchService.fetchMessagesByThreadId(threadId: thread.id)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 15.0) { // make timer 15 seconds?
+                    print("tick \(tickCount)")
+                    tickCount += 1
+                    messageRefreshTicker.toggle()
+                }
+                
             }
         }
         .onDisappear {
@@ -78,6 +102,15 @@ struct MessageThreadView: View {
                     }
                 }
                 
+            }
+        }
+        .photosPicker(isPresented: $photoPickerPresented, selection: $selectedImages, maxSelectionCount: 4)
+        .onChange(of: selectedImages) {
+            viewModel.messageImages = []
+            viewModel.uiImages = []
+            
+            Task {
+                await viewModel.loadImages(fromItem: selectedImages)
             }
         }
     }

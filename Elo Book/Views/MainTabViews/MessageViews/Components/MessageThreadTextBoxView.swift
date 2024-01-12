@@ -18,50 +18,81 @@ struct MessageThreadTextBoxView: View {
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        HStack {
-            Button {
-                photoPickerPresented.toggle()
-            } label: {
-                Image(systemName: "plus.circle.fill")
-                    .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-            }
-            
-            TextField("Message", text: $message, axis: .vertical)
-                .font(.footnote)
-                
-            
-            Spacer()
-            if sendingMessage {
-                ProgressView()
-            }
-            
-            Group {
-                if (Checks.isValidCaption(message) || (message.isEmpty && !viewModel.messageImages.isEmpty)) && !users.isEmpty {
-                    Button {
-                        sendingMessage.toggle()
-                        Task {
-                            try await viewModel.uploadMessage(user: user, recievingUsers: users, caption: message)
-                            message = ""
-                            sendingMessage.toggle()
-                            refresh.toggle()
+        VStack {
+            HStack {
+                if !viewModel.uiImages.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(Array(viewModel.uiImages.enumerated()), id: \.0) { index, image in
+                                Button {
+                                    viewModel.uiImages.remove(at: index)
+                                    viewModel.messageImages.remove(at: index)
+                                } label: {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 70)
+                                        .padding(.leading, 1)
+                                }
                             }
-                        
-                        
-                        
-                        
-                    } label: {
-                        Text("Send")
-                            .font(.footnote)
-                            .foregroundStyle(Color(.systemBlue))
+                        }
                     }
-                } else {
-                    Text("Send")
-                        .font(.footnote)
-                        .foregroundStyle(Color(.systemGray))
+                    .frame(height: 70)
+                    .padding(.horizontal)
+                    
+                    Divider()
+                        .frame(height: 1)
                 }
             }
-            .padding(.horizontal, 5)
-        
+
+            
+            HStack {
+                Button {
+                    photoPickerPresented.toggle()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                }
+                
+                TextField("Message", text: $message, axis: .vertical)
+                    .font(.footnote)
+                    
+                
+                Spacer()
+                if sendingMessage {
+                    ProgressView()
+                }
+                
+                Group {
+                    if (Checks.isValidCaption(message) || (message.isEmpty && !viewModel.messageImages.isEmpty)) && !users.isEmpty {
+                        Button {
+                            sendingMessage.toggle()
+                            Task {
+                                try await viewModel.uploadMessage(user: user, recievingUsers: users, caption: message)
+                                message = ""
+                                viewModel.messageImages = []
+                                viewModel.uiImages = []
+                                sendingMessage.toggle()
+                                refresh.toggle()
+                                }
+                            
+                            
+                            
+                            
+                        } label: {
+                            Text("Send")
+                                .font(.footnote)
+                                .foregroundStyle(Color(.systemBlue))
+                        }
+                    } else {
+                        Text("Send")
+                            .font(.footnote)
+                            .foregroundStyle(Color(.systemGray))
+                    }
+                }
+                .padding(.horizontal, 5)
+            
+            }
         }
         .padding(10)
         .background(

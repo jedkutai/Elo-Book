@@ -161,8 +161,6 @@ struct SearchView2: View {
                     searchDatabaseText = String(searchText.prefix(2))
                 }
                 
-                
-
             }
             .onChange(of: searchDatabaseText) {
                 if !searchDatabaseText.isEmpty {
