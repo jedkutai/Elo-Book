@@ -13,36 +13,38 @@ struct MessageThreadCell: View {
     
     @State private var threadUser: User? // if there is only one other user, user this
     @State private var threadUsers: [User]? // if theres a few users, user this
+    @State private var lastMessage: Message2?
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
-            Text("Boo")
-            if let threadUser = threadUser { // just you and another person
-                HStack {
-                    // Profile image
+            
+            Group {
+                if let threadUser = threadUser, let lastMessage = lastMessage { // just you and another person
+                    MessageThreadCellSingle(user: user, threadUser: threadUser, thread: thread, lastMessage: lastMessage)
                     
-                    VStack {
-                        // other users fullname, username and badge
-                        // text of the last message
-                    }
-                    
-                    // blue indicator if last message hasnt been seen by you
-                    // time to show how long ago message was sent
+                } else if let threadUsers = threadUsers, let lastMessage = lastMessage { // group chat with the fellas
+                    MessageThreadCellGroup(user: user, threadUsers: threadUsers, thread: thread, lastMessage: lastMessage)
+                } else {
+                    Image(systemName: "circle.fill")
+                        .foregroundStyle(Color(.clear))
                 }
-                
-            } else if let threadusers = threadUsers {
-                
             }
+            .padding(.horizontal, 10)
         }
         .onAppear {
-            if let memberIds = thread.memberIds { // make sure there are users in the thread
-                let otherUsers = memberIds.filter( { $0 != user.id } )
-                print(otherUsers)
-                if memberIds.count == 2 {
-                    
-                } else if memberIds.count > 2 {
-                    
+            Task {
+                lastMessage = try await FetchService.fetchLastMessageByThread(thread: thread)
+                if let memberIds = thread.memberIds { // make sure there are users in the thread
+                    let otherUserIds = memberIds.filter( { $0 != user.id } )
+                    if otherUserIds.count == 1 {
+                        threadUser = try await FetchService.fetchUserById(withUid: otherUserIds[0])
+                    } else if memberIds.count > 2 {
+                        threadUsers = try await FetchService.fetchUsersByUserIds(userIds: otherUserIds)
+                    }
                 }
             }
         }
     }
+    
+    
 }

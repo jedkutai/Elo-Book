@@ -79,10 +79,20 @@ struct FetchService {
         return try snapshot.data(as: UserFavoriteSports.self)
     }
     
-//    static func fetchLastMessageByThreadAndMessageId(threadId: String, lastMessageId: String) async throws -> Message {
-//        let snapshot = try await Firestore.firestore().collection("threads").document(threadId).collection("messages").document(lastMessageId).getDocument()
-//        return try snapshot.data(as: Message.self)
-//    }
+    static func fetchLastMessageByThread(thread: Thread) async throws -> Message2 {
+        let query = Firestore.firestore().collection("threads").document(thread.id).collection("messages")
+            .order(by: "timestamp", descending: true)
+            .limit(to: 1)
+        
+        do {
+            let snapshot = try await query.getDocuments()
+            let messages = snapshot.documents.compactMap({ try? $0.data(as: Message2.self) })
+            
+            return messages[0]
+        } catch {
+            throw error
+        }
+    }
     
     static func fetchFollowingByUser(user: User) async throws -> [User] {
         var users: [User] = []

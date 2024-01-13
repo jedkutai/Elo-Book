@@ -5,14 +5,16 @@
 //  Created by Jed Kutai on 1/12/24.
 //
 
-import SwiftUI
+import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-struct ThreadsManager: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class ThreadsManager: ObservableObject {
+    @Published private(set) var threads: [Thread] = []
+    let db = Firestore.firestore()
+    
+    func getThreads(user: User) {
+        db.collection("threads")
     }
 }
 
-#Preview {
-    ThreadsManager()
-}

@@ -26,6 +26,9 @@ struct MessageView: View {
                         LazyVStack {
                             ForEach(threads, id: \.id) { thread in
                                 MessageThreadCell(user: $user, thread: thread)
+                                
+                                Divider()
+                                    .frame(height: 1)
                             }
                         }
                         .padding(.top, 5)
