@@ -17,6 +17,7 @@ struct SearchView2: View {
     
     @State private var filters: [String] = [] // create a usefavorites array
     @State private var someUsers: [User] = []
+    @State private var elementsLoaded: Bool = false
     
     let fourHoursAgo = Calendar.current.date(byAdding: .hour, value: -4, to: Date()) ?? Date()
     
@@ -57,50 +58,67 @@ struct SearchView2: View {
     @EnvironmentObject var x: X
     @Environment(\.dismiss) private var dismiss
     
+    
+    
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                HStack {
+            if elementsLoaded {
+                VStack {
                     HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                        
-                        TextField("Search", text: $searchText)
-                            .autocapitalization(.none)
-                            .onSubmit {
-                                hideKeyboard()
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                            
+                            TextField("Search", text: $searchText)
+                                .autocapitalization(.none)
+                                .onSubmit {
+                                    hideKeyboard()
+                                }
+                            
+                            Spacer()
+                            
+                            if !searchText.isEmpty {
+                                Button {
+                                    searchText = ""
+                                } label: {
+                                    Image(systemName: "x.circle.fill")
+                                        .foregroundColor(.gray)
+                                }
                             }
                         
-                        Spacer()
-                        
-                        if !searchText.isEmpty {
-                            Button {
-                                searchText = ""
-                            } label: {
-                                Image(systemName: "x.circle.fill")
-                                    .foregroundColor(.gray)
-                            }
                         }
-                    
+                        .padding(5)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color(.gray).opacity(0.3), lineWidth: 1)
+                        )
+                        
                     }
-                    .padding(5)
-                    .background(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color(.gray).opacity(0.3), lineWidth: 1)
-                    )
+                    .padding(.horizontal)
                     
-                }
-                .padding(.horizontal)
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack {
-                        if !searchText.isEmpty {
-                            ForEach(Array(filteredUsers.prefix(5)), id: \.id) { searchUser in
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack {
+                            if !searchText.isEmpty {
+                                ForEach(Array(filteredUsers.prefix(5)), id: \.id) { searchUser in
+                                    NavigationLink {
+                                        AltUserProfileView(user: user, viewedUser: searchUser).navigationBarBackButtonHidden()
+                                    } label: {
+                                        VStack {
+                                            UserResultCell(user: searchUser)
+                                            Divider()
+                                                .frame(height: 1)
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            ForEach(filteredDiscoverEvents, id: \.id) { event in
                                 NavigationLink {
-                                    AltUserProfileView(user: user, viewedUser: searchUser).navigationBarBackButtonHidden()
+                                    EventView(user: user, event: event).navigationBarBackButtonHidden()
                                 } label: {
                                     VStack {
-                                        UserResultCell(user: searchUser)
+                                        EventCell(event: event)
                                         Divider()
                                             .frame(height: 1)
                                     }
@@ -108,75 +126,75 @@ struct SearchView2: View {
                             }
                         }
                         
-                        ForEach(filteredDiscoverEvents, id: \.id) { event in
-                            NavigationLink {
-                                EventView(user: user, event: event).navigationBarBackButtonHidden()
-                            } label: {
-                                VStack {
-                                    EventCell(event: event)
-                                    Divider()
-                                        .frame(height: 1)
-                                }
-                            }
-                        }
                     }
-                    
-                }
-                .scrollDismissesKeyboard(.immediately)
-                .refreshable {
-                    
-                    Task {
-                        do {
-                            filters = try await FetchService.fetchFavoriteSportsSettingsAsStringArray(user: user)
-                        } catch {
-                            filters = []
-                        }
+                    .scrollDismissesKeyboard(.immediately)
+                    .refreshable {
                         
-                        user = try await FetchService.fetchUserById(withUid: user.id)
+                        Task {
+                            do {
+                                filters = try await FetchService.fetchFavoriteSportsSettingsAsStringArray(user: user)
+                            } catch {
+                                filters = []
+                            }
+                            
+                            user = try await FetchService.fetchUserById(withUid: user.id)
+                        }
                     }
                 }
-            }
-            .onAppear {
-                Task {
-                    do {
-                        filters = try await FetchService.fetchFavoriteSportsSettingsAsStringArray(user: user)
-                    } catch {
-                        filters = []
-                    }
-                    
-                    if x.firstEventSearch {
-                        x.firstEventSearch.toggle()
-                        x.events = try await FetchService.fetchRecentEvents()
-                    }
-                    user = try await FetchService.fetchUserById(withUid: user.id)
+            } else {
+                VStack {
+                    Spacer()
+                    ProgressView("Degenerating...")
+                    Spacer()
                 }
             }
-            .onTapGesture {
-                hideKeyboard()
-            }
-            .onChange(of: searchText) {
-                if searchText.count < 1 {
-                    searchDatabaseText = ""
-                } else if searchText.count >= 1 {
-                    searchDatabaseText = String(searchText.prefix(2))
+            
+            
+        }
+        .padding(.vertical, 10)
+        .onAppear {
+            Task {
+                do {
+                    filters = try await FetchService.fetchFavoriteSportsSettingsAsStringArray(user: user)
+                } catch {
+                    filters = []
                 }
                 
-            }
-            .onChange(of: searchDatabaseText) {
-                if !searchDatabaseText.isEmpty {
-                    if Checks.isValidSearch(searchDatabaseText) {
-                        Task {
-                            someUsers = try await SearchService.searchDatabaseForUsernames(searchTerm: searchDatabaseText)
-                        }
-                    }
+                if x.firstEventSearch {
+                    x.firstEventSearch.toggle()
+                    x.events = try await FetchService.fetchRecentEvents()
+                }
+                user = try await FetchService.fetchUserById(withUid: user.id)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.elementsLoaded = true // Set to true when elements are loaded
                 }
             }
-            .onSubmit {
-                hideKeyboard()
+        }
+        .onTapGesture {
+            hideKeyboard()
+        }
+        .onChange(of: searchText) {
+            if searchText.count < 1 {
+                searchDatabaseText = ""
+            } else if searchText.count >= 1 {
+                searchDatabaseText = String(searchText.prefix(2))
             }
             
         }
-        .padding(.bottom, 1)
+        .onChange(of: searchDatabaseText) {
+            if !searchDatabaseText.isEmpty {
+                if Checks.isValidSearch(searchDatabaseText) {
+                    Task {
+                        someUsers = try await SearchService.searchDatabaseForUsernames(searchTerm: searchDatabaseText)
+                    }
+                }
+            }
+        }
+        .onSubmit {
+            hideKeyboard()
+        }
+            
     }
+        
 }
 
