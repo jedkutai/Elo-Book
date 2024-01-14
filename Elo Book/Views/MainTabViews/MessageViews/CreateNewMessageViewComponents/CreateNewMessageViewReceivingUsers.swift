@@ -12,7 +12,7 @@ struct CreateNewMessageViewReceivingUsers: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         if !receivingUsers.isEmpty {
-            Group {
+            HStack {
                 HStack {
                     Text("To:")
                         .padding(.horizontal, 5)

@@ -93,7 +93,7 @@ struct SearchView2: View {
                 .padding(.horizontal)
                 
                 ScrollView(.vertical, showsIndicators: false) {
-                    LazyVStack {
+                    VStack {
                         if !searchText.isEmpty {
                             ForEach(Array(filteredUsers.prefix(5)), id: \.id) { searchUser in
                                 NavigationLink {

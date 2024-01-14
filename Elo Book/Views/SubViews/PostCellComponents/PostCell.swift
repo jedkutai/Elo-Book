@@ -56,6 +56,7 @@ struct PostCell: View {
                 commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
                 comments = try await FetchService.fetchCommentsByPostId(postId: post.id)
+                
             }
         }
         .onChange(of: showMore) {

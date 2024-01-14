@@ -23,7 +23,7 @@ struct LogoView: View {
                 
                 
                 if showProgressView {
-                    ProgressView()
+                    ProgressView("Degenerating...")
                         .scaledToFit()
                         .frame(height: 50)
                 } else {

@@ -17,6 +17,7 @@ struct UserFeedView: View {
     @State private var loadingMorePosts = false
     @State private var showCreatePostView = false
     @State private var showSuggestedUsers = false
+    @State private var elementsLoaded: Bool = false
     
     @State private var postCreated = false
     @Environment(\.colorScheme) var colorScheme
@@ -36,56 +37,65 @@ struct UserFeedView: View {
                         Spacer()
                     }
                     
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVStack {
-                            ForEach($userFeedPosts, id: \.id) { post in
-                                PostCell(user: $user, post: post)
-                                    .padding(.top, 1)
-                            }
-                            
-                            if userFeedPosts.count >= 20 {
-                                Button {
-                                    if !loadingMorePosts {
-                                        loadingMorePosts.toggle()
-                                        loadMorePosts()
-                                    }
-                                } label: {
-                                    HStack {
-                                        Spacer()
-                                        
-                                        if loadingMorePosts {
-                                            ProgressView()
-                                        } else {
-                                            Text("Load more")
-                                                .font(.footnote)
-                                                .foregroundStyle(Color(.gray).opacity(0.3))
+                    if elementsLoaded {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVStack {
+                                ForEach($userFeedPosts, id: \.id) { post in
+                                    PostCell(user: $user, post: post)
+                                        .padding(.top, 1)
+                                }
+                                
+                                if userFeedPosts.count >= 20 {
+                                    Button {
+                                        if !loadingMorePosts {
+                                            loadingMorePosts.toggle()
+                                            loadMorePosts()
                                         }
-                                        
-                                        Spacer()
+                                    } label: {
+                                        HStack {
+                                            Spacer()
+                                            
+                                            if loadingMorePosts {
+                                                ProgressView()
+                                            } else {
+                                                Text("Load more")
+                                                    .font(.footnote)
+                                                    .foregroundStyle(Color(.gray).opacity(0.3))
+                                            }
+                                            
+                                            Spacer()
+                                        }
                                     }
                                 }
+                                Text("Appear")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                                
                             }
-                            Text("Appear")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                            
+                            if showSuggestedUsers {
+                                HStack {
+                                    Spacer()
+                                    Text("Accounts you might like:")
+                                        .font(.title2)
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    Spacer()
+                                }
+                                .padding(.top, emptyPadding)
+                                EmptyFeedView(user: user, emptyUsers: $emptyUsers)
+                                    
+                            }
                             
                         }
-                        
-                        if showSuggestedUsers {
-                            HStack {
-                                Spacer()
-                                Text("Accounts you might like:")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                Spacer()
-                            }
-                            .padding(.top, emptyPadding)
-                            EmptyFeedView(user: user, emptyUsers: $emptyUsers)
-                                
+                        .highPriorityGesture(DragGesture())
+                    } else {
+                        VStack {
+                            Spacer()
+                            ProgressView("Degenerating...")
+                            Spacer()
                         }
-                        
                     }
-                    .highPriorityGesture(DragGesture())
+                
                 }
                 
                 VStack {
@@ -129,6 +139,7 @@ struct UserFeedView: View {
                 if userFeedPosts.isEmpty {
                     showSuggestedUsers = true
                 }
+                self.elementsLoaded = true // Set to true when elements are loaded
             }
             
         }
@@ -151,7 +162,7 @@ struct UserFeedView: View {
         }
         .onChange(of: userFeedPosts) {
             showSuggestedUsers = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 if userFeedPosts.isEmpty {
                     showSuggestedUsers = true
                 }

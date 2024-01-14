@@ -23,9 +23,17 @@ struct MessageView: View {
                 // Body
                 ScrollView {
                     if let threads = threads {
-                        LazyVStack {
+                        VStack {
                             ForEach(threads, id: \.id) { thread in
-                                MessageThreadCell(user: $user, thread: thread)
+                                NavigationLink {
+                                    if let memberIds = thread.memberIds {
+                                        if memberIds.count >= 2 {
+                                            ThreadView(user: user, thread: thread).navigationBarBackButtonHidden()
+                                        }
+                                    }
+                                } label: {
+                                    MessageThreadCell(user: $user, thread: thread)
+                                }
                                 
                                 Divider()
                                     .frame(height: 1)

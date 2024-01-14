@@ -17,7 +17,6 @@ struct MessageThreadCell: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
-            
             Group {
                 if let threadUser = threadUser, let lastMessage = lastMessage { // just you and another person
                     MessageThreadCellSingle(user: user, threadUser: threadUser, thread: thread, lastMessage: lastMessage)
