@@ -99,7 +99,7 @@ struct MessageDisplayer: View {
                                     .padding(.horizontal, 10)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10.0)
-                                            .foregroundStyle(Color(.lightGray))
+                                            .foregroundStyle(Color(.systemGray).opacity(0.3))
                                     )
                                 
                                 Spacer()

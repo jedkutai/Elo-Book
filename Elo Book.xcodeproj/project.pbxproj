@@ -97,6 +97,9 @@
 		A74BA9462B47905300F62D08 /* AccountInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9432B47905200F62D08 /* AccountInfoView.swift */; };
 		A74BA9472B47905300F62D08 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9442B47905300F62D08 /* SettingsView.swift */; };
 		A74BA94A2B47905E00F62D08 /* SettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9492B47905E00F62D08 /* SettingsOption.swift */; };
+		A74E15142B53CA1800ABAF43 /* EventChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74E15132B53CA1800ABAF43 /* EventChatRoomView.swift */; };
+		A74E15162B53CA4900ABAF43 /* EventChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74E15152B53CA4900ABAF43 /* EventChatManager.swift */; };
+		A74E15182B53DCB800ABAF43 /* ChatMessageDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74E15172B53DCB800ABAF43 /* ChatMessageDisplayer.swift */; };
 		A752E2B42B4773550007842A /* Elo_BookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A752E2B32B4773550007842A /* Elo_BookApp.swift */; };
 		A752E2BA2B4773560007842A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A752E2B92B4773560007842A /* Assets.xcassets */; };
 		A752E2BD2B4773560007842A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A752E2BC2B4773560007842A /* Preview Assets.xcassets */; };
@@ -257,6 +260,9 @@
 		A74BA9442B47905300F62D08 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A74BA9492B47905E00F62D08 /* SettingsOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsOption.swift; sourceTree = "<group>"; };
 		A74BA94B2B47920C00F62D08 /* Elo-Book-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Elo-Book-Info.plist"; sourceTree = SOURCE_ROOT; };
+		A74E15132B53CA1800ABAF43 /* EventChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventChatRoomView.swift; sourceTree = "<group>"; };
+		A74E15152B53CA4900ABAF43 /* EventChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventChatManager.swift; sourceTree = "<group>"; };
+		A74E15172B53DCB800ABAF43 /* ChatMessageDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageDisplayer.swift; sourceTree = "<group>"; };
 		A752E2B02B4773550007842A /* Elo Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Elo Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A752E2B32B4773550007842A /* Elo_BookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elo_BookApp.swift; sourceTree = "<group>"; };
 		A752E2B92B4773560007842A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -566,6 +572,7 @@
 		A74BA9132B478F3700F62D08 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A74E15122B53CA0700ABAF43 /* EventChatRoom */,
 				A7ACF81E2B4EF5F000192B72 /* ExpandedPostCellWithStaticHeader */,
 				A7ACF8192B4EF42200192B72 /* PostCellWithStaticHeader */,
 				A70651AE2B49E18000A6CE3A /* FollowsViews */,
@@ -670,6 +677,15 @@
 				A74BA9492B47905E00F62D08 /* SettingsOption.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A74E15122B53CA0700ABAF43 /* EventChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				A74E15132B53CA1800ABAF43 /* EventChatRoomView.swift */,
+				A74E15172B53DCB800ABAF43 /* ChatMessageDisplayer.swift */,
+			);
+			path = EventChatRoom;
 			sourceTree = "<group>";
 		};
 		A752E2A72B4773550007842A = {
@@ -790,6 +806,7 @@
 		A7C833ED2B4F2861005B9AB7 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
+				A704D3742B52F8B000F92AC6 /* MessageInfo.swift */,
 				A7CAC35A2B513E7100199A19 /* Thread.swift */,
 				A7CAC35C2B513F4D00199A19 /* Message2.swift */,
 			);
@@ -835,7 +852,7 @@
 			isa = PBXGroup;
 			children = (
 				A7CAC3792B523B1600199A19 /* MessageManager.swift */,
-				A704D3742B52F8B000F92AC6 /* MessageInfo.swift */,
+				A74E15152B53CA4900ABAF43 /* EventChatManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -989,6 +1006,7 @@
 				A7EF1F622B4B5A2B00B0F12C /* PostImageView3.swift in Sources */,
 				A74BA8802B4779A200F62D08 /* Team.swift in Sources */,
 				A74BA8A02B477A9B00F62D08 /* SearchService.swift in Sources */,
+				A74E15162B53CA4900ABAF43 /* EventChatManager.swift in Sources */,
 				A704D3752B52F8B000F92AC6 /* MessageInfo.swift in Sources */,
 				A74BA89E2B477A9B00F62D08 /* CommentService.swift in Sources */,
 				A74BA8A82B477AB400F62D08 /* UploadPost.swift in Sources */,
@@ -1074,6 +1092,7 @@
 				A74BA89F2B477A9B00F62D08 /* UserService.swift in Sources */,
 				A7ACF81D2B4EF48400192B72 /* PostCellWithStaticHeaderHeader.swift in Sources */,
 				A74BA8AA2B477AB400F62D08 /* ImageUploader.swift in Sources */,
+				A74E15142B53CA1800ABAF43 /* EventChatRoomView.swift in Sources */,
 				A7ACF8202B4EF60800192B72 /* ExpandedPostCellWithStaticHeader.swift in Sources */,
 				A74BA8B52B477ADD00F62D08 /* HideKeyboard.swift in Sources */,
 				A7CAC35B2B513E7100199A19 /* Thread.swift in Sources */,
@@ -1083,6 +1102,7 @@
 				A70651C02B4A5A7200A6CE3A /* MiniEventCell.swift in Sources */,
 				A7CAC35F2B5140D100199A19 /* UploadMessage.swift in Sources */,
 				A74BA9092B478EF200F62D08 /* SelectUsernameView.swift in Sources */,
+				A74E15182B53DCB800ABAF43 /* ChatMessageDisplayer.swift in Sources */,
 				A74BA89D2B477A9B00F62D08 /* PostService.swift in Sources */,
 				A74BA9082B478EF200F62D08 /* CreateAccountControllerView.swift in Sources */,
 				A742A9C32B4C93FE00F956B7 /* NewUserWelcomeView.swift in Sources */,

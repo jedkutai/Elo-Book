@@ -12,6 +12,7 @@ import UIKit
 struct ThreadViewSingle: View {
     @State var user: User
     @State var threadUser: User
+    @State var thread: Thread
     @StateObject var messagesManager: MessageManager
     var dismiss: DismissAction
     
@@ -19,8 +20,8 @@ struct ThreadViewSingle: View {
     @State private var message = ""
     @State private var photosPickerPresented = false
     @State private var showMessageImages = true
-    @State private var someUsers: [User] = []
-    @State private var filteredUsers: [User] = []
+//    @State private var someUsers: [User] = []
+//    @State private var filteredUsers: [User] = []
     @State private var selectedImages: [PhotosPickerItem] = []
     @StateObject private var viewModel = UploadMessage()
     
@@ -144,10 +145,12 @@ struct ThreadViewSingle: View {
                                 message = ""
                                 Task {
                                     if !viewModel.messageImages.isEmpty {
-                                        try await viewModel.uploadMessageImages(user: user, receivingUsers: [threadUser])
+//                                        try await viewModel.uploadMessageImages(user: user, receivingUsers: [threadUser])
+                                        try await viewModel.uploadMessageImagesViaThread(user: user, thread: thread)
                                     }
                                     if Checks.isValidCaption(captionToBeSent) {
-                                        try await viewModel.uploadMessageCaption(user: user, receivingUsers: [threadUser], caption: captionToBeSent)
+//                                        try await viewModel.uploadMessageCaption(user: user, receivingUsers: [threadUser], caption: captionToBeSent)
+                                        try await viewModel.uploadMessageCaptionViaThread(user: user, thread: thread, caption: captionToBeSent)
                                     }
                                     
                                 }

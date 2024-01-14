@@ -31,7 +31,7 @@ struct ThreadView: View {
         NavigationStack {
             Group {
                 if let threadUser = threadUser { // just you and another person
-                    ThreadViewSingle(user: user, threadUser: threadUser, messagesManager: messagesManager, dismiss: dismiss)
+                    ThreadViewSingle(user: user, threadUser: threadUser, thread: thread, messagesManager: messagesManager, dismiss: dismiss)
                 } else if let threadUsers = threadUsers { // group chat with the fellas
                     ThreadViewGroup(user: user, threadUsers: threadUsers, thread: thread, messagesManager: messagesManager, dismiss: dismiss)
                 } else {

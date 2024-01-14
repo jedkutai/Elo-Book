@@ -60,6 +60,31 @@ struct EventView: View {
                     Divider()
                         .frame(height: 1)
                     
+                    NavigationLink {
+                        EventChatRoomView(user: user, event: event).navigationBarBackButtonHidden()
+                    } label: {
+                        HStack {
+                            Image(systemName: "text.bubble")
+                                .foregroundStyle(Color(.systemBlue))
+                            
+                            Text("Join Discussion")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                
+                            Spacer()
+                            
+                            
+                            Text("Tap to join.")
+                                .font(.footnote)
+                                .foregroundStyle(Color(.systemGray))
+                            
+                        }
+                        .padding(.horizontal)
+                    }
+                    
+                    Divider()
+                        .frame(height: 1)
+                    
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack {
                             ForEach($posts, id: \.id) { post in

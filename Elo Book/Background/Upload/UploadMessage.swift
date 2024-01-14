@@ -28,6 +28,36 @@ class UploadMessage: ObservableObject {
         }
     }
     
+    func uploadMessageCaptionViaEvent(user: User, event: Event, caption: String) async throws {
+        let eventDocId = event.id
+        
+        let messageRef = Firestore.firestore()
+            .collection("events")
+            .document(eventDocId)
+            .collection("messages").document()
+        
+        let messageDocId = messageRef.documentID
+        
+        let messageToUpload = Message2(id: messageDocId, threadId: eventDocId, userId: user.id, caption: caption) // create the message
+        guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+        try await messageRef.setData(encodedMessage) // upload the message
+    }
+    
+    func uploadMessageCaptionViaThread(user: User, thread: Thread, caption: String) async throws {
+        let threadDocId = thread.id
+        
+        let messageRef = Firestore.firestore()
+            .collection("threads")
+            .document(threadDocId)
+            .collection("messages").document()
+        
+        let messageDocId = messageRef.documentID
+        
+        let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, caption: caption, messageSeenBy: [user.id]) // create the message
+        guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+        try await messageRef.setData(encodedMessage) // upload the message
+        try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+    }
     
     func uploadMessageCaption(user: User, receivingUsers: [User], caption: String) async throws {
         let allThreadUsers: [User] = receivingUsers + [user] // add sender and receiving users
@@ -85,6 +115,34 @@ class UploadMessage: ObservableObject {
             try await messageRef.setData(encodedMessage) // upload the message
             try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
             
+        }
+    }
+    
+    func uploadMessageImagesViaThread(user: User, thread: Thread) async throws {
+        if !uiImages.isEmpty {
+            var filenames: [String] = [] // for deleting images late
+            var imageUrls: [String] = [] // for showing image
+            
+            for uiImage in uiImages {
+                let filename = NSUUID().uuidString
+                guard let imageUrl = try await ImageUploader.uploadMessageImage(uid: user.id, image: uiImage, filename: filename) else { return }
+                filenames.append(filename)
+                imageUrls.append(imageUrl)
+            }
+            
+            let threadDocId = thread.id
+            
+            let messageRef = Firestore.firestore()
+                .collection("threads")
+                .document(threadDocId)
+                .collection("messages").document()
+            
+            let messageDocId = messageRef.documentID
+            
+            let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, imageUrls: imageUrls, imageIds: filenames, messageSeenBy: [user.id]) // create the message
+            guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+            try await messageRef.setData(encodedMessage) // upload the message
+            try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
         }
     }
     
@@ -159,6 +217,22 @@ class UploadMessage: ObservableObject {
         }
     }
     
+    func uploadMessageSharedProfileViaThread(user: User, thread: Thread, sharedUser: User) async throws {
+        let threadDocId = thread.id
+        
+        let messageRef = Firestore.firestore()
+            .collection("threads")
+            .document(threadDocId)
+            .collection("messages").document()
+        
+        let messageDocId = messageRef.documentID
+        
+        let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, sharedUserId: sharedUser.id, messageSeenBy: [user.id]) // create the message
+        guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+        try await messageRef.setData(encodedMessage) // upload the message
+        try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
+    }
+    
     func uploadMessageSharedProfile(user: User, receivingUsers: [User], sharedUser: User) async throws {
         let allThreadUsers: [User] = receivingUsers + [user] // add sender and receiving users
         
@@ -216,6 +290,22 @@ class UploadMessage: ObservableObject {
             try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
             
         }
+    }
+    
+    func uploadMessageSharedPostViaThread(user: User, thread: Thread, sharedPost: Post) async throws {
+        let threadDocId = thread.id
+        
+        let messageRef = Firestore.firestore()
+            .collection("threads")
+            .document(threadDocId)
+            .collection("messages").document()
+        
+        let messageDocId = messageRef.documentID
+        
+        let messageToUpload = Message2(id: messageDocId, threadId: threadDocId, userId: user.id, sharedPostId: sharedPost.id, messageSeenBy: [user.id]) // create the message
+        guard let encodedMessage = try? Firestore.Encoder().encode(messageToUpload) else { return } // encode message
+        try await messageRef.setData(encodedMessage) // upload the message
+        try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp]) // update the last message field for the thread
     }
     
     func uploadMessageSharedPost(user: User, receivingUsers: [User], sharedPost: Post) async throws {

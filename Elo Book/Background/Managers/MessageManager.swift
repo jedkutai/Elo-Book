@@ -21,7 +21,7 @@ class MessageManager: ObservableObject {
     }
     
     func getMessages(thread: Thread, user: User) {
-        db.collection("threads").document(thread.id).collection("messages").order(by: "timestamp", descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("threads").document(thread.id).collection("messages").order(by: "timestamp", descending: false).limit(to: 40).addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching documents: \(String(describing: error))")
                 return
@@ -85,17 +85,6 @@ class MessageManager: ObservableObject {
                 lastMessage = message
                 self.messagesInfo[message.id] = MessageInfo(byUser: byUser, showTime: showTime, showName: showName, showIcon: showIcon)
             }
-            
-//            self.messages = documents.compactMap { document -> Message2? in
-//                do {
-//                    return try document.data(as: Message2.self)
-//                } catch {
-//                    print("error decoding document into Message: \(error)")
-//                    return nil
-//                }
-//            }
-//            
-//            self.messages.sort { $0.timestamp.dateValue() < $1.timestamp.dateValue() }
             
         }
     }

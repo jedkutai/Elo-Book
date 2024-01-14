@@ -32,7 +32,7 @@ struct EventCell: View {
                                 .frame(width: 25, height: 25)
                         }
                     }
-                    .padding(.leading, 30)
+                    .padding(.leading, 15)
                     
                     Spacer()
                     
@@ -64,12 +64,11 @@ struct EventCell: View {
                                 .frame(width: 25, height: 25)
                         }
                     }
-                    .padding(.trailing, 30)
+                    .padding(.trailing, 15)
                 }
             } else {
                 Image(systemName: "circle")
                     .foregroundStyle(Color(.clear))
-//                ProgressView("Degenerating...")
             }
             
         }

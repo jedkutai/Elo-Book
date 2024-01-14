@@ -31,10 +31,16 @@ struct EmptyFeedUserCell: View {
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 }
                 
-                if let username = viewedUser.username {
-                    Text(username)
-                        .font(.footnote)
-                        .foregroundStyle(Color(.systemGray))
+                HStack {
+                    if let username = viewedUser.username {
+                        Text(username)
+                            .font(.footnote)
+                            .foregroundStyle(Color(.systemGray))
+                    }
+                    
+                    if let displayedBadge = viewedUser.displayedBadge {
+                        BadgeDiplayer(badge: displayedBadge)
+                    }
                 }
                 
                 if following {

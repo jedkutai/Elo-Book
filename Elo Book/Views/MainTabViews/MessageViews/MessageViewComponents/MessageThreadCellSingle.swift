@@ -61,12 +61,18 @@ struct MessageThreadCellSingle: View {
                 HStack {
                     if let caption = lastMessage.caption {
                         Text(caption)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .multilineTextAlignment(.leading)
                             .font(.footnote)
                             .foregroundStyle(Color(.systemGray))
+                        
                     } else if let imageUrls = lastMessage.imageUrls {
                         Text(imageUrls.count > 1 ? "\(imageUrls.count) images" : "1 image")
-                            .font(.footnote)
-                            .foregroundStyle(Color(.systemGray))
+                    } else if lastMessage.sharedUserId != nil {
+                        Text("Shared Profile")
+                    } else if lastMessage.sharedPostId != nil {
+                        Text("Shared Post")
                     }
                     Spacer()
                 }
