@@ -97,9 +97,6 @@ struct ThreadViewSingle: View {
                 })
                 .scrollDismissesKeyboard(.immediately)
                 
-//                .onChange(of: messagesManager.lastMessageId) { id in
-//                    proxy.scrollTo(id, anchor: .bottom)
-//                }
             }
             
             // keyboard

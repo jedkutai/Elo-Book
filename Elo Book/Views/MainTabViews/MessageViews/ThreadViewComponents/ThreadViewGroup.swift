@@ -78,9 +78,6 @@ struct ThreadViewGroup: View {
                             } else if let userIndex = threadUsers.firstIndex(where: { $0.id == message.userId}) {
                                 
                                 MessageDisplayer(user: user, messageUser: threadUsers[userIndex], message: message, messageInfo: messageInfo, isGroupMessage: true)
-                            } else {
-                                Text("failed to load message")
-                                    .foregroundStyle(Color(.systemRed))
                             }
                             
                             
