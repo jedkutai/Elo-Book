@@ -15,6 +15,10 @@
 			</array>
 		</dict>
 	</array>
+    
+    <key>NSContactsUsageDescription</key>
+    <string>Allow access to your contacts to help you find friends quickly.</string>
+    
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

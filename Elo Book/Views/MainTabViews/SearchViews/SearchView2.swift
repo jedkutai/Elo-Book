@@ -20,6 +20,7 @@ struct SearchView2: View {
     @State private var elementsLoaded: Bool = false
     
     let fourHoursAgo = Calendar.current.date(byAdding: .hour, value: -4, to: Date()) ?? Date()
+    let fiveHoursAgo = Calendar.current.date(byAdding: .hour, value: -6, to: Date()) ?? Date()
     
     var displayedEvents: [Event] {
         guard !filters.isEmpty else { return x.events }
@@ -31,7 +32,7 @@ struct SearchView2: View {
     var filteredDiscoverEvents: [Event] {
         guard !searchText.isEmpty else { return displayedEvents }
         return x.events.filter { event in
-            return event.title.localizedCaseInsensitiveContains(searchText) || event.sport.localizedCaseInsensitiveContains(searchText)
+            return (event.title.localizedCaseInsensitiveContains(searchText) || event.sport.localizedCaseInsensitiveContains(searchText)) && event.timestamp.dateValue() >= fiveHoursAgo
         }
     }
     

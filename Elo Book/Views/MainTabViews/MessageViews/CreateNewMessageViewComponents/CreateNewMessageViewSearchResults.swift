@@ -15,17 +15,17 @@ struct CreateNewMessageViewSearchResults: View {
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            ForEach(filteredUsers, id: \.id) { filteredUser in
-                if filteredUser.id != user.id {
-                    if !receivingUsers.contains(where: { $0.id == filteredUser.id }) {
-                        Button {
-                            if receivingUsers.count < 48 { // max group members is 50, 48 plus you is 49 plus next person to add is 50
-                                receivingUsers.append(filteredUser)
-                                searchText = ""
-                            }
-                        } label: {
-                            VStack {
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                ForEach(filteredUsers, id: \.id) { filteredUser in
+                    if filteredUser.id != user.id {
+                        if !receivingUsers.contains(where: { $0.id == filteredUser.id }) {
+                            Button {
+                                if receivingUsers.count < 48 { // max group members is 50, 48 plus you is 49 plus next person to add is 50
+                                    receivingUsers.append(filteredUser)
+                                    searchText = ""
+                                }
+                            } label: {
                                 HStack {
                                     SquareProfilePicture(user: filteredUser, size: .xSmall)
                                     
@@ -50,16 +50,17 @@ struct CreateNewMessageViewSearchResults: View {
                                 }
                                 .padding(.horizontal, 5)
                                 
-                                Divider()
-                                    .frame(height: 1)
+                                
                             }
+                            Divider()
+                                .frame(height: 1)
                         }
                     }
                 }
             }
+            .scrollDismissesKeyboard(.interactively)
+            .padding(.horizontal, 10)
         }
-        .scrollDismissesKeyboard(.interactively)
-        .padding(.horizontal, 10)
     }
 }
 

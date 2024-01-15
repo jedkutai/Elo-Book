@@ -12,6 +12,7 @@ enum Tab {
     case search
     case profile
     case messages
+    case communities
 }
 
 struct MainTabControllerView: View {
@@ -34,15 +35,6 @@ struct MainTabControllerView: View {
                     }
                     .tag(Tab.home)
                 
-
-                SearchView2(user: $user)
-                    .tabItem {
-                        VStack {
-                            Image(systemName: "magnifyingglass")
-                            Text("Search")
-                        }
-                    }
-                    .tag(Tab.search)
                 
                 MessageView(user: $user)
                     .accentColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
@@ -53,6 +45,27 @@ struct MainTabControllerView: View {
                         }
                     }
                     .tag(Tab.messages)
+                
+
+                SearchView2(user: $user)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "magnifyingglass")
+                            Text("Search")
+                        }
+                    }
+                    .tag(Tab.search)
+                
+                
+                Text("Under Construction").foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                    .accentColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "rectangle.3.group.fill")
+                            Text("Communities")
+                        }
+                    }
+                    .tag(Tab.communities)
                 
                 UserProfileView(user: $user, refresh: $refresh)
                     .tabItem {

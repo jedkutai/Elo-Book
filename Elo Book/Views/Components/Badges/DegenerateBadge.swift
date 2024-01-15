@@ -10,7 +10,7 @@ import SwiftUI
 struct DegenerateBadge: View {
     var body: some View {
         Image(systemName: "checkmark.seal.fill")
-            .foregroundStyle(Color(.green))
+            .foregroundStyle(Color(.systemYellow))
             .font(.system(size: 15))
     }
 }

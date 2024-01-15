@@ -11,7 +11,7 @@ import SwiftUI
 struct Theme {
     // @Environment(\.colorScheme) var colorScheme
     static var postCellBackground: Color = Color(.gray).opacity(0.3)
-    static var buttonColorInteracted: Color = Color.yellow
+    static var buttonColorInteracted: Color = Color(.systemYellow)
     
     static var whiteLogoString: String = "elo_logo_white"
     static var blackLogoString: String = "elo_logo_black"

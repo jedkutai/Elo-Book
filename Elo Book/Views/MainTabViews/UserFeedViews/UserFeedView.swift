@@ -32,10 +32,17 @@ struct UserFeedView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 30)
-                            .padding(.horizontal)
                         
                         Spacer()
+                        
+                        NavigationLink {
+                            AddContactsView(user: user).navigationBarBackButtonHidden()
+                        } label: {
+                            Image(systemName: "person.badge.plus")
+                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                        }
                     }
+                    .padding(.horizontal)
                     
                     if elementsLoaded {
                         ScrollView(.vertical, showsIndicators: false) {
