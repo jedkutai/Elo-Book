@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct NotificationsSettingsView: View {
     @State var user: User
@@ -20,10 +21,12 @@ struct NotificationsSettingsView: View {
     @State private var communityInviteAlerts: Bool = true
     @State private var communityMessageAlerts: Bool = true
     
+    @State private var notificationsAuthorized: Bool = true
     
     @State private var swipeStarted = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
+    private let textBoxWidth = UIScreen.main.bounds.width * 0.5
     var body: some View {
         NavigationStack {
             VStack {
@@ -237,11 +240,36 @@ struct NotificationsSettingsView: View {
                     ProgressView()
                 }
                 
+                if !notificationsAuthorized {
+                    Text("Allow Push notifications:")
+                        .foregroundStyle(Color(.systemGray))
+                        .multilineTextAlignment(.center)
+                    
+                    Button {
+                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                            if UIApplication.shared.canOpenURL(settingsURL) {
+                                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                            }
+                        }
+                    } label: {
+                        Text("Open Settings")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(width: textBoxWidth, height: 44)
+                            .background(Color(.systemBlue))
+                            .cornerRadius(8)
+                            .padding(.top, 20)
+                    }
+                }
+                
                 Spacer()
                 
             }
         }
         .onAppear {
+            self.checkNotificationSettings()
+            
             Task {
                 do {
                     notificationSettings = try await FetchService.fetchNotificationSettings(user: user)
@@ -295,6 +323,16 @@ struct NotificationsSettingsView: View {
                     dismiss()
                 }
         )
+    }
+    
+    private func checkNotificationSettings() {
+        let center = UNUserNotificationCenter.current()
+
+        center.getNotificationSettings { settings in
+            if settings.authorizationStatus != .authorized {
+                notificationsAuthorized = false
+            }
+        }
     }
 }
 

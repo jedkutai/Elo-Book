@@ -5,14 +5,19 @@
 //  Created by Jed Kutai on 1/15/24.
 //
 
-import SwiftUI
+import Foundation
+import Firebase
 
-struct Chat: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    Chat()
+struct Chat: Identifiable, Hashable, Codable {
+    let id: String
+    let eventId: String
+    let userId: String
+    
+    let username: String?
+    var displayedBadge: String?
+    let caption: String?
+    
+    
+    var timestamp: Timestamp = Timestamp()
+    
 }

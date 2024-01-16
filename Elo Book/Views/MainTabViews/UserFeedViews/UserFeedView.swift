@@ -36,7 +36,7 @@ struct UserFeedView: View {
                         Spacer()
                         
                         NavigationLink {
-                            AddContactsView(user: user).navigationBarBackButtonHidden()
+                            AddContactsView(user: $user).navigationBarBackButtonHidden()
                         } label: {
                             Image(systemName: "person.badge.plus")
                                 .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
@@ -180,12 +180,14 @@ struct UserFeedView: View {
     
     private func localRefresh() {
         Task {
+            user = try await FetchService.fetchUserById(withUid: user.id)
             userFeedPosts = try await FetchService.fetchFeedPostsByUser(user: user)
         }
     }
     
     private func loadMorePosts() {
         Task {
+            user = try await FetchService.fetchUserById(withUid: user.id)
             userFeedPosts = try await FetchService.fetchMoreFeedPostsByUser(user: user, userFeedPosts: userFeedPosts)
             loadingMorePosts = false
         }

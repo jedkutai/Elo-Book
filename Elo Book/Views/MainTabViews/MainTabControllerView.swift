@@ -40,7 +40,7 @@ struct MainTabControllerView: View {
                     .accentColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     .tabItem {
                         VStack {
-                            Image(systemName: "pencil.and.scribble")
+                            Image(systemName: "bubble.fill")
                             Text("Messages")
                         }
                     }

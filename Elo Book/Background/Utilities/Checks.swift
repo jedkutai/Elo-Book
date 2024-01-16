@@ -10,8 +10,23 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import Contacts
+import Combine
 
 class Checks {
+    
+    // Function to extract numeric phone numbers from CNContact
+    static func extractNumericPhoneNumbers(from contact: CNContact) -> [String] {
+        var numericPhoneNumbers: [String] = []
+
+        for phoneNumber in contact.phoneNumbers {
+            let phoneNumberString = phoneNumber.value.stringValue
+            let numericPhoneNumber = phoneNumberString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+            numericPhoneNumbers.append(String(numericPhoneNumber.suffix(10)))
+        }
+
+        return numericPhoneNumbers
+    }
     
     static func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -105,6 +120,12 @@ class Checks {
     static func isValidSearch(_ searchTerm: String) -> Bool {
         let trimmedSearchTerm = searchTerm.trimmingCharacters(in: .whitespaces)
         return !trimmedSearchTerm.isEmpty && searchTerm.count >= 1 && searchTerm.count <= 30
+    }
+    
+    static func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
+        let phoneRegex = #"^\d{10}$"#
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        return phoneTest.evaluate(with: phoneNumber)
     }
     
 }

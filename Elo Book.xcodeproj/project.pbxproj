@@ -26,6 +26,9 @@
 		A70651C42B4A619800A6CE3A /* CreatePostMasterTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70651C32B4A619800A6CE3A /* CreatePostMasterTextBox.swift */; };
 		A716D1F12B54502E009D3ED3 /* SwiftSVG in Frameworks */ = {isa = PBXBuildFile; productRef = A716D1F02B54502E009D3ED3 /* SwiftSVG */; };
 		A716D1F42B54B488009D3ED3 /* AddContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A716D1F32B54B488009D3ED3 /* AddContactsView.swift */; };
+		A73978442B5639B000F2B225 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73978432B5639B000F2B225 /* Chat.swift */; };
+		A73978462B563FED00F2B225 /* UploadChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73978452B563FED00F2B225 /* UploadChat.swift */; };
+		A73978482B564D1A00F2B225 /* EventChatRoomView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73978472B564D1A00F2B225 /* EventChatRoomView2.swift */; };
 		A742A9C12B4BCE9500F956B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */; };
 		A742A9C32B4C93FE00F956B7 /* NewUserWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C22B4C93FE00F956B7 /* NewUserWelcomeView.swift */; };
 		A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C42B4CD3AA00F956B7 /* NotificationsSettingsView.swift */; };
@@ -135,6 +138,9 @@
 		A752E3002B4777170007842A /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A752E2FC2B4777160007842A /* LogoView.swift */; };
 		A752E3022B4777170007842A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A752E2FE2B4777170007842A /* ContentView.swift */; };
 		A752E3072B4778020007842A /* X.swift in Sources */ = {isa = PBXBuildFile; fileRef = A752E3062B4778020007842A /* X.swift */; };
+		A75D111A2B5601B700EE3924 /* ContactAccountsDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75D11192B5601B700EE3924 /* ContactAccountsDisplayer.swift */; };
+		A75D111D2B56150E00EE3924 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75D111C2B56150E00EE3924 /* ResetPasswordView.swift */; };
+		A75D111F2B5616F800EE3924 /* ResestPasswordExitCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75D111E2B5616F800EE3924 /* ResestPasswordExitCover.swift */; };
 		A7693AAE2B4DE28600286344 /* SearchView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AAD2B4DE28600286344 /* SearchView2.swift */; };
 		A7693AB02B4E03EA00286344 /* UserBadgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AAF2B4E03EA00286344 /* UserBadgeSettings.swift */; };
 		A7693AB22B4E098E00286344 /* SelectBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AB12B4E098E00286344 /* SelectBadgesView.swift */; };
@@ -191,6 +197,9 @@
 		A70651BF2B4A5A7200A6CE3A /* MiniEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniEventCell.swift; sourceTree = "<group>"; };
 		A70651C32B4A619800A6CE3A /* CreatePostMasterTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostMasterTextBox.swift; sourceTree = "<group>"; };
 		A716D1F32B54B488009D3ED3 /* AddContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactsView.swift; sourceTree = "<group>"; };
+		A73978432B5639B000F2B225 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		A73978452B563FED00F2B225 /* UploadChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadChat.swift; sourceTree = "<group>"; };
+		A73978472B564D1A00F2B225 /* EventChatRoomView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventChatRoomView2.swift; sourceTree = "<group>"; };
 		A742A9BF2B4BAABF00F956B7 /* Elo Book.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Elo Book.entitlements"; sourceTree = "<group>"; };
 		A742A9C02B4BCE9500F956B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A742A9C22B4C93FE00F956B7 /* NewUserWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserWelcomeView.swift; sourceTree = "<group>"; };
@@ -273,6 +282,9 @@
 		A752E2FC2B4777160007842A /* LogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		A752E2FE2B4777170007842A /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A752E3062B4778020007842A /* X.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X.swift; sourceTree = "<group>"; };
+		A75D11192B5601B700EE3924 /* ContactAccountsDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAccountsDisplayer.swift; sourceTree = "<group>"; };
+		A75D111C2B56150E00EE3924 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		A75D111E2B5616F800EE3924 /* ResestPasswordExitCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResestPasswordExitCover.swift; sourceTree = "<group>"; };
 		A7693AAD2B4DE28600286344 /* SearchView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView2.swift; sourceTree = "<group>"; };
 		A7693AAF2B4E03EA00286344 /* UserBadgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBadgeSettings.swift; sourceTree = "<group>"; };
 		A7693AB12B4E098E00286344 /* SelectBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBadgesView.swift; sourceTree = "<group>"; };
@@ -391,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				A716D1F32B54B488009D3ED3 /* AddContactsView.swift */,
+				A75D11192B5601B700EE3924 /* ContactAccountsDisplayer.swift */,
 			);
 			path = AddContactsViews;
 			sourceTree = "<group>";
@@ -460,6 +473,7 @@
 				A74BA8A42B477AB400F62D08 /* UploadPost.swift */,
 				A74BA8A52B477AB400F62D08 /* UploadProfileImage.swift */,
 				A7CAC35E2B5140D100199A19 /* UploadMessage.swift */,
+				A73978452B563FED00F2B225 /* UploadChat.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -554,6 +568,7 @@
 				A74BA8FF2B478EDB00F62D08 /* FirstOpenView.swift */,
 				A74BA90A2B478EFD00F62D08 /* LoginViews */,
 				A74BA9012B478EDF00F62D08 /* CreateAccountViews */,
+				A75D111B2B5614FB00EE3924 /* ResetPasswordViews */,
 			);
 			path = OpenAppViews;
 			sourceTree = "<group>";
@@ -697,6 +712,7 @@
 			children = (
 				A74E15132B53CA1800ABAF43 /* EventChatRoomView.swift */,
 				A74E15172B53DCB800ABAF43 /* ChatMessageDisplayer.swift */,
+				A73978472B564D1A00F2B225 /* EventChatRoomView2.swift */,
 			);
 			path = EventChatRoom;
 			sourceTree = "<group>";
@@ -769,6 +785,15 @@
 			path = Background;
 			sourceTree = "<group>";
 		};
+		A75D111B2B5614FB00EE3924 /* ResetPasswordViews */ = {
+			isa = PBXGroup;
+			children = (
+				A75D111C2B56150E00EE3924 /* ResetPasswordView.swift */,
+				A75D111E2B5616F800EE3924 /* ResestPasswordExitCover.swift */,
+			);
+			path = ResetPasswordViews;
+			sourceTree = "<group>";
+		};
 		A7800E392B4E261E00AF8492 /* Badges */ = {
 			isa = PBXGroup;
 			children = (
@@ -822,6 +847,7 @@
 				A704D3742B52F8B000F92AC6 /* MessageInfo.swift */,
 				A7CAC35A2B513E7100199A19 /* Thread.swift */,
 				A7CAC35C2B513F4D00199A19 /* Message2.swift */,
+				A73978432B5639B000F2B225 /* Chat.swift */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
@@ -1016,16 +1042,19 @@
 			files = (
 				A752E2B42B4773550007842A /* Elo_BookApp.swift in Sources */,
 				A74BA8A12B477A9B00F62D08 /* AuthService.swift in Sources */,
+				A73978442B5639B000F2B225 /* Chat.swift in Sources */,
 				A70651B62B4A251F00A6CE3A /* CreatePostMasterView.swift in Sources */,
 				A74BA9222B478FA100F62D08 /* EmptyFeedUserCell.swift in Sources */,
 				A7EF1F622B4B5A2B00B0F12C /* PostImageView3.swift in Sources */,
 				A74BA8802B4779A200F62D08 /* Team.swift in Sources */,
 				A74BA8A02B477A9B00F62D08 /* SearchService.swift in Sources */,
 				A716D1F42B54B488009D3ED3 /* AddContactsView.swift in Sources */,
+				A75D111D2B56150E00EE3924 /* ResetPasswordView.swift in Sources */,
 				A74E15162B53CA4900ABAF43 /* EventChatManager.swift in Sources */,
 				A704D3752B52F8B000F92AC6 /* MessageInfo.swift in Sources */,
 				A74BA89E2B477A9B00F62D08 /* CommentService.swift in Sources */,
 				A74BA8A82B477AB400F62D08 /* UploadPost.swift in Sources */,
+				A75D111A2B5601B700EE3924 /* ContactAccountsDisplayer.swift in Sources */,
 				A7EF1F5C2B4B2E5D00B0F12C /* PostCellFooter2.swift in Sources */,
 				A704D3772B5327EF00F92AC6 /* MessageDisplayer.swift in Sources */,
 				A7ACF81B2B4EF43F00192B72 /* PostCellWithStaticHeader.swift in Sources */,
@@ -1083,6 +1112,7 @@
 				A74BA9472B47905300F62D08 /* SettingsView.swift in Sources */,
 				A704D37F2B53640900F92AC6 /* MessageImageViewExpanded.swift in Sources */,
 				A74BA8C52B477C4700F62D08 /* CommentCell.swift in Sources */,
+				A73978462B563FED00F2B225 /* UploadChat.swift in Sources */,
 				A7EF1F5A2B4B2B1000B0F12C /* PostCellExpandedBody2.swift in Sources */,
 				A74BA8B72B477ADD00F62D08 /* ErrorMessageStrings.swift in Sources */,
 				A74BA90F2B478F0700F62D08 /* SelectUsernameAltView.swift in Sources */,
@@ -1137,11 +1167,13 @@
 				A74BA9102B478F0700F62D08 /* LoginView.swift in Sources */,
 				A7CAC36E2B51C70B00199A19 /* CreateNewMessageViewReceivingUsers.swift in Sources */,
 				A7CAC3702B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift in Sources */,
+				A73978482B564D1A00F2B225 /* EventChatRoomView2.swift in Sources */,
 				A7CAC36C2B51588900199A19 /* MessageViewHeader.swift in Sources */,
 				A74BA87D2B4779A200F62D08 /* CommentLike.swift in Sources */,
 				A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */,
 				A74BA93B2B47902300F62D08 /* PostCellExpandedTextBox.swift in Sources */,
 				A74BA93D2B47902300F62D08 /* PostCellExpandedFooter.swift in Sources */,
+				A75D111F2B5616F800EE3924 /* ResestPasswordExitCover.swift in Sources */,
 				A7CAC3722B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

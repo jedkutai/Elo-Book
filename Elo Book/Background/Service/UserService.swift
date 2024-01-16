@@ -10,6 +10,13 @@ import Firebase
 import FirebaseFirestore
 
 struct UserService {
+    
+    static func updatePhoneNumber(uid: String, newPhoneNumber: String) async throws {
+        try await Firestore.firestore().collection("users").document(uid).updateData(["phoneNumber": newPhoneNumber])
+        
+        // try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp])
+    }
+    
     static func changeFullname(uid: String, newFullname: String) async throws {
         let userRef = Firestore.firestore().collection("users").document(uid)
         try await userRef.updateData(["fullname": newFullname])

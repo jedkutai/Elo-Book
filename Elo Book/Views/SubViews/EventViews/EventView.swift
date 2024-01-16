@@ -21,6 +21,7 @@ struct EventView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -57,10 +58,17 @@ struct EventView: View {
                     }
                     .padding(.horizontal)
                     
+                    
+                    
+                    NavigationLink {
+                        EventChatRoomView(user: user, event: event).navigationBarBackButtonHidden()
+                    } label: {
+                        Text("Join Game Chat")
+                            .foregroundStyle(Color(.systemBlue))
+                    }
+                
                     Divider()
                         .frame(height: 1)
-                    
-                
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVStack {

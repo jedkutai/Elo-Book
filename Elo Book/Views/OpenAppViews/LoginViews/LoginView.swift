@@ -63,6 +63,18 @@ struct LoginView: View {
                     .textContentType(.password)
                     .modifier(IGTextFieldModifier())
                 
+                HStack {
+                    Spacer()
+                    
+                    NavigationLink {
+                        ResetPasswordView().navigationBarBackButtonHidden()
+                    } label: {
+                        Text("Forgot password?")
+                            .foregroundStyle(Color(.systemBlue))
+                    }
+                }
+                .padding(.horizontal, 24)
+                
                 if canSubmit {
                     Button {
                         canSubmit = false

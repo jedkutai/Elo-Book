@@ -57,11 +57,16 @@ struct AuthService {
             print("DEBUG: \(error.localizedDescription)")
             return "Error: \(error.localizedDescription)"
         }
+        
     }
     
     static func fetchUserById(withUid uid: String) async throws -> User {
         let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
         return try snapshot.data(as: User.self)
+    }
+    
+    static func resetPassword(withEmail email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
     

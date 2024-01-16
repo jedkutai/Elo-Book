@@ -7,29 +7,53 @@
 
 import SwiftUI
 import Contacts
+import Combine
+import UIKit
 
-
+// causes app to crash, needs fix
 
 struct AddContactsView: View {
-    @State var user: User
+    @Binding var user: User
     
     @State private var contacts: [CNContact] = []
     
+    
     @State private var loadingContacts = true
     @State private var allowedAccess = false
+    @State private var canContinue = true
+    @State private var phoneNumber = ""
+    @State private var searchText = ""
     
+    var filteredContacts: [CNContact] {
+        guard !searchText.isEmpty else { return contacts }
+        return contacts.filter { contact in
+            return contact.givenName.localizedCaseInsensitiveContains(searchText) || contact.familyName.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+    
+    private let textBoxWidth = UIScreen.main.bounds.width * 0.5
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     var body: some View {
-        if loadingContacts {
-            loadingPage
-        } else {
-            if allowedAccess {
-                displayContacts
+        Group {
+            if loadingContacts {
+                loadingPage
             } else {
-                beggingPage
+                if allowedAccess {
+                    if user.phoneNumber == nil {
+                        addPhoneNumber
+                    } else {
+                        displayContacts
+                    }
+                } else {
+                    beggingPage
+                }
             }
         }
+        .onAppear {
+            fetchContacts()
+        }
+        
     }
     
     var loadingPage: some View {
@@ -63,6 +87,7 @@ struct AddContactsView: View {
             Spacer()
             
         }
+        .padding(.horizontal)
         .onAppear {
             fetchContacts()
         }
@@ -79,7 +104,7 @@ struct AddContactsView: View {
                 }
                 
                 Spacer()
-                Text("Find Contacts")
+                Text("Add Phone Number")
                     .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
@@ -96,8 +121,58 @@ struct AddContactsView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 
+                VStack {
+                    Spacer()
+                    
+                    TextField("Enter your phone number:", text: $phoneNumber)
+                        .disableAutocorrection(true)
+                        .modifier(IGTextFieldModifier())
+                        .keyboardType(.numberPad) // This restricts input to numeric keypad
+                        .onReceive(Just(phoneNumber)) { newPhoneNumber in
+                            let filtered = newPhoneNumber.filter { "0123456789".contains($0) }
+                            if filtered != newPhoneNumber {
+                                self.phoneNumber = String(filtered.suffix(10))
+                            }
+                        }
+                        .padding(.top, 50)
+                    
+                    if Checks.isValidPhoneNumber(phoneNumber) && canContinue {
+                        Button {
+                            
+                            Task {
+                                continueCooldown()
+                                let submission = phoneNumber
+                                phoneNumber = ""
+                                try await UserService.updatePhoneNumber(uid: user.id, newPhoneNumber: submission)
+                                user = try await FetchService.fetchUserById(withUid: user.id)
+                            }
+                            
+                        } label: {
+                            Text("Continue")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .frame(width: textBoxWidth, height: 44)
+                                .background(Color(.systemBlue))
+                                .cornerRadius(8)
+                                .padding(.top, 20)
+                        }
+                    } else {
+                        Text("Continue")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(width: textBoxWidth, height: 44)
+                            .background(Color(.systemGray))
+                            .cornerRadius(8)
+                            .padding(.top, 20)
+                    }
+                    
+                    Spacer()
+                }
             }
         }
+        .padding(.horizontal)
     }
     
     var displayContacts: some View {
@@ -112,7 +187,7 @@ struct AddContactsView: View {
                     }
                     
                     Spacer()
-                    Text("Find Contacts")
+                    Text("Found Contacts")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
@@ -124,25 +199,54 @@ struct AddContactsView: View {
                     
                 }
                 
+                HStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                        
+                        TextField("Search", text: $searchText)
+                            .autocapitalization(.none)
+                            .onSubmit {
+                                hideKeyboard()
+                            }
+                        
+                        Spacer()
+                        
+                        if !searchText.isEmpty {
+                            Button {
+                                searchText = ""
+                            } label: {
+                                Image(systemName: "x.circle.fill")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    
+                    }
+                    .padding(5)
+                    .background(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color(.gray).opacity(0.3), lineWidth: 1)
+                    )
+                    
+                }
+                .padding(.horizontal)
+                
                 Divider()
                     .frame(height: 1)
                 
                 ScrollView(.vertical) {
-                    ForEach(contacts, id: \.identifier) { contact in
-                        Text("\(contact.givenName) \(contact.familyName)")
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                    ForEach(filteredContacts, id: \.identifier) { contact in
                         
-                        
-                        ForEach(self.extractNumericPhoneNumbers(from: contact), id: \.self) { phoneNumber in
-                            Text(phoneNumber)
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                        if !contact.givenName.isEmpty {
+                            ContactAccountsDisplayer(contact: contact, user: $user)
+                            
+                            Divider()
+                                .frame(height: 1)
                         }
-                        
-                        Divider()
-                            .frame(height: 1)
                     }
                 }
             }
+            .padding(.horizontal)
         }
     }
     
@@ -178,6 +282,25 @@ struct AddContactsView: View {
             
             Text("We can't continue without access to your contacts :(")
                 .foregroundStyle(Color(.systemGray))
+                .multilineTextAlignment(.center)
+            
+            Button {
+                if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(settingsURL) {
+                        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                    }
+                }
+            } label: {
+                Text("Open Settings")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .frame(width: textBoxWidth, height: 44)
+                    .background(Color(.systemBlue))
+                    .cornerRadius(8)
+                    .padding(.top, 20)
+            }
+            
             
             Spacer()
         }
@@ -186,22 +309,27 @@ struct AddContactsView: View {
     
     func fetchContacts() {
         DispatchQueue.global(qos: .userInitiated).async { // Perform work on a background thread
+            
             var fetchedContacts: [CNContact] = [] // Create an array to hold fetched contacts
 
             let contactStore = CNContactStore()
+            
+            
 
             // Check if access to contacts is granted
             if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
+                
                 allowedAccess = true
+                
                 // Create CNKeyDescriptor objects for the keys you want to fetch, including phoneNumbers
                 let keysToFetch: [CNKeyDescriptor] = [
                     CNContactGivenNameKey as CNKeyDescriptor,
                     CNContactFamilyNameKey as CNKeyDescriptor,
                     CNContactPhoneNumbersKey as CNKeyDescriptor // Include phone numbers in the fetch request
                 ]
-
+                
                 let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
-
+                
                 do {
                     try contactStore.enumerateContacts(with: fetchRequest) { (contact, stop) in
                         // Handle each contact here
@@ -210,34 +338,44 @@ struct AddContactsView: View {
                 } catch {
                     print("Error fetching contacts: \(error.localizedDescription)")
                 }
-
+                
+                let sortedContacts = fetchedContacts.sorted { (contact1, contact2) -> Bool in
+                    let name1 = "\(contact1.familyName)\(contact1.givenName)"
+                    let name2 = "\(contact2.familyName)\(contact2.givenName)"
+                    return name1.localizedCaseInsensitiveCompare(name2) == .orderedAscending
+                }
+                
                 DispatchQueue.main.async { // Update the UI on the main thread
                     // Process and update your SwiftUI view here
-                    self.contacts = fetchedContacts // Update the @State variable with fetched contacts
+                    self.contacts = sortedContacts
                     loadingContacts = false
                     
                 }
+                
             } else {
                 loadingContacts = false
+                
+                contactStore.requestAccess(for: .contacts) { (granted, error) in
+                    if granted {
+                        print("Permission granted")
+                        // Fetch contacts here
+                    } else if let error = error {
+                        print("Error requesting contacts access: \(error.localizedDescription)")
+                    }
+                }
             }
             
         }
     }
 
-    // Function to extract numeric phone numbers from CNContact
-    func extractNumericPhoneNumbers(from contact: CNContact) -> [String] {
-        var numericPhoneNumbers: [String] = []
+    
 
-        for phoneNumber in contact.phoneNumbers {
-            let phoneNumberString = phoneNumber.value.stringValue
-            let numericPhoneNumber = phoneNumberString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-            numericPhoneNumbers.append(String(numericPhoneNumber.suffix(10)))
+    private func continueCooldown() {
+        canContinue = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            canContinue = true
         }
-
-        return numericPhoneNumbers
     }
-
-
 
 }
 

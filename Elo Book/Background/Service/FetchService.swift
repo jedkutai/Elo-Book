@@ -8,8 +8,30 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import Contacts
+import Combine
 
 struct FetchService {
+    static func fetchAccountsByContact(contact: CNContact) async throws -> [User] {
+        var users: [User] = []
+        
+        let phoneNumbers = Checks.extractNumericPhoneNumbers(from: contact)
+        
+        if let firstNumber = phoneNumbers.first {
+            let query = Firestore.firestore().collection("users")
+                .whereField("phoneNumber", isEqualTo: firstNumber)
+            
+            let snapshot = try await query.getDocuments()
+            
+            users = snapshot.documents.compactMap({ try? $0.data(as: User.self) })
+        }
+        
+        
+        
+        return users
+        
+    }
+    
     static func fetchMessageThreadsByUser(user: User) async throws -> [Thread] {
         
         let query = Firestore.firestore().collection("threads")

@@ -20,8 +20,6 @@ struct ThreadViewGroup: View {
     @State private var message = ""
     @State private var photosPickerPresented = false
     @State private var showMessageImages = true
-//    @State private var someUsers: [User] = []
-//    @State private var filteredUsers: [User] = []
     @State private var selectedImages: [PhotosPickerItem] = []
     @StateObject private var viewModel = UploadMessage()
     

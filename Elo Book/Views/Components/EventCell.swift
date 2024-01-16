@@ -38,13 +38,13 @@ struct EventCell: View {
                     
                     VStack {
                         Text(event.title)
+                            .multilineTextAlignment(.center)
                             .font(.subheadline)
-                            .fontWeight(.semibold)
                             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                         
                         Text("\(DateFormatter.longDate(timestamp: event.timestamp))")
                             .font(.subheadline)
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            .foregroundStyle(Color(.systemGray))
                     }
                     
                     Spacer()
