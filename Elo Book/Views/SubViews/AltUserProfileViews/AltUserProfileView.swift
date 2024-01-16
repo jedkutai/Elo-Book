@@ -15,6 +15,7 @@ struct AltUserProfileView: View {
     
     @State private var loadingMorePosts = false
     @State private var swipeStarted = false
+    @State private var shareProfile = false
     @State private var shareLink = ""
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -34,6 +35,7 @@ struct AltUserProfileView: View {
                             
                             if let username = viewedUser.username {
                                 Text("\(username)")
+                                    .foregroundColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                                     .fontWeight(.bold)
                             }
                             
@@ -43,18 +45,24 @@ struct AltUserProfileView: View {
                             
                             Spacer()
                             
-                            if !shareLink.isEmpty {
-                                ShareLink(item: shareLink) {
-                                    Image(systemName: "square.and.arrow.up")
-                                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                                }
-                            } else {
-                                Button {
-                                    shareLink = DeepLink.createUserProfileLink(user: viewedUser)
-                                } label: {
-                                    Image(systemName: "square.and.arrow.up")
-                                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                                }
+//                            if !shareLink.isEmpty {
+//                                ShareLink(item: shareLink) {
+//                                    Image(systemName: "square.and.arrow.up")
+//                                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                                }
+//                            } else {
+//                                Button {
+//                                    shareLink = DeepLink.createUserProfileLink(user: viewedUser)
+//                                } label: {
+//                                    Image(systemName: "square.and.arrow.up")
+//                                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                                }
+//                            }
+                            Button {
+                                shareProfile.toggle()
+                            } label: {
+                                Image(systemName: "square.and.arrow.up")
+                                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                             }
                             
                             
@@ -117,7 +125,7 @@ struct AltUserProfileView: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        if value.startLocation.y < 40 {
+                        if value.startLocation.y < 20 {
                             self.swipeStarted = true
                         }
                     }
@@ -126,6 +134,9 @@ struct AltUserProfileView: View {
                         dismiss()
                     }
             )
+            .fullScreenCover(isPresented: $shareProfile) {
+                ShareProfileView(user: user, userToShare: viewedUser)
+            }
             
         }
         .padding(.vertical, 1)

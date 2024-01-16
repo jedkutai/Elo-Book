@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct StaticPostLoader: View {
+    @State var user: User
+    @State var postId: String
+    
+    @State private var postUser: User?
+    @State private var post: Post?
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if let postUser = postUser, let post = post {
+            NavigationLink {
+                AltPostCellExpanded(user: user, postUser: postUser, post: post).navigationBarBackButtonHidden()
+            } label: {
+                StaticPostCell(user: user, postUser: postUser, post: post)
+            }
+        } else {
+            ProgressView("Loading Post...")
+                .onAppear {
+                    Task {
+                        post = try await FetchService.fetchPostByPostId(postId: postId)
+                        if let post = post {
+                            postUser = try await FetchService.fetchUserById(withUid: post.userId)
+                        }
+                    }
+                }
+        }
     }
-}
-
-#Preview {
-    StaticPostLoader()
 }

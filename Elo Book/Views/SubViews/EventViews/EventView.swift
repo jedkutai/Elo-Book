@@ -148,7 +148,7 @@ struct EventView: View {
         .gesture(
             DragGesture()
                 .onChanged { value in
-                    if value.startLocation.y < 40 {
+                    if value.startLocation.y < 20 {
                         self.swipeStarted = true
                     }
                 }

@@ -61,6 +61,7 @@ struct SearchView2: View {
                             .foregroundColor(.gray)
                         
                         TextField("Search", text: $searchText)
+                            .padding(.vertical, 2.5)
                             .autocapitalization(.none)
                             .onSubmit {
                                 hideKeyboard()

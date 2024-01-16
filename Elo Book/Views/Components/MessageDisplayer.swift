@@ -37,9 +37,9 @@ struct MessageDisplayer: View {
                                     .foregroundStyle(Color(.systemBlue))
                             )
                     } else if let sharedUserId = message.sharedUserId {
-                        
+                        StaticUserProfileLoader(user: user, viewedUserId: sharedUserId)
                     } else if let sharedPostId = message.sharedPostId {
-                        
+                        StaticPostLoader(user: user, postId: sharedPostId)
                     } else if let imageUrls = message.imageUrls {
                         MessageImageView(imageUrls: imageUrls)
                     }
@@ -99,7 +99,7 @@ struct MessageDisplayer: View {
                                     .padding(.horizontal, 10)
                                     .background(
                                         RoundedRectangle(cornerRadius: 10.0)
-                                            .foregroundStyle(Color(.systemGray).opacity(0.3))
+                                            .foregroundStyle(Color(.systemGray).opacity(0.2))
                                     )
                                 
                                 Spacer()
@@ -107,9 +107,9 @@ struct MessageDisplayer: View {
                         }
                         
                     } else if let sharedUserId = message.sharedUserId {
-                        
+                        StaticUserProfileLoader(user: user, viewedUserId: sharedUserId)
                     } else if let sharedPostId = message.sharedPostId {
-                        
+                        StaticPostLoader(user: user, postId: sharedPostId)
                     } else if let imageUrls = message.imageUrls {
                         MessageImageView(imageUrls: imageUrls)
                     }

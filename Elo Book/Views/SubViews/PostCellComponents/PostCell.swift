@@ -22,7 +22,6 @@ struct PostCell: View {
     
     
     @Environment(\.colorScheme) var colorScheme
-    private let imageWidth = UIScreen.main.bounds.width * 0.85
     var body: some View {
         if postDeleted {
             

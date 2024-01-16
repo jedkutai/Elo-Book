@@ -13,6 +13,7 @@ struct CreateNewMessageViewSearchBar: View {
         HStack {
             TextField("Find Users", text: $searchText, axis: .vertical)
                 .autocapitalization(.none)
+                .padding(.vertical, 2.5)
             
             Spacer()
         }

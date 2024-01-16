@@ -58,6 +58,7 @@ struct FollowingView: View {
                             .foregroundColor(.gray)
                         
                         TextField("Search Following", text: $searchText)
+                            .padding(.vertical, 2.5)
                             .autocapitalization(.none)
                             .onSubmit {
                                 hideKeyboard()
@@ -119,7 +120,7 @@ struct FollowingView: View {
         .gesture(
             DragGesture()
                 .onChanged { value in
-                    if value.startLocation.y < 40 {
+                    if value.startLocation.y < 20 {
                         self.swipeStarted = true
                     }
                 }

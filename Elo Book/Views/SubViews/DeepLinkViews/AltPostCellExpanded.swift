@@ -35,7 +35,7 @@ struct AltPostCellExpanded: View {
                         Button {
                             dismiss()
                         } label: {
-                            Image(systemName: "chevron.down")
+                            Image(systemName: "chevron.left")
                                 .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                         }
                         
@@ -124,7 +124,7 @@ struct AltPostCellExpanded: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        if value.startLocation.y < 40 {
+                        if value.startLocation.y < 20 {
                             self.swipeStarted = true
                         }
                     }

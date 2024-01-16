@@ -20,7 +20,7 @@ struct EventChatRoomView: View {
     }
     
     @State private var message = ""
-    
+    @State private var swipeStarted = false
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -70,7 +70,7 @@ struct EventChatRoomView: View {
                 HStack {
                     
                     TextField("Message", text: $message, axis: .vertical)
-                        .font(.footnote)
+                        .padding(.vertical, 2.5)
                         
                     
                     Spacer()
@@ -106,6 +106,19 @@ struct EventChatRoomView: View {
                 .padding(10)
                 
             }
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        if value.startLocation.y < 20 {
+                            self.swipeStarted = true
+                        }
+                    }
+                    .onEnded { _ in
+                        self.swipeStarted = false
+                        dismiss()
+                        
+                    }
+            )
             .onSubmit {
                 if Checks.isValidCaption(message)  {
                     let captionToBeSent = message

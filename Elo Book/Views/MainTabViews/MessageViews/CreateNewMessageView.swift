@@ -80,7 +80,7 @@ struct CreateNewMessageView: View {
                         }
                         
                         TextField("Message", text: $message, axis: .vertical)
-                            .font(.footnote)
+                            .padding(.vertical, 2.5)
                             
                         
                         Spacer()

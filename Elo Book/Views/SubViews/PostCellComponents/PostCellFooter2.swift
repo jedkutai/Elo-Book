@@ -17,6 +17,7 @@ struct PostCellFooter2: View {
     
     @State private var shareLink = ""
     @State private var likeCoolDown = false
+    @State private var sharePost = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack(spacing: 8) {
@@ -84,18 +85,12 @@ struct PostCellFooter2: View {
             }
             Spacer()
 
-            if !shareLink.isEmpty {
-                ShareLink(item: shareLink) {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
-            } else {
-                Button {
-                    shareLink = DeepLink.createPostLink(post: post)
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
+            
+            Button {
+                sharePost.toggle()
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
             }
             
             Spacer()
@@ -109,8 +104,11 @@ struct PostCellFooter2: View {
         }
         .padding(.top, 5)
         .padding(.horizontal, 8.0)
-        .onAppear {
-            shareLink = DeepLink.createPostLink(post: post)
+        .fullScreenCover(isPresented: $sharePost) {
+            SharePostView(user: user, postUser: postUser, postToShare: post)
         }
+//        .onAppear {
+//            shareLink = DeepLink.createPostLink(post: post)
+//        }
     }
 }

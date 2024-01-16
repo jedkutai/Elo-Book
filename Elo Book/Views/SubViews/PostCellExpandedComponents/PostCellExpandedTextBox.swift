@@ -20,7 +20,7 @@ struct PostCellExpandedTextBox: View {
         HStack {
             
             TextField("Comment", text: $caption, axis: .vertical)
-                .font(.subheadline)
+                .padding(.vertical, 2.5)
                 
             
             Spacer()

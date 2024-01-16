@@ -6,13 +6,189 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct StaticPostImageView: View {
+    @State var imageUrls: [String]
+    
+    @State private var showImages = false
+    
+    
+    private let imageWidth = UIScreen.main.bounds.width * 0.425
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            if imageUrls.count == 1 {
+                one
+            } else if imageUrls.count == 2 {
+                two
+            } else if imageUrls.count == 3 {
+                three
+            } else if imageUrls.count == 4 {
+                four
+            }
+        }
+        
     }
-}
 
-#Preview {
-    StaticPostImageView()
+    var one: some View {
+        NavigationStack {
+            NavigationLink {
+                MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 0)
+            } label: {
+                KFImage(URL(string: imageUrls[0]))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: imageWidth, height: imageWidth * 0.5 + 5)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .padding(.horizontal, 8)
+            }
+        }
+            
+    }
+
+    var two: some View {
+        NavigationStack {
+            HStack {
+                NavigationLink {
+                    MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 0)
+                } label: {
+                    KFImage(URL(string: imageUrls[0]))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: imageWidth * 0.5 - 0.5, height: imageWidth * 0.5 + 5)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(.leading, 8)
+                }
+                    
+                
+                Spacer()
+                
+                NavigationLink {
+                    MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 1)
+                } label: {
+                    KFImage(URL(string: imageUrls[1]))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: imageWidth * 0.5 - 0.5, height: imageWidth * 0.5 + 5)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(.trailing, 8)
+                }
+                    
+            }
+            .frame(width: imageWidth)
+        }
+    }
+    
+    var three: some View {
+        NavigationStack {
+            HStack {
+                NavigationLink {
+                    MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 0)
+                } label: {
+                    KFImage(URL(string: imageUrls[0]))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.5 + 5)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(.leading, 8)
+                }
+                    
+                
+                Spacer()
+                
+                VStack {
+                    NavigationLink {
+                        MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 1)
+                    } label: {
+                        KFImage(URL(string: imageUrls[1]))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25 - 0.25)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                        
+                        
+                    Spacer()
+                    
+                    NavigationLink {
+                        MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 2)
+                    } label: {
+                        KFImage(URL(string: imageUrls[2]))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25 - 0.25)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                        
+                }
+                .frame(height: imageWidth * 0.5 + 5)
+                .padding(.trailing, 8)
+            }
+        }
+    }
+    
+    var four: some View {
+        NavigationStack {
+            VStack {
+                HStack {
+                    NavigationLink {
+                        MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 0)
+                    } label: {
+                        KFImage(URL(string: imageUrls[0]))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.leading, 8)
+                    }
+                        
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 1)
+                    } label: {
+                        KFImage(URL(string: imageUrls[1]))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.trailing, 8)
+                    }
+                        
+                }
+                .frame(width: imageWidth)
+                .padding(.bottom, 5)
+                
+                HStack {
+                    NavigationLink {
+                        MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 2)
+                    } label: {
+                        KFImage(URL(string: imageUrls[2]))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.leading, 8)
+                    }
+                        
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        MessageImageViewExpanded(imageUrls: imageUrls, centeredImage: 3)
+                    } label: {
+                        KFImage(URL(string: imageUrls[3]))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: imageWidth * 0.5 - 2.5, height: imageWidth * 0.25)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.trailing, 8)
+                    }
+                        
+                }
+                .frame(width: imageWidth)
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@ struct CreatePostMasterTextBox: View {
             HStack {
                 
                 TextField("Find Events", text: $searchText, axis: .vertical)
-                    .font(.subheadline)
+                    .padding(.vertical, 2.5)
                     
                 
                 Spacer()
@@ -35,7 +35,7 @@ struct CreatePostMasterTextBox: View {
             HStack {
                 
                 TextField("Caption", text: $caption, axis: .vertical)
-                    .font(.subheadline)
+                    .padding(.vertical, 2.5)
                     
                 
                 Spacer()
