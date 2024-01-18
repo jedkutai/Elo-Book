@@ -14,6 +14,8 @@ struct PostCellFooterToStaticHeader: View {
     @Binding var likes: [PostLike]
     @Binding var comments: [Comment]
     @Binding var commentCount: Int
+    @Binding var postDeleted: Bool
+    @Binding var showMore: Bool
     
     @State private var shareLink = ""
     @State private var likeCoolDown = false
@@ -62,7 +64,7 @@ struct PostCellFooterToStaticHeader: View {
             Spacer()
             
             NavigationLink {
-                ExpandedPostCellWithStaticHeader(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount)
+                ExpandedPostCellWithStaticHeader(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount, postDeleted: $postDeleted, showMore: $showMore)
                 
             } label: {
                 HStack {

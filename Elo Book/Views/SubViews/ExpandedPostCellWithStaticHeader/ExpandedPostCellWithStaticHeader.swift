@@ -14,6 +14,8 @@ struct ExpandedPostCellWithStaticHeader: View {
     @Binding var comments: [Comment]
     @Binding var likes: [PostLike]
     @Binding var commentCount: Int
+    @Binding var postDeleted: Bool
+    @Binding var showMore: Bool
     
     @State private var events: [Event]?
     @State private var posting: Bool = false
@@ -28,7 +30,7 @@ struct ExpandedPostCellWithStaticHeader: View {
                 
                 ScrollView {
                     VStack {
-                        ExpandedPostCellWithStaticHeaderHeader(user: $user, postUser: $postUser)
+                        ExpandedPostCellWithStaticHeaderHeader(user: $user, postUser: $postUser, post: $post, postDeleted: $postDeleted, showMore: $showMore)
                         PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }

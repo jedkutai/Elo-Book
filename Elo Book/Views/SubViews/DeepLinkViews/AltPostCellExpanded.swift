@@ -35,7 +35,7 @@ struct AltPostCellExpanded: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     
                     LazyVStack {
-                        PostCellExpandedHeader(user: $user, postUser: $postUser, showMore: $showMore, postDeleted: $postDeleted)
+                        PostCellExpandedHeader(user: $user, postUser: $postUser, post: $post, showMore: $showMore, postDeleted: $postDeleted)
                         
                         PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         
@@ -112,18 +112,6 @@ struct AltPostCellExpanded: View {
                     commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 }
             }
-//            .gesture(
-//                DragGesture()
-//                    .onChanged { value in
-//                        if value.startLocation.y < 20 {
-//                            self.swipeStarted = true
-//                        }
-//                    }
-//                    .onEnded { _ in
-//                        self.swipeStarted = false
-//                        dismiss()
-//                    }
-//            )
             
         }
     }
