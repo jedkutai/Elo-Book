@@ -14,6 +14,7 @@ struct ExpandedPostCellWithStaticHeaderHeader: View {
     @Binding var postDeleted: Bool
     @Binding var showMore: Bool
     @State private var showDeleteWarning = false
+    @State var reportViewToggle = false
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
@@ -42,27 +43,8 @@ struct ExpandedPostCellWithStaticHeaderHeader: View {
             
             Spacer()
             
-            if user.id == postUser.id {
-                if showMore {
-                    Button {
-                        showDeleteWarning.toggle()
-                    } label: {
-                        HStack {
-                            Label("Delete", systemImage: "trash")
-                                .font(.footnote)
-                                .foregroundStyle(Color(.red))
-                            
-                        }
-                    }
-                } else {
-                    Button {
-                        showMore.toggle()
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                }
-            }
+            PostEllipsis(user: $user, postUser: $postUser, post: $post, showMore: $showMore, showDeleteWarning: $showDeleteWarning)
+            
         }
         .frame(width: UIScreen.main.bounds.width * 0.85)
         .padding(.horizontal, 8)

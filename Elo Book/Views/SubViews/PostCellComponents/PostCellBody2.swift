@@ -11,12 +11,12 @@ struct PostCellBody2: View {
     @State var user: User
     @State var viewedUser: User
     @State var post: Post
-    @State private var showMore: Bool = false
+    @State private var showMoreText: Bool = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         if let caption = post.caption {
             Group {
-                if showMore {
+                if showMoreText {
                     Text(caption)
                         .font(.subheadline)
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
@@ -26,7 +26,7 @@ struct PostCellBody2: View {
                     if caption.count > 200 {
                         
                         Button {
-                            showMore.toggle()
+                            showMoreText.toggle()
                         } label: {
                             Group {
                                 Text("\(String(caption.prefix(125)))")

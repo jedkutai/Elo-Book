@@ -17,7 +17,7 @@ struct CommentCell: View {
     @State private var likeCooldown = false
     @State private var showDelete = false
     @State private var commentDeleted = false
-    @State private var showMore = false
+    @State private var showMoreText = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         if commentDeleted {
@@ -88,7 +88,7 @@ struct CommentCell: View {
                             }
                             
                             if let caption = comment.caption {
-                                if showMore {
+                                if showMoreText {
                                     Text(caption)
                                         .font(.subheadline)
                                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
@@ -107,7 +107,7 @@ struct CommentCell: View {
                                     } else {
                                         
                                         Button {
-                                            showMore.toggle()
+                                            showMoreText.toggle()
                                         } label: {
                                             Group {
                                                 Text("\(String(caption.prefix(75)))")

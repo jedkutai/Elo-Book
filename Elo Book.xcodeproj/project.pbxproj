@@ -177,6 +177,7 @@
 		A7CAC37C2B524F1F00199A19 /* SquareGroupChatPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC37B2B524F1F00199A19 /* SquareGroupChatPicture.swift */; };
 		A7CAC37E2B52502400199A19 /* MessageThreadCellSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC37D2B52502400199A19 /* MessageThreadCellSingle.swift */; };
 		A7CAC3802B5257FE00199A19 /* MessageThreadCellGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC37F2B5257FE00199A19 /* MessageThreadCellGroup.swift */; };
+		A7E788DB2B5984FA00DEAA24 /* PostEllipsis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E788DA2B5984FA00DEAA24 /* PostEllipsis.swift */; };
 		A7EF1F532B4B24EB00B0F12C /* PostImageExpandedView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F522B4B24EB00B0F12C /* PostImageExpandedView2.swift */; };
 		A7EF1F562B4B27FF00B0F12C /* PostImageView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F552B4B27FF00B0F12C /* PostImageView2.swift */; };
 		A7EF1F582B4B298B00B0F12C /* PostCellBody2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F572B4B298B00B0F12C /* PostCellBody2.swift */; };
@@ -330,6 +331,7 @@
 		A7CAC37B2B524F1F00199A19 /* SquareGroupChatPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareGroupChatPicture.swift; sourceTree = "<group>"; };
 		A7CAC37D2B52502400199A19 /* MessageThreadCellSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThreadCellSingle.swift; sourceTree = "<group>"; };
 		A7CAC37F2B5257FE00199A19 /* MessageThreadCellGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageThreadCellGroup.swift; sourceTree = "<group>"; };
+		A7E788DA2B5984FA00DEAA24 /* PostEllipsis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEllipsis.swift; sourceTree = "<group>"; };
 		A7EF1F522B4B24EB00B0F12C /* PostImageExpandedView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageExpandedView2.swift; sourceTree = "<group>"; };
 		A7EF1F552B4B27FF00B0F12C /* PostImageView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageView2.swift; sourceTree = "<group>"; };
 		A7EF1F572B4B298B00B0F12C /* PostCellBody2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellBody2.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				A704D3762B5327EF00F92AC6 /* MessageDisplayer.swift */,
 				A704D37C2B53638300F92AC6 /* MessageImageView.swift */,
 				A704D37E2B53640900F92AC6 /* MessageImageViewExpanded.swift */,
+				A7E788DA2B5984FA00DEAA24 /* PostEllipsis.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1170,6 +1173,7 @@
 				A70651B22B49F16800A6CE3A /* FollowingView.swift in Sources */,
 				A74BA8A92B477AB400F62D08 /* UploadProfileImage.swift in Sources */,
 				A7800E3D2B4E263A00AF8492 /* PublicFigureBadge.swift in Sources */,
+				A7E788DB2B5984FA00DEAA24 /* PostEllipsis.swift in Sources */,
 				A74BA9312B478FFE00F62D08 /* PostCellHeader.swift in Sources */,
 				A752E3022B4777170007842A /* ContentView.swift in Sources */,
 				A74BA9182B478F5C00F62D08 /* AltUserProfileView.swift in Sources */,

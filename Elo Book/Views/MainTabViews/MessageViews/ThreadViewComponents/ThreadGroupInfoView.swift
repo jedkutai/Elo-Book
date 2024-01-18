@@ -93,7 +93,7 @@ struct ThreadGroupInfoView: View {
                 
                 
                 
-                if !leftGroup {
+                if !leftGroup && threadUsers.count > 2 {
                     Button {
                         // leave group
                         // get the warning pop up

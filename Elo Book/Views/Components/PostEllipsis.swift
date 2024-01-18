@@ -8,11 +8,43 @@
 import SwiftUI
 
 struct PostEllipsis: View {
+    @Binding var user: User
+    @Binding var postUser: User
+    @Binding var post: Post
+    @Binding var showMore: Bool
+    @Binding var showDeleteWarning: Bool
+    
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if showMore {
+            if user.id == postUser.id {
+                Button {
+                    showDeleteWarning.toggle()
+                } label: {
+                    HStack {
+                        Label("Delete", systemImage: "trash")
+                            .font(.footnote)
+                            .foregroundStyle(Color(.red))
+                        
+                    }
+                }
+            } else {
+                NavigationLink {
+                    Text("Under Construction")
+                } label: {
+                    Label("Report", systemImage: "exclamationmark.triangle.fill")
+                        .font(.footnote)
+                        .foregroundStyle(Color(.orange))
+                }
+            }
+        } else {
+            Button {
+                showMore.toggle()
+            } label: {
+                Image(systemName: "ellipsis")
+                    .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+            }
+        }
     }
 }
 
-#Preview {
-    PostEllipsis()
-}
