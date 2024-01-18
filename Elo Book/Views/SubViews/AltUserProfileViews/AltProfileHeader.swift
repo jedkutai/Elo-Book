@@ -10,6 +10,7 @@ import SwiftUI
 struct AltProfileHeader: View {
     @Binding var user: User
     @Binding var viewedUser: User
+    @Binding var shareProfile: Bool
     @State private var followingCount: Int?
     @State private var followersCount: Int?
     @State private var postCount: Int?
@@ -55,7 +56,7 @@ struct AltProfileHeader: View {
                                 
                                 
                                 NavigationLink {
-                                    FollowingView(user: user, viewedUser: viewedUser).navigationBarBackButtonHidden()
+                                    FollowingView(user: user, viewedUser: viewedUser)
                                 } label: {
                                     HStack {
                                         Text("Following: \(followingCount ?? 0)")
@@ -67,7 +68,7 @@ struct AltProfileHeader: View {
                                 }
                                 
                                 NavigationLink {
-                                    FollowersView(user: user, viewedUser: viewedUser).navigationBarBackButtonHidden()
+                                    FollowersView(user: user, viewedUser: viewedUser)
                                 } label: {
                                     HStack {
                                         Text("Followers: \(followersCount ?? 0)")
@@ -89,6 +90,13 @@ struct AltProfileHeader: View {
                     
                     
                     Spacer()
+                    
+                    Button {
+                        shareProfile.toggle()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                    }
                 }
                 
                 if let bio = viewedUser.bio {
@@ -151,8 +159,7 @@ struct AltProfileHeader: View {
                     
                 }
                 
-                Divider()
-                    .frame(height: 1)
+                
             }
             .onAppear {
                 Task {
@@ -163,6 +170,7 @@ struct AltProfileHeader: View {
                     userProfilePosts = try await FetchService.fetchUserProfilePostsByUserId(uid: viewedUser.id)
                 }
             }
+            .padding(.vertical, 10)
             .padding(.horizontal)
         }
     }

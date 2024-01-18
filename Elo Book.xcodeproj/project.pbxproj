@@ -97,7 +97,6 @@
 		A74BA9212B478FA100F62D08 /* EmptyFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA91F2B478FA100F62D08 /* EmptyFeedView.swift */; };
 		A74BA9222B478FA100F62D08 /* EmptyFeedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9202B478FA100F62D08 /* EmptyFeedUserCell.swift */; };
 		A74BA9252B478FB800F62D08 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9242B478FB800F62D08 /* EventView.swift */; };
-		A74BA9282B478FE100F62D08 /* ExpandedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9272B478FE100F62D08 /* ExpandedPostCell.swift */; };
 		A74BA9312B478FFE00F62D08 /* PostCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA92C2B478FFE00F62D08 /* PostCellHeader.swift */; };
 		A74BA9322B478FFE00F62D08 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA92D2B478FFE00F62D08 /* PostCell.swift */; };
 		A74BA93B2B47902300F62D08 /* PostCellExpandedTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA9352B47902300F62D08 /* PostCellExpandedTextBox.swift */; };
@@ -150,6 +149,10 @@
 		A7693AAE2B4DE28600286344 /* SearchView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AAD2B4DE28600286344 /* SearchView2.swift */; };
 		A7693AB02B4E03EA00286344 /* UserBadgeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AAF2B4E03EA00286344 /* UserBadgeSettings.swift */; };
 		A7693AB22B4E098E00286344 /* SelectBadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7693AB12B4E098E00286344 /* SelectBadgesView.swift */; };
+		A77C90732B586BD200BDB7DF /* ThreadGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90722B586BD200BDB7DF /* ThreadGroupInfoView.swift */; };
+		A77C90752B58D3D500BDB7DF /* AddUsersToGroupChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90742B58D3D500BDB7DF /* AddUsersToGroupChatView.swift */; };
+		A77C90782B5903C400BDB7DF /* ExpandedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90772B5903C400BDB7DF /* ExpandedPostCell.swift */; };
+		A77C907A2B5904C300BDB7DF /* PostCellFooterToStaticHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90792B5904C300BDB7DF /* PostCellFooterToStaticHeader.swift */; };
 		A7800E3B2B4E262E00AF8492 /* AlphaTesterBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */; };
 		A7800E3D2B4E263A00AF8492 /* PublicFigureBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */; };
 		A7800E3F2B4E264500AF8492 /* DegenerateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */; };
@@ -272,7 +275,6 @@
 		A74BA91F2B478FA100F62D08 /* EmptyFeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyFeedView.swift; sourceTree = "<group>"; };
 		A74BA9202B478FA100F62D08 /* EmptyFeedUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyFeedUserCell.swift; sourceTree = "<group>"; };
 		A74BA9242B478FB800F62D08 /* EventView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
-		A74BA9272B478FE100F62D08 /* ExpandedPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedPostCell.swift; sourceTree = "<group>"; };
 		A74BA92C2B478FFE00F62D08 /* PostCellHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellHeader.swift; sourceTree = "<group>"; };
 		A74BA92D2B478FFE00F62D08 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		A74BA9352B47902300F62D08 /* PostCellExpandedTextBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellExpandedTextBox.swift; sourceTree = "<group>"; };
@@ -300,6 +302,10 @@
 		A7693AAD2B4DE28600286344 /* SearchView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView2.swift; sourceTree = "<group>"; };
 		A7693AAF2B4E03EA00286344 /* UserBadgeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBadgeSettings.swift; sourceTree = "<group>"; };
 		A7693AB12B4E098E00286344 /* SelectBadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBadgesView.swift; sourceTree = "<group>"; };
+		A77C90722B586BD200BDB7DF /* ThreadGroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadGroupInfoView.swift; sourceTree = "<group>"; };
+		A77C90742B58D3D500BDB7DF /* AddUsersToGroupChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersToGroupChatView.swift; sourceTree = "<group>"; };
+		A77C90772B5903C400BDB7DF /* ExpandedPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPostCell.swift; sourceTree = "<group>"; };
+		A77C90792B5904C300BDB7DF /* PostCellFooterToStaticHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellFooterToStaticHeader.swift; sourceTree = "<group>"; };
 		A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaTesterBadge.swift; sourceTree = "<group>"; };
 		A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFigureBadge.swift; sourceTree = "<group>"; };
 		A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegenerateBadge.swift; sourceTree = "<group>"; };
@@ -381,6 +387,7 @@
 			children = (
 				A704D3782B53312900F92AC6 /* ThreadViewSingle.swift */,
 				A704D37A2B5332D500F92AC6 /* ThreadViewGroup.swift */,
+				A77C90722B586BD200BDB7DF /* ThreadGroupInfoView.swift */,
 			);
 			path = ThreadViewComponents;
 			sourceTree = "<group>";
@@ -633,20 +640,20 @@
 		A74BA9132B478F3700F62D08 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A77C90762B5903B400BDB7DF /* ExpandedPostCelll */,
 				A716D1F22B54B44F009D3ED3 /* AddContactsViews */,
-				A74E15122B53CA0700ABAF43 /* EventChatRoom */,
-				A7ACF81E2B4EF5F000192B72 /* ExpandedPostCellWithStaticHeader */,
-				A7ACF8192B4EF42200192B72 /* PostCellWithStaticHeader */,
-				A70651AE2B49E18000A6CE3A /* FollowsViews */,
-				A70651AD2B49E17900A6CE3A /* FollowingViews */,
-				A74BA9412B47903F00F62D08 /* SettingsViews */,
 				A74BA9142B478F4D00F62D08 /* AltUserProfileViews */,
 				A74BA9192B478F6B00F62D08 /* DeepLinkViews */,
 				A74BA91E2B478F9200F62D08 /* EmptyFeedViews */,
+				A74E15122B53CA0700ABAF43 /* EventChatRoom */,
 				A74BA9232B478FAF00F62D08 /* EventViews */,
-				A74BA9262B478FCC00F62D08 /* ExpandedPostCellView */,
+				A7ACF81E2B4EF5F000192B72 /* ExpandedPostCellWithStaticHeader */,
+				A70651AD2B49E17900A6CE3A /* FollowingViews */,
+				A70651AE2B49E18000A6CE3A /* FollowsViews */,
 				A74BA9292B478FF100F62D08 /* PostCellComponents */,
 				A74BA9342B47900F00F62D08 /* PostCellExpandedComponents */,
+				A7ACF8192B4EF42200192B72 /* PostCellWithStaticHeader */,
+				A74BA9412B47903F00F62D08 /* SettingsViews */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -684,14 +691,6 @@
 				A74BA9242B478FB800F62D08 /* EventView.swift */,
 			);
 			path = EventViews;
-			sourceTree = "<group>";
-		};
-		A74BA9262B478FCC00F62D08 /* ExpandedPostCellView */ = {
-			isa = PBXGroup;
-			children = (
-				A74BA9272B478FE100F62D08 /* ExpandedPostCell.swift */,
-			);
-			path = ExpandedPostCellView;
 			sourceTree = "<group>";
 		};
 		A74BA9292B478FF100F62D08 /* PostCellComponents */ = {
@@ -827,6 +826,14 @@
 			path = ResetPasswordViews;
 			sourceTree = "<group>";
 		};
+		A77C90762B5903B400BDB7DF /* ExpandedPostCelll */ = {
+			isa = PBXGroup;
+			children = (
+				A77C90772B5903C400BDB7DF /* ExpandedPostCell.swift */,
+			);
+			path = ExpandedPostCelll;
+			sourceTree = "<group>";
+		};
 		A7800E392B4E261E00AF8492 /* Badges */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,6 +868,7 @@
 			children = (
 				A7ACF81A2B4EF43F00192B72 /* PostCellWithStaticHeader.swift */,
 				A7ACF81C2B4EF48400192B72 /* PostCellWithStaticHeaderHeader.swift */,
+				A77C90792B5904C300BDB7DF /* PostCellFooterToStaticHeader.swift */,
 			);
 			path = PostCellWithStaticHeader;
 			sourceTree = "<group>";
@@ -917,6 +925,7 @@
 				A7CAC3742B51E4B300199A19 /* MessageThreadCell.swift */,
 				A7CAC37D2B52502400199A19 /* MessageThreadCellSingle.swift */,
 				A7CAC37F2B5257FE00199A19 /* MessageThreadCellGroup.swift */,
+				A77C90742B58D3D500BDB7DF /* AddUsersToGroupChatView.swift */,
 			);
 			path = MessageViewComponents;
 			sourceTree = "<group>";
@@ -1096,6 +1105,7 @@
 				A74BA9062B478EF200F62D08 /* WelcomeView.swift in Sources */,
 				A7CAC3802B5257FE00199A19 /* MessageThreadCellGroup.swift in Sources */,
 				A74BA94A2B47905E00F62D08 /* SettingsOption.swift in Sources */,
+				A77C90782B5903C400BDB7DF /* ExpandedPostCell.swift in Sources */,
 				A7EF1F532B4B24EB00B0F12C /* PostImageExpandedView2.swift in Sources */,
 				A74BA9172B478F5C00F62D08 /* AltProfileHeader.swift in Sources */,
 				A7CAC3692B5157B000199A19 /* CreateNewMessageViewHeader.swift in Sources */,
@@ -1109,7 +1119,6 @@
 				A74BA9212B478FA100F62D08 /* EmptyFeedView.swift in Sources */,
 				A7693AAE2B4DE28600286344 /* SearchView2.swift in Sources */,
 				A74BA9452B47905300F62D08 /* SelectFavoriteSportsView.swift in Sources */,
-				A74BA9282B478FE100F62D08 /* ExpandedPostCell.swift in Sources */,
 				A7EF1F562B4B27FF00B0F12C /* PostImageView2.swift in Sources */,
 				A70651C42B4A619800A6CE3A /* CreatePostMasterTextBox.swift in Sources */,
 				A752E3002B4777170007842A /* LogoView.swift in Sources */,
@@ -1179,6 +1188,7 @@
 				A74BA8AA2B477AB400F62D08 /* ImageUploader.swift in Sources */,
 				A74E15142B53CA1800ABAF43 /* EventChatRoomView.swift in Sources */,
 				A7ACF8202B4EF60800192B72 /* ExpandedPostCellWithStaticHeader.swift in Sources */,
+				A77C90752B58D3D500BDB7DF /* AddUsersToGroupChatView.swift in Sources */,
 				A74BA8B52B477ADD00F62D08 /* HideKeyboard.swift in Sources */,
 				A7CAC35B2B513E7100199A19 /* Thread.swift in Sources */,
 				A73978572B568DA400F2B225 /* StaticPostLoader.swift in Sources */,
@@ -1198,6 +1208,7 @@
 				A74BA8B22B477ADD00F62D08 /* Checks.swift in Sources */,
 				A74BA8B62B477ADD00F62D08 /* CropProfileImageViewController.swift in Sources */,
 				A70651B02B49E1C000A6CE3A /* FollowersView.swift in Sources */,
+				A77C90732B586BD200BDB7DF /* ThreadGroupInfoView.swift in Sources */,
 				A74BA8FB2B478EA500F62D08 /* UserProfileView.swift in Sources */,
 				A7693AB02B4E03EA00286344 /* UserBadgeSettings.swift in Sources */,
 				A70651BC2B4A2A4E00A6CE3A /* PostPreviewImages.swift in Sources */,
@@ -1214,6 +1225,7 @@
 				A73978522B56818100F2B225 /* StaticPostImageView.swift in Sources */,
 				A74BA93D2B47902300F62D08 /* PostCellExpandedFooter.swift in Sources */,
 				A75D111F2B5616F800EE3924 /* ResestPasswordExitCover.swift in Sources */,
+				A77C907A2B5904C300BDB7DF /* PostCellFooterToStaticHeader.swift in Sources */,
 				A7CAC3722B51D0BD00199A19 /* CreateNewMessageViewSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

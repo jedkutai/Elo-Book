@@ -36,7 +36,7 @@ struct UserProfileView: View {
                             Spacer()
                             
                             NavigationLink {
-                                SettingsView(user: user, refresh: $refresh).navigationBarBackButtonHidden()
+                                SettingsView(user: user, refresh: $refresh)
                             } label: {
                                 Image(systemName: "line.3.horizontal")
                                     .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
@@ -98,6 +98,7 @@ struct UserProfileView: View {
                 
                 Spacer()
             }
+            
             
         }
         .padding(.vertical, 1)

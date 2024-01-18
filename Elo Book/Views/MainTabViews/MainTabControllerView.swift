@@ -18,6 +18,9 @@ enum Tab {
 struct MainTabControllerView: View {
     @State var user: User
     
+    @State private var threads: [Thread] = []
+    @State private var unreadMessageCount = 0
+    
     @State var selectedTab: Tab = .home
     @State private var refresh = false
     
@@ -36,12 +39,20 @@ struct MainTabControllerView: View {
                     .tag(Tab.home)
                 
                 
-                MessageView(user: $user)
+                MessageView(user: $user, threads: $threads, unreadMessageCount: $unreadMessageCount)
                     .accentColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                     .tabItem {
                         VStack {
-                            Image(systemName: "bubble.fill")
-                            Text("Messages")
+                            Image(systemName: unreadMessageCount > 0 ? "exclamationmark.bubble.fill" : "bubble.fill")
+                            if unreadMessageCount == 0 {
+                                Text("Messages")
+                            } else if unreadMessageCount == 1 {
+                                Text("\(unreadMessageCount) Message")
+                            } else if unreadMessageCount < 10 {
+                                Text("\(unreadMessageCount) Messages")
+                            } else {
+                                Text("10+ Messages")
+                            }
                         }
                     }
                     .tag(Tab.messages)
@@ -78,9 +89,17 @@ struct MainTabControllerView: View {
             }
             .accentColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
         }
+        .onAppear {
+            Task {
+                threads = try await FetchService.fetchMessageThreadsByUser(user: user)
+                unreadMessageCount = try await MessageService.unreadMessagesCount(user: user, threads: threads)
+            }
+        }
         .onChange(of: refresh) {
             Task {
                 user = try await FetchService.fetchUserById(withUid: user.id)
+                threads = try await FetchService.fetchMessageThreadsByUser(user: user)
+                unreadMessageCount = try await MessageService.unreadMessagesCount(user: user, threads: threads)
             }
         }
     }

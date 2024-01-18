@@ -13,53 +13,31 @@ struct SettingsView: View {
     @Binding var refresh: Bool
     
     @State private var swipeStarted = false
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    Spacer()
-                    
-                    Text("Settings")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                }
-                
-                Divider()
-                    .frame(height: 1)
-                
-                
                 ScrollView {
                     NavigationLink {
-                        AccountInfoView(user: $user).navigationBarBackButtonHidden()
+                        AccountInfoView(user: $user)
                     } label: {
                         SettingsOption(systemName: "lock", text: "Account Info")
                     }
                     
                     NavigationLink {
-                        SelectBadgesView(user: user, refresh: $refresh).navigationBarBackButtonHidden()
+                        SelectBadgesView(user: user, refresh: $refresh)
                     } label: {
                         SettingsOption(systemName: "checkmark.seal.fill", text: "Badges")
                     }
                     
                     NavigationLink {
-                        SelectFavoriteSportsView(user: user, refresh: $refresh).navigationBarBackButtonHidden()
+                        SelectFavoriteSportsView(user: user, refresh: $refresh)
                     } label: {
                         SettingsOption(systemName: "star", text: "Favorite Sports")
                     }
                     
                     NavigationLink {
-                        NotificationsSettingsView(user: user, refresh: $refresh).navigationBarBackButtonHidden()
+                        NotificationsSettingsView(user: user, refresh: $refresh)
                     } label: {
                         SettingsOption(systemName: "bell", text: "Notifications")
                     }
@@ -85,19 +63,9 @@ struct SettingsView: View {
                 }
                 
             }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .padding(.horizontal)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.startLocation.y < 20 {
-                            self.swipeStarted = true
-                        }
-                    }
-                    .onEnded { _ in
-                        self.swipeStarted = false
-                        dismiss()
-                    }
-            )
         }
         
     }

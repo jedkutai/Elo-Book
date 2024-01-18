@@ -18,7 +18,6 @@ struct ExpandedPostCellWithStaticHeader: View {
     @State private var events: [Event]?
     @State private var posting: Bool = false
     @State private var loadingMorePosts: Bool = false
-    @State private var swipeStarted = false
     @State private var caption: String = ""
     @StateObject private var viewModel = UploadComment()
     @Environment(\.dismiss) private var dismiss
@@ -26,25 +25,6 @@ struct ExpandedPostCellWithStaticHeader: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    if let events = events {
-                        if !events.isEmpty {
-                            EventsHorizontalScroll(user: $user, events: events)
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                }
-                .padding(.leading)
-                .padding(.bottom, 5)
                 
                 ScrollView {
                     VStack {
@@ -117,18 +97,15 @@ struct ExpandedPostCellWithStaticHeader: View {
                     }
                 }
             }
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.startLocation.y < 20 {
-                            self.swipeStarted = true
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    if let events = events {
+                        if !events.isEmpty {
+                            EventsHorizontalScroll(user: $user, events: events)
                         }
                     }
-                    .onEnded { _ in
-                        self.swipeStarted = false
-                        dismiss()
-                    }
-            )
+                }
+            }
         }
     }
 }

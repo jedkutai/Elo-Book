@@ -26,51 +26,22 @@ struct EventView: View {
         NavigationStack {
             ZStack {
                 VStack {
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                        }
-                        
-                        Spacer()
-                        
-                        EventCell(event: event)
-                        
-                        Spacer()
-                        
-                        Menu {
-                            Button {
-                                sortByScore.toggle()
-                            } label: {
-                                if sortByScore {
-                                    Label("Show Most Recent", systemImage: "clock.arrow.circlepath")
-                                } else {
-                                    Label("Show Most Popular", systemImage: "square.stack.3d.up")
-                                }
-                            }
-                            
-                        } label: {
-                            Image(systemName: "arrow.up.arrow.down.circle.fill")
-                                .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                        }
-                    }
-                    .padding(.horizontal)
-                    
-                    
-                    
-                    NavigationLink {
-                        EventChatRoomView(user: user, event: event).navigationBarBackButtonHidden()
-                    } label: {
-                        Text("Join Game Chat")
-                            .foregroundStyle(Color(.systemBlue))
-                    }
-                
-                    Divider()
-                        .frame(height: 1)
                     
                     ScrollView(.vertical, showsIndicators: false) {
+                        HStack {
+                            Text("Start: \(DateFormatter.longDate(timestamp: event.timestamp))")
+                                .font(.subheadline)
+                                .foregroundStyle(Color(.systemGray))
+                            NavigationLink {
+                                EventChatRoomView(user: user, event: event)
+                            } label: {
+                                Text("Join Game Chat")
+                                    .font(.subheadline)
+                                    .foregroundStyle(Color(.systemBlue))
+                            }
+                        }
+                        .padding(.horizontal)
+                        
                         LazyVStack {
                             ForEach($posts, id: \.id) { post in
                                 PostCell(user: $user, post: post)
@@ -143,20 +114,31 @@ struct EventView: View {
                     .padding(10)
                 }
             }
-            
-        }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.startLocation.y < 20 {
-                        self.swipeStarted = true
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    MiniEventCell(event: event)
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Button {
+                            sortByScore.toggle()
+                        } label: {
+                            if sortByScore {
+                                Label("Show Most Recent", systemImage: "clock.arrow.circlepath")
+                            } else {
+                                Label("Show Most Popular", systemImage: "square.stack.3d.up")
+                            }
+                        }
+                        
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down.circle")
+                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                     }
                 }
-                .onEnded { _ in
-                    self.swipeStarted = false
-                    dismiss()
-                }
-        )
+            }
+            
+        }
         .fullScreenCover(isPresented: $showCreatePostView) {
             CreatePostMasterView(user: user, postCreated: $postCreated, selectedEvents: [event])
         }

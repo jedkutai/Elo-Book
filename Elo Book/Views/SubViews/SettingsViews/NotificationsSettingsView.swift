@@ -24,45 +24,11 @@ struct NotificationsSettingsView: View {
     @State private var notificationsAuthorized: Bool = true
     
     @State private var swipeStarted = false
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     private let textBoxWidth = UIScreen.main.bounds.width * 0.5
     var body: some View {
         NavigationStack {
             VStack {
-                // header
-                HStack {
-                    Button {
-                        dismiss()
-                        Task {
-                            await UserService.updateUserNotificationSettings(user: user, followAlerts: followAlerts, likedPostAlerts: likedPostAlerts, commentedPostAlerts: commentedPostAlerts, likedCommentAlerts: likedCommentAlerts, communityInviteAlerts: communityInviteAlerts, communityMessageAlerts: communityMessageAlerts)
-                            
-                            refresh.toggle()
-                        }
-                        
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                        
-                    }
-                    
-                    Spacer()
-                    
-                    Text("Notifications")
-                        .font(.headline)
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(Color.clear)
-                    
-                }
-                .padding(.horizontal)
-                
-                Divider()
-                    .frame(height: 1)
-                
 
                 if notificationSettings != nil {
                     ScrollView {
@@ -266,6 +232,8 @@ struct NotificationsSettingsView: View {
                 Spacer()
                 
             }
+            .navigationTitle("Notifications")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             self.checkNotificationSettings()
@@ -311,18 +279,14 @@ struct NotificationsSettingsView: View {
                 
             }
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.startLocation.y < 20 {
-                        self.swipeStarted = true
-                    }
-                }
-                .onEnded { _ in
-                    self.swipeStarted = false
-                    dismiss()
-                }
-        )
+        .onDisappear {
+            Task {
+                await UserService.updateUserNotificationSettings(user: user, followAlerts: followAlerts, likedPostAlerts: likedPostAlerts, commentedPostAlerts: commentedPostAlerts, likedCommentAlerts: likedCommentAlerts, communityInviteAlerts: communityInviteAlerts, communityMessageAlerts: communityMessageAlerts)
+                
+                refresh.toggle()
+            }
+            
+        }
     }
     
     private func checkNotificationSettings() {

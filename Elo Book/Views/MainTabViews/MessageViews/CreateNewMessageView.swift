@@ -34,7 +34,7 @@ struct CreateNewMessageView: View {
         NavigationStack {
             VStack {
                 // header
-                CreateNewMessageViewHeader(dismiss: dismiss)
+//                CreateNewMessageViewHeader(dismiss: dismiss)
                 
                 // bar that shows everyone that is being added to the thread
                 CreateNewMessageViewReceivingUsers(receivingUsers: $receivingUsers)
@@ -127,6 +127,8 @@ struct CreateNewMessageView: View {
                 )
                 .padding(10)
             }
+            .navigationTitle("New Message").foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+            .toolbarTitleDisplayMode(.inline)
         }
         .photosPicker(isPresented: $photosPickerPresented, selection: $selectedImages, maxSelectionCount: 4)
         .onChange(of: selectedImages) {

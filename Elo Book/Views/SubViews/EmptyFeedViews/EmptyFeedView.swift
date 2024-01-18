@@ -18,7 +18,11 @@ struct EmptyFeedView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(emptyUsers, id: \.id) { viewedUser in
-                            EmptyFeedUserCell(user: user, viewedUser: viewedUser)
+                            NavigationLink {
+                                AltUserProfileView(user: user, viewedUser: viewedUser)
+                            } label: {
+                                EmptyFeedUserCell(user: user, viewedUser: viewedUser)
+                            }
                                 
                         }
                     }

@@ -35,7 +35,7 @@ struct ContactAccountsDisplayer: View {
                     ForEach(accounts, id: \.id) { account in
                         HStack {
                             NavigationLink {
-                                AltUserProfileView(user: user, viewedUser: account).navigationBarBackButtonHidden()
+                                AltUserProfileView(user: user, viewedUser: account)
                             } label: {
                                 UserResultCell(user: account)
                             }

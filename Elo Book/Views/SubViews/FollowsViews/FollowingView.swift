@@ -32,26 +32,8 @@ struct FollowingView: View {
     var body: some View {
         NavigationStack {
             LazyVStack {
-                HStack {
-                    Spacer()
-                    Text("Following")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                    Spacer()
-                    
-                }
-                .padding(.horizontal)
                 
                 HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    Spacer()
                     
                     HStack {
                         Image(systemName: "magnifyingglass")
@@ -88,7 +70,7 @@ struct FollowingView: View {
                 ScrollView {
                     ForEach(filteredFollowers, id: \.id) { following in
                         NavigationLink {
-                            AltUserProfileView(user: user, viewedUser: following).navigationBarBackButtonHidden()
+                            AltUserProfileView(user: user, viewedUser: following)
                         } label: {
                             FollowsResultCell(user: user, viewedUser: following)
                         }
@@ -108,6 +90,8 @@ struct FollowingView: View {
                 
                 
             }
+            .navigationTitle("Following")
+            .toolbarTitleDisplayMode(.inline)
             .onAppear {
                 Task {
                     following = try await FetchService.fetchFollowingByUser(user: viewedUser)
@@ -117,17 +101,5 @@ struct FollowingView: View {
             Spacer()
             
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.startLocation.y < 20 {
-                        self.swipeStarted = true
-                    }
-                }
-                .onEnded { _ in
-                    self.swipeStarted = false
-                    dismiss()
-                }
-        )
     }
 }

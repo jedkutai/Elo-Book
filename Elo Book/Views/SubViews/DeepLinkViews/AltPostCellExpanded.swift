@@ -22,6 +22,8 @@ struct AltPostCellExpanded: View {
     @State private var posting = false
     @State private var loadingMorePosts = false
     @State private var swipeStarted = false
+    @State private var showMore = false
+    @State private var postDeleted = false
     @StateObject private var viewModel = UploadComment()
     @Environment(\.dismiss) private var dismiss
     
@@ -31,27 +33,9 @@ struct AltPostCellExpanded: View {
         NavigationStack {
             VStack {
                 ScrollView(.vertical, showsIndicators: false) {
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                        }
-                        
-                        if let events = events {
-                            EventsHorizontalScroll(user: $user, events: events)
-                        } else {
-                            Text("Invisible Invisible")
-                                .font(.title2)
-                                .foregroundColor(colorScheme == .dark ? Theme.buttonColor : Theme.buttonColorDarkMode)
-                        }
-                        
-                    }
-                    .padding(.leading)
                     
                     LazyVStack {
-                        PostCellExpandedHeader(user: $user, postUser: $postUser)
+                        PostCellExpandedHeader(user: $user, postUser: $postUser, showMore: $showMore, postDeleted: $postDeleted)
                         
                         PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         
@@ -111,6 +95,13 @@ struct AltPostCellExpanded: View {
                 
                 PostCellExpandedTextBox(user: $user, post: $post, likes: $likes, comments: $comments, posting: $posting, caption: $caption, viewModel: viewModel)
             }
+            .toolbar {
+                if let events = events {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        EventsHorizontalScroll(user: $user, events: events)
+                    }
+                }
+            }
             .onAppear {
                 Task {
                     if let eventIds = post.eventIds {
@@ -121,18 +112,18 @@ struct AltPostCellExpanded: View {
                     commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)
                 }
             }
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.startLocation.y < 20 {
-                            self.swipeStarted = true
-                        }
-                    }
-                    .onEnded { _ in
-                        self.swipeStarted = false
-                        dismiss()
-                    }
-            )
+//            .gesture(
+//                DragGesture()
+//                    .onChanged { value in
+//                        if value.startLocation.y < 20 {
+//                            self.swipeStarted = true
+//                        }
+//                    }
+//                    .onEnded { _ in
+//                        self.swipeStarted = false
+//                        dismiss()
+//                    }
+//            )
             
         }
     }

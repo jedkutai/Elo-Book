@@ -35,7 +35,7 @@ struct CommentCell: View {
                         VStack {
                             HStack {
                                 NavigationLink {
-                                    AltUserProfileView(user: user, viewedUser: commentUser).navigationBarBackButtonHidden()
+                                    AltUserProfileView(user: user, viewedUser: commentUser)
                                 } label: {
                                     HStack {
                                         SquareProfilePicture(user: commentUser, size: .xSmall)

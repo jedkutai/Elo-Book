@@ -10,11 +10,15 @@ import SwiftUI
 struct PostCellExpandedHeader: View {
     @Binding var user: User
     @Binding var postUser: User
+    @Binding var showMore: Bool
+    @Binding var postDeleted: Bool
+    @State private var showDeleteWarning = false
+    
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack {
             NavigationLink {
-                AltUserProfileView(user: user, viewedUser: postUser).navigationBarBackButtonHidden()
+                AltUserProfileView(user: user, viewedUser: postUser)
             } label: {
                 HStack {
                     SquareProfilePicture(user: postUser, size: .xSmall)

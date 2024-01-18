@@ -9,38 +9,38 @@ import SwiftUI
 
 struct MessageView: View {
     @Binding var user: User
-    @State private var threads: [Thread]?
+    @Binding var threads: [Thread]
+    @Binding var unreadMessageCount: Int
+    
     @State private var showCreateNewMessage = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
             VStack {
-                MessageViewHeader(user: $user, showCreateNewMessage: $showCreateNewMessage)
+                MessageViewHeader(user: $user, showCreateNewMessage: $showCreateNewMessage, unreadMessageCount: $unreadMessageCount)
                 
                 Divider()
                     .frame(height: 1)
                 
                 // Body
                 ScrollView {
-                    if let threads = threads {
-                        VStack {
-                            ForEach(threads, id: \.id) { thread in
-                                NavigationLink {
-                                    if let memberIds = thread.memberIds {
-                                        if memberIds.count >= 2 {
-                                            ThreadView(user: user, thread: thread).navigationBarBackButtonHidden()
-                                        }
+                    VStack {
+                        ForEach(threads, id: \.id) { thread in
+                            NavigationLink {
+                                if let memberIds = thread.memberIds {
+                                    if memberIds.count >= 2 {
+                                        ThreadView(user: user, thread: thread)
                                     }
-                                } label: {
-                                    MessageThreadCell(user: $user, thread: thread)
                                 }
-                                
-                                Divider()
-                                    .frame(height: 1)
+                            } label: {
+                                MessageThreadCell(user: $user, thread: thread)
                             }
+                            
+                            Divider()
+                                .frame(height: 1)
                         }
-                        .padding(.top, 5)
                     }
+                    .padding(.top, 5)
                     
                     
                 }
@@ -53,17 +53,18 @@ struct MessageView: View {
                 CreateNewMessageView(user: user)
             }
             .onAppear {
-                threads = []
                 refreshThreads()
             }
+            
         }
     }
     
     private func refreshThreads() {
-        threads = nil
         // refresh action, fetch threads and update user etc
+        threads = []
         Task {
             threads = try await FetchService.fetchMessageThreadsByUser(user: user)
+            unreadMessageCount = try await MessageService.unreadMessagesCount(user: user, threads: threads)
         }
     }
 }

@@ -38,7 +38,7 @@ struct PostCell: View {
                     
                     PostCellBody2(user: user, viewedUser: postUser, post: post)
                     
-                    PostCellFooter2(user: $user, postUser: postUser, post: $post, likes: $likes, comments: $comments, commentCount: $commentCount)
+                    PostCellFooter2(user: $user, postUser: postUser, post: $post, likes: $likes, comments: $comments, commentCount: $commentCount, postDeleted: $postDeleted, showMore: $showMore)
                 }
                 .padding(10)
                 .frame(width: UIScreen.main.bounds.width - 20)

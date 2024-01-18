@@ -11,7 +11,6 @@ struct EventChatRoomView: View {
     @State var user: User
     @State var event: Event
     @StateObject var eventChatManager: EventChatManager
-//    @State private var viewModel: UploadChat
     
     init(user: User, event: Event) { // need this to initialize messagesmanager
         self._user = State(initialValue: user)
@@ -22,31 +21,9 @@ struct EventChatRoomView: View {
     @State private var message = ""
     @State private var swipeStarted = false
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    Spacer()
-                    
-                    MiniEventCell(event: event)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(Color(.clear))
-                }
-                .padding(.horizontal)
-                
-                Divider()
-                    .frame(height: 1)
                 
                 ScrollViewReader { proxy in
                     ScrollView(.vertical, showsIndicators: false) {
@@ -106,19 +83,11 @@ struct EventChatRoomView: View {
                 .padding(10)
                 
             }
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.startLocation.y < 20 {
-                            self.swipeStarted = true
-                        }
-                    }
-                    .onEnded { _ in
-                        self.swipeStarted = false
-                        dismiss()
-                        
-                    }
-            )
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    MiniEventCell(event: event)
+                }
+            }
             .onSubmit {
                 if Checks.isValidCaption(message)  {
                     let captionToBeSent = message

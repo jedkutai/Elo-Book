@@ -24,41 +24,10 @@ struct SelectBadgesView: View {
     
     @State private var showEarnedBadges = true
     @State private var swipeStarted = false
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                        Task {
-                            
-                            try await UserService.updateDisplayedBadge(user: user, displayedBadge: selectedBadge)
-                            refresh.toggle()
-                        }
-                        
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                        
-                    }
-                    
-                    Spacer()
-                    
-                    Text("Badges")
-                        .font(.headline)
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                    
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(Color.clear)
-                    
-                }
-                .padding(.horizontal)
-                
                 
                 HStack {
                     Spacer()
@@ -263,6 +232,8 @@ struct SelectBadgesView: View {
                 }
                 .padding(.horizontal)
             }
+            .navigationTitle("Badges")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             if let displayedBadge = user.displayedBadge {
@@ -306,18 +277,6 @@ struct SelectBadgesView: View {
                 }
             }
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.startLocation.y < 20 {
-                        self.swipeStarted = true
-                    }
-                }
-                .onEnded { _ in
-                    self.swipeStarted = false
-                    dismiss()
-                }
-        )
     }
     
 }

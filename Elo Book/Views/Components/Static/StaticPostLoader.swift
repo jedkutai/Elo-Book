@@ -16,7 +16,8 @@ struct StaticPostLoader: View {
     var body: some View {
         if let postUser = postUser, let post = post {
             NavigationLink {
-                AltPostCellExpanded(user: user, postUser: postUser, post: post).navigationBarBackButtonHidden()
+//                AltPostCellExpanded(user: user, postUser: postUser, post: post).navigationBarBackButtonHidden()
+                AltPostCellExpanded(user: user, postUser: postUser, post: post)
             } label: {
                 StaticPostCell(user: user, postUser: postUser, post: post)
             }

@@ -26,32 +26,6 @@ struct SelectFavoriteSportsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                        Task {
-                            try await UserService.updateUserFavoriteSportsSettings(user: user, baseball: baseball, basketball: basketball, football: football, hockey: hockey, soccer: soccer)
-                            refresh.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    Spacer()
-                    
-                    Text("Favorite Sports")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(Color.clear) // invisible
-                }
-                .padding(.horizontal)
-                
-                Divider()
-                    .frame(height: 1)
                 
                 if favoriteSportsSettings != nil {
                     ScrollView {
@@ -181,6 +155,15 @@ struct SelectFavoriteSportsView: View {
                 
                 Spacer()
             }
+            .navigationTitle("Favorite Sports")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .onDisappear {
+            // update
+            Task {
+                try await UserService.updateUserFavoriteSportsSettings(user: user, baseball: baseball, basketball: basketball, football: football, hockey: hockey, soccer: soccer)
+                refresh.toggle()
+            }
         }
         .onAppear {
             Task {
@@ -219,17 +202,5 @@ struct SelectFavoriteSportsView: View {
             }
             
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.startLocation.y < 20 {
-                        self.swipeStarted = true
-                    }
-                }
-                .onEnded { _ in
-                    self.swipeStarted = false
-                    dismiss()
-                }
-        )
     }
 }

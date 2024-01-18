@@ -20,84 +20,42 @@ struct ThreadViewSingle: View {
     @State private var message = ""
     @State private var photosPickerPresented = false
     @State private var showMessageImages = true
-//    @State private var someUsers: [User] = []
-//    @State private var filteredUsers: [User] = []
+    @State private var doneLoadingMessages = false
     @State private var selectedImages: [PhotosPickerItem] = []
     @StateObject private var viewModel = UploadMessage()
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack {
-            // header (dismiss button, user icon with their name below it -> link to profile, invisible icon for centering
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
-                
-                Spacer()
-                
-                VStack {
-                    SquareProfilePicture(user: threadUser, size: .shmedium)
+            
+            if doneLoadingMessages {
+                ScrollViewReader { proxy in
+                    ScrollView(.vertical, showsIndicators: false) {
+                        ForEach(messagesManager.messages, id: \.id) { message in
+                            if let messageInfo = messagesManager.messagesInfo[message.id] {
+                                if message.userId == user.id {
+                                    MessageDisplayer(user: user, messageUser: user, message: message, messageInfo: messageInfo, isGroupMessage: false)
+                                } else {
+                                    MessageDisplayer(user: user, messageUser: threadUser, message: message, messageInfo: messageInfo, isGroupMessage: false)
+                                }
+                            }
+                        }
+                    }
+                    .onAppear(perform: {
+                        proxy.scrollTo(messagesManager.lastMessageId, anchor: .bottom)
+                    })
+                    .onChange(of: messagesManager.lastMessageId, { oldId, newId in
+                        withAnimation {
+                            proxy.scrollTo(newId, anchor: .bottom)
+                        }
+                    })
+                    .scrollDismissesKeyboard(.immediately)
                     
-                    NavigationLink {
-                        AltUserProfileView(user: user, viewedUser: threadUser).navigationBarBackButtonHidden()
-                    } label: {
-                        HStack {
-                            if let fullname = threadUser.fullname {
-                                Text(fullname)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                            }
-                            
-                            if let username = threadUser.username {
-                                Text(username)
-                                    .foregroundStyle(Color(.systemGray))
-                            }
-                            
-                            if let displayedBadge = threadUser.displayedBadge {
-                                BadgeDiplayer(badge: displayedBadge)
-                            }
-                            
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(Color(.lightGray))
-                        }
-                    }
                 }
-                
+            } else {
                 Spacer()
-                
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(Color(.clear))
-            }
-            
-            Divider()
-                .frame(height: 1)
-            
-            ScrollViewReader { proxy in
-                ScrollView(.vertical, showsIndicators: false) {
-                    ForEach(messagesManager.messages, id: \.id) { message in
-                        if let messageInfo = messagesManager.messagesInfo[message.id] {
-                            if message.userId == user.id {
-                                MessageDisplayer(user: user, messageUser: user, message: message, messageInfo: messageInfo, isGroupMessage: false)
-                            } else {
-                                MessageDisplayer(user: user, messageUser: threadUser, message: message, messageInfo: messageInfo, isGroupMessage: false)
-                            }
-                        }
-                    }
-                }
-                .onAppear(perform: {
-                    proxy.scrollTo(messagesManager.lastMessageId, anchor: .bottom)
-                })
-                .onChange(of: messagesManager.lastMessageId, { oldId, newId in
-                    withAnimation {
-                        proxy.scrollTo(newId, anchor: .bottom)
-                    }
-                })
-                .scrollDismissesKeyboard(.immediately)
-                
+                ProgressView()
+                Spacer()
             }
             
             // keyboard
@@ -172,7 +130,14 @@ struct ThreadViewSingle: View {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color(.gray).opacity(0.3), lineWidth: 1)
             )
-            .padding(10)
+            .padding(.bottom, 10)
+            .padding(.horizontal, 10)
+            
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                doneLoadingMessages = true
+            }
         }
         .photosPicker(isPresented: $photosPickerPresented, selection: $selectedImages, maxSelectionCount: 4)
         .onChange(of: selectedImages) {
@@ -195,6 +160,33 @@ struct ThreadViewSingle: View {
                         try await viewModel.uploadMessageCaption(user: user, receivingUsers: [threadUser], caption: captionToBeSent)
                     }
                     
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    AltUserProfileView(user: user, viewedUser: threadUser)
+                } label: {
+                    HStack {
+                        SquareProfilePicture(user: threadUser, size: .small)
+                        
+                        if let fullname = threadUser.fullname {
+                            Text(fullname)
+                                .fontWeight(.bold)
+                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                        }
+                        
+                        if let username = threadUser.username {
+                            Text(username)
+                                .foregroundStyle(Color(.systemGray))
+                        }
+                        
+                        if let displayedBadge = threadUser.displayedBadge {
+                            BadgeDiplayer(badge: displayedBadge)
+                        }
+                        
+                    }
                 }
             }
         }

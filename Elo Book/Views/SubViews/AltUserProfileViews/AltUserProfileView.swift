@@ -16,61 +16,17 @@ struct AltUserProfileView: View {
     @State private var loadingMorePosts = false
     @State private var swipeStarted = false
     @State private var shareProfile = false
-    @State private var shareLink = ""
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
             VStack {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack {
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "chevron.left")
-                                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                            }
-                            Spacer()
-                            
-                            if let username = viewedUser.username {
-                                Text("\(username)")
-                                    .foregroundColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    .fontWeight(.bold)
-                            }
-                            
-                            if let badge = viewedUser.displayedBadge {
-                                BadgeDiplayer(badge: badge)
-                            }
-                            
-                            Spacer()
-                            
-//                            if !shareLink.isEmpty {
-//                                ShareLink(item: shareLink) {
-//                                    Image(systemName: "square.and.arrow.up")
-//                                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-//                                }
-//                            } else {
-//                                Button {
-//                                    shareLink = DeepLink.createUserProfileLink(user: viewedUser)
-//                                } label: {
-//                                    Image(systemName: "square.and.arrow.up")
-//                                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-//                                }
-//                            }
-                            Button {
-                                shareProfile.toggle()
-                            } label: {
-                                Image(systemName: "square.and.arrow.up")
-                                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                            }
-                            
-                            
-                        }
-                        .padding(.horizontal)
                         
-                        AltProfileHeader(user: $user, viewedUser: $viewedUser)
+                        AltProfileHeader(user: $user, viewedUser: $viewedUser, shareProfile: $shareProfile)
                         
+                        Divider()
+                            .frame(height: 1)
                         
                         ForEach($userProfilePosts, id: \.id) { (post) in
                             PostCellWithStaticHeader(user: $user, post: post, postUser: viewedUser)
@@ -113,7 +69,6 @@ struct AltUserProfileView: View {
                     }
                 }
                 .onAppear {
-                    shareLink = DeepLink.createUserProfileLink(user: viewedUser)
                     Task {
                         userProfilePosts = try await FetchService.fetchUserProfilePostsByUserId(uid: viewedUser.id)
                     }
@@ -122,18 +77,23 @@ struct AltUserProfileView: View {
                 
                 Spacer()
             }
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        if value.startLocation.y < 20 {
-                            self.swipeStarted = true
-                        }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    if let username = viewedUser.username {
+                        Text("\(username)")
+                            .foregroundColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            .fontWeight(.bold)
                     }
-                    .onEnded { _ in
-                        self.swipeStarted = false
-                        dismiss()
+                    
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    
+                    if let badge = viewedUser.displayedBadge {
+                        BadgeDiplayer(badge: badge)
                     }
-            )
+                }
+            }
             .fullScreenCover(isPresented: $shareProfile) {
                 ShareProfileView(user: user, userToShare: viewedUser)
             }

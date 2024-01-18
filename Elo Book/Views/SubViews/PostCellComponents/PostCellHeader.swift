@@ -18,7 +18,7 @@ struct PostCellHeader: View {
     var body: some View {
         HStack {
             NavigationLink {
-                AltUserProfileView(user: user, viewedUser: postUser).navigationBarBackButtonHidden()
+                AltUserProfileView(user: user, viewedUser: postUser)
             } label: {
                 HStack {
                     SquareProfilePicture(user: postUser, size: .xSmall)

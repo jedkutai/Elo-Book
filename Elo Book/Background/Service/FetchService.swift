@@ -12,6 +12,13 @@ import Contacts
 import Combine
 
 struct FetchService {
+    
+    static func fetchThreadById(id: String) async throws -> Thread {
+        let snapshot = try await Firestore.firestore().collection("threads").document(id).getDocument()
+        return try snapshot.data(as: Thread.self)
+    }
+    
+    
     static func fetchAccountsByContact(contact: CNContact) async throws -> [User] {
         var users: [User] = []
         

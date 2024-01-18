@@ -14,6 +14,8 @@ struct PostCellFooter2: View {
     @Binding var likes: [PostLike]
     @Binding var comments: [Comment]
     @Binding var commentCount: Int
+    @Binding var postDeleted: Bool
+    @Binding var showMore: Bool
     
     @State private var shareLink = ""
     @State private var likeCoolDown = false
@@ -46,18 +48,9 @@ struct PostCellFooter2: View {
                     if likes.contains(where: { $0.userId == user.id }) { // if post is liked
                         Image(systemName: "square.stack.3d.up.fill")
                             .foregroundColor(Theme.buttonColorInteracted)
-//                        Image("money stack band filled")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(height: 20)
                     } else {
                         Image(systemName: "square.stack.3d.up")
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-//                        Image("money stack band")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(height: 20)
-//                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                         
                     }
                     
@@ -71,8 +64,8 @@ struct PostCellFooter2: View {
             Spacer()
             
             NavigationLink {
-                ExpandedPostCellWithStaticHeader(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount)
-                    .navigationBarBackButtonHidden()
+                ExpandedPostCell(user: user, postUser: postUser, post: post, comments: $comments, likes: $likes, commentCount: $commentCount, postDeleted: $postDeleted, showMore: $showMore)
+                
             } label: {
                 HStack {
                     Image(systemName: "bubble")
@@ -107,8 +100,5 @@ struct PostCellFooter2: View {
         .fullScreenCover(isPresented: $sharePost) {
             SharePostView(user: user, postUser: postUser, postToShare: post)
         }
-//        .onAppear {
-//            shareLink = DeepLink.createPostLink(post: post)
-//        }
     }
 }

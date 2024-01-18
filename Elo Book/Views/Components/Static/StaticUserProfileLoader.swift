@@ -15,7 +15,7 @@ struct StaticUserProfileLoader: View {
     var body: some View {
         if let viewedUser = viewedUser {
             NavigationLink {
-                AltUserProfileView(user: user, viewedUser: viewedUser).navigationBarBackButtonHidden()
+                AltUserProfileView(user: user, viewedUser: viewedUser)
             } label: {
                 StaticUserProfile(user: user, userToShare: viewedUser)
             }

@@ -93,7 +93,7 @@ struct SearchView2: View {
                         if !searchText.isEmpty {
                             ForEach(Array(filteredUsers.prefix(5)), id: \.id) { searchUser in
                                 NavigationLink {
-                                    AltUserProfileView(user: user, viewedUser: searchUser).navigationBarBackButtonHidden()
+                                    AltUserProfileView(user: user, viewedUser: searchUser)
                                 } label: {
                                     VStack {
                                         UserResultCell(user: searchUser)
@@ -106,7 +106,7 @@ struct SearchView2: View {
                         
                         ForEach(filteredDiscoverEvents, id: \.id) { event in
                             NavigationLink {
-                                EventView(user: user, event: event).navigationBarBackButtonHidden()
+                                EventView(user: user, event: event)
                             } label: {
                                 VStack {
                                     EventCell(event: event)

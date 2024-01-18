@@ -60,7 +60,7 @@ struct ProfileHeader: View {
                                 
                                 
                                 NavigationLink {
-                                    FollowingView(user: user, viewedUser: user).navigationBarBackButtonHidden()
+                                    FollowingView(user: user, viewedUser: user)
                                 } label: {
                                     HStack {
                                         Text("Following: \(followingCount ?? 0)")
@@ -72,7 +72,7 @@ struct ProfileHeader: View {
                                 }
                                 
                                 NavigationLink {
-                                    FollowersView(user: user, viewedUser: user).navigationBarBackButtonHidden()
+                                    FollowersView(user: user, viewedUser: user)
                                 } label: {
                                     HStack {
                                         Text("Followers: \(followersCount ?? 0)")

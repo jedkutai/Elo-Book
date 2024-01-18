@@ -34,25 +34,6 @@ struct FollowersView: View {
         NavigationStack {
             LazyVStack {
                 HStack {
-                    Spacer()
-                    Text("Followers")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                    Spacer()
-                    
-                }
-                .padding(.horizontal)
-                
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    Spacer()
                     
                     HStack {
                         Image(systemName: "magnifyingglass")
@@ -89,7 +70,7 @@ struct FollowersView: View {
                 ScrollView {
                     ForEach(filteredFollowers, id: \.id) { follower in
                         NavigationLink {
-                            AltUserProfileView(user: user, viewedUser: follower).navigationBarBackButtonHidden()
+                            AltUserProfileView(user: user, viewedUser: follower)
                         } label: {
                             FollowsResultCell(user: user, viewedUser: follower)
                         }
@@ -109,6 +90,8 @@ struct FollowersView: View {
                 
                 
             }
+            .navigationTitle("Followers")
+            .toolbarTitleDisplayMode(.inline)
             .onAppear {
                 Task {
                     followers = try await FetchService.fetchFollowersByUser(user: viewedUser)
@@ -118,18 +101,6 @@ struct FollowersView: View {
             Spacer()
             
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    if value.startLocation.y < 20 {
-                        self.swipeStarted = true
-                    }
-                }
-                .onEnded { _ in
-                    self.swipeStarted = false
-                    dismiss()
-                }
-        )
     }
 }
 
