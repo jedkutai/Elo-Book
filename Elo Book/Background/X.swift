@@ -13,8 +13,7 @@ import CoreLocation
 class X: ObservableObject {
     
     // login stuff
-    @Published var email: String = UserDefaults.standard.string(forKey: "email") ?? ""
-    @Published var password: String = UserDefaults.standard.string(forKey: "password") ?? ""
+    @Published var uid: String = UserDefaults.standard.string(forKey: "uid") ?? ""
     
     // first open stuff
     @Published var firstOpenUserFeed: Bool = true

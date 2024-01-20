@@ -21,6 +21,7 @@ struct EventChatRoomView: View {
     @State private var message = ""
     @State private var swipeStarted = false
     @Environment(\.colorScheme) var colorScheme
+    @Namespace var namespace
     var body: some View {
         NavigationStack {
             VStack {
@@ -86,6 +87,7 @@ struct EventChatRoomView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     MiniEventCell(event: event)
+                        .matchedGeometryEffect(id: "MiniEventCell", in: namespace)
                 }
             }
             .onSubmit {

@@ -19,7 +19,7 @@ struct Comment: Identifiable, Hashable, Codable {
     
     var score: Int = 0
     var timestamp: Timestamp = Timestamp()
-    
+    var notificationSeen: Bool?
 }
 
 extension Comment {

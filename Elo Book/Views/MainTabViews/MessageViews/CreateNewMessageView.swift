@@ -21,8 +21,8 @@ struct CreateNewMessageView: View {
     @State private var showMessageImages = true
     
     @State private var receivingUsers: [User] = [] // don't make optional
-    @State private var someUsers: [User] = []
-    @State private var filteredUsers: [User] = []
+
+    
     @State private var selectedImages: [PhotosPickerItem] = []
     
     @StateObject private var viewModel = UploadMessage()
@@ -34,7 +34,6 @@ struct CreateNewMessageView: View {
         NavigationStack {
             VStack {
                 // header
-//                CreateNewMessageViewHeader(dismiss: dismiss)
                 
                 // bar that shows everyone that is being added to the thread
                 CreateNewMessageViewReceivingUsers(receivingUsers: $receivingUsers)
@@ -43,7 +42,7 @@ struct CreateNewMessageView: View {
                 CreateNewMessageViewSearchBar(searchText: $searchText)
                 
                 // search results
-                CreateNewMessageViewSearchResults(user: $user, filteredUsers: $filteredUsers, receivingUsers: $receivingUsers, searchText: $searchText)
+                CreateNewMessageViewSearchResults(user: $user, receivingUsers: $receivingUsers, searchText: $searchText)
                 
                 Spacer()
                 
@@ -136,28 +135,6 @@ struct CreateNewMessageView: View {
             viewModel.messageImages = []
             Task {
                 await viewModel.loadImages(fromItem: selectedImages)
-            }
-        }
-        .onChange(of: searchText) {
-            if searchText.count < 1 {
-                searchDatabaseText = ""
-            } else if searchText.count >= 1 {
-                searchDatabaseText = String(searchText.prefix(1))
-            }
-            
-            filteredUsers = SearchService.searchLocallyForUsernames(searchText: searchText, users: someUsers, limit: 10)
-        }
-        .onChange(of: searchDatabaseText) {
-            if !searchDatabaseText.isEmpty {
-                if Checks.isValidSearch(searchDatabaseText) {
-                    Task {
-                        someUsers = try await SearchService.searchDatabaseForUsernames(searchTerm: searchDatabaseText)
-                    }
-                } else {
-                    someUsers = []
-                }
-            } else {
-                someUsers = []
             }
         }
         

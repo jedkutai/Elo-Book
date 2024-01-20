@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct FollowNotificationsView: View {
+    @Binding var user: User
+    
+    private let viewWidth = UIScreen.main.bounds.width * 0.9
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            LazyVStack {
+                Text("Follow Notifications")
+                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                
+                Text("Swipe ->")
+                    .foregroundStyle(Color(.systemGray))
+                    .font(.footnote)
+                
+            }
+            .frame(width: viewWidth)
+            
+        }
     }
-}
-
-#Preview {
-    FollowNotificationsView()
 }

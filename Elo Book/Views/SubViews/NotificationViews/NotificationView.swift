@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct NotificationView: View {
+    @Binding var user: User
+    
+    private let screenWidth = UIScreen.main.bounds.width
+    private let screenHeight = UIScreen.main.bounds.height
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            FollowNotificationsView(user: $user)
+                        }
+                        .frame(width: screenWidth)
+                        .id(0)
+                        
+                        
+                        ScrollView(.vertical, showsIndicators: false) {
+                            PostNotificationsView(user: $user)
+                        }
+                        .frame(width: screenWidth)
+                        .id(1)
+                    }
+                    .scrollTargetLayout()
+                }
+                .scrollTargetBehavior(.viewAligned)
+                
+                Spacer()
+            }
+        }
     }
 }
 
-#Preview {
-    NotificationView()
-}

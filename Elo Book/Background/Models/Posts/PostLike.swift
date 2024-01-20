@@ -16,5 +16,5 @@ struct PostLike: Identifiable, Hashable, Codable {
     let userId: String
     
     var timestamp: Timestamp = Timestamp()
-    
+    var notificationSeen: Bool?
 }

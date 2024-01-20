@@ -9,9 +9,27 @@ import SwiftUI
 
 struct CreateNewMessageViewSearchResults: View {
     @Binding var user: User
-    @Binding var filteredUsers: [User]
     @Binding var receivingUsers: [User] 
     @Binding var searchText: String
+    
+    @State private var followers: [User] = []
+    var filteredUsers: [User] {
+        guard !searchText.isEmpty else { return [] }
+        return followers.filter { searchUser in
+            if user.id == searchUser.id {
+                return false
+            }
+            
+            if receivingUsers.contains(where: { $0.id == searchUser.id }) {
+                return false
+            }
+            
+            if let username = searchUser.username {
+                return username.localizedCaseInsensitiveContains(searchText)
+            }
+            return false
+        }
+    }
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -60,6 +78,11 @@ struct CreateNewMessageViewSearchResults: View {
             }
             .scrollDismissesKeyboard(.interactively)
             .padding(.horizontal, 10)
+        }
+        .onAppear {
+            Task {
+                followers = try await FetchService.fetchFollowersByUser(user: user)
+            }
         }
     }
 }

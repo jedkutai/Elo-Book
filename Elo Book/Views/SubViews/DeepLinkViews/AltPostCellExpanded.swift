@@ -39,7 +39,7 @@ struct AltPostCellExpanded: View {
                         
                         PostCellExpandedBody2(user: $user, viewUser: $postUser, post: $post)
                         
-                        PostCellExpandedFooter(user: $user, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
+                        PostCellExpandedFooter(user: $user, postUser: $postUser, post: $post, comments: $comments, likes: $likes, commentCount: $commentCount)
                     }
                     .padding(10)
                     .frame(width: UIScreen.main.bounds.width - 20)

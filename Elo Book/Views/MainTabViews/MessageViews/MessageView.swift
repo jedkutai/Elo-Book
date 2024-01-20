@@ -36,8 +36,7 @@ struct MessageView: View {
                                 MessageThreadCell(user: $user, thread: thread)
                             }
                             
-                            Divider()
-                                .frame(height: 1)
+                            
                         }
                     }
                     .padding(.top, 5)

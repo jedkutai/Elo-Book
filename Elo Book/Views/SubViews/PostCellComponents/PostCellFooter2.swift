@@ -19,7 +19,7 @@ struct PostCellFooter2: View {
     
     @State private var shareLink = ""
     @State private var likeCoolDown = false
-    @State private var sharePost = false
+//    @State private var sharePost = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack(spacing: 8) {
@@ -79,8 +79,8 @@ struct PostCellFooter2: View {
             Spacer()
 
             
-            Button {
-                sharePost.toggle()
+            NavigationLink {
+                SharePostView(user: user, postUser: postUser, postToShare: post)
             } label: {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
@@ -97,8 +97,8 @@ struct PostCellFooter2: View {
         }
         .padding(.top, 5)
         .padding(.horizontal, 8.0)
-        .fullScreenCover(isPresented: $sharePost) {
-            SharePostView(user: user, postUser: postUser, postToShare: post)
-        }
+//        .fullScreenCover(isPresented: $sharePost) {
+//            SharePostView(user: user, postUser: postUser, postToShare: post)
+//        }
     }
 }

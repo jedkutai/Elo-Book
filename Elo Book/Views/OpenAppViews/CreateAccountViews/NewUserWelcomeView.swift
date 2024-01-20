@@ -14,7 +14,10 @@ struct NewUserWelcomeView: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         VStack {
-            
+            Text("Gambling problem? Call 1-800-GAMBLER.")
+                .font(.footnote)
+                .foregroundStyle(Color(.systemGray))
+                .multilineTextAlignment(.center)
             Spacer()
             if phase == 0 {
                 ProgressView()
@@ -67,6 +70,7 @@ struct NewUserWelcomeView: View {
             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
             .font(.largeTitle)
             .fontWeight(.bold)
+            .multilineTextAlignment(.center)
     }
     
     var phase2: some View {
@@ -74,6 +78,7 @@ struct NewUserWelcomeView: View {
             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
             .font(.largeTitle)
             .fontWeight(.bold)
+            .multilineTextAlignment(.center)
     }
     
     var phase3: some View {
@@ -81,6 +86,7 @@ struct NewUserWelcomeView: View {
             .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
             .font(.largeTitle)
             .fontWeight(.bold)
+            .multilineTextAlignment(.center)
     }
     
 }

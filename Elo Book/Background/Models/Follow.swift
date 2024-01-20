@@ -18,5 +18,5 @@ struct Follow: Identifiable, Hashable, Codable {
     
     var timestamp: Timestamp = Timestamp()
     
-    
+    var notificationSeen: Bool?
 }

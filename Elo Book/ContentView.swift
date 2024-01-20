@@ -11,14 +11,13 @@ import SwiftData
 struct ContentView: View {
     @EnvironmentObject var x: X
     
-    @State private var userId = ""
     @State private var user: User?
     
     @State private var loggedIn = false
     @State private var failedLogin = false
     
     var body: some View {
-        if x.email.isEmpty || failedLogin {
+        if x.uid.isEmpty || failedLogin {
             FirstOpenView()
         }
         else if let loggedInUser = user {
@@ -28,10 +27,18 @@ struct ContentView: View {
             LogoView()
                 .onAppear {
                     Task {
-                        userId = try await AuthService.login(withEmail: x.email, password: x.password)
-                        if !userId.hasPrefix("Error:") {
-                            user = try await AuthService.fetchUserById(withUid: userId)
-                            loggedIn = true
+                        if !x.uid.isEmpty {
+                            user = try await AuthService.fetchUserById(withUid: x.uid)
+                            if let user = user {
+                                if user.id == x.uid {
+                                    loggedIn = true
+                                } else {
+                                    failedLogin = true
+                                }
+                            } else {
+                                failedLogin = true
+                            }
+                            
                         } else {
                             failedLogin = true
                         }

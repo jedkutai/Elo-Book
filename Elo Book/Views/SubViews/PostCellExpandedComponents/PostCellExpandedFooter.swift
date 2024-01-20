@@ -9,12 +9,13 @@ import SwiftUI
 
 struct PostCellExpandedFooter: View {
     @Binding var user: User
+    @Binding var postUser: User
     @Binding var post: Post
     @Binding var comments: [Comment]
     @Binding var likes: [PostLike]
     @Binding var commentCount: Int
     @Environment(\.colorScheme) var colorScheme
-    @State private var shareLink = ""
+//    @State private var shareLink = ""
     @State private var likeCoolDown = false
     var body: some View {
         HStack(spacing: 8) {
@@ -77,18 +78,24 @@ struct PostCellExpandedFooter: View {
             }
             Spacer()
             
-            if !shareLink.isEmpty {
-                ShareLink(item: shareLink) {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
-            } else {
-                Button {
-                    shareLink = DeepLink.createPostLink(post: post)
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
+//            if !shareLink.isEmpty {
+//                ShareLink(item: shareLink) {
+//                    Image(systemName: "square.and.arrow.up")
+//                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                }
+//            } else {
+//                Button {
+//                    shareLink = DeepLink.createPostLink(post: post)
+//                } label: {
+//                    Image(systemName: "square.and.arrow.up")
+//                        .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                }
+//            }
+            NavigationLink {
+                SharePostView(user: user, postUser: postUser, postToShare: post)
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
             }
             
             Spacer()
@@ -101,8 +108,8 @@ struct PostCellExpandedFooter: View {
         }
         .padding(.top, 5)
         .padding(.horizontal, 8.0)
-        .onAppear {
-            shareLink = DeepLink.createPostLink(post: post)
-        }
+//        .onAppear {
+//            shareLink = DeepLink.createPostLink(post: post)
+//        }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct AltProfileHeader: View {
     @Binding var user: User
     @Binding var viewedUser: User
-    @Binding var shareProfile: Bool
+//    @Binding var shareProfile: Bool
     @State private var followingCount: Int?
     @State private var followersCount: Int?
     @State private var postCount: Int?
@@ -91,8 +91,14 @@ struct AltProfileHeader: View {
                     
                     Spacer()
                     
-                    Button {
-                        shareProfile.toggle()
+//                    Button {
+//                        shareProfile.toggle()
+//                    } label: {
+//                        Image(systemName: "square.and.arrow.up")
+//                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                    }
+                    NavigationLink {
+                        ShareProfileView(user: user, userToShare: viewedUser)
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)

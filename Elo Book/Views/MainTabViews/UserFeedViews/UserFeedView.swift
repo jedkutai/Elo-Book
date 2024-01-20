@@ -20,6 +20,7 @@ struct UserFeedView: View {
     @State private var elementsLoaded: Bool = false
     
     @State private var postCreated = false
+    @Namespace var namespace
     @Environment(\.colorScheme) var colorScheme
     private let emptyPadding = UIScreen.main.bounds.height / 4
     
@@ -33,13 +34,39 @@ struct UserFeedView: View {
                             .scaledToFit()
                             .frame(height: 30)
                         
+                        NavigationLink {
+//                            Text("Under Construction")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            NotificationView(user: $user)
+                        } label: {
+                            
+                            VStack {
+                                Spacer()
+                                
+                                Image(systemName: "bell.fill")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                
+                                // if has notifications
+//                                Image(systemName: "bell.fill")
+//                                    .foregroundStyle(Color(.systemOrange))
+                            }
+                            .frame(height: 30)
+                        }
+                        
                         Spacer()
                         
                         NavigationLink {
                             AddContactsView(user: $user).navigationBarBackButtonHidden()
                         } label: {
-                            Image(systemName: "person.badge.plus")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            VStack {
+                                Spacer()
+                                
+                                Image(systemName: "person.badge.plus")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                            }
+                            .frame(height: 30)
+                            
+                            
                         }
                     }
                     .padding(.horizontal)
@@ -75,7 +102,7 @@ struct UserFeedView: View {
                                     }
                                 }
                                 Text("Appear")
-                                    .foregroundStyle(colorScheme == .dark ? Theme.textColor : Theme.textColorDarkMode)
+                                    .foregroundStyle(Color(.clear))
                                 
                             }
                             
@@ -99,6 +126,7 @@ struct UserFeedView: View {
                         VStack {
                             Spacer()
                             ProgressView("Degenerating...")
+                                .matchedGeometryEffect(id: "Degenerating", in: namespace)
                             Spacer()
                         }
                     }
@@ -142,12 +170,6 @@ struct UserFeedView: View {
                 localRefresh()
                 x.firstOpenUserFeed.toggle()
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                if userFeedPosts.isEmpty {
-                    showSuggestedUsers = true
-                }
-                self.elementsLoaded = true // Set to true when elements are loaded
-            }
             
         }
         .fullScreenCover(isPresented: $x.loadedDeepLink) {
@@ -182,6 +204,10 @@ struct UserFeedView: View {
         Task {
             user = try await FetchService.fetchUserById(withUid: user.id)
             userFeedPosts = try await FetchService.fetchFeedPostsByUser(user: user)
+            if userFeedPosts.isEmpty {
+                showSuggestedUsers = true
+            }
+            self.elementsLoaded = true // Set to true when elements are loaded
         }
     }
     

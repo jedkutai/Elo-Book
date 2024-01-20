@@ -15,7 +15,7 @@ struct AltUserProfileView: View {
     
     @State private var loadingMorePosts = false
     @State private var swipeStarted = false
-    @State private var shareProfile = false
+//    @State private var shareProfile = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
@@ -23,7 +23,7 @@ struct AltUserProfileView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack {
                         
-                        AltProfileHeader(user: $user, viewedUser: $viewedUser, shareProfile: $shareProfile)
+                        AltProfileHeader(user: $user, viewedUser: $viewedUser)
                         
                         Divider()
                             .frame(height: 1)
@@ -94,9 +94,9 @@ struct AltUserProfileView: View {
                     }
                 }
             }
-            .fullScreenCover(isPresented: $shareProfile) {
-                ShareProfileView(user: user, userToShare: viewedUser)
-            }
+//            .fullScreenCover(isPresented: $shareProfile) {
+//                ShareProfileView(user: user, userToShare: viewedUser)
+//            }
             
         }
         .padding(.vertical, 1)

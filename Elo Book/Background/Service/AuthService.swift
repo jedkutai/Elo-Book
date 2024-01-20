@@ -33,13 +33,12 @@ struct AuthService {
         let dateOfBirthConverted = Timestamp(date: dateOfBirth)
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
-            await uploadUserData(uid: result.user.uid, email: email, dateOfBirth: dateOfBirthConverted)
+            let uid = result.user.uid
+            await uploadUserData(uid: uid, email: email, dateOfBirth: dateOfBirthConverted)
             
-            UserDefaults.standard.set(email, forKey: "email")
-            UserDefaults.standard.set(password, forKey: "password")
+            UserDefaults.standard.set(uid, forKey: "uid")
             
-            
-            return result.user.uid
+            return uid
         } catch {
             return "\(error.localizedDescription)"
         }
@@ -50,9 +49,11 @@ struct AuthService {
     static func login(withEmail email: String, password: String) async throws -> String {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            UserDefaults.standard.set(email, forKey: "email")
-            UserDefaults.standard.set(password, forKey: "password")
-            return result.user.uid
+            let uid = result.user.uid
+            
+            UserDefaults.standard.set(uid, forKey: "uid")
+            
+            return uid
         } catch {
             print("DEBUG: \(error.localizedDescription)")
             return "Error: \(error.localizedDescription)"

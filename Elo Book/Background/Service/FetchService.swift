@@ -119,6 +119,7 @@ struct FetchService {
             
             return messages[0]
         } catch {
+            print("\(error.localizedDescription)")
             throw error
         }
     }

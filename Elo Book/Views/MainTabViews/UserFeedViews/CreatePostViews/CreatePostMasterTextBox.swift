@@ -45,6 +45,8 @@ struct CreatePostMasterTextBox: View {
                 } else {
                     ProgressWheel(characterCount: caption.count, maxCharacterCount: 1000)
                         .padding(.trailing)
+                    
+                    
                 }
                 
             

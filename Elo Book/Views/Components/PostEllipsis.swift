@@ -30,7 +30,7 @@ struct PostEllipsis: View {
                 }
             } else {
                 NavigationLink {
-                    Text("Under Construction")
+                    ReportPostView(user: user, postUser: postUser, post: post)
                 } label: {
                     Label("Report", systemImage: "exclamationmark.triangle.fill")
                         .font(.footnote)
