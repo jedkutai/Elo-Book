@@ -22,14 +22,9 @@ struct CommentService {
         let updatedData = try Firestore.Encoder().encode(post)
         try await docRef.setData(updatedData, merge: true)
         
-//        let query = Firestore.firestore().collection("posts").document(comment.postId).collection("commentLikes")
-//        
-//        let snapshot = try await query.getDocuments()
-//        
-//        for document in snapshot.documents {
-//            let docRef = Firestore.firestore().collection("commentLikes").document(document.documentID)
-//            try await docRef.delete()
-//        }
+        let commentOnPostRef = Firestore.firestore().collection("users").document(post.userId).collection("commentOnPostAlerts").document(comment.id)
+        try await commentOnPostRef.delete()
+        
         
     }
     

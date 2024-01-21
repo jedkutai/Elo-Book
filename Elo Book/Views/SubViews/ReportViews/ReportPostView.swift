@@ -46,7 +46,7 @@ struct ReportPostView: View {
                 .scrollDismissesKeyboard(.immediately)
                 
                 
-                TextField("Message", text: $additionalComments, axis: .vertical)
+                TextField("Additional Comments", text: $additionalComments, axis: .vertical)
                     .padding(10)
                     .background(
                         RoundedRectangle(cornerRadius: 15)

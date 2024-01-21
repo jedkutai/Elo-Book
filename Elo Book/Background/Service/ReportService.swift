@@ -24,4 +24,19 @@ struct ReportService {
         try await UserService.unFollowUser(userId: postUser.id, userToUnfollow: user.id)
         
     }
+    
+    static func reportComment(user: User, commentUser: User, comment: Comment, harassment: Bool, violence: Bool, scam: Bool, impersonation: Bool, slurs: Bool, other: Bool, additionalComments: String) async throws {
+        
+        let reportRef = Firestore.firestore().collection("commentReports").document()
+        
+        let report = ReportComment(id: reportRef.documentID, commentId: comment.id, commenterId: commentUser.id, reporterId: user.id, harassment: harassment, violence: violence, scam: scam, slurs: slurs, impersonation: impersonation, other: other, additionalComments: additionalComments)
+        
+        guard let encodedReport = try? Firestore.Encoder().encode(report) else { return }
+        
+        try await reportRef.setData(encodedReport)
+        
+        try await UserService.unFollowUser(userId: user.id, userToUnfollow: commentUser.id)
+        try await UserService.unFollowUser(userId: commentUser.id, userToUnfollow: user.id)
+        
+    }
 }

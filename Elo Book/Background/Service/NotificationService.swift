@@ -13,6 +13,26 @@ import FirebaseMessaging
 
 struct NotificationService {
     
+    static func followAlertSeen(user: User, follow: Follow) async throws {
+        let docRef = Firestore.firestore().collection("follows").document(follow.id)
+        let snapshot = try await docRef.getDocument()
+        var freshFollow = try snapshot.data(as: Follow.self)
+        freshFollow.notificationSeen = true
+        let updatedData = try Firestore.Encoder().encode(freshFollow)
+        try await docRef.setData(updatedData, merge: true)
+    }
+    
+    static func commentOnPostAlertSeen(user: User, commentAlert: CommentOnPostAlert) async throws {
+        let commentOnPostRef = Firestore.firestore().collection("users").document(user.id).collection("commentOnPostAlerts").document(commentAlert.id)
+        
+        let snapshot = try await commentOnPostRef.getDocument()
+        var freshAlert = try snapshot.data(as: CommentOnPostAlert.self)
+        freshAlert.notificationSeen = true
+        let updatedData = try Firestore.Encoder().encode(freshAlert)
+        try await commentOnPostRef.setData(updatedData, merge: true)
+        
+    }
+    
 }
     
 

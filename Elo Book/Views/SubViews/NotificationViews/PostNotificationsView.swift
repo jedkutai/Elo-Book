@@ -10,21 +10,25 @@ import SwiftUI
 struct PostNotificationsView: View {
     @Binding var user: User
     
-    private let viewWidth = UIScreen.main.bounds.width * 0.9
-    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var x: X
     var body: some View {
         NavigationStack {
             LazyVStack {
-                Text("Post Notifications")
-                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                
+                ForEach(x.recentComments, id: \.id) { commentAlert in
+                    CommentAlertCell(user: user, commentAlert: commentAlert)
+                }
+                
                 
                 Text("<- Swipe")
                     .foregroundStyle(Color(.systemGray))
                     .font(.footnote)
-                
             }
-            .frame(width: viewWidth)
-            
+            .padding(.vertical, 5)
+            .onAppear {
+                x.unseenComments = false
+                x.setUnseenNotifications()
+            }
         }
     }
 }

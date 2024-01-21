@@ -15,7 +15,7 @@ struct CommentCell: View {
     
     @State private var likes: [CommentLike] = []
     @State private var likeCooldown = false
-    @State private var showDelete = false
+    @State private var showMore = false
     @State private var commentDeleted = false
     @State private var showMoreText = false
     @Environment(\.colorScheme) var colorScheme
@@ -61,8 +61,10 @@ struct CommentCell: View {
                                 }
                                 
                                 
-                                if user.id == commentUser.id {
-                                    if showDelete {
+
+                                
+                                if showMore {
+                                    if user.id == commentUser.id {
                                         Button {
                                             Task {
                                                 try await CommentService.deleteComment(comment: comment)
@@ -74,18 +76,29 @@ struct CommentCell: View {
                                                 .foregroundStyle(Color(.red))
                                         }
                                     } else {
-                                        Button {
-                                            showDelete.toggle()
+                                        NavigationLink {
+                                            ReportCommentView(user: user, commentUser: commentUser, comment: comment)
                                         } label: {
-                                            Image(systemName: "ellipsis")
-                                                .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                            Label("Report", systemImage: "exclamationmark.triangle.fill")
+                                                .font(.footnote)
+                                                .foregroundStyle(Color(.orange))
                                         }
+                                    }
+                                    
+                                } else {
+                                    Button {
+                                        showMore.toggle()
+                                    } label: {
+                                        Image(systemName: "ellipsis")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                                     }
                                 }
                                 
                                 
                                 Spacer()
                             }
+                            
+                            
                             
                             if let caption = comment.caption {
                                 if showMoreText {
@@ -153,19 +166,9 @@ struct CommentCell: View {
                                     if likes.contains(where: { $0.userId == user.id }) {
                                         Image(systemName: "square.stack.3d.up.fill")
                                             .foregroundColor(Theme.buttonColorInteracted)
-//                                        Image("money stack band filled")
-//                                            .resizable()
-//                                            .scaledToFit()
-//                                            .frame(height: 20)
-//                                            .foregroundColor(Theme.buttonColorInteracted)
                                     } else {
                                         Image(systemName: "square.stack.3d.up")
                                             .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-//                                        Image("money stack band")
-//                                            .resizable()
-//                                            .scaledToFit()
-//                                            .frame(height: 20)
-//                                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                                     }
                                     
                                     Text("\(likes.count)")
@@ -185,10 +188,10 @@ struct CommentCell: View {
                 .padding(.horizontal, 18)
             }
         }
-        .onChange(of: showDelete) {
-            if showDelete {
+        .onChange(of: showMore) {
+            if showMore {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    showDelete = false
+                    showMore = false
                 }
             }
         }

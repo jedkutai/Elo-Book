@@ -5,14 +5,18 @@
 //  Created by Jed Kutai on 1/20/24.
 //
 
-import SwiftUI
+import Foundation
+import Firebase
+import FirebaseFirestore
 
-struct CommentOnPostAlert: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    CommentOnPostAlert()
+struct CommentOnPostAlert: Identifiable, Hashable, Codable {
+    let id: String // comment Id
+    let postId: String
+    let userId: String
+    
+    var notificationSeen: Bool?
+    
+    var timestamp: Timestamp = Timestamp()
+    
+    
 }

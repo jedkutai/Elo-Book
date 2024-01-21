@@ -50,8 +50,6 @@ struct FirstOpenView: View {
             }
             .onAppear {
                 x.clearAll()
-                UserDefaults.standard.removeObject(forKey: "email")
-                UserDefaults.standard.removeObject(forKey: "password")
                 UserDefaults.standard.removeObject(forKey: "uid")
             }
         }

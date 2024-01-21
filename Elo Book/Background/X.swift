@@ -24,6 +24,13 @@ class X: ObservableObject {
     @Published var users: [User] = []
     @Published var teams: [Team] = []
     
+    // for notifications
+    @Published var recentFollows: [Follow] = [] // load 20 most recent FetchService.fetchRecentFollowsByUser()
+    @Published var recentComments: [CommentOnPostAlert] = []
+    @Published var unseenFollows = false
+    @Published var unseenComments = false
+    @Published var unseenNotifications = false
+    
     // deep link stuff
     @Published var loadedDeepLink: Bool = false
     @Published var deepLinkType: String = ""
@@ -32,6 +39,10 @@ class X: ObservableObject {
     // tab view controller
     @Published var selectedTab: Tab = .home
     
+    func setUnseenNotifications() {
+        let status = self.unseenFollows || self.unseenComments
+        self.unseenNotifications = status
+    }
     
     func clearAll() {
         

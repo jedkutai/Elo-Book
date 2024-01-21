@@ -10,6 +10,8 @@ import SwiftUI
 struct NotificationView: View {
     @Binding var user: User
     
+    
+    @EnvironmentObject var x: X
     private let screenWidth = UIScreen.main.bounds.width
     private let screenHeight = UIScreen.main.bounds.height
     @Environment(\.colorScheme) var colorScheme
@@ -20,6 +22,11 @@ struct NotificationView: View {
                     LazyHStack {
                         ScrollView(.vertical, showsIndicators: false) {
                             FollowNotificationsView(user: $user)
+                        }
+                        .refreshable {
+                            Task {
+                                x.recentFollows = try await FetchService.fetchRecentFollowsByUser(user: user)
+                            }
                         }
                         .frame(width: screenWidth)
                         .id(0)
@@ -37,6 +44,8 @@ struct NotificationView: View {
                 
                 Spacer()
             }
+            .navigationTitle("Notifications")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

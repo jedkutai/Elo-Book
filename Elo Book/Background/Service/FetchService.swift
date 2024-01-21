@@ -13,6 +13,12 @@ import Combine
 
 struct FetchService {
     
+    static func fetchPostByPostAndCommentId(postId: String, commentId: String) async throws -> Comment {
+        let snapshot = try await Firestore.firestore().collection("posts").document(postId).collection("comments").document(commentId).getDocument()
+        return try snapshot.data(as: Comment.self)
+        
+    }
+    
     static func fetchThreadById(id: String) async throws -> Thread {
         let snapshot = try await Firestore.firestore().collection("threads").document(id).getDocument()
         return try snapshot.data(as: Thread.self)
@@ -170,6 +176,39 @@ struct FetchService {
         return sortedUsers
     }
     
+    static func fetchRecentFollowsByUser(user: User) async throws -> [Follow] {
+        let thirtyDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        
+        let query = Firestore.firestore().collection("follows")
+            .whereField("followingId", isEqualTo: user.id)
+            .whereField("timestamp", isGreaterThan: thirtyDaysAgo)
+            .order(by: "timestamp", descending: true)
+            .limit(to: 20)
+        
+        let snapshot = try await query.getDocuments()
+        let follows = snapshot.documents.compactMap({ try? $0.data(as: Follow.self) })
+        
+        
+        return follows
+    }
+    
+    static func fetchRecentCommentAlertsByUser(user: User) async throws -> [CommentOnPostAlert] {
+        let thirtyDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        
+        let query = Firestore.firestore().collection("users").document(user.id).collection("commentOnPostAlerts")
+            .whereField("timestamp", isGreaterThan: thirtyDaysAgo)
+            .order(by: "timestamp", descending: true)
+            .limit(to: 20)
+        
+        let snapshot = try await query.getDocuments()
+        let commentAlerts = snapshot.documents.compactMap({ try? $0.data(as: CommentOnPostAlert.self) })
+        
+        
+        return commentAlerts
+    }
+    
+    
+    
     static func fetchCommentCountByPost(postId: String) async throws -> Int {
         let query = Firestore.firestore().collection("posts").document(postId).collection("comments")
         let snapshot = try await query.getDocuments()
@@ -258,15 +297,17 @@ struct FetchService {
     }
     
     static func fetchPostByPostId(postId: String) async throws -> Post {
-        let query = Firestore.firestore().collection("posts")
-            .whereField("id", isEqualTo: postId)
-            .limit(to: 1)
-        
-        let snapshot = try await query.getDocuments()
-        
-        let posts = snapshot.documents.compactMap({ try? $0.data(as: Post.self) })
-        
-        return posts[0]
+//        let query = Firestore.firestore().collection("posts")
+//            .whereField("id", isEqualTo: postId)
+//            .limit(to: 1)
+//        
+//        let snapshot = try await query.getDocuments()
+//        
+//        let posts = snapshot.documents.compactMap({ try? $0.data(as: Post.self) })
+//        
+//        return posts[0]
+        let snapshot = try await Firestore.firestore().collection("posts").document(postId).getDocument()
+        return try snapshot.data(as: Post.self)
     }
     
     

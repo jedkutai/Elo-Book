@@ -35,8 +35,9 @@ class UploadComment: ObservableObject {
     func uploadComment(user: User, post: Post, caption: String) async throws {
 
         let commentRef = Firestore.firestore().collection("posts").document(post.id).collection("comments").document()
+        let commentDocId = commentRef.documentID
         
-        let comment = Comment(id: commentRef.documentID, postId: post.id, userId: user.id, caption: caption, timestamp: Timestamp())
+        let comment = Comment(id: commentDocId, postId: post.id, userId: user.id, caption: caption, timestamp: Timestamp())
         guard let encodedComment = try? Firestore.Encoder().encode(comment) else { return }
         
         try await commentRef.setData(encodedComment)
@@ -47,6 +48,16 @@ class UploadComment: ObservableObject {
         post.score += 3
         let updatedData = try Firestore.Encoder().encode(post)
         try await docRef.setData(updatedData, merge: true)
+        
+        if post.userId != user.id {
+            let commentOnPostRef = Firestore.firestore().collection("users").document(post.userId).collection("commentOnPostAlerts").document(commentDocId)
+            
+            let alert = CommentOnPostAlert(id: commentDocId, postId: post.id, userId: user.id)
+            guard let encodedAlert = try? Firestore.Encoder().encode(alert) else { return }
+            
+            try await commentOnPostRef.setData(encodedAlert)
+            print("done")
+        }
         
     }
 

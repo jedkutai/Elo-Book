@@ -29,26 +29,27 @@ struct UserFeedView: View {
             ZStack {
                 VStack {
                     HStack {
-                        Image(colorScheme == .dark ? "elo_white" : "elo_black")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 30)
+                        
                         
                         NavigationLink {
-//                            Text("Under Construction")
-//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                             NotificationView(user: $user)
                         } label: {
+                            Image(colorScheme == .dark ? "elo_white" : "elo_black")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 30)
                             
                             VStack {
                                 Spacer()
+                                if x.unseenNotifications {
+                                    Image(systemName: "bell.fill")
+                                        .foregroundStyle(Color(.systemOrange))
+                                } else {
+                                    Image(systemName: "bell.fill")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                }
                                 
-                                Image(systemName: "bell.fill")
-                                    .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                                 
-                                // if has notifications
-//                                Image(systemName: "bell.fill")
-//                                    .foregroundStyle(Color(.systemOrange))
                             }
                             .frame(height: 30)
                         }
@@ -166,6 +167,7 @@ struct UserFeedView: View {
             if x.firstOpenUserFeed {
                 Task {
                     try await UserService.uploadFCMToken(user: user)
+                    
                 }
                 localRefresh()
                 x.firstOpenUserFeed.toggle()
@@ -207,6 +209,31 @@ struct UserFeedView: View {
             if userFeedPosts.isEmpty {
                 showSuggestedUsers = true
             }
+            
+            x.recentFollows = try await FetchService.fetchRecentFollowsByUser(user: user)
+            x.recentComments = try await FetchService.fetchRecentCommentAlertsByUser(user: user)
+            if let mostRecentFollow = x.recentFollows.first {
+                if let seen = mostRecentFollow.notificationSeen {
+                    if !seen {
+                        x.unseenFollows = true
+                    }
+                } else {
+                    x.unseenFollows = true
+                }
+            }
+            
+            if let mostRecentComment = x.recentComments.first {
+                if let seen = mostRecentComment.notificationSeen {
+                    if !seen {
+                        x.unseenComments = true
+                    }
+                } else {
+                    x.unseenComments = true
+                }
+            }
+            
+            x.setUnseenNotifications()
+            
             self.elementsLoaded = true // Set to true when elements are loaded
         }
     }

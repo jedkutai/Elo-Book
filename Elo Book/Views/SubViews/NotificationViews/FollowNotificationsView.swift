@@ -10,20 +10,26 @@ import SwiftUI
 struct FollowNotificationsView: View {
     @Binding var user: User
     
-    private let viewWidth = UIScreen.main.bounds.width * 0.9
-    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var x: X
     var body: some View {
         NavigationStack {
             LazyVStack {
-                Text("Follow Notifications")
-                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                
+                ForEach(x.recentFollows, id: \.id) { follow in
+                    FollowNotificationCell(user: user, follow: follow)
+                }
                 
                 Text("Swipe ->")
                     .foregroundStyle(Color(.systemGray))
                     .font(.footnote)
-                
             }
-            .frame(width: viewWidth)
+            .padding(.vertical, 5)
+
+            
+        }
+        .onAppear {
+            x.unseenFollows = false
+            x.setUnseenNotifications()
             
         }
     }
