@@ -19,9 +19,6 @@ struct FollowNotificationsView: View {
                     FollowNotificationCell(user: user, follow: follow)
                 }
                 
-                Text("Swipe ->")
-                    .foregroundStyle(Color(.systemGray))
-                    .font(.footnote)
             }
             .padding(.vertical, 5)
 

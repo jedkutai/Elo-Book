@@ -17,17 +17,20 @@ struct FullLengthPostImageView: View {
         ScrollViewReader { value in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(Array(imageUrls.enumerated()), id: \.element ) { index, imageUrl in
-                        KFImage(URL(string: imageUrl))
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: imageWidth)
-                            .id(index)
-                            .onTapGesture {
-                                target = 0
-                                fullLength.toggle()
-                            }
+                    VStack {
+                        ForEach(Array(imageUrls.enumerated()), id: \.element ) { index, imageUrl in
+                            KFImage(URL(string: imageUrl))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: imageWidth)
+                                .id(index)
+                                .onTapGesture {
+                                    target = 0
+                                    fullLength.toggle()
+                                }
 
+                        }
+                        
                     }
                 }
                 .scrollTargetLayout()

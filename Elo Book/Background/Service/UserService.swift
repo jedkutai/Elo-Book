@@ -11,10 +11,12 @@ import FirebaseFirestore
 
 struct UserService {
     
+    static func acceptTermsOfService(user: User) async throws {
+        try await Firestore.firestore().collection("users").document(user.id).updateData(["termsOfServiceV1": true])
+    }
+    
     static func updatePhoneNumber(uid: String, newPhoneNumber: String) async throws {
         try await Firestore.firestore().collection("users").document(uid).updateData(["phoneNumber": newPhoneNumber])
-        
-        // try await Firestore.firestore().collection("threads").document(threadDocId).updateData(["lastMessageTimeStamp": messageToUpload.timestamp])
     }
     
     static func changeFullname(uid: String, newFullname: String) async throws {

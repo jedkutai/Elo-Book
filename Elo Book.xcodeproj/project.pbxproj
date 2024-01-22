@@ -159,6 +159,9 @@
 		A76E127D2B5CCEC60033967A /* ExpandedPostCellFromCommentAlertTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E127C2B5CCEC60033967A /* ExpandedPostCellFromCommentAlertTextBox.swift */; };
 		A76E12802B5D036B0033967A /* ReportCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E127F2B5D036B0033967A /* ReportCommentView.swift */; };
 		A76E12822B5D03BC0033967A /* ReportComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E12812B5D03BC0033967A /* ReportComment.swift */; };
+		A777B20D2B5E1EC60008196D /* DiscoverPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777B20C2B5E1EC60008196D /* DiscoverPostsView.swift */; };
+		A777B20F2B5E224C0008196D /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777B20E2B5E224C0008196D /* DiscoverViewController.swift */; };
+		A777B2122B5E3D490008196D /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A777B2112B5E3D490008196D /* TermsOfServiceView.swift */; };
 		A77C90732B586BD200BDB7DF /* ThreadGroupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90722B586BD200BDB7DF /* ThreadGroupInfoView.swift */; };
 		A77C90752B58D3D500BDB7DF /* AddUsersToGroupChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90742B58D3D500BDB7DF /* AddUsersToGroupChatView.swift */; };
 		A77C90782B5903C400BDB7DF /* ExpandedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77C90772B5903C400BDB7DF /* ExpandedPostCell.swift */; };
@@ -330,6 +333,9 @@
 		A76E127C2B5CCEC60033967A /* ExpandedPostCellFromCommentAlertTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPostCellFromCommentAlertTextBox.swift; sourceTree = "<group>"; };
 		A76E127F2B5D036B0033967A /* ReportCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCommentView.swift; sourceTree = "<group>"; };
 		A76E12812B5D03BC0033967A /* ReportComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportComment.swift; sourceTree = "<group>"; };
+		A777B20C2B5E1EC60008196D /* DiscoverPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPostsView.swift; sourceTree = "<group>"; };
+		A777B20E2B5E224C0008196D /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		A777B2112B5E3D490008196D /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		A77C90722B586BD200BDB7DF /* ThreadGroupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadGroupInfoView.swift; sourceTree = "<group>"; };
 		A77C90742B58D3D500BDB7DF /* AddUsersToGroupChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUsersToGroupChatView.swift; sourceTree = "<group>"; };
 		A77C90772B5903C400BDB7DF /* ExpandedPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPostCell.swift; sourceTree = "<group>"; };
@@ -610,6 +616,8 @@
 			isa = PBXGroup;
 			children = (
 				A7693AAD2B4DE28600286344 /* SearchView2.swift */,
+				A777B20C2B5E1EC60008196D /* DiscoverPostsView.swift */,
+				A777B20E2B5E224C0008196D /* DiscoverViewController.swift */,
 			);
 			path = SearchViews;
 			sourceTree = "<group>";
@@ -680,6 +688,7 @@
 		A74BA9132B478F3700F62D08 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A777B2102B5E3D350008196D /* TermsOfServiceViews */,
 				A716D1F22B54B44F009D3ED3 /* AddContactsViews */,
 				A74BA9142B478F4D00F62D08 /* AltUserProfileViews */,
 				A74BA9192B478F6B00F62D08 /* DeepLinkViews */,
@@ -912,6 +921,14 @@
 				A7E788E62B59F2D700DEAA24 /* ReportCategory.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A777B2102B5E3D350008196D /* TermsOfServiceViews */ = {
+			isa = PBXGroup;
+			children = (
+				A777B2112B5E3D490008196D /* TermsOfServiceView.swift */,
+			);
+			path = TermsOfServiceViews;
 			sourceTree = "<group>";
 		};
 		A77C90762B5903B400BDB7DF /* ExpandedPostCelll */ = {
@@ -1238,6 +1255,7 @@
 				A7693AB22B4E098E00286344 /* SelectBadgesView.swift in Sources */,
 				A74BA87E2B4779A200F62D08 /* Post.swift in Sources */,
 				A74BA9212B478FA100F62D08 /* EmptyFeedView.swift in Sources */,
+				A777B20D2B5E1EC60008196D /* DiscoverPostsView.swift in Sources */,
 				A7693AAE2B4DE28600286344 /* SearchView2.swift in Sources */,
 				A74BA9452B47905300F62D08 /* SelectFavoriteSportsView.swift in Sources */,
 				A7EF1F562B4B27FF00B0F12C /* PostImageView2.swift in Sources */,
@@ -1345,6 +1363,7 @@
 				A77C90732B586BD200BDB7DF /* ThreadGroupInfoView.swift in Sources */,
 				A74BA8FB2B478EA500F62D08 /* UserProfileView.swift in Sources */,
 				A7693AB02B4E03EA00286344 /* UserBadgeSettings.swift in Sources */,
+				A777B20F2B5E224C0008196D /* DiscoverViewController.swift in Sources */,
 				A70651BC2B4A2A4E00A6CE3A /* PostPreviewImages.swift in Sources */,
 				A74BA87B2B4779A200F62D08 /* Comment.swift in Sources */,
 				A7ACF8182B4EE92A00192B72 /* NotificationService.swift in Sources */,
@@ -1354,6 +1373,7 @@
 				A7CAC3702B51CFE400199A19 /* CreateNewMessageViewSearchResults.swift in Sources */,
 				A7CAC36C2B51588900199A19 /* MessageViewHeader.swift in Sources */,
 				A74BA87D2B4779A200F62D08 /* CommentLike.swift in Sources */,
+				A777B2122B5E3D490008196D /* TermsOfServiceView.swift in Sources */,
 				A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */,
 				A74BA93B2B47902300F62D08 /* PostCellExpandedTextBox.swift in Sources */,
 				A73978522B56818100F2B225 /* StaticPostImageView.swift in Sources */,

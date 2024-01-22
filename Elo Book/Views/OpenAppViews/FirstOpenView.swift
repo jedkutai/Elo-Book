@@ -50,7 +50,7 @@ struct FirstOpenView: View {
             }
             .onAppear {
                 x.clearAll()
-                UserDefaults.standard.removeObject(forKey: "uid")
+                
             }
         }
     }

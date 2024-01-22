@@ -22,7 +22,7 @@ struct MainTabControllerView: View {
     
     @State var selectedTab: Tab = .home
     @State private var refresh = false
-    
+    @State private var showTermsOfService = false
     @EnvironmentObject var x: X
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
@@ -57,7 +57,8 @@ struct MainTabControllerView: View {
                     .tag(Tab.messages)
                 
 
-                SearchView2(user: $user)
+                
+                DiscoverViewController(user: $user)
                     .tabItem {
                         VStack {
                             Image(systemName: "magnifyingglass")
@@ -77,7 +78,17 @@ struct MainTabControllerView: View {
             }
             .accentColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
         }
+        .fullScreenCover(isPresented: $showTermsOfService) {
+            TermsOfServiceView(user: $user)
+        }
         .onAppear {
+            if let terms = user.termsOfServiceV1 {
+                if !terms {
+                    showTermsOfService.toggle()
+                }
+            } else {
+                showTermsOfService.toggle()
+            }
             Task {
                 threads = try await FetchService.fetchMessageThreadsByUser(user: user)
                 unreadMessageCount = try await MessageService.unreadMessagesCount(user: user, threads: threads)

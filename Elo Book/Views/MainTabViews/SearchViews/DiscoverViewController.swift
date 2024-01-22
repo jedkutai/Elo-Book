@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct DiscoverViewController: View {
+    @Binding var user: User
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            TabView {
+                SearchView2(user: $user)
+                
+                DiscoverPostsView(user: $user)
+            }
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
+        }
     }
 }
 
-#Preview {
-    DiscoverViewController()
-}

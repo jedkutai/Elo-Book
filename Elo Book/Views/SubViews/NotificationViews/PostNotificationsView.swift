@@ -20,9 +20,6 @@ struct PostNotificationsView: View {
                 }
                 
                 
-                Text("<- Swipe")
-                    .foregroundStyle(Color(.systemGray))
-                    .font(.footnote)
             }
             .padding(.vertical, 5)
             .onAppear {

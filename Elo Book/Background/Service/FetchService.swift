@@ -13,6 +13,53 @@ import Combine
 
 struct FetchService {
     
+    static func fetchDiscoverPosts(user: User, timeRestraintHours: Int) async throws -> [Post] {
+        
+        let timeAgo = Calendar.current.date(byAdding: .hour, value: -timeRestraintHours, to: Date())!
+        
+        let query = Firestore.firestore().collection("posts")
+            .whereField("timestamp", isGreaterThan: timeAgo)
+            .order(by: "timestamp")
+            .order(by: "score", descending: true)
+            .limit(to: 20)
+        
+        
+        let snapshot = try await query.getDocuments()
+        var posts = snapshot.documents.compactMap({ try? $0.data(as: Post.self) })
+        
+        posts.shuffle()
+        return posts
+        
+    }
+    
+    
+    static func fetchMoreDiscoverPosts(user: User, timeRestraintHours: Int, otherPosts: [Post]) async throws -> [Post] {
+       
+        do {
+            let timeAgo = Calendar.current.date(byAdding: .hour, value: -timeRestraintHours, to: Date())!
+            
+            let postIds = otherPosts.map { $0.id }
+            
+            let query = Firestore.firestore().collection("posts")
+                .whereField("timestamp", isGreaterThan: timeAgo)
+                .order(by: "timestamp")
+                .order(by: "score", descending: true)
+                .limit(to: otherPosts.count + 20)
+            
+            let snapshot = try await query.getDocuments()
+            let snapshotPosts = snapshot.documents.compactMap({ try? $0.data(as: Post.self) })
+            
+            var posts = snapshotPosts.filter { !postIds.contains($0.id) }
+            
+            posts.shuffle()
+            return posts
+        } catch {
+            print("\(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    
     static func fetchPostByPostAndCommentId(postId: String, commentId: String) async throws -> Comment {
         let snapshot = try await Firestore.firestore().collection("posts").document(postId).collection("comments").document(commentId).getDocument()
         return try snapshot.data(as: Comment.self)

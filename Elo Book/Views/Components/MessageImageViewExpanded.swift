@@ -15,35 +15,51 @@ struct MessageImageViewExpanded: View {
     
     
     var body: some View {
+//        VStack {
+////            Spacer()
+//            
+//            ScrollViewReader { value in
+//                ScrollView(.horizontal, showsIndicators: false) {
+//                    LazyHStack {
+//                        ForEach(imageUrls, id: \.self) { imageUrl in
+//                            ScrollView(.vertical) {
+//                                KFImage(URL(string: imageUrl))
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: UIScreen.main.bounds.width)
+//                                    
+//                            }
+//                            .id(imageUrls.firstIndex(of: imageUrl))
+//                        }
+//                    }
+//                    .scrollTargetLayout()
+//                }
+//                .scrollTargetBehavior(.viewAligned)
+//                .onAppear {
+//                    value.scrollTo(centeredImage)
+//                }
+//            }
+//            
+////            Spacer()
+//        }
+//        .background(Color.black.edgesIgnoringSafeArea(.all))
         VStack {
-            Spacer()
-            
-            ScrollViewReader { value in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach(imageUrls, id: \.self) { imageUrl in
-                            ScrollView(.vertical) {
-                                KFImage(URL(string: imageUrl))
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: UIScreen.main.bounds.width)
-                                    
-                            }
-                            .id(imageUrls.firstIndex(of: imageUrl))
-                        }
+            TabView(selection: $centeredImage) {
+                ForEach(Array(imageUrls.enumerated()), id: \.0) { index, imageUrl in
+                    ScrollView(.vertical) {
+                        KFImage(URL(string: imageUrl))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIScreen.main.bounds.width)
+
                     }
-                    .scrollTargetLayout()
-                }
-                .scrollTargetBehavior(.viewAligned)
-                .onAppear {
-                    value.scrollTo(centeredImage)
+                    .tag(index)
                 }
             }
-            
-            Spacer()
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .always))
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
-    
     }
 }
 

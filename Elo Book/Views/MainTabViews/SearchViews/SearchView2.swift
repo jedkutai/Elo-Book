@@ -48,7 +48,7 @@ struct SearchView2: View {
     
     @EnvironmentObject var x: X
     @Environment(\.dismiss) private var dismiss
-    
+    @Environment(\.colorScheme) private var colorScheme
     
     
     
@@ -56,11 +56,21 @@ struct SearchView2: View {
         NavigationStack {
             VStack {
                 HStack {
+                    Text("Search")
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                }
+                .padding(.horizontal)
+                
+                HStack {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
                         
-                        TextField("Search", text: $searchText)
+                        TextField("Search by team name or sport", text: $searchText)
                             .padding(.vertical, 2.5)
                             .autocapitalization(.none)
                             .onSubmit {
@@ -132,9 +142,7 @@ struct SearchView2: View {
                     }
                 }
             }
-            .padding(.vertical, 10)
         }
-        .padding(.vertical, 10)
         .onAppear {
             Task {
                 do {

@@ -46,6 +46,7 @@ class X: ObservableObject {
     
     func clearAll() {
         
+        UserDefaults.standard.removeObject(forKey: "uid")
         // first open stuff
         self.firstOpenUserFeed = true
         self.firstOpenUserProfile = true
