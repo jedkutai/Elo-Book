@@ -29,7 +29,6 @@ struct UserFeedView: View {
                 VStack {
                     HStack {
                         
-                        
                         NavigationLink {
                             NotificationView(user: $user)
                         } label: {

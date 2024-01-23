@@ -12,6 +12,7 @@ import FirebaseFirestore
 
 struct AuthService {
     
+    
     static func uploadUserData(uid: String, email: String, dateOfBirth: Timestamp) async {
         let user = User(id: uid, email: email.lowercased(), dateOfBirth: dateOfBirth)
         guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
@@ -70,5 +71,15 @@ struct AuthService {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
-    
+    static func deleteAccount(withEmail email: String, password: String) async throws {
+        do {
+            if let user = Auth.auth().currentUser {
+                let userDoc = Firestore.firestore().collection("users").document(user.uid)
+                try await userDoc.delete()
+                try await user.delete()
+            }
+        } catch {
+            print("failed")
+        }
+    }
 }

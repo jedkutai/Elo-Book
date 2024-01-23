@@ -49,6 +49,7 @@
 		A742A9C52B4CD3AA00F956B7 /* NotificationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C42B4CD3AA00F956B7 /* NotificationsSettingsView.swift */; };
 		A742A9C72B4D20CE00F956B7 /* UserNotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */; };
 		A742A9CB2B4DBD9B00F956B7 /* UserFavoriteSports.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9CA2B4DBD9B00F956B7 /* UserFavoriteSports.swift */; };
+		A746CA162B5FAA4900B363F2 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A746CA152B5FAA4900B363F2 /* DeleteAccountView.swift */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA87A2B4779A200F62D08 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86F2B4779A100F62D08 /* Follow.swift */; };
 		A74BA87B2B4779A200F62D08 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA8702B4779A100F62D08 /* Comment.swift */; };
@@ -259,6 +260,7 @@
 		A742A9C42B4CD3AA00F956B7 /* NotificationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSettingsView.swift; sourceTree = "<group>"; };
 		A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationSettings.swift; sourceTree = "<group>"; };
 		A742A9CA2B4DBD9B00F956B7 /* UserFavoriteSports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteSports.swift; sourceTree = "<group>"; };
+		A746CA152B5FAA4900B363F2 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86F2B4779A100F62D08 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		A74BA8702B4779A100F62D08 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -542,6 +544,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		A746CA142B5FAA3A00B363F2 /* DeleteAccountViews */ = {
+			isa = PBXGroup;
+			children = (
+				A746CA152B5FAA4900B363F2 /* DeleteAccountView.swift */,
+			);
+			path = DeleteAccountViews;
+			sourceTree = "<group>";
+		};
 		A74BA86A2B47797F00F62D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +743,7 @@
 		A74BA9132B478F3700F62D08 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A746CA142B5FAA3A00B363F2 /* DeleteAccountViews */,
 				A73C8A082B5F217A0016A026 /* CommentCellExpandedViews */,
 				A716D1F22B54B44F009D3ED3 /* AddContactsViews */,
 				A74BA9142B478F4D00F62D08 /* AltUserProfileViews */,
@@ -1319,6 +1330,7 @@
 				A74BA87C2B4779A200F62D08 /* Event.swift in Sources */,
 				A7BD47D72B5B927D00EE50D7 /* FollowNotificationsView.swift in Sources */,
 				A7E788E22B59E90600DEAA24 /* ReportPostView.swift in Sources */,
+				A746CA162B5FAA4900B363F2 /* DeleteAccountView.swift in Sources */,
 				A7CAC35D2B513F4D00199A19 /* Message2.swift in Sources */,
 				A74BA8C82B477C4700F62D08 /* SquareProfilePicture.swift in Sources */,
 				A74BA8FD2B478EA500F62D08 /* ProfileHeader.swift in Sources */,
@@ -1577,7 +1589,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Elo-Book-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Elo Book";
+				INFOPLIST_KEY_CFBundleDisplayName = Elo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1589,7 +1601,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.elobook.Elo-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1615,7 +1627,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Elo-Book-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Elo Book";
+				INFOPLIST_KEY_CFBundleDisplayName = Elo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1627,7 +1639,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.elobook.Elo-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

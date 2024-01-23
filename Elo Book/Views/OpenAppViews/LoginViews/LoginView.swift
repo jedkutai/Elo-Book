@@ -18,6 +18,7 @@ struct LoginView: View {
     @State private var canSubmit = true
     @State private var invalidLogin = false
     @State private var tooManyAttempts = false
+    @State private var showPassword = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
@@ -59,11 +60,26 @@ struct LoginView: View {
                     .padding(.bottom, 15)
                 
                 
-                SecureField("Password", text: $password)
-                    .textContentType(.password)
-                    .modifier(IGTextFieldModifier())
+                if showPassword {
+                    TextField("Password", text: $password)
+                        .textContentType(.password)
+                        .modifier(IGTextFieldModifier())
+                } else {
+                    SecureField("Password", text: $password)
+                        .textContentType(.password)
+                        .modifier(IGTextFieldModifier())
+                }
+                
+                
                 
                 HStack {
+                    Button {
+                        showPassword.toggle()
+                    } label: {
+                        Text(showPassword ? "Hide" : "Show")
+                            .font(.footnote)
+                            .foregroundStyle(Color(.systemGray))
+                    }
                     Spacer()
                     
                     NavigationLink {
@@ -73,7 +89,7 @@ struct LoginView: View {
                             .foregroundStyle(Color(.systemBlue))
                     }
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 27)
                 
                 if canSubmit {
                     Button {

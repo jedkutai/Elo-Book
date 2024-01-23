@@ -21,6 +21,7 @@ struct CreateAccountView: View {
     @State private var attemptingCreation = false
     @State private var emailUnavailable = false
     @State private var didTheyTouch = false
+    @State private var showPassword = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         NavigationStack {
@@ -110,15 +111,31 @@ struct CreateAccountView: View {
                         .padding(.horizontal, 24)
                     }
                     
-                    SecureField("Password", text: $password)
-                        .textContentType(.password)
-                        .modifier(IGTextFieldModifier())
+                    if showPassword {
+                        TextField("Password", text: $password)
+                            .textContentType(.password)
+                            .modifier(IGTextFieldModifier())
+                        
+                        TextField("Confirm Password", text: $passwordConfirm)
+                            .textContentType(.password)
+                            .modifier(IGTextFieldModifier())
+                    } else {
+                        SecureField("Password", text: $password)
+                            .textContentType(.password)
+                            .modifier(IGTextFieldModifier())
+                        
+                        SecureField("Confirm Password", text: $passwordConfirm)
+                            .textContentType(.password)
+                            .modifier(IGTextFieldModifier())
+                    }
                     
-                    SecureField("Confirm Password", text: $passwordConfirm)
-                        .textContentType(.password)
-                        .modifier(IGTextFieldModifier())
-                    
-                    
+                    Button {
+                        showPassword.toggle()
+                    } label: {
+                        Text(showPassword ? "Hide Password" : "Show Password")
+                            .font(.footnote)
+                            .foregroundStyle(Color(.systemGray))
+                    }
                     
                     
                     if Checks.isValidSignUp(email, password, passwordConfirm) {
