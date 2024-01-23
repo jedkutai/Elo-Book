@@ -20,10 +20,14 @@ struct PostCell: View {
     @State private var postDeleted = false
     @State private var showMore = false
     
+    @EnvironmentObject var x: X
+    @State private var hidden = false
     
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         if postDeleted {
+            
+        } else if hidden {
             
         } else {
             postCell
@@ -50,6 +54,16 @@ struct PostCell: View {
             
         }
         .onAppear {
+            let blockedByUser = x.blockedBy.contains { block in
+                return block.userId == post.userId
+            }
+            
+            let blockedUser = x.blocked.contains { block in
+                return block.userToBlockId == post.userId
+            }
+            
+            self.hidden = blockedByUser || blockedUser
+            
             Task {
                 postUser = try await FetchService.fetchUserById(withUid: post.userId)
                 commentCount = try await FetchService.fetchCommentCountByPost(postId: post.id)

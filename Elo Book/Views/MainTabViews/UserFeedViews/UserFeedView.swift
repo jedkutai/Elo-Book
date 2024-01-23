@@ -233,6 +233,9 @@ struct UserFeedView: View {
             
             x.setUnseenNotifications()
             
+            x.blocked = try await FetchService.fectchBlocksViaUserId(userId: user.id)
+            x.blockedBy = try await FetchService.fectchBlockedByViaUserId(userId: user.id)
+            
             self.elementsLoaded = true // Set to true when elements are loaded
         }
     }

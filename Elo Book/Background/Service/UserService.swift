@@ -11,6 +11,45 @@ import FirebaseFirestore
 
 struct UserService {
     
+    static func blockUser(user: User, userToBlock: User) async throws {
+        
+        let blockRef = Firestore.firestore().collection("blocks")
+        let query = blockRef
+            .whereField("userId", isEqualTo: user.id)
+            .whereField("userToBlockId", isEqualTo: userToBlock.id)
+        
+        let querySnapshot = try await query.getDocuments()
+        
+        if querySnapshot.documents.first == nil {
+            let blockRef = Firestore.firestore().collection("blocks").document()
+            
+            let block = Block(id: blockRef.documentID, userId: user.id, userToBlockId: userToBlock.id)
+            
+            guard let encodedBlock = try? Firestore.Encoder().encode(block) else { return }
+            
+            try await blockRef.setData(encodedBlock)
+            
+            try await UserService.unFollowUser(userId: user.id, userToUnfollow: userToBlock.id)
+            try await UserService.unFollowUser(userId: userToBlock.id, userToUnfollow: user.id)
+        }
+        
+    }
+    
+    static func unblockUser(user: User, userToUnBlock: User) async throws {
+        let blockRef = Firestore.firestore().collection("blocks")
+        let query = blockRef
+            .whereField("userId", isEqualTo: user.id)
+            .whereField("userToBlockId", isEqualTo: userToUnBlock.id)
+        
+        let querySnapshot = try await query.getDocuments()
+        
+        if let document = querySnapshot.documents.first {
+            let docId = document.documentID
+            try await blockRef.document(docId).delete()
+        }
+    }
+    
+    
     static func acceptTermsOfService(user: User) async throws {
         try await Firestore.firestore().collection("users").document(user.id).updateData(["termsOfServiceV1": true])
     }
@@ -70,12 +109,12 @@ struct UserService {
         if let document = querySnapshot.documents.first {
             let docId = document.documentID
             
-            let followingRef = Firestore.firestore().collection("users").document(userId).collection("following").document(docId)
-            let followersRef = Firestore.firestore().collection("users").document(userToUnfollow).collection("followers").document(docId)
+//            let followingRef = Firestore.firestore().collection("users").document(userId).collection("following").document(docId)
+//            let followersRef = Firestore.firestore().collection("users").document(userToUnfollow).collection("followers").document(docId)
             
             try await followRef.document(docId).delete()
-            try await followingRef.delete()
-            try await followersRef.delete()
+//            try await followingRef.delete()
+//            try await followersRef.delete()
             
             let docRef = Firestore.firestore().collection("users").document(userToUnfollow)
             let document = try await docRef.getDocument()

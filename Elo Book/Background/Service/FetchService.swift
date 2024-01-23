@@ -12,6 +12,26 @@ import Contacts
 import Combine
 
 struct FetchService {
+    static func fectchBlocksViaUserId(userId: String) async throws -> [Block] {
+        let snapshot = try await Firestore.firestore().collection("blocks")
+            .whereField("userId", isEqualTo: userId)
+            .getDocuments()
+        
+        let blocks = snapshot.documents.compactMap({ try? $0.data(as: Block.self) })
+        return blocks
+    }
+    
+    static func fectchBlockedByViaUserId(userId: String) async throws -> [Block] {
+        let snapshot = try await Firestore.firestore().collection("blocks")
+            .whereField("userToBlockId", isEqualTo: userId)
+            .getDocuments()
+        
+        let blocks = snapshot.documents.compactMap({ try? $0.data(as: Block.self) })
+        return blocks
+    }
+    
+    
+    
     
     static func fetchDiscoverPosts(user: User, timeRestraintHours: Int) async throws -> [Post] {
         

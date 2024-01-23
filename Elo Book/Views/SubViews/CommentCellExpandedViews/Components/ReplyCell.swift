@@ -13,6 +13,9 @@ struct ReplyCell: View {
     
     @State private var replyUser: User?
     
+    @EnvironmentObject var x: X
+    @State private var hidden = false
+    
     @State private var likes: [ReplyLike] = []
     @State private var likeCooldown = false
     @State private var showMore = false
@@ -22,7 +25,7 @@ struct ReplyCell: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        if replyDeleted {
+        if replyDeleted || self.failed {
             
         } else {
             replyCell
@@ -198,6 +201,16 @@ struct ReplyCell: View {
             }
         }
         .onAppear {
+            let blockedByUser = x.blockedBy.contains { block in
+                return block.userId == reply.userId
+            }
+            
+            let blockedUser = x.blocked.contains { block in
+                return block.userToBlockId == reply.userId
+            }
+            
+            self.hidden = blockedByUser || blockedUser
+            
             Task {
                 do {
                     replyUser = try await FetchService.fetchUserById(withUid: reply.userId)

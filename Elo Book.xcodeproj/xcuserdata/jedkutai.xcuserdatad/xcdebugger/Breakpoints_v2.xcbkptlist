@@ -14,8 +14,8 @@
             filePath = "Elo Book/Views/SubViews/PostCellComponents/PostCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "postCell"
             landmarkType = "24">
             <Locations>

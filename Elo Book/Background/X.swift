@@ -24,6 +24,9 @@ class X: ObservableObject {
     @Published var users: [User] = []
     @Published var teams: [Team] = []
     
+    @Published var blocked: [Block] = []
+    @Published var blockedBy: [Block] = []
+    
     // for notifications
     @Published var recentFollows: [Follow] = [] // load 20 most recent FetchService.fetchRecentFollowsByUser()
     @Published var recentComments: [CommentOnPostAlert] = []

@@ -18,7 +18,7 @@
 		</dict>
 	</array>
 	<key>NSContactsUsageDescription</key>
-	<string>Allow access to your contacts to help you find friends quickly.</string>
+	<string>Allow access to your contacts to help you find friends quickly. Your contacts WILL NOT be stored on our server, accessing your contacts is only for finding your friends.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

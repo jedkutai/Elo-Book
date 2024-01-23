@@ -13,6 +13,8 @@ struct CommentCell: View {
     
     @State private var commentUser: User?
     
+    @EnvironmentObject var x: X
+    @State private var hidden = false
     
     @State private var likes: [CommentLike] = []
     @State private var replies: Int?
@@ -22,7 +24,7 @@ struct CommentCell: View {
     @State private var showMoreText = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        if commentDeleted {
+        if commentDeleted || self.hidden {
             
         } else {
             commentCell
@@ -99,8 +101,6 @@ struct CommentCell: View {
                                 
                                 Spacer()
                             }
-                            
-                            
                             
                             if let caption = comment.caption {
                                 if showMoreText {
@@ -209,6 +209,7 @@ struct CommentCell: View {
                             .frame(height: 1)
                     }
                 }
+                .padding(.top, 10)
                 .padding(.horizontal, 18)
             }
         }
@@ -220,6 +221,16 @@ struct CommentCell: View {
             }
         }
         .onAppear {
+            let blockedByUser = x.blockedBy.contains { block in
+                return block.userId == comment.userId
+            }
+            
+            let blockedUser = x.blocked.contains { block in
+                return block.userToBlockId == comment.userId
+            }
+            
+            self.hidden = blockedByUser || blockedUser
+            
             Task {
                 commentUser  = try await FetchService.fetchUserById(withUid: comment.userId)
                 likes = try await FetchService.fetchCommentLikesByCommentId(comment: comment)

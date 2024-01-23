@@ -75,8 +75,6 @@ struct FollowingView: View {
                             FollowsResultCell(user: user, viewedUser: following)
                         }
                         
-                        Divider()
-                            .frame(height: 1)
                     }
                     Spacer()
                 }

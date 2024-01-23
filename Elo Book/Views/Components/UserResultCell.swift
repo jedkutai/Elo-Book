@@ -9,42 +9,60 @@ import SwiftUI
 
 struct UserResultCell: View {
     @State var user: User
+    
+    @EnvironmentObject var x: X
+    @State private var hidden = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        HStack {
-            SquareProfilePicture(user: user, size: .small)
+        if self.hidden {
             
-            VStack {
-                if let fullname = user.fullname {
-                    HStack {
-                        Text(fullname)
-                            .font(.footnote)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        
-                        Spacer()
-                    }
-                }
+        } else {
+            HStack {
+                SquareProfilePicture(user: user, size: .small)
                 
-                if let username = user.username {
-                    HStack {
-                        Text("@\(username)")
-                            .font(.footnote)
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        
-                        if let displayedBadge = user.displayedBadge {
-                            BadgeDiplayer(badge: displayedBadge)
+                VStack {
+                    if let fullname = user.fullname {
+                        HStack {
+                            Text(fullname)
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
                     }
+                    
+                    if let username = user.username {
+                        HStack {
+                            Text("@\(username)")
+                                .font(.footnote)
+                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                            
+                            if let displayedBadge = user.displayedBadge {
+                                BadgeDiplayer(badge: displayedBadge)
+                            }
+                            
+                            Spacer()
+                        }
+                    }
+                    
                 }
                 
+                Spacer()
             }
-            
-            Spacer()
+            .padding(.horizontal, 10)
+            .onAppear {
+                let blockedByUser = x.blockedBy.contains { block in
+                    return block.userId == user.id
+                }
+                
+                let blockedUser = x.blocked.contains { block in
+                    return block.userToBlockId == user.id
+                }
+                
+                self.hidden = blockedByUser || blockedUser
+            }
         }
-        .padding(.horizontal, 10)
         
     }
 }
