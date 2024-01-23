@@ -74,10 +74,14 @@ struct EventCell: View {
         }
         .onAppear {
             Task {
-                team1 = try await FetchService.fetchTeamById(docId: event.team1_ID)
-                team2 = try await FetchService.fetchTeamById(docId: event.team2_ID)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.elementsLoaded = true // Set to true when elements are loaded
+                do {
+                    team1 = try await FetchService.fetchTeamById(docId: event.team1_ID)
+                    team2 = try await FetchService.fetchTeamById(docId: event.team2_ID)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.elementsLoaded = true // Set to true when elements are loaded
+                    }
+                } catch {
+                    self.elementsLoaded = true
                 }
             }
         }

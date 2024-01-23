@@ -10,10 +10,12 @@ import SwiftUI
 struct CommentCell: View {
     @State var user: User
     @State var comment: Comment
+    
     @State private var commentUser: User?
     
     
     @State private var likes: [CommentLike] = []
+    @State private var replies: Int?
     @State private var likeCooldown = false
     @State private var showMore = false
     @State private var commentDeleted = false
@@ -182,8 +184,30 @@ struct CommentCell: View {
                         }
                         
                     }
-                    Divider()
-                        .frame(height: 1)
+                    
+                    if let replies = replies {
+                        if replies > 0 {
+                            HStack {
+                                Rectangle()
+                                    .frame(width: 50, height: 1)
+                                    .foregroundStyle(Color(.systemGray))
+                                
+                                Text("Replies: \(replies)")
+                                    .font(.footnote)
+                                    .foregroundStyle(Color(.systemGray))
+                                
+                                Rectangle()
+                                    .frame(width: 50, height: 1)
+                                    .foregroundStyle(Color(.systemGray))
+                            }
+                        } else {
+                            Divider()
+                                .frame(height: 1)
+                        }
+                    } else {
+                        Divider()
+                            .frame(height: 1)
+                    }
                 }
                 .padding(.horizontal, 18)
             }
@@ -199,6 +223,11 @@ struct CommentCell: View {
             Task {
                 commentUser  = try await FetchService.fetchUserById(withUid: comment.userId)
                 likes = try await FetchService.fetchCommentLikesByCommentId(comment: comment)
+                do {
+                    replies = try await FetchService.fetchCommentRepliesCountByCommentId(comment: comment)
+                } catch {
+                    print("\(error.localizedDescription)")
+                }
             }
         }
     }

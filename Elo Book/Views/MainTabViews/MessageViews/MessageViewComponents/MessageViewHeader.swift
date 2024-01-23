@@ -18,7 +18,7 @@ struct MessageViewHeader: View {
 //            SquareProfilePicture(user: user, size: .shmedium)
             
             if unreadMessageCount == 0 {
-                Text("MESSAGES")
+                Text("Messages")
                     .fontWeight(.bold)
                     .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 

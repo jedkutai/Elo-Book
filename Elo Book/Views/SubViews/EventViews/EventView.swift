@@ -21,7 +21,6 @@ struct EventView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) var colorScheme
-    @Namespace var namespace
     var body: some View {
         NavigationStack {
             ZStack {
@@ -117,7 +116,6 @@ struct EventView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     MiniEventCell(event: event)
-                        .matchedGeometryEffect(id: "MiniEventCell", in: namespace)
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {

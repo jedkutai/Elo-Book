@@ -23,7 +23,7 @@ struct DiscoverPostsView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("DISCOVER")
+                    Text("Discover")
                         .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                         .fontWeight(.bold)
                     

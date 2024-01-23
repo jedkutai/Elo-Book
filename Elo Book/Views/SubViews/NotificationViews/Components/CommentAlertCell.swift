@@ -132,14 +132,18 @@ struct CommentAlertCell: View {
                 .foregroundStyle(Color(.clear))
                 .onAppear {
                     Task {
-                        comment = try await FetchService.fetchPostByPostAndCommentId(postId: commentAlert.postId, commentId: commentAlert.id)
-                        if comment == nil {
-                            failed = true
-                        } else {
-                            commentUser = try await FetchService.fetchUserById(withUid: commentAlert.userId)
-                            if commentUser == nil {
+                        do {
+                            comment = try await FetchService.fetchPostByPostAndCommentId(postId: commentAlert.postId, commentId: commentAlert.id)
+                            if comment == nil {
                                 failed = true
+                            } else {
+                                commentUser = try await FetchService.fetchUserById(withUid: commentAlert.userId)
+                                if commentUser == nil {
+                                    failed = true
+                                }
                             }
+                        } catch {
+                            failed = true
                         }
                     }
                 }

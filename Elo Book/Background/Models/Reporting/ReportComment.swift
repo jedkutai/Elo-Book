@@ -12,6 +12,7 @@ import FirebaseFirestore
 struct ReportComment: Identifiable, Hashable, Codable {
     let id: String
     
+    let postId: String
     let commentId: String
     let commenterId: String
     let reporterId: String

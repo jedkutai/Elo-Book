@@ -16,7 +16,7 @@ struct EventsHorizontalScroll: View {
             LazyHStack {
                 ForEach(events, id: \.id) { event in
                     NavigationLink {
-                        EventView(user: user, event: event).navigationBarBackButtonHidden()
+                        EventView(user: user, event: event)
                     } label: {
                         MiniEventCell(event: event)
                             .padding(5)

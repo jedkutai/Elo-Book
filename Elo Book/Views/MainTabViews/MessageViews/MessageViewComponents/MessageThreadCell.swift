@@ -38,30 +38,34 @@ struct MessageThreadCell: View {
         }
         .onAppear {
             Task {
-                lastMessage = try await FetchService.fetchLastMessageByThread(thread: thread)
-                if let memberIds = thread.memberIds { // make sure there are users in the thread
-                    
-                    let otherUserIds = memberIds.filter( { $0 != user.id } )
-                    if otherUserIds.count == 1 {
-                        if otherUserIds[0] == user.id {
-                            failed = true
-                        } else {
-                            threadUser = try await FetchService.fetchUserById(withUid: otherUserIds[0])
-                        }
+                do {
+                    lastMessage = try await FetchService.fetchLastMessageByThread(thread: thread)
+                    if let memberIds = thread.memberIds { // make sure there are users in the thread
                         
-                        
-                    } else if memberIds.count > 2 {
-                        threadUsers = try await FetchService.fetchUsersByUserIds(userIds: otherUserIds)
-                        if let threadUsers = threadUsers {
-                            if threadUsers.count != memberIds.count - 1 {
-                                if threadUsers.count < 2 {
-                                    failed = true
+                        let otherUserIds = memberIds.filter( { $0 != user.id } )
+                        if otherUserIds.count == 1 {
+                            if otherUserIds[0] == user.id {
+                                failed = true
+                            } else {
+                                threadUser = try await FetchService.fetchUserById(withUid: otherUserIds[0])
+                            }
+                            
+                            
+                        } else if memberIds.count > 2 {
+                            threadUsers = try await FetchService.fetchUsersByUserIds(userIds: otherUserIds)
+                            if let threadUsers = threadUsers {
+                                if threadUsers.count != memberIds.count - 1 {
+                                    if threadUsers.count < 2 {
+                                        failed = true
+                                    }
                                 }
                             }
+                        } else {
+                            failed = true
                         }
-                    } else {
-                        failed = true
                     }
+                } catch {
+                    failed = true
                 }
             }
         }

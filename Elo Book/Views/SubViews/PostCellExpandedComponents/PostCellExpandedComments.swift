@@ -15,7 +15,11 @@ struct PostCellExpandedComments: View {
         NavigationStack {
             LazyVStack {
                 ForEach(comments, id: \.id) { comment in
-                    CommentCell(user: user, comment: comment)
+                    NavigationLink {
+                        CommentCellExpaned(user: $user, comment: comment)
+                    } label: {
+                        CommentCell(user: user, comment: comment)
+                    }
                 }
                 
             }

@@ -56,7 +56,6 @@ class UploadComment: ObservableObject {
             guard let encodedAlert = try? Firestore.Encoder().encode(alert) else { return }
             
             try await commentOnPostRef.setData(encodedAlert)
-            print("done")
         }
         
     }

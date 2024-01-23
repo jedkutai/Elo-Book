@@ -17,7 +17,7 @@ struct StaticPostLoader: View {
     var body: some View {
         if let postUser = postUser, let post = post {
             NavigationLink {
-//                AltPostCellExpanded(user: user, postUser: postUser, post: post).navigationBarBackButtonHidden()
+
                 AltPostCellExpanded(user: user, postUser: postUser, post: post)
             } label: {
                 StaticPostCell(user: user, postUser: postUser, post: post)
@@ -31,10 +31,14 @@ struct StaticPostLoader: View {
                 .onAppear {
                     Task {
                         if !postId.isEmpty {
-                            post = try await FetchService.fetchPostByPostId(postId: postId)
-                            if let post = post {
-                                postUser = try await FetchService.fetchUserById(withUid: post.userId)
-                            } else {
+                            do {
+                                post = try await FetchService.fetchPostByPostId(postId: postId)
+                                if let post = post {
+                                    postUser = try await FetchService.fetchUserById(withUid: post.userId)
+                                } else {
+                                    failed = true
+                                }
+                            } catch {
                                 failed = true
                             }
                         } else {

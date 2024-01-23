@@ -50,7 +50,11 @@ struct AltPostCellExpanded: View {
                     .padding(.top, 2)
                     
                     ForEach(comments, id: \.id) { comment in
-                        CommentCell(user: user, comment: comment)
+                        NavigationLink {
+                            CommentCellExpaned(user: $user, comment: comment)
+                        } label: {
+                            CommentCell(user: user, comment: comment)
+                        }
                     }
                     
                     if comments.count >= 20 {

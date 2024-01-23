@@ -53,15 +53,20 @@ struct ExpandedPostCellFromCommentAlert: View {
                         .padding(.top, 2)
                         
                         ForEach(comments, id: \.id) { comment in
-                            if comment.id == targetComment.id {
-                                CommentCell(user: user, comment: comment)
-                                    .padding(5)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 2.5)
-                                            .stroke(Color(.systemYellow), lineWidth: 2)
-                                    )
-                            } else {
-                                CommentCell(user: user, comment: comment)
+                            NavigationLink {
+                                CommentCellExpaned(user: $user, comment: comment)
+                            } label: {
+                                if comment.id == targetComment.id {
+                                    CommentCell(user: user, comment: comment)
+                                        .padding(5)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 2.5)
+                                                .stroke(Color(.systemYellow), lineWidth: 2)
+                                        )
+                                } else {
+                                    CommentCell(user: user, comment: comment)
+                                }
+                                
                             }
                             
                         }

@@ -11,6 +11,7 @@ struct StaticUserProfileLoader: View {
     @State var user: User
     @State var viewedUserId: String
     
+    @State private var failed = false
     @State private var viewedUser: User?
     var body: some View {
         if let viewedUser = viewedUser {
@@ -19,11 +20,17 @@ struct StaticUserProfileLoader: View {
             } label: {
                 StaticUserProfile(user: user, userToShare: viewedUser)
             }
+        } else if failed {
+            
         } else {
             ProgressView("Loading Profile...")
                 .onAppear {
                     Task {
-                        viewedUser = try await FetchService.fetchUserById(withUid: viewedUserId)
+                        do {
+                            viewedUser = try await FetchService.fetchUserById(withUid: viewedUserId)
+                        } catch {
+                            failed = true
+                        }
                     }
                 }
         }

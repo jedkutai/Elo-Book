@@ -293,6 +293,34 @@ struct FetchService {
         return commentLikes
     } 
     
+    static func fetchReplyLikesByReplyId(reply: Reply) async throws -> [ReplyLike] {
+        let query = Firestore.firestore().collection("posts").document(reply.postId).collection("comments").document(reply.commentId).collection("replies").document(reply.id).collection("replyLikes")
+        
+        let snapshot = try await query.getDocuments()
+        let replyLikes = snapshot.documents.compactMap({ try? $0.data(as: ReplyLike.self) })
+        
+        return replyLikes
+    }
+    
+    static func fetchCommentRepliesCountByCommentId(comment: Comment) async throws -> Int {
+        let query = Firestore.firestore().collection("posts").document(comment.postId).collection("comments").document(comment.id).collection("replies")
+            
+        
+        let snapshot = try await query.getDocuments()
+        
+        return snapshot.count
+    }
+    
+    static func fetchCommentRepliesByCommentId(comment: Comment) async throws -> [Reply] {
+        let query = Firestore.firestore().collection("posts").document(comment.postId).collection("comments").document(comment.id).collection("replies").order(by: "timestamp")
+            
+        
+        let snapshot = try await query.getDocuments()
+        let replies = snapshot.documents.compactMap({ try? $0.data(as: Reply.self) })
+        
+        return replies
+    }
+    
     static func fetchCommentUsersByComments(comments: [Comment]) async throws -> [User] {
         var users: [User] = []
         for comment in comments {

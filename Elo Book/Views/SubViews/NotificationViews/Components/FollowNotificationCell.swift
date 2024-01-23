@@ -135,10 +135,14 @@ struct FollowNotificationCell: View {
                 .foregroundStyle(Color(.clear))
                 .onAppear {
                     Task {
-                        follower = try await FetchService.fetchUserById(withUid: follow.followerId)
-                        if let follower = follower {
-                            following = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: follower.id)
-                        } else {
+                        do {
+                            follower = try await FetchService.fetchUserById(withUid: follow.followerId)
+                            if let follower = follower {
+                                following = try await FetchService.userAFollowingUserB(userAId: user.id, userBId: follower.id)
+                            } else {
+                                failed = true
+                            }
+                        } catch {
                             failed = true
                         }
                     }

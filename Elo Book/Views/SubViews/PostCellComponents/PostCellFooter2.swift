@@ -97,8 +97,5 @@ struct PostCellFooter2: View {
         }
         .padding(.top, 5)
         .padding(.horizontal, 8.0)
-//        .fullScreenCover(isPresented: $sharePost) {
-//            SharePostView(user: user, postUser: postUser, postToShare: post)
-//        }
     }
 }

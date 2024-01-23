@@ -20,7 +20,6 @@ struct UserFeedView: View {
     @State private var elementsLoaded: Bool = false
     
     @State private var postCreated = false
-    @Namespace var namespace
     @Environment(\.colorScheme) var colorScheme
     private let emptyPadding = UIScreen.main.bounds.height / 4
     
@@ -127,7 +126,6 @@ struct UserFeedView: View {
                         VStack {
                             Spacer()
                             ProgressView("Degenerating...")
-                                .matchedGeometryEffect(id: "Degenerating", in: namespace)
                             Spacer()
                         }
                     }
@@ -205,7 +203,9 @@ struct UserFeedView: View {
     private func localRefresh() {
         Task {
             user = try await FetchService.fetchUserById(withUid: user.id)
-            userFeedPosts = try await FetchService.fetchFeedPostsByUser(user: user)
+            let newUserFeedPosts = try await FetchService.fetchFeedPostsByUser(user: user)
+            userFeedPosts = []
+            userFeedPosts = newUserFeedPosts
             if userFeedPosts.isEmpty {
                 showSuggestedUsers = true
             }

@@ -29,7 +29,7 @@ struct ReportService {
         
         let reportRef = Firestore.firestore().collection("commentReports").document()
         
-        let report = ReportComment(id: reportRef.documentID, commentId: comment.id, commenterId: commentUser.id, reporterId: user.id, harassment: harassment, violence: violence, scam: scam, slurs: slurs, impersonation: impersonation, other: other, additionalComments: additionalComments)
+        let report = ReportComment(id: reportRef.documentID, postId: comment.postId, commentId: comment.id, commenterId: commentUser.id, reporterId: user.id, harassment: harassment, violence: violence, scam: scam, slurs: slurs, impersonation: impersonation, other: other, additionalComments: additionalComments)
         
         guard let encodedReport = try? Firestore.Encoder().encode(report) else { return }
         
@@ -39,4 +39,20 @@ struct ReportService {
         try await UserService.unFollowUser(userId: commentUser.id, userToUnfollow: user.id)
         
     }
+    
+    static func reportReply(user: User, replyUser: User, reply: Reply, harassment: Bool, violence: Bool, scam: Bool, impersonation: Bool, slurs: Bool, other: Bool, additionalComments: String) async throws {
+        
+        let reportRef = Firestore.firestore().collection("replyReports").document()
+        
+        let report = ReportReply(id: reportRef.documentID, postId: reply.postId, commentId: reply.commentId, replyId: reply.id, replierId: replyUser.id, reporterId: user.id, harassment: harassment, violence: violence, scam: scam, slurs: slurs, impersonation: impersonation, other: other, additionalComments: additionalComments)
+        
+        guard let encodedReport = try? Firestore.Encoder().encode(report) else { return }
+        
+        try await reportRef.setData(encodedReport)
+        
+        try await UserService.unFollowUser(userId: user.id, userToUnfollow: replyUser.id)
+        try await UserService.unFollowUser(userId: replyUser.id, userToUnfollow: user.id)
+        
+    }
+    
 }

@@ -28,14 +28,18 @@ struct ContentView: View {
                 .onAppear {
                     Task {
                         if !x.uid.isEmpty {
-                            user = try await AuthService.fetchUserById(withUid: x.uid)
-                            if let user = user {
-                                if user.id == x.uid {
-                                    loggedIn = true
+                            do {
+                                user = try await AuthService.fetchUserById(withUid: x.uid)
+                                if let user = user {
+                                    if user.id == x.uid {
+                                        loggedIn = true
+                                    } else {
+                                        failedLogin = true
+                                    }
                                 } else {
                                     failedLogin = true
                                 }
-                            } else {
+                            } catch {
                                 failedLogin = true
                             }
                             
