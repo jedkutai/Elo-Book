@@ -43,6 +43,12 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
+                        BlockedUsersView(user: user)
+                    } label: {
+                        SettingsOption(systemName: "circle.slash", text: "Blocked Users")
+                    }
+                    
+                    NavigationLink {
                         FirstOpenView().navigationBarBackButtonHidden()
                     } label: {
                         HStack {

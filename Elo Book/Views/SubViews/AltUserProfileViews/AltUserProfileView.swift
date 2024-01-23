@@ -121,27 +121,29 @@ struct AltUserProfileView: View {
                     }
                 }
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        if showMore {
-                            Button {
-                                blockAlert.toggle()
-                            } label: {
-                                HStack {
-                                    Image(systemName: "circle.slash")
-                                    Text("Block User")
+                    if !blockedUser {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            if showMore {
+                                Button {
+                                    blockAlert.toggle()
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "circle.slash")
+                                        Text("Block User")
+                                    }
+                                    .foregroundStyle(Color(.systemRed))
+                                        
                                 }
-                                .foregroundStyle(Color(.systemRed))
-                                    
+                            } else {
+                                Button {
+                                    showMore.toggle()
+                                } label: {
+                                    Image(systemName: "ellipsis")
+                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+                                }
                             }
-                        } else {
-                            Button {
-                                showMore.toggle()
-                            } label: {
-                                Image(systemName: "ellipsis")
-                                    .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                            }
+                            
                         }
-                        
                     }
                     
                     ToolbarItem(placement: .topBarTrailing) {

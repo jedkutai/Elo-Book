@@ -180,6 +180,8 @@
 		A7800E3D2B4E263A00AF8492 /* PublicFigureBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */; };
 		A7800E3F2B4E264500AF8492 /* DegenerateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */; };
 		A7800E412B4E276C00AF8492 /* BadgeDiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E402B4E276C00AF8492 /* BadgeDiplayer.swift */; };
+		A796144E2B603D7800174EB0 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A796144D2B603D7800174EB0 /* BlockedUsersView.swift */; };
+		A79614502B60425E00174EB0 /* BlockedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A796144F2B60425E00174EB0 /* BlockedUserCell.swift */; };
 		A79974852B6012DA00B49CE9 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79974842B6012DA00B49CE9 /* Block.swift */; };
 		A7ACF8182B4EE92A00192B72 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF8172B4EE92A00192B72 /* NotificationService.swift */; };
 		A7ACF81B2B4EF43F00192B72 /* PostCellWithStaticHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF81A2B4EF43F00192B72 /* PostCellWithStaticHeader.swift */; };
@@ -364,6 +366,8 @@
 		A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFigureBadge.swift; sourceTree = "<group>"; };
 		A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegenerateBadge.swift; sourceTree = "<group>"; };
 		A7800E402B4E276C00AF8492 /* BadgeDiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDiplayer.swift; sourceTree = "<group>"; };
+		A796144D2B603D7800174EB0 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
+		A796144F2B60425E00174EB0 /* BlockedUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserCell.swift; sourceTree = "<group>"; };
 		A79974842B6012DA00B49CE9 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		A7ACF8172B4EE92A00192B72 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		A7ACF81A2B4EF43F00192B72 /* PostCellWithStaticHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellWithStaticHeader.swift; sourceTree = "<group>"; };
@@ -838,6 +842,7 @@
 				A74BA9422B47905200F62D08 /* SelectFavoriteSportsView.swift */,
 				A74BA9442B47905300F62D08 /* SettingsView.swift */,
 				A742A9C42B4CD3AA00F956B7 /* NotificationsSettingsView.swift */,
+				A796144D2B603D7800174EB0 /* BlockedUsersView.swift */,
 			);
 			path = SettingsViews;
 			sourceTree = "<group>";
@@ -846,6 +851,7 @@
 			isa = PBXGroup;
 			children = (
 				A74BA9492B47905E00F62D08 /* SettingsOption.swift */,
+				A796144F2B60425E00174EB0 /* BlockedUserCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1314,6 +1320,7 @@
 				A7E788E02B59E77C00DEAA24 /* ReportService.swift in Sources */,
 				A7CAC3692B5157B000199A19 /* CreateNewMessageViewHeader.swift in Sources */,
 				A7CAC37A2B523B1600199A19 /* MessageManager.swift in Sources */,
+				A796144E2B603D7800174EB0 /* BlockedUsersView.swift in Sources */,
 				A74BA87A2B4779A200F62D08 /* Follow.swift in Sources */,
 				A704D37B2B5332D500F92AC6 /* ThreadViewGroup.swift in Sources */,
 				A74BA8942B477A6E00F62D08 /* Dimensions.swift in Sources */,
@@ -1416,6 +1423,7 @@
 				A73978572B568DA400F2B225 /* StaticPostLoader.swift in Sources */,
 				A704D3792B53312900F92AC6 /* ThreadViewSingle.swift in Sources */,
 				A70651B42B4A02F000A6CE3A /* FollowsResultCell.swift in Sources */,
+				A79614502B60425E00174EB0 /* BlockedUserCell.swift in Sources */,
 				A74BA8812B4779A200F62D08 /* PostLike.swift in Sources */,
 				A70651C02B4A5A7200A6CE3A /* MiniEventCell.swift in Sources */,
 				A7CAC35F2B5140D100199A19 /* UploadMessage.swift in Sources */,
@@ -1605,7 +1613,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.elobook.Elo-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1643,7 +1651,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.elobook.Elo-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
