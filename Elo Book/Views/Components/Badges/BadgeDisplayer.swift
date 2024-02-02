@@ -17,6 +17,8 @@ struct BadgeDiplayer: View {
             DegenerateBadge()
         } else if badge == "publicFigure" {
             PublicFigureBadge()
+        } else if badge == "firstHundred" {
+            FirstHundredBadge()
         }
     }
 }
