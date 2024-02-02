@@ -62,7 +62,7 @@ struct MessageDisplayer: View {
                             }
                             
                             if let displayedBadge = messageUser.displayedBadge {
-                                BadgeDiplayer(badge: displayedBadge)
+                                BadgeDisplayer(badge: displayedBadge)
                             }
                             Spacer()
                         }

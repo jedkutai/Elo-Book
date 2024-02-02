@@ -179,9 +179,16 @@
 		A7800E3B2B4E262E00AF8492 /* AlphaTesterBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */; };
 		A7800E3D2B4E263A00AF8492 /* PublicFigureBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */; };
 		A7800E3F2B4E264500AF8492 /* DegenerateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */; };
-		A7800E412B4E276C00AF8492 /* BadgeDiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E402B4E276C00AF8492 /* BadgeDiplayer.swift */; };
+		A7800E412B4E276C00AF8492 /* BadgeDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7800E402B4E276C00AF8492 /* BadgeDisplayer.swift */; };
+		A789F7032B6469A000B0F0D7 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = A789F7022B6469A000B0F0D7 /* Community.swift */; };
 		A796144E2B603D7800174EB0 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A796144D2B603D7800174EB0 /* BlockedUsersView.swift */; };
 		A79614502B60425E00174EB0 /* BlockedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A796144F2B60425E00174EB0 /* BlockedUserCell.swift */; };
+		A79791932B614FC7009B92C6 /* CommentNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79791922B614FC7009B92C6 /* CommentNotificationsView.swift */; };
+		A79791952B6157E3009B92C6 /* ReplyAlertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79791942B6157E3009B92C6 /* ReplyAlertCell.swift */; };
+		A79791982B6168AA009B92C6 /* ExpandedCommentCellFromReplyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79791972B6168A9009B92C6 /* ExpandedCommentCellFromReplyAlert.swift */; };
+		A797919A2B617901009B92C6 /* PostCellNotBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79791992B617901009B92C6 /* PostCellNotBinding.swift */; };
+		A797919D2B62E2F6009B92C6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A797919C2B62E2F6009B92C6 /* CommunityView.swift */; };
+		A797919F2B62EF75009B92C6 /* FirstHundredBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A797919E2B62EF75009B92C6 /* FirstHundredBadge.swift */; };
 		A79974852B6012DA00B49CE9 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79974842B6012DA00B49CE9 /* Block.swift */; };
 		A7ACF8182B4EE92A00192B72 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF8172B4EE92A00192B72 /* NotificationService.swift */; };
 		A7ACF81B2B4EF43F00192B72 /* PostCellWithStaticHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ACF81A2B4EF43F00192B72 /* PostCellWithStaticHeader.swift */; };
@@ -211,6 +218,7 @@
 		A7E788E22B59E90600DEAA24 /* ReportPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E788E12B59E90600DEAA24 /* ReportPostView.swift */; };
 		A7E788E52B59EE0A00DEAA24 /* ReportPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E788E42B59EE0A00DEAA24 /* ReportPost.swift */; };
 		A7E788E72B59F2D700DEAA24 /* ReportCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E788E62B59F2D700DEAA24 /* ReportCategory.swift */; };
+		A7EC77322B64B5B700B81552 /* UploadCommunityProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EC77312B64B5B700B81552 /* UploadCommunityProfileImage.swift */; };
 		A7EF1F532B4B24EB00B0F12C /* PostImageExpandedView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F522B4B24EB00B0F12C /* PostImageExpandedView2.swift */; };
 		A7EF1F582B4B298B00B0F12C /* PostCellBody2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F572B4B298B00B0F12C /* PostCellBody2.swift */; };
 		A7EF1F5A2B4B2B1000B0F12C /* PostCellExpandedBody2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EF1F592B4B2B1000B0F12C /* PostCellExpandedBody2.swift */; };
@@ -365,9 +373,16 @@
 		A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaTesterBadge.swift; sourceTree = "<group>"; };
 		A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFigureBadge.swift; sourceTree = "<group>"; };
 		A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegenerateBadge.swift; sourceTree = "<group>"; };
-		A7800E402B4E276C00AF8492 /* BadgeDiplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDiplayer.swift; sourceTree = "<group>"; };
+		A7800E402B4E276C00AF8492 /* BadgeDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDisplayer.swift; sourceTree = "<group>"; };
+		A789F7022B6469A000B0F0D7 /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		A796144D2B603D7800174EB0 /* BlockedUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersView.swift; sourceTree = "<group>"; };
 		A796144F2B60425E00174EB0 /* BlockedUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserCell.swift; sourceTree = "<group>"; };
+		A79791922B614FC7009B92C6 /* CommentNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationsView.swift; sourceTree = "<group>"; };
+		A79791942B6157E3009B92C6 /* ReplyAlertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyAlertCell.swift; sourceTree = "<group>"; };
+		A79791972B6168A9009B92C6 /* ExpandedCommentCellFromReplyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedCommentCellFromReplyAlert.swift; sourceTree = "<group>"; };
+		A79791992B617901009B92C6 /* PostCellNotBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellNotBinding.swift; sourceTree = "<group>"; };
+		A797919C2B62E2F6009B92C6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		A797919E2B62EF75009B92C6 /* FirstHundredBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstHundredBadge.swift; sourceTree = "<group>"; };
 		A79974842B6012DA00B49CE9 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		A7ACF8172B4EE92A00192B72 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		A7ACF81A2B4EF43F00192B72 /* PostCellWithStaticHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellWithStaticHeader.swift; sourceTree = "<group>"; };
@@ -397,6 +412,7 @@
 		A7E788E12B59E90600DEAA24 /* ReportPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostView.swift; sourceTree = "<group>"; };
 		A7E788E42B59EE0A00DEAA24 /* ReportPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPost.swift; sourceTree = "<group>"; };
 		A7E788E62B59F2D700DEAA24 /* ReportCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCategory.swift; sourceTree = "<group>"; };
+		A7EC77312B64B5B700B81552 /* UploadCommunityProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadCommunityProfileImage.swift; sourceTree = "<group>"; };
 		A7EF1F522B4B24EB00B0F12C /* PostImageExpandedView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageExpandedView2.swift; sourceTree = "<group>"; };
 		A7EF1F572B4B298B00B0F12C /* PostCellBody2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellBody2.swift; sourceTree = "<group>"; };
 		A7EF1F592B4B2B1000B0F12C /* PostCellExpandedBody2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellExpandedBody2.swift; sourceTree = "<group>"; };
@@ -574,6 +590,7 @@
 				A74BA86C2B4779A100F62D08 /* User.swift */,
 				A76E126B2B5C9F3E0033967A /* Alerts */,
 				A7800E432B4E3DE100AF8492 /* Comments */,
+				A789F7012B64699000B0F0D7 /* Communities */,
 				A7C833ED2B4F2861005B9AB7 /* Messaging */,
 				A7800E422B4E3DC700AF8492 /* Posts */,
 				A73C8A0B2B5F21B30016A026 /* Replies */,
@@ -620,6 +637,7 @@
 				A7CAC35E2B5140D100199A19 /* UploadMessage.swift */,
 				A73978452B563FED00F2B225 /* UploadChat.swift */,
 				A73C8A102B5F270C0016A026 /* UploadReply.swift */,
+				A7EC77312B64B5B700B81552 /* UploadCommunityProfileImage.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -669,6 +687,7 @@
 				A74BA8E82B478E0500F62D08 /* SearchViews */,
 				A74BA8E92B478E0C00F62D08 /* UserFeedViews */,
 				A74BA8EA2B478E1600F62D08 /* UserProfileViews */,
+				A797919B2B62E2C7009B92C6 /* CommunityViews */,
 			);
 			path = MainTabViews;
 			sourceTree = "<group>";
@@ -757,6 +776,7 @@
 				A74BA91E2B478F9200F62D08 /* EmptyFeedViews */,
 				A74E15122B53CA0700ABAF43 /* EventChatRoom */,
 				A74BA9232B478FAF00F62D08 /* EventViews */,
+				A79791962B616882009B92C6 /* ExpandedCommentCellFromreplyAlert */,
 				A76E12742B5CC9B10033967A /* ExpandedPostCellFromCommentAlert */,
 				A77C90762B5903B400BDB7DF /* ExpandedPostCelll */,
 				A7ACF81E2B4EF5F000192B72 /* ExpandedPostCellWithStaticHeader */,
@@ -817,6 +837,7 @@
 				A74BA92C2B478FFE00F62D08 /* PostCellHeader.swift */,
 				A7EF1F612B4B5A2B00B0F12C /* PostImageView3.swift */,
 				A7EF1F632B4B625F00B0F12C /* FullLengthPostImageView.swift */,
+				A79791992B617901009B92C6 /* PostCellNotBinding.swift */,
 			);
 			path = PostCellComponents;
 			sourceTree = "<group>";
@@ -947,6 +968,7 @@
 			children = (
 				A76E12692B5BBB430033967A /* FollowNotificationCell.swift */,
 				A76E12702B5CB7870033967A /* CommentAlertCell.swift */,
+				A79791942B6157E3009B92C6 /* ReplyAlertCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1010,7 +1032,8 @@
 				A7800E3A2B4E262E00AF8492 /* AlphaTesterBadge.swift */,
 				A7800E3C2B4E263A00AF8492 /* PublicFigureBadge.swift */,
 				A7800E3E2B4E264500AF8492 /* DegenerateBadge.swift */,
-				A7800E402B4E276C00AF8492 /* BadgeDiplayer.swift */,
+				A7800E402B4E276C00AF8492 /* BadgeDisplayer.swift */,
+				A797919E2B62EF75009B92C6 /* FirstHundredBadge.swift */,
 			);
 			path = Badges;
 			sourceTree = "<group>";
@@ -1031,6 +1054,30 @@
 				A74BA8722B4779A100F62D08 /* CommentLike.swift */,
 			);
 			path = Comments;
+			sourceTree = "<group>";
+		};
+		A789F7012B64699000B0F0D7 /* Communities */ = {
+			isa = PBXGroup;
+			children = (
+				A789F7022B6469A000B0F0D7 /* Community.swift */,
+			);
+			path = Communities;
+			sourceTree = "<group>";
+		};
+		A79791962B616882009B92C6 /* ExpandedCommentCellFromreplyAlert */ = {
+			isa = PBXGroup;
+			children = (
+				A79791972B6168A9009B92C6 /* ExpandedCommentCellFromReplyAlert.swift */,
+			);
+			path = ExpandedCommentCellFromreplyAlert;
+			sourceTree = "<group>";
+		};
+		A797919B2B62E2C7009B92C6 /* CommunityViews */ = {
+			isa = PBXGroup;
+			children = (
+				A797919C2B62E2F6009B92C6 /* CommunityView.swift */,
+			);
+			path = CommunityViews;
 			sourceTree = "<group>";
 		};
 		A7ACF8192B4EF42200192B72 /* PostCellWithStaticHeader */ = {
@@ -1055,10 +1102,11 @@
 		A7BD47D32B5B8AE400EE50D7 /* NotificationViews */ = {
 			isa = PBXGroup;
 			children = (
-				A76E12682B5BBB380033967A /* Components */,
 				A7BD47D42B5B8B1000EE50D7 /* NotificationView.swift */,
+				A76E12682B5BBB380033967A /* Components */,
 				A7BD47D62B5B927D00EE50D7 /* FollowNotificationsView.swift */,
 				A7BD47D82B5B9E7C00EE50D7 /* PostNotificationsView.swift */,
+				A79791922B614FC7009B92C6 /* CommentNotificationsView.swift */,
 			);
 			path = NotificationViews;
 			sourceTree = "<group>";
@@ -1292,6 +1340,7 @@
 				A73978442B5639B000F2B225 /* Chat.swift in Sources */,
 				A70651B62B4A251F00A6CE3A /* CreatePostMasterView.swift in Sources */,
 				A74BA9222B478FA100F62D08 /* EmptyFeedUserCell.swift in Sources */,
+				A79791982B6168AA009B92C6 /* ExpandedCommentCellFromReplyAlert.swift in Sources */,
 				A7EF1F622B4B5A2B00B0F12C /* PostImageView3.swift in Sources */,
 				A74BA8802B4779A200F62D08 /* Team.swift in Sources */,
 				A76E12732B5CC85F0033967A /* ExpandedPostCellFromCommentAlert.swift in Sources */,
@@ -1337,6 +1386,7 @@
 				A74BA8F02B478E6E00F62D08 /* UserFeedView.swift in Sources */,
 				A74BA91C2B478F7800F62D08 /* AltPostCellExpanded.swift in Sources */,
 				A74BA8C72B477C4700F62D08 /* EventCell.swift in Sources */,
+				A797919A2B617901009B92C6 /* PostCellNotBinding.swift in Sources */,
 				A7E788E72B59F2D700DEAA24 /* ReportCategory.swift in Sources */,
 				A74BA87C2B4779A200F62D08 /* Event.swift in Sources */,
 				A7BD47D72B5B927D00EE50D7 /* FollowNotificationsView.swift in Sources */,
@@ -1346,17 +1396,20 @@
 				A74BA8C82B477C4700F62D08 /* SquareProfilePicture.swift in Sources */,
 				A74BA8FD2B478EA500F62D08 /* ProfileHeader.swift in Sources */,
 				A74BA9072B478EF200F62D08 /* CreateAccountView.swift in Sources */,
+				A797919F2B62EF75009B92C6 /* FirstHundredBadge.swift in Sources */,
 				A74BA91D2B478F7800F62D08 /* DeepLinkControllerView.swift in Sources */,
 				A73978592B56900000F2B225 /* StaticUserProfileLoader.swift in Sources */,
+				A79791952B6157E3009B92C6 /* ReplyAlertCell.swift in Sources */,
 				A73978502B567C8F00F2B225 /* StaticUserProfile.swift in Sources */,
 				A7ACF8232B4EF62F00192B72 /* ExpandedPostCellWithStaticHeaderHeader.swift in Sources */,
 				A70651B92B4A273700A6CE3A /* PostPreview.swift in Sources */,
 				A752E3072B4778020007842A /* X.swift in Sources */,
-				A7800E412B4E276C00AF8492 /* BadgeDiplayer.swift in Sources */,
+				A7800E412B4E276C00AF8492 /* BadgeDisplayer.swift in Sources */,
 				A7CAC37E2B52502400199A19 /* MessageThreadCellSingle.swift in Sources */,
 				A74BA8A72B477AB400F62D08 /* UploadComment.swift in Sources */,
 				A76E126A2B5BBB430033967A /* FollowNotificationCell.swift in Sources */,
 				A74BA9322B478FFE00F62D08 /* PostCell.swift in Sources */,
+				A7EC77322B64B5B700B81552 /* UploadCommunityProfileImage.swift in Sources */,
 				A74BA8962B477A6E00F62D08 /* Theme.swift in Sources */,
 				A7E788E52B59EE0A00DEAA24 /* ReportPost.swift in Sources */,
 				A704D37D2B53638300F92AC6 /* MessageImageView.swift in Sources */,
@@ -1367,6 +1420,7 @@
 				A74BA8772B4779A200F62D08 /* User.swift in Sources */,
 				A74BA8EC2B478E2C00F62D08 /* MainTabControllerView.swift in Sources */,
 				A74BA9402B47902300F62D08 /* PostCellExpandedHeader.swift in Sources */,
+				A797919D2B62E2F6009B92C6 /* CommunityView.swift in Sources */,
 				A74BA8B32B477ADD00F62D08 /* CropImageViewController.swift in Sources */,
 				A7CAC3662B51523A00199A19 /* CreateNewMessageView.swift in Sources */,
 				A74BA93C2B47902300F62D08 /* PostCellExpandedComments.swift in Sources */,
@@ -1391,6 +1445,7 @@
 				A74BA8A92B477AB400F62D08 /* UploadProfileImage.swift in Sources */,
 				A7800E3D2B4E263A00AF8492 /* PublicFigureBadge.swift in Sources */,
 				A7E788DB2B5984FA00DEAA24 /* PostEllipsis.swift in Sources */,
+				A79791932B614FC7009B92C6 /* CommentNotificationsView.swift in Sources */,
 				A74BA9312B478FFE00F62D08 /* PostCellHeader.swift in Sources */,
 				A7BD47D92B5B9E7C00EE50D7 /* PostNotificationsView.swift in Sources */,
 				A752E3022B4777170007842A /* ContentView.swift in Sources */,
@@ -1415,6 +1470,7 @@
 				A74BA8AA2B477AB400F62D08 /* ImageUploader.swift in Sources */,
 				A74E15142B53CA1800ABAF43 /* EventChatRoomView.swift in Sources */,
 				A7ACF8202B4EF60800192B72 /* ExpandedPostCellWithStaticHeader.swift in Sources */,
+				A789F7032B6469A000B0F0D7 /* Community.swift in Sources */,
 				A77C90752B58D3D500BDB7DF /* AddUsersToGroupChatView.swift in Sources */,
 				A74BA8B52B477ADD00F62D08 /* HideKeyboard.swift in Sources */,
 				A76E12792B5CCA4F0033967A /* ExpandedPostCellFromCommentAlertBody.swift in Sources */,
@@ -1613,7 +1669,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.elobook.Elo-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1651,7 +1707,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.elobook.Elo-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

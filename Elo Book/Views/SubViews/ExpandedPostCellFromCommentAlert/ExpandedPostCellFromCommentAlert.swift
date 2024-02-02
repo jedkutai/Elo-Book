@@ -22,7 +22,6 @@ struct ExpandedPostCellFromCommentAlert: View {
     @State private var caption = ""
     @State private var posting = false
     @State private var loadingMorePosts = false
-    @State private var swipeStarted = false
     @State private var showMore = false
     @State private var postDeleted = false
     @State private var failed = false

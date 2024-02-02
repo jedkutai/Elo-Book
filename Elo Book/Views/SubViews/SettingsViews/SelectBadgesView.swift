@@ -19,6 +19,7 @@ struct SelectBadgesView: View {
     @State private var alphaTester: Bool = false
     @State private var degenerate: Bool = false
     @State private var publicFigure: Bool = false
+    @State private var firstHundred: Bool = false
     
     @State private var noBadges = true
     
@@ -29,66 +30,148 @@ struct SelectBadgesView: View {
         NavigationStack {
             VStack {
                 
-                HStack {
-                    Spacer()
-                    
-                    if showEarnedBadges {
-                        Text("Earned")
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                            .fontWeight(.bold)
-                        
-                    } else {
-                        Button {
-                            showEarnedBadges.toggle()
-                        } label: {
-                            Text("Earned")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                
-                        }
-                    }
-                    
-                    Spacer()
-                    Spacer()
-                    
-                    if !showEarnedBadges {
-                        
-                        Text("All")
-                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                            .fontWeight(.bold)
-                    } else {
-                        Button {
-                            showEarnedBadges.toggle()
-                        } label: {
-                            Text("All")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        }
-                    }
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                Divider()
-                    .frame(height: 1)
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    if showEarnedBadges {
-                        if alphaTester {
-                            HStack {
-                                Button {
-                                    selectedBadge = "alphaTester"
-                                } label: {
-                                    Text("Alpha Tester")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                        .fontWeight(.semibold)
+                TabView(selection: $showEarnedBadges) {
+                    VStack {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            if alphaTester {
+                                HStack {
+                                    Button {
+                                        selectedBadge = "alphaTester"
+                                    } label: {
+                                        Text("Alpha Tester")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            .fontWeight(.semibold)
+                                        
+                                        AlphaTesterBadge()
+                                    }
                                     
-                                    AlphaTesterBadge()
+                                    if selectedBadge == "alphaTester" {
+                                        Text("(Active)")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    }
+                                    
+                                    Spacer()
                                 }
                                 
-                                if selectedBadge == "alphaTester" {
-                                    Text("(Active)")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                HStack {
+                                    Text("Been here since the start of the app.")
+                                        .foregroundStyle(Color(.systemGray))
+                                        .multilineTextAlignment(.leading)
+                                        
+                                    Spacer()
                                 }
+                                .padding(.bottom)
+                            }
+                            
+                            if degenerate {
+                                HStack {
+                                    Button {
+                                        selectedBadge = "degenerate"
+                                    } label: {
+                                        Text("Degenerate")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            .fontWeight(.semibold)
+                                        
+                                        
+                                        DegenerateBadge()
+                                    }
+                                    
+                                    if selectedBadge == "degenerate" {
+                                        Text("(Active)")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    }
+                                    Spacer()
+                                }
+                                
+                                HStack {
+                                    Text("Self-explanatory.")
+                                        .foregroundStyle(Color(.systemGray))
+                                        .multilineTextAlignment(.leading)
+                                        
+                                    Spacer()
+                                }
+                                .padding(.bottom)
+                            }
+                            
+                            if publicFigure {
+                                HStack {
+                                    Button {
+                                        selectedBadge = "publicFigure"
+                                    } label: {
+                                        Text("Public Figure")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            .fontWeight(.semibold)
+                                        
+                                        PublicFigureBadge()
+                                    }
+                                    
+                                    if selectedBadge == "publicFigure" {
+                                        Text("(Active)")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    }
+                                    Spacer()
+                                }
+                                
+                                HStack {
+                                    Text("Cool guy alert, wee woo wee woo.")
+                                        .foregroundStyle(Color(.systemGray))
+                                        .multilineTextAlignment(.leading)
+                                        
+                                    Spacer()
+                                }
+                                .padding(.bottom)
+                            }
+                            
+                            if firstHundred {
+                                HStack {
+                                    Button {
+                                        selectedBadge = "firstHundred"
+                                    } label: {
+                                        Text("First Hundred")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                            .fontWeight(.semibold)
+                                        
+                                        
+                                        FirstHundredBadge()
+                                    }
+                                    
+                                    if selectedBadge == "firstHundred" {
+                                        Text("(Active)")
+                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    }
+                                    
+                                    Spacer()
+                                }
+                                
+                                HStack {
+                                    Text("Also self-explanatory.")
+                                        .foregroundStyle(Color(.systemGray))
+                                        .multilineTextAlignment(.leading)
+                                        
+                                    Spacer()
+                                }
+                                .padding(.bottom)
+                            }
+                            
+                            if noBadges {
+                                Text("No Badges???")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    .font(.largeTitle)
+                                    .padding()
+                            }
+                        }
+                        .padding()
+                    }
+                    .tag(true)
+                    
+                    VStack {
+                        ScrollView(.vertical, showsIndicators: false) {
+                            HStack {
+                                Text("Alpha Tester")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    .fontWeight(.semibold)
+                                
+                                AlphaTesterBadge()
                                 
                                 Spacer()
                             }
@@ -101,25 +184,15 @@ struct SelectBadgesView: View {
                                 Spacer()
                             }
                             .padding(.bottom)
-                        }
-                        
-                        if degenerate {
+                            
                             HStack {
-                                Button {
-                                    selectedBadge = "degenerate"
-                                } label: {
-                                    Text("Degenerate")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                        .fontWeight(.semibold)
-                                    
-                                    
-                                    DegenerateBadge()
-                                }
+                                Text("Degenerate")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    .fontWeight(.semibold)
                                 
-                                if selectedBadge == "degenerate" {
-                                    Text("(Active)")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                }
+                                
+                                DegenerateBadge()
+                                
                                 Spacer()
                             }
                             
@@ -131,24 +204,34 @@ struct SelectBadgesView: View {
                                 Spacer()
                             }
                             .padding(.bottom)
-                        }
-                        
-                        if publicFigure {
+                            
                             HStack {
-                                Button {
-                                    selectedBadge = "publicFigure"
-                                } label: {
-                                    Text("Public Figure")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                        .fontWeight(.semibold)
-                                    
-                                    PublicFigureBadge()
-                                }
+                                Text("First Hundred")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    .fontWeight(.semibold)
                                 
-                                if selectedBadge == "publicFigure" {
-                                    Text("(Active)")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                }
+                                
+                                FirstHundredBadge() // changed
+                                
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text("Also self-explanatory.")
+                                    .foregroundStyle(Color(.systemGray))
+                                    .multilineTextAlignment(.leading)
+                                    
+                                Spacer()
+                            }
+                            .padding(.bottom)
+                            
+                            HStack {
+                                Text("Public Figure")
+                                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                                    .fontWeight(.semibold)
+                                
+                                PublicFigureBadge()
+                                
                                 Spacer()
                             }
                             
@@ -161,78 +244,268 @@ struct SelectBadgesView: View {
                             }
                             .padding(.bottom)
                         }
-                        
-                        if noBadges {
-                            Text("No Badges???")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .font(.largeTitle)
-                                .padding()
-                        }
-                        
-                    } else {
-                        HStack {
-                            Text("Alpha Tester")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .fontWeight(.semibold)
-                            
-                            AlphaTesterBadge()
-                            
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            Text("Been here since the start of the app.")
-                                .foregroundStyle(Color(.systemGray))
-                                .multilineTextAlignment(.leading)
-                                
-                            Spacer()
-                        }
-                        .padding(.bottom)
-                        
-                        HStack {
-                            Text("Degenerate")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .fontWeight(.semibold)
-                            
-                            
-                            DegenerateBadge()
-                            
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            Text("Self-explanatory.")
-                                .foregroundStyle(Color(.systemGray))
-                                .multilineTextAlignment(.leading)
-                                
-                            Spacer()
-                        }
-                        .padding(.bottom)
-                        
-                        HStack {
-                            Text("Public Figure")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .fontWeight(.semibold)
-                            
-                            PublicFigureBadge()
-                            
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            Text("Cool guy alert, wee woo wee woo.")
-                                .foregroundStyle(Color(.systemGray))
-                                .multilineTextAlignment(.leading)
-                                
-                            Spacer()
-                        }
-                        .padding(.bottom)
-                        
+                        .padding()
                     }
+                    .tag(false)
                 }
-                .padding(.horizontal)
+                .tabViewStyle(.page)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                
+//                HStack {
+//                    Spacer()
+//                    
+//                    if showEarnedBadges {
+//                        Text("Earned")
+//                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                            .fontWeight(.bold)
+//                        
+//                    } else {
+//                        Button {
+//                            showEarnedBadges.toggle()
+//                        } label: {
+//                            Text("Earned")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                
+//                        }
+//                    }
+//                    
+//                    Spacer()
+//                    Spacer()
+//                    
+//                    if !showEarnedBadges {
+//                        
+//                        Text("All")
+//                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                            .fontWeight(.bold)
+//                    } else {
+//                        Button {
+//                            showEarnedBadges.toggle()
+//                        } label: {
+//                            Text("All")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                        }
+//                    }
+//                    
+//                    Spacer()
+//                }
+//                .padding(.horizontal)
+//                
+//                Divider()
+//                    .frame(height: 1)
+//                
+//                ScrollView(.vertical, showsIndicators: false) {
+//                    if showEarnedBadges {
+//                        if alphaTester {
+//                            HStack {
+//                                Button {
+//                                    selectedBadge = "alphaTester"
+//                                } label: {
+//                                    Text("Alpha Tester")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                        .fontWeight(.semibold)
+//                                    
+//                                    AlphaTesterBadge()
+//                                }
+//                                
+//                                if selectedBadge == "alphaTester" {
+//                                    Text("(Active)")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                }
+//                                
+//                                Spacer()
+//                            }
+//                            
+//                            HStack {
+//                                Text("Been here since the start of the app.")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                    .multilineTextAlignment(.leading)
+//                                    
+//                                Spacer()
+//                            }
+//                            .padding(.bottom)
+//                        }
+//                        
+//                        if degenerate {
+//                            HStack {
+//                                Button {
+//                                    selectedBadge = "degenerate"
+//                                } label: {
+//                                    Text("Degenerate")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                        .fontWeight(.semibold)
+//                                    
+//                                    
+//                                    DegenerateBadge()
+//                                }
+//                                
+//                                if selectedBadge == "degenerate" {
+//                                    Text("(Active)")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                }
+//                                Spacer()
+//                            }
+//                            
+//                            HStack {
+//                                Text("Self-explanatory.")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                    .multilineTextAlignment(.leading)
+//                                    
+//                                Spacer()
+//                            }
+//                            .padding(.bottom)
+//                        }
+//                        
+//                        if publicFigure {
+//                            HStack {
+//                                Button {
+//                                    selectedBadge = "publicFigure"
+//                                } label: {
+//                                    Text("Public Figure")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                        .fontWeight(.semibold)
+//                                    
+//                                    PublicFigureBadge()
+//                                }
+//                                
+//                                if selectedBadge == "publicFigure" {
+//                                    Text("(Active)")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                }
+//                                Spacer()
+//                            }
+//                            
+//                            HStack {
+//                                Text("Cool guy alert, wee woo wee woo.")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                    .multilineTextAlignment(.leading)
+//                                    
+//                                Spacer()
+//                            }
+//                            .padding(.bottom)
+//                        }
+//                        
+//                        if firstHundred {
+//                            HStack {
+//                                Button {
+//                                    selectedBadge = "firstHundred"
+//                                } label: {
+//                                    Text("First Hundred")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                        .fontWeight(.semibold)
+//                                    
+//                                    
+//                                    FirstHundredBadge()
+//                                }
+//                                
+//                                if selectedBadge == "firstHundred" {
+//                                    Text("(Active)")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                }
+//                                
+//                                Spacer()
+//                            }
+//                            
+//                            HStack {
+//                                Text("Also self-explanatory.")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                    .multilineTextAlignment(.leading)
+//                                    
+//                                Spacer()
+//                            }
+//                            .padding(.bottom)
+//                        }
+//                        
+//                        if noBadges {
+//                            Text("No Badges???")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .font(.largeTitle)
+//                                .padding()
+//                        }
+//                        
+//                    } else {
+//                        HStack {
+//                            Text("Alpha Tester")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .fontWeight(.semibold)
+//                            
+//                            AlphaTesterBadge()
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        HStack {
+//                            Text("Been here since the start of the app.")
+//                                .foregroundStyle(Color(.systemGray))
+//                                .multilineTextAlignment(.leading)
+//                                
+//                            Spacer()
+//                        }
+//                        .padding(.bottom)
+//                        
+//                        HStack {
+//                            Text("Degenerate")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .fontWeight(.semibold)
+//                            
+//                            
+//                            DegenerateBadge()
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        HStack {
+//                            Text("Self-explanatory.")
+//                                .foregroundStyle(Color(.systemGray))
+//                                .multilineTextAlignment(.leading)
+//                                
+//                            Spacer()
+//                        }
+//                        .padding(.bottom)
+//                        
+//                        HStack {
+//                            Text("First Hundred")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .fontWeight(.semibold)
+//                            
+//                            
+//                            FirstHundredBadge() // changed
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        HStack {
+//                            Text("Also self-explanatory.")
+//                                .foregroundStyle(Color(.systemGray))
+//                                .multilineTextAlignment(.leading)
+//                                
+//                            Spacer()
+//                        }
+//                        .padding(.bottom)
+//                        
+//                        HStack {
+//                            Text("Public Figure")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .fontWeight(.semibold)
+//                            
+//                            PublicFigureBadge()
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        HStack {
+//                            Text("Cool guy alert, wee woo wee woo.")
+//                                .foregroundStyle(Color(.systemGray))
+//                                .multilineTextAlignment(.leading)
+//                                
+//                            Spacer()
+//                        }
+//                        .padding(.bottom)
+//                        
+//                    }
+//                }
+//                .padding(.horizontal)
             }
-            .navigationTitle("Badges")
+            .navigationTitle(showEarnedBadges ? "Earned Badges" : "All Badges")
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
@@ -275,6 +548,11 @@ struct SelectBadgesView: View {
                     }
                     
                 }
+            }
+        }
+        .onDisappear {
+            Task {
+                try await UserService.updateDisplayedBadge(user: user, displayedBadge: selectedBadge)
             }
         }
     }

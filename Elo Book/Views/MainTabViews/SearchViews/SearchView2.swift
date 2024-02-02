@@ -55,15 +55,15 @@ struct SearchView2: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Text("Search")
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        .fontWeight(.bold)
-                    
-                    Spacer()
-                    
-                }
-                .padding(.horizontal)
+//                HStack {
+//                    Text("Search")
+//                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                        .fontWeight(.bold)
+//                    
+//                    Spacer()
+//                    
+//                }
+//                .padding(.horizontal)
                 
                 HStack {
                     HStack {

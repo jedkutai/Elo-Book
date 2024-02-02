@@ -9,10 +9,12 @@ import SwiftUI
 
 struct FirstHundredBadge: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Menu {
+            Text("First Hundred Users")
+        } label: {
+            Image(systemName: "checkmark.seal.fill")
+                .foregroundStyle(Color(.purple))
+                .font(.system(size: 15))
+        }
     }
-}
-
-#Preview {
-    FirstHundredBadge()
 }

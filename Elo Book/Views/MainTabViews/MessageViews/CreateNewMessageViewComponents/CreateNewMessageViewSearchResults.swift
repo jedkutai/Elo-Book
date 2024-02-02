@@ -61,7 +61,7 @@ struct CreateNewMessageViewSearchResults: View {
                                     }
                                     
                                     if let displayedBadge = filteredUser.displayedBadge {
-                                        BadgeDiplayer(badge: displayedBadge)
+                                        BadgeDisplayer(badge: displayedBadge)
                                     }
                                     
                                     Spacer()

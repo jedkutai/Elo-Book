@@ -30,8 +30,12 @@ class X: ObservableObject {
     // for notifications
     @Published var recentFollows: [Follow] = [] // load 20 most recent FetchService.fetchRecentFollowsByUser()
     @Published var recentComments: [CommentOnPostAlert] = []
+    @Published var recentReplies: [ReplyOnCommentAlert] = []
+    
     @Published var unseenFollows = false
     @Published var unseenComments = false
+    @Published var unseenReplies = false
+    
     @Published var unseenNotifications = false
     
     // deep link stuff
@@ -43,7 +47,7 @@ class X: ObservableObject {
     @Published var selectedTab: Tab = .home
     
     func setUnseenNotifications() {
-        let status = self.unseenFollows || self.unseenComments
+        let status = self.unseenFollows || self.unseenComments || self.unseenReplies
         self.unseenNotifications = status
     }
     

@@ -23,11 +23,11 @@ struct DiscoverPostsView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("Discover")
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                        .fontWeight(.bold)
+//                    Text("Discover")
+//                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                        .fontWeight(.bold)
                     
-                    Spacer()
+//                    Spacer()
                     
                     Menu {
                         Button {
@@ -70,6 +70,8 @@ struct DiscoverPostsView: View {
                                 .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
                         }
                     }
+                    
+                    Spacer()
                     
                 }
                 .padding(.horizontal)

@@ -36,7 +36,10 @@ struct CommentCellExpaned: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         ForEach(replies, id: \.id) { reply in
-                            ReplyCell(user: $user, reply: reply)
+                            VStack {
+                                ReplyCell(user: $user, reply: reply)
+                                Divider()
+                            }
                         }
                     }
                     .scrollDismissesKeyboard(.immediately)

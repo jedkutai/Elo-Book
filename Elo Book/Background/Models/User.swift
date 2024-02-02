@@ -24,6 +24,8 @@ struct User: Identifiable, Hashable, Codable {
     var displayedBadge: String?
     var fcmToken: String?
     var termsOfServiceV1: Bool?
+    var communities: Int?
+    var website: String?
     
     var score: Int = 0
     var timestamp: Timestamp = Timestamp()

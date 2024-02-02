@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AlphaTesterBadge: View {
     var body: some View {
-        Image(systemName: "checkmark.seal.fill")
-            .foregroundStyle(Color(.red))
-            .font(.system(size: 15))
+        Menu {
+            Text("Alpha Tester")
+        } label: {
+            Image(systemName: "checkmark.seal.fill")
+                .foregroundStyle(Color(.red))
+                .font(.system(size: 15))
+        }
             
     }
 }

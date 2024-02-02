@@ -50,6 +50,7 @@ class UploadComment: ObservableObject {
         try await docRef.setData(updatedData, merge: true)
         
         if post.userId != user.id {
+            
             let commentOnPostRef = Firestore.firestore().collection("users").document(post.userId).collection("commentOnPostAlerts").document(commentDocId)
             
             let alert = CommentOnPostAlert(id: commentDocId, postId: post.id, userId: user.id)

@@ -105,6 +105,15 @@ struct ProfileHeader: View {
                     }
                 }
                 
+                if let website = user.website {
+                    HStack {
+                        Link(website, destination: URL(string: website)!)
+                            .foregroundStyle(Color(.systemBlue))
+                        
+                        Spacer()
+                    }
+                }
+                
                 Button {
                     editProfile = true
                 } label: {
@@ -132,7 +141,7 @@ struct ProfileHeader: View {
             }
             .padding(.horizontal)
             .fullScreenCover(isPresented: $editProfile) {
-                EditProfileView(user: user, fullname: user.fullname ?? "", bio: user.bio ?? "")
+                EditProfileView(user: user, fullname: user.fullname ?? "", bio: user.bio ?? "", website: user.website ?? "")
                     .onDisappear {
                         editProfile = false
                         reloading.toggle()

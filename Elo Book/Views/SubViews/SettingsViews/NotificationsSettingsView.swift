@@ -117,87 +117,87 @@ struct NotificationsSettingsView: View {
                         
                         
                         
-                        HStack {
-                            Text("Comment Alerts")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .fontWeight(.semibold)
-                            
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            
-                            
-                            Button {
-                                likedCommentAlerts.toggle()
-                            } label: {
-                                Text("New Like")
-                                    .foregroundStyle(Color(.systemGray))
-                                
-                                Spacer()
-                                
-                                if likedCommentAlerts {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(Color(.green))
-                                } else {
-                                    Image(systemName: "circle")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                                }
-                            }
-                        }
-                        .padding(.leading)
-                        
-                        HStack {
-                            Text("Community Alerts")
-                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                .fontWeight(.semibold)
-                            
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            
-                            
-                            Button {
-                                communityInviteAlerts.toggle()
-                            } label: {
-                                Text("New Invite")
-                                    .foregroundStyle(Color(.systemGray))
-                                
-                                Spacer()
-                                
-                                if communityInviteAlerts {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(Color(.green))
-                                } else {
-                                    Image(systemName: "circle")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                                }
-                            }
-                        }
-                        .padding(.leading)
-                        
-                        HStack {
-                            
-                            
-                            Button {
-                                communityMessageAlerts.toggle()
-                            } label: {
-                                Text("New Message")
-                                    .foregroundStyle(Color(.systemGray))
-                                
-                                Spacer()
-                                
-                                if communityMessageAlerts {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .foregroundStyle(Color(.green))
-                                } else {
-                                    Image(systemName: "circle")
-                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                                }
-                            }
-                        }
-                        .padding(.leading)
+//                        HStack {
+//                            Text("Comment Alerts")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .fontWeight(.semibold)
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        HStack {
+//                            
+//                            
+//                            Button {
+//                                likedCommentAlerts.toggle()
+//                            } label: {
+//                                Text("New Like")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                
+//                                Spacer()
+//                                
+//                                if likedCommentAlerts {
+//                                    Image(systemName: "checkmark.circle.fill")
+//                                        .foregroundStyle(Color(.green))
+//                                } else {
+//                                    Image(systemName: "circle")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                                }
+//                            }
+//                        }
+//                        .padding(.leading)
+//                        
+//                        HStack {
+//                            Text("Community Alerts")
+//                                .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+//                                .fontWeight(.semibold)
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        HStack {
+//                            
+//                            
+//                            Button {
+//                                communityInviteAlerts.toggle()
+//                            } label: {
+//                                Text("New Invite")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                
+//                                Spacer()
+//                                
+//                                if communityInviteAlerts {
+//                                    Image(systemName: "checkmark.circle.fill")
+//                                        .foregroundStyle(Color(.green))
+//                                } else {
+//                                    Image(systemName: "circle")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                                }
+//                            }
+//                        }
+//                        .padding(.leading)
+//                        
+//                        HStack {
+//                            
+//                            
+//                            Button {
+//                                communityMessageAlerts.toggle()
+//                            } label: {
+//                                Text("New Message")
+//                                    .foregroundStyle(Color(.systemGray))
+//                                
+//                                Spacer()
+//                                
+//                                if communityMessageAlerts {
+//                                    Image(systemName: "checkmark.circle.fill")
+//                                        .foregroundStyle(Color(.green))
+//                                } else {
+//                                    Image(systemName: "circle")
+//                                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                                }
+//                            }
+//                        }
+//                        .padding(.leading)
                          
                     }
                     .padding(.horizontal)

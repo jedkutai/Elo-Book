@@ -41,7 +41,7 @@ struct BlockedUserCell: View {
                                 }
                                 
                                 if let displayedBadege = blockedUser.displayedBadge {
-                                    BadgeDiplayer(badge: displayedBadege)
+                                    BadgeDisplayer(badge: displayedBadege)
                                 }
                             }
                         }

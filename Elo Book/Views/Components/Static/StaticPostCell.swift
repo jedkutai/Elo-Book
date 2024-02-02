@@ -40,7 +40,7 @@ struct StaticPostCell: View {
                             }
                             
                             if let displayedBadege = postUser.displayedBadge {
-                                BadgeDiplayer(badge: displayedBadege)
+                                BadgeDisplayer(badge: displayedBadege)
                             }
                         }
                         

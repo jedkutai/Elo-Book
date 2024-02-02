@@ -1,5 +1,5 @@
 //
-//  BadgeDiplayer.swift
+//  BadgeDisplayer.swift
 //  Elo Book
 //
 //  Created by Jed Kutai on 1/9/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BadgeDiplayer: View {
+struct BadgeDisplayer: View {
     let badge: String
     
     var body: some View {

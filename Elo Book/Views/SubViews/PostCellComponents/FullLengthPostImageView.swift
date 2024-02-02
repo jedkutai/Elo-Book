@@ -15,22 +15,19 @@ struct FullLengthPostImageView: View {
     private let imageWidth = UIScreen.main.bounds.width * 0.85
     var body: some View {
         ScrollViewReader { value in
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {
-                    VStack {
-                        ForEach(Array(imageUrls.enumerated()), id: \.element ) { index, imageUrl in
-                            KFImage(URL(string: imageUrl))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: imageWidth)
-                                .id(index)
-                                .onTapGesture {
-                                    target = 0
-                                    fullLength.toggle()
-                                }
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack {
+                    ForEach(Array(imageUrls.enumerated()), id: \.element ) { index, imageUrl in
+                        KFImage(URL(string: imageUrl))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: imageWidth)
+                            .id(index)
+                            .onTapGesture {
+                                target = 0
+                                fullLength.toggle()
+                            }
 
-                        }
-                        
                     }
                 }
                 .scrollTargetLayout()

@@ -13,5 +13,6 @@ struct UserBadgeSettings: Identifiable, Hashable, Codable {
     var publicFigure: Bool?
     var alphaTester: Bool?
     var degenerate: Bool?
+    var firstHundred: Bool?
     
 }

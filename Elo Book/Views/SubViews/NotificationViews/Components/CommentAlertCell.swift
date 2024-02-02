@@ -33,13 +33,6 @@ struct CommentAlertCell: View {
                                 HStack {
                                     SquareProfilePicture(user: commentUser, size: .xSmall)
                                     
-                                    if let fullname = commentUser.fullname {
-                                        Text(fullname)
-                                            .font(.footnote)
-                                            .fontWeight(.semibold)
-                                            .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                                    }
-                                    
                                     if let username = commentUser.username {
                                         Text(username)
                                             .font(.footnote)
@@ -48,7 +41,7 @@ struct CommentAlertCell: View {
                                     }
                                     
                                     if let badge = commentUser.displayedBadge {
-                                        BadgeDiplayer(badge: badge)
+                                        BadgeDisplayer(badge: badge)
                                     }
                                     
                                 }
@@ -83,20 +76,6 @@ struct CommentAlertCell: View {
                                 Spacer()
                             }
                             .padding(.horizontal, 30)
-    //                        NavigationLink {
-    //                            ExpandedPostCellFromCommentAlert(user: user, commentAlert: commentAlert, targetComment: comment)
-    //                        } label: {
-    //                            HStack {
-    //                                Text("\(caption)")
-    //                                    .multilineTextAlignment(.leading)
-    //                                    .foregroundColor(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-    //                                    .lineLimit(1)
-    //                                    .truncationMode(.tail)
-    //
-    //                                Spacer()
-    //                            }
-    //                            .padding(.horizontal, 30)
-    //                        }
                         }
                         
                         Divider()
@@ -133,7 +112,7 @@ struct CommentAlertCell: View {
                 .onAppear {
                     Task {
                         do {
-                            comment = try await FetchService.fetchPostByPostAndCommentId(postId: commentAlert.postId, commentId: commentAlert.id)
+                            comment = try await FetchService.fetchCommentByCommentAlert(commentAlert: commentAlert)
                             if comment == nil {
                                 failed = true
                             } else {

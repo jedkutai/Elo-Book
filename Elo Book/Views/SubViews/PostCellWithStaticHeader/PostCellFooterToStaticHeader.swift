@@ -19,7 +19,6 @@ struct PostCellFooterToStaticHeader: View {
     
     @State private var shareLink = ""
     @State private var likeCoolDown = false
-    @State private var sharePost = false
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
         HStack(spacing: 8) {
@@ -30,12 +29,12 @@ struct PostCellFooterToStaticHeader: View {
                     likeCoolDown = true
                     Task {
                         if likes.contains(where: { $0.userId == user.id }) { // already liked so unlike
-                            try await PostService.unlikePost(postId: post.id, userId: user.id)
+                            try await PostService.unlikePost(post: post, user: user)
                             if let indexToRemove = likes.firstIndex(where: {$0.userId == user.id}) {
                                 likes.remove(at: indexToRemove)
                             }
                         } else {
-                            try await PostService.likePost(postId: post.id, userId: user.id)
+                            try await PostService.likePost(post: post, user: user)
                             likes.append(PostLike(id: "", postId: post.id, userId: user.id))
                         }
                         likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)
@@ -79,8 +78,8 @@ struct PostCellFooterToStaticHeader: View {
             Spacer()
 
             
-            Button {
-                sharePost.toggle()
+            NavigationLink {
+                SharePostView(user: user, postUser: postUser, postToShare: post)
             } label: {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
@@ -97,9 +96,6 @@ struct PostCellFooterToStaticHeader: View {
         }
         .padding(.top, 5)
         .padding(.horizontal, 8.0)
-        .fullScreenCover(isPresented: $sharePost) {
-            SharePostView(user: user, postUser: postUser, postToShare: post)
-        }
     }
 }
 

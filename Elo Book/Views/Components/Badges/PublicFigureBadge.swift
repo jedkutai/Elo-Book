@@ -9,8 +9,12 @@ import SwiftUI
 
 struct PublicFigureBadge: View {
     var body: some View {
-        Image(systemName: "checkmark.seal.fill")
-            .foregroundStyle(Color(.blue))
-            .font(.system(size: 15))
+        Menu {
+            Text("Public Figure")
+        } label: {
+            Image(systemName: "checkmark.seal.fill")
+                .foregroundStyle(Color(.blue))
+                .font(.system(size: 15))
+        }
     }
 }

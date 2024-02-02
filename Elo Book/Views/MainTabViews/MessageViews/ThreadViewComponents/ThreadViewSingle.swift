@@ -183,7 +183,7 @@ struct ThreadViewSingle: View {
                         }
                         
                         if let displayedBadge = threadUser.displayedBadge {
-                            BadgeDiplayer(badge: displayedBadge)
+                            BadgeDisplayer(badge: displayedBadge)
                         }
                         
                     }

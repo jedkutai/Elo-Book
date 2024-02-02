@@ -39,7 +39,7 @@ class UploadReply: ObservableObject {
         try await docRef.setData(updatedData, merge: true)
         
         if comment.userId != user.id {
-            let replyOnCommentRef = Firestore.firestore().collection("users").document(comment.postId).collection("replyOnCommentAlerts").document(replyDocId)
+            let replyOnCommentRef = Firestore.firestore().collection("users").document(comment.userId).collection("replyOnCommentAlerts").document(replyDocId)
             
             let alert = ReplyOnCommentAlert(id: replyDocId, commentId: comment.id, postId: comment.postId, userId: user.id)
             guard let encodedAlert = try? Firestore.Encoder().encode(alert) else { return }

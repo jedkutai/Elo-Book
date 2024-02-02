@@ -127,6 +127,13 @@ extension AppDelegate {
   }
 }
 
+extension UINavigationController {
+    // Remove back button text
+    open override func viewWillLayoutSubviews() {
+        navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+}
+
 @main
 struct Elo_BookApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

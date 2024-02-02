@@ -25,12 +25,12 @@ struct PostCellExpandedFooter: View {
                     likeCoolDown = true
                     Task {
                         if likes.contains(where: { $0.userId == user.id }) { // already liked so unlike
-                            try await PostService.unlikePost(postId: post.id, userId: user.id)
+                            try await PostService.unlikePost(post: post, user: user)
                             if let indexToRemove = likes.firstIndex(where: {$0.userId == user.id}) {
                                 likes.remove(at: indexToRemove)
                             }
                         } else {
-                            try await PostService.likePost(postId: post.id, userId: user.id)
+                            try await PostService.likePost(post: post, user: user)
                             likes.append(PostLike(id: "", postId: post.id, userId: user.id))
                         }
                         likes = try await FetchService.fetchPostLikesByPostId(postId: post.id)

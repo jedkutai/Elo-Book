@@ -53,7 +53,7 @@ struct CreateNewMessageViewReceivingUsers: View {
                                     }
                                     
                                     if let displayedBadge = receivingUser.displayedBadge {
-                                        BadgeDiplayer(badge: displayedBadge)
+                                        BadgeDisplayer(badge: displayedBadge)
                                     }
                                     
                                     Spacer()

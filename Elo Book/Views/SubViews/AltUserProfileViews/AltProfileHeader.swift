@@ -111,6 +111,15 @@ struct AltProfileHeader: View {
                         }
                     }
                     
+                    if let website = viewedUser.website {
+                        HStack {
+                            Link(website, destination: URL(string: website)!)
+                                .foregroundStyle(Color(.systemBlue))
+                            
+                            Spacer()
+                        }
+                    }
+                    
                     if user.id != viewedUser.id {
                         if following {
                             Button {

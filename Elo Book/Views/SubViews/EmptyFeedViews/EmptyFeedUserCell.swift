@@ -46,7 +46,7 @@ struct EmptyFeedUserCell: View {
                         }
                         
                         if let displayedBadge = viewedUser.displayedBadge {
-                            BadgeDiplayer(badge: displayedBadge)
+                            BadgeDisplayer(badge: displayedBadge)
                         }
                     }
                     

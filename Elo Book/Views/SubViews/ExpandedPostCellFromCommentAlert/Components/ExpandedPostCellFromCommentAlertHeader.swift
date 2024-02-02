@@ -45,7 +45,7 @@ struct ExpandedPostCellFromCommentAlertHeader: View {
                     }
                     
                     if let badge = user.displayedBadge {
-                        BadgeDiplayer(badge: badge)
+                        BadgeDisplayer(badge: badge)
                     }
                 }
                 

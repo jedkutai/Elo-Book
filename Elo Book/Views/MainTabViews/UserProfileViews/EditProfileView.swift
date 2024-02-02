@@ -11,6 +11,7 @@ struct EditProfileView: View {
     @State var user: User
     @State var fullname: String
     @State var bio: String
+    @State var website: String
     
     @Environment(\.dismiss) private var dismiss
     @StateObject private var uploadProfileImage = UploadProfileImage()
@@ -76,6 +77,17 @@ struct EditProfileView: View {
                 }
                 .padding(.horizontal)
                 
+                HStack {
+                    Text("Website: ")
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                    
+                    TextField("Add a link...", text: $website, axis: .vertical)
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                }
+                .padding(.horizontal)
+                
                 Spacer()
                 
             }
@@ -96,7 +108,7 @@ struct EditProfileView: View {
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    if fullname != user.fullname || bio != user.bio || uploadProfileImage.selectedImage != nil {
+                    if fullname != user.fullname || bio != user.bio || website != user.website || uploadProfileImage.selectedImage != nil {
                         Button {
                             updatingProfile = true
                             Task {
@@ -110,6 +122,10 @@ struct EditProfileView: View {
                                 
                                 if bio != user.bio {
                                     try await UserService.changeBio(uid: user.id, newBio: bio)
+                                }
+                                
+                                if website != user.website {
+                                    try await UserService.changeWebsite(uid: user.id, newLink: website)
                                 }
                             }
                             dismiss()

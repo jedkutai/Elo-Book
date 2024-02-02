@@ -68,6 +68,11 @@ struct UserService {
         try await userRef.updateData(["bio": newBio])
     }
     
+    static func changeWebsite(uid: String, newLink: String) async throws {
+        let userRef = Firestore.firestore().collection("users").document(uid)
+        try await userRef.updateData(["website": newLink])
+    }
+    
     static func changeProfileImage(uid: String, newProfileImageUrl: String) async throws {
         let userRef = Firestore.firestore().collection("users").document(uid)
         try await userRef.updateData(["profileImageUrl": newProfileImageUrl])
@@ -92,7 +97,7 @@ struct UserService {
             let docRef = Firestore.firestore().collection("users").document(userToFollowId)
             let document = try await docRef.getDocument()
             var user = try document.data(as: User.self)
-            user.score += 1
+            user.score += 100
             let updatedData = try Firestore.Encoder().encode(user)
             try await docRef.setData(updatedData, merge: true)
         }
@@ -109,17 +114,12 @@ struct UserService {
         if let document = querySnapshot.documents.first {
             let docId = document.documentID
             
-//            let followingRef = Firestore.firestore().collection("users").document(userId).collection("following").document(docId)
-//            let followersRef = Firestore.firestore().collection("users").document(userToUnfollow).collection("followers").document(docId)
-            
             try await followRef.document(docId).delete()
-//            try await followingRef.delete()
-//            try await followersRef.delete()
             
             let docRef = Firestore.firestore().collection("users").document(userToUnfollow)
             let document = try await docRef.getDocument()
             var user = try document.data(as: User.self)
-            user.score -= 1
+            user.score -= 100
             let updatedData = try Firestore.Encoder().encode(user)
             try await docRef.setData(updatedData, merge: true)
         }
@@ -151,7 +151,7 @@ struct UserService {
     }
     
     static func startUserBadges(user: User) async throws {
-        let userBadges = UserBadgeSettings(id: user.id, publicFigure: false, alphaTester: false, degenerate: false)
+        let userBadges = UserBadgeSettings(id: user.id, publicFigure: false, alphaTester: false, degenerate: false, firstHundred: false)
         guard let encodedBadges = try? Firestore.Encoder().encode(userBadges) else { return }
         try? await Firestore.firestore().collection("users").document(user.id).collection("settings").document("badges").setData(encodedBadges)
     }

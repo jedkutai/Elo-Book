@@ -33,6 +33,17 @@ struct NotificationService {
         
     }
     
+    static func replyOnCommentAlertSeen(user: User, replyAlert: ReplyOnCommentAlert) async throws {
+        let replyOnCommentRef = Firestore.firestore().collection("users").document(user.id).collection("replyOnCommentAlerts").document(replyAlert.id)
+        
+        let snapshot = try await replyOnCommentRef.getDocument()
+        var freshAlert = try snapshot.data(as: ReplyOnCommentAlert.self)
+        freshAlert.notificationSeen = true
+        let updatedData = try Firestore.Encoder().encode(freshAlert)
+        try await replyOnCommentRef.setData(updatedData, merge: true)
+        
+    }
+    
 }
     
 

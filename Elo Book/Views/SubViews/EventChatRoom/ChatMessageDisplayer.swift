@@ -22,7 +22,7 @@ struct ChatMessageDisplayer: View {
                 }
                 
                 if let displayedBadge = chat.displayedBadge {
-                    BadgeDiplayer(badge: displayedBadge)
+                    BadgeDisplayer(badge: displayedBadge)
                 }
                 
                 Spacer()

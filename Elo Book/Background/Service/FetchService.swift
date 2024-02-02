@@ -80,9 +80,15 @@ struct FetchService {
     }
     
     
-    static func fetchPostByPostAndCommentId(postId: String, commentId: String) async throws -> Comment {
-        let snapshot = try await Firestore.firestore().collection("posts").document(postId).collection("comments").document(commentId).getDocument()
+    static func fetchCommentByCommentAlert(commentAlert: CommentOnPostAlert) async throws -> Comment {
+        let snapshot = try await Firestore.firestore().collection("posts").document(commentAlert.postId).collection("comments").document(commentAlert.id).getDocument()
         return try snapshot.data(as: Comment.self)
+        
+    }
+    
+    static func fetchReplyByRelpyAlert(replyAlert: ReplyOnCommentAlert) async throws -> Reply {
+        let snapshot = try await Firestore.firestore().collection("posts").document(replyAlert.postId).collection("comments").document(replyAlert.commentId).collection("replies").document(replyAlert.id).getDocument()
+        return try snapshot.data(as: Reply.self)
         
     }
     
@@ -207,8 +213,12 @@ struct FetchService {
         let follows = snapshot.documents.compactMap({ try? $0.data(as: Follow.self) })
         
         for follow in follows {
-            let user = try await self.fetchUserById(withUid: follow.followingId)
-            users.append(user)
+            do {
+                let user = try await self.fetchUserById(withUid: follow.followingId)
+                users.append(user)
+            } catch {
+                // skip
+            }
         }
         
         let sortedUsers = users.sorted { (user1, user2) in
@@ -230,8 +240,12 @@ struct FetchService {
         let follows = snapshot.documents.compactMap({ try? $0.data(as: Follow.self) })
         
         for follow in follows {
-            let user = try await self.fetchUserById(withUid: follow.followerId)
-            users.append(user)
+            do {
+                let user = try await self.fetchUserById(withUid: follow.followerId)
+                users.append(user)
+            } catch {
+                // skip
+            }
         }
         
         let sortedUsers = users.sorted { (user1, user2) in
@@ -272,6 +286,20 @@ struct FetchService {
         
         
         return commentAlerts
+    }
+    
+    static func fetchRecentReplyAlertsByUser(user: User) async throws -> [ReplyOnCommentAlert] {
+        let thirtyDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date())!
+        
+        let query = Firestore.firestore().collection("users").document(user.id).collection("replyOnCommentAlerts")
+            .whereField("timestamp", isGreaterThan: thirtyDaysAgo)
+            .order(by: "timestamp", descending: true)
+            .limit(to: 20)
+        
+        let snapshot = try await query.getDocuments()
+        let replyAlerts = snapshot.documents.compactMap({ try? $0.data(as: ReplyOnCommentAlert.self) })
+        
+        return replyAlerts
     }
     
     
@@ -392,19 +420,14 @@ struct FetchService {
     }
     
     static func fetchPostByPostId(postId: String) async throws -> Post {
-//        let query = Firestore.firestore().collection("posts")
-//            .whereField("id", isEqualTo: postId)
-//            .limit(to: 1)
-//        
-//        let snapshot = try await query.getDocuments()
-//        
-//        let posts = snapshot.documents.compactMap({ try? $0.data(as: Post.self) })
-//        
-//        return posts[0]
         let snapshot = try await Firestore.firestore().collection("posts").document(postId).getDocument()
         return try snapshot.data(as: Post.self)
     }
     
+    static func fetchCommentByPostAndCommentId(postId: String, commentId: String) async throws -> Comment {
+        let snapshot = try await Firestore.firestore().collection("posts").document(postId).collection("comments").document(commentId).getDocument()
+        return try snapshot.data(as: Comment.self)
+    }
     
     static func fetchCommentsByPostId(postId: String) async throws -> [Comment] {
         

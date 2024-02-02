@@ -40,7 +40,7 @@ struct FollowNotificationCell: View {
                             }
                             
                             if let displayedbadge = follower.displayedBadge {
-                                BadgeDiplayer(badge: displayedbadge)
+                                BadgeDisplayer(badge: displayedbadge)
                             }
                             
                             Spacer()

@@ -9,9 +9,13 @@ import SwiftUI
 
 struct DegenerateBadge: View {
     var body: some View {
-        Image(systemName: "checkmark.seal.fill")
-            .foregroundStyle(Color(.systemYellow))
-            .font(.system(size: 15))
+        Menu {
+            Text("Degenerate")
+        } label: {
+            Image(systemName: "checkmark.seal.fill")
+                .foregroundStyle(Color(.systemYellow))
+                .font(.system(size: 15))
+        }
     }
 }
 

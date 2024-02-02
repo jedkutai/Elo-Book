@@ -61,7 +61,7 @@ struct ReplyCell: View {
                                         }
                                         
                                         if let badge = replyUser.displayedBadge {
-                                            BadgeDiplayer(badge: badge)
+                                            BadgeDisplayer(badge: badge)
                                         }
                                     }
                                 }
@@ -185,7 +185,7 @@ struct ReplyCell: View {
                     
                     
                     
-                    Divider()
+//                    Divider()
                 }
                 .padding(.horizontal)
                 

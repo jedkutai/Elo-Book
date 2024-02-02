@@ -128,8 +128,8 @@ struct AltUserProfileView: View {
                                     blockAlert.toggle()
                                 } label: {
                                     HStack {
-                                        Image(systemName: "circle.slash")
                                         Text("Block User")
+                                            .font(.footnote)
                                     }
                                     .foregroundStyle(Color(.systemRed))
                                         
@@ -158,7 +158,7 @@ struct AltUserProfileView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         
                         if let badge = viewedUser.displayedBadge {
-                            BadgeDiplayer(badge: badge)
+                            BadgeDisplayer(badge: badge)
                         }
                     }
                 }

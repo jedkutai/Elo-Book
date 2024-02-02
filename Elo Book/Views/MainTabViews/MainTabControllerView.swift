@@ -9,9 +9,10 @@ import SwiftUI
 
 enum Tab {
     case home
-    case search
+    case discover
     case profile
     case messages
+    case communities
 }
 
 struct MainTabControllerView: View {
@@ -62,10 +63,19 @@ struct MainTabControllerView: View {
                     .tabItem {
                         VStack {
                             Image(systemName: "magnifyingglass")
-                            Text("Search")
+                            Text("Discover")
                         }
                     }
-                    .tag(Tab.search)
+                    .tag(Tab.discover)
+                
+//                CommunityView(user: $user)
+//                    .tabItem {
+//                        VStack {
+//                            Image(systemName: "rectangle.3.group")
+//                            Text("Communities")
+//                        }
+//                    }
+//                    .tag(Tab.communities)
                 
                 UserProfileView(user: $user, refresh: $refresh)
                     .tabItem {

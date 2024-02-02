@@ -59,7 +59,7 @@ struct CommentCell: View {
                                         }
                                         
                                         if let badge = commentUser.displayedBadge {
-                                            BadgeDiplayer(badge: badge)
+                                            BadgeDisplayer(badge: badge)
                                         }
                                     }
                                 }
@@ -201,12 +201,34 @@ struct CommentCell: View {
                                     .foregroundStyle(Color(.systemGray))
                             }
                         } else {
-                            Divider()
-                                .frame(height: 1)
+                            HStack {
+                                Rectangle()
+                                    .frame(width: 50, height: 1)
+                                    .foregroundStyle(Color(.systemGray))
+                                
+                                Text("Reply")
+                                    .font(.footnote)
+                                    .foregroundStyle(Color(.systemGray))
+                                
+                                Rectangle()
+                                    .frame(width: 50, height: 1)
+                                    .foregroundStyle(Color(.systemGray))
+                            }
                         }
                     } else {
-                        Divider()
-                            .frame(height: 1)
+                        HStack {
+                            Rectangle()
+                                .frame(width: 50, height: 1)
+                                .foregroundStyle(Color(.systemGray))
+                            
+                            Text("Reply")
+                                .font(.footnote)
+                                .foregroundStyle(Color(.systemGray))
+                            
+                            Rectangle()
+                                .frame(width: 50, height: 1)
+                                .foregroundStyle(Color(.systemGray))
+                        }
                     }
                 }
                 .padding(.top, 10)

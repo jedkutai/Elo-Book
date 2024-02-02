@@ -10,15 +10,31 @@ import SwiftUI
 struct DiscoverViewController: View {
     @Binding var user: User
     
+    @State private var selectedTab = 1
+    @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         NavigationStack {
-            TabView {
-                SearchView2(user: $user)
+            VStack {
+                HStack {
+                    Text(selectedTab == 1 ? "Search" : "Discover")
+                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
+                        .fontWeight(.bold)
+                    
+                    Spacer()
+                    
+                }
+                .padding(.horizontal)
                 
-                DiscoverPostsView(user: $user)
+                TabView(selection: $selectedTab) {
+                    SearchView2(user: $user)
+                        .tag(1)
+                    
+                    DiscoverPostsView(user: $user)
+                        .tag(2)
+                }
+                .tabViewStyle(.page)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
             }
-            .tabViewStyle(.page)
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
         }
     }
 }

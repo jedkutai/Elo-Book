@@ -18,7 +18,7 @@ struct UserResultCell: View {
             
         } else {
             HStack {
-                SquareProfilePicture(user: user, size: .small)
+                SquareProfilePicture(user: user, size: .shmedium)
                 
                 VStack {
                     if let fullname = user.fullname {
@@ -39,7 +39,7 @@ struct UserResultCell: View {
                                 .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                             
                             if let displayedBadge = user.displayedBadge {
-                                BadgeDiplayer(badge: displayedBadge)
+                                BadgeDisplayer(badge: displayedBadge)
                             }
                             
                             Spacer()

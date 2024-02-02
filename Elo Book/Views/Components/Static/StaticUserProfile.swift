@@ -28,7 +28,7 @@ struct StaticUserProfile: View {
                 }
                 
                 if let badge = userToShare.displayedBadge {
-                    BadgeDiplayer(badge: badge)
+                    BadgeDisplayer(badge: badge)
                 }
                 
                 

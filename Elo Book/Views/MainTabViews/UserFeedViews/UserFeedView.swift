@@ -55,7 +55,7 @@ struct UserFeedView: View {
                         Spacer()
                         
                         NavigationLink {
-                            AddContactsView(user: $user).navigationBarBackButtonHidden()
+                            AddContactsView(user: $user)
                         } label: {
                             VStack {
                                 Spacer()
@@ -211,27 +211,9 @@ struct UserFeedView: View {
             
             x.recentFollows = try await FetchService.fetchRecentFollowsByUser(user: user)
             x.recentComments = try await FetchService.fetchRecentCommentAlertsByUser(user: user)
-            if let mostRecentFollow = x.recentFollows.first {
-                if let seen = mostRecentFollow.notificationSeen {
-                    if !seen {
-                        x.unseenFollows = true
-                    }
-                } else {
-                    x.unseenFollows = true
-                }
-            }
+            x.recentReplies = try await FetchService.fetchRecentReplyAlertsByUser(user: user)
             
-            if let mostRecentComment = x.recentComments.first {
-                if let seen = mostRecentComment.notificationSeen {
-                    if !seen {
-                        x.unseenComments = true
-                    }
-                } else {
-                    x.unseenComments = true
-                }
-            }
-            
-            x.setUnseenNotifications()
+            self.checkForNotifications()
             
             x.blocked = try await FetchService.fectchBlocksViaUserId(userId: user.id)
             x.blockedBy = try await FetchService.fectchBlockedByViaUserId(userId: user.id)
@@ -246,5 +228,39 @@ struct UserFeedView: View {
             userFeedPosts = try await FetchService.fetchMoreFeedPostsByUser(user: user, userFeedPosts: userFeedPosts)
             loadingMorePosts = false
         }
+    }
+    
+    private func checkForNotifications() {
+        if let mostRecentFollow = x.recentFollows.first {
+            if let seen = mostRecentFollow.notificationSeen {
+                if !seen {
+                    x.unseenFollows = true
+                }
+            } else {
+                x.unseenFollows = true
+            }
+        }
+        
+        if let mostRecentComment = x.recentComments.first {
+            if let seen = mostRecentComment.notificationSeen {
+                if !seen {
+                    x.unseenComments = true
+                }
+            } else {
+                x.unseenComments = true
+            }
+        }
+        
+        if let mostRecentReplies = x.recentReplies.first {
+            if let seen = mostRecentReplies.notificationSeen {
+                if !seen {
+                    x.unseenReplies = true
+                }
+            } else {
+                x.unseenReplies = true
+            }
+        }
+        
+        x.setUnseenNotifications()
     }
 }

@@ -83,7 +83,7 @@ struct LoginView: View {
                     Spacer()
                     
                     NavigationLink {
-                        ResetPasswordView().navigationBarBackButtonHidden()
+                        ResetPasswordView()
                     } label: {
                         Text("Forgot password?")
                             .foregroundStyle(Color(.systemBlue))

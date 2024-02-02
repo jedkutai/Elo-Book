@@ -16,17 +16,17 @@ struct ResetPasswordView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    .padding(.horizontal)
-                    
-                    Spacer()
-                }
+//                HStack {
+//                    Button {
+//                        dismiss()
+//                    } label: {
+//                        Image(systemName: "chevron.left")
+//                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
+//                    }
+//                    .padding(.horizontal)
+//                    
+//                    Spacer()
+//                }
                 
                 Spacer()
                 

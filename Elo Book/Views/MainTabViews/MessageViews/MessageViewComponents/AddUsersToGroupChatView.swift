@@ -61,7 +61,7 @@ struct AddUsersToGroupChatView: View {
                                             }
                                             
                                             if let displayedBadge = newUser.displayedBadge {
-                                                BadgeDiplayer(badge: displayedBadge)
+                                                BadgeDisplayer(badge: displayedBadge)
                                             }
                                             
                                             Spacer()
@@ -124,7 +124,7 @@ struct AddUsersToGroupChatView: View {
                                                 }
                                                 
                                                 if let displayedBadge = filteredUser.displayedBadge {
-                                                    BadgeDiplayer(badge: displayedBadge)
+                                                    BadgeDisplayer(badge: displayedBadge)
                                                 }
                                                 
                                                 Spacer()

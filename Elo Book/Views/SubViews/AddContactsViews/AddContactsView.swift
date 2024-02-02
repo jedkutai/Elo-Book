@@ -23,6 +23,7 @@ struct AddContactsView: View {
     @State private var canContinue = true
     @State private var phoneNumber = ""
     @State private var searchText = ""
+    @State private var navigationTitle = ""
     
     var filteredContacts: [CNContact] {
         guard !searchText.isEmpty else { return contacts }
@@ -35,20 +36,25 @@ struct AddContactsView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     var body: some View {
-        Group {
-            if loadingContacts {
-                loadingPage
-            } else {
-                if allowedAccess {
-                    if user.phoneNumber == nil {
-                        addPhoneNumber
-                    } else {
-                        displayContacts
-                    }
+        
+        NavigationStack {
+            Group {
+                if loadingContacts {
+                    loadingPage
                 } else {
-                    beggingPage
+                    if allowedAccess {
+                        if user.phoneNumber == nil {
+                            addPhoneNumber
+                        } else {
+                            displayContacts
+                        }
+                    } else {
+                        beggingPage
+                    }
                 }
             }
+            .navigationTitle(navigationTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             fetchContacts()
@@ -58,66 +64,18 @@ struct AddContactsView: View {
     
     var loadingPage: some View {
         VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
-                
-                Spacer()
-                Text("Find Contacts")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                Spacer()
-                
-                
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(Color(.clear))
-                
-            }
-            
-            Divider()
-                .frame(height: 1)
-            
-            Spacer()
             ProgressView()
-            Spacer()
             
         }
         .padding(.horizontal)
         .onAppear {
+            navigationTitle = "Find Contacts"
             fetchContacts()
         }
     }
     
     var addPhoneNumber: some View {
         VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
-                
-                Spacer()
-                Text("Add Phone Number")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                Spacer()
-                
-                
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(Color(.clear))
-                
-            }
-            
-            Divider()
-                .frame(height: 1)
             
             ScrollView(.vertical, showsIndicators: false) {
                 
@@ -173,31 +131,14 @@ struct AddContactsView: View {
             }
         }
         .padding(.horizontal)
+        .onAppear {
+            navigationTitle = "Add Phone Number"
+        }
     }
     
     var displayContacts: some View {
         NavigationStack  {
             VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                    }
-                    
-                    Spacer()
-                    Text("Found Contacts")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                    Spacer()
-                    
-                    
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(Color(.clear))
-                    
-                }
                 
                 HStack {
                     HStack {
@@ -229,10 +170,8 @@ struct AddContactsView: View {
                     )
                     
                 }
-                .padding(.horizontal)
                 
-                Divider()
-                    .frame(height: 1)
+                
                 
                 ScrollView(.vertical) {
                     ForEach(filteredContacts, id: \.identifier) { contact in
@@ -240,38 +179,19 @@ struct AddContactsView: View {
                         if !contact.givenName.isEmpty {
                             ContactAccountsDisplayer(contact: contact, user: $user)
                             
-                            Divider()
-                                .frame(height: 1)
                         }
                     }
                 }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 10)
+            .onAppear {
+                navigationTitle = "Found Friends"
+            }
         }
     }
     
     var beggingPage: some View {
         VStack {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundStyle(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-                }
-                
-                Spacer()
-                Text("Find Contacts")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
-                Spacer()
-                
-                
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(Color(.clear))
-                
-            }
             Spacer()
             
             Image(systemName: "waveform.path.ecg")
@@ -305,6 +225,9 @@ struct AddContactsView: View {
             Spacer()
         }
         .padding(.horizontal)
+        .onAppear {
+            navigationTitle = "Find Contacts"
+        }
     }
     
     func fetchContacts() {

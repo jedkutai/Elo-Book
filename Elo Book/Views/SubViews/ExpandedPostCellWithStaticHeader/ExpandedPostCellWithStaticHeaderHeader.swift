@@ -37,7 +37,7 @@ struct ExpandedPostCellWithStaticHeaderHeader: View {
                 }
                 
                 if let badge = postUser.displayedBadge {
-                    BadgeDiplayer(badge: badge)
+                    BadgeDisplayer(badge: badge)
                 }
             }
             
