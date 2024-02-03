@@ -58,16 +58,25 @@ struct LoginView: View {
                     .disableAutocorrection(true)
                     .modifier(IGTextFieldModifier())
                     .padding(.bottom, 15)
+                    .onTapGesture {
+                        hideKeyboard()
+                    }
                 
                 
                 if showPassword {
                     TextField("Password", text: $password)
                         .textContentType(.password)
                         .modifier(IGTextFieldModifier())
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
                 } else {
                     SecureField("Password", text: $password)
                         .textContentType(.password)
                         .modifier(IGTextFieldModifier())
+                        .onTapGesture {
+                            hideKeyboard()
+                        }
                 }
                 
                 
@@ -96,26 +105,31 @@ struct LoginView: View {
                         canSubmit = false
 
                         Task {
-                            userId = try await AuthService.login(withEmail: email, password: password)
-                            if userId.hasPrefix("Error:") {
-                                if userId == ErrorMessageStrings.genericErrorMessage || userId == ErrorMessageStrings.invalidPassword {
-                                    canSubmit = true
-                                    invalidLogin = true
-                                } else if userId == ErrorMessageStrings.tooManyAttempts {
-                                    tooManyAttempts = true
-                                    invalidLogin = false
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 120.0) {
-                                        tooManyAttempts = false
+                            do {
+                                userId = try await AuthService.login(withEmail: email, password: password)
+                                if userId.hasPrefix("Error:") {
+                                    if userId == ErrorMessageStrings.genericErrorMessage || userId == ErrorMessageStrings.invalidPassword {
                                         canSubmit = true
+                                        invalidLogin = true
+                                    } else if userId == ErrorMessageStrings.tooManyAttempts {
+                                        tooManyAttempts = true
+                                        invalidLogin = false
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 120.0) {
+                                            tooManyAttempts = false
+                                            canSubmit = true
+                                        }
+                                    } else {
+                                        canSubmit = true
+                                        invalidLogin = true
                                     }
+                                    
                                 } else {
-                                    canSubmit = true
-                                    invalidLogin = true
+                                    currentView = .welcomeUser
                                 }
-                                
-                            } else {
-                                currentView = .welcomeUser
+                            } catch {
+                                canSubmit = true
+                                invalidLogin = true
                             }
                             
                         }
@@ -142,14 +156,14 @@ struct LoginView: View {
                 
                 Spacer()
             }
-            .onTapGesture {
-                hideKeyboard()
-            }
             .onChange(of: email) {
                 invalidLogin = false
             }
             .onChange(of: password) {
                 invalidLogin = false
+            }
+            .onSubmit {
+                hideKeyboard()
             }
     
         }

@@ -29,13 +29,19 @@ struct YourCommunitiesView: View {
                     }
                     
                 } else {
+                    // add search bar here
+                    
+                    
                     ScrollView(.vertical, showsIndicators: false) {
                         ForEach(communities, id: \.id) { community in
-                            Text(community.communityName)
+                            CommunityCell(community: community)
+                            
+                            Divider()
                         }
                     }
                 }
             }
+            .padding(.horizontal)
         }
         .onChange(of: refreshCommunitiesView) {
             self.refreshCommunities()
@@ -47,10 +53,9 @@ struct YourCommunitiesView: View {
             do {
                 user = try await FetchService.fetchUserById(withUid: user.id)
                 
-                
                 let loadedCommunities = try await FetchService.fetchCommunitesByUser(user: user)
                 communities = []
-                communities = loadedCommunities
+                communities = loadedCommunities.sorted { $0.communityName > $1.communityName }
             } catch {
                 failed = true
             }
