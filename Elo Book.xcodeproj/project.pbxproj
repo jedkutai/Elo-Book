@@ -50,6 +50,9 @@
 		A742A9C72B4D20CE00F956B7 /* UserNotificationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */; };
 		A742A9CB2B4DBD9B00F956B7 /* UserFavoriteSports.swift in Sources */ = {isa = PBXBuildFile; fileRef = A742A9CA2B4DBD9B00F956B7 /* UserFavoriteSports.swift */; };
 		A746CA162B5FAA4900B363F2 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A746CA152B5FAA4900B363F2 /* DeleteAccountView.swift */; };
+		A749C13C2B6DA894000E6E07 /* SelectCommunityNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C13B2B6DA894000E6E07 /* SelectCommunityNameView.swift */; };
+		A749C13E2B6E1DAA000E6E07 /* CommunityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C13D2B6E1DAA000E6E07 /* CommunityService.swift */; };
+		A749C1402B6E3B21000E6E07 /* YourCommunitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C13F2B6E3B21000E6E07 /* YourCommunitiesView.swift */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA87A2B4779A200F62D08 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86F2B4779A100F62D08 /* Follow.swift */; };
 		A74BA87B2B4779A200F62D08 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA8702B4779A100F62D08 /* Comment.swift */; };
@@ -272,6 +275,9 @@
 		A742A9C62B4D20CE00F956B7 /* UserNotificationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationSettings.swift; sourceTree = "<group>"; };
 		A742A9CA2B4DBD9B00F956B7 /* UserFavoriteSports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteSports.swift; sourceTree = "<group>"; };
 		A746CA152B5FAA4900B363F2 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
+		A749C13B2B6DA894000E6E07 /* SelectCommunityNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCommunityNameView.swift; sourceTree = "<group>"; };
+		A749C13D2B6E1DAA000E6E07 /* CommunityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityService.swift; sourceTree = "<group>"; };
+		A749C13F2B6E3B21000E6E07 /* YourCommunitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCommunitiesView.swift; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86F2B4779A100F62D08 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		A74BA8702B4779A100F62D08 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -574,6 +580,14 @@
 			path = DeleteAccountViews;
 			sourceTree = "<group>";
 		};
+		A749C13A2B6DA747000E6E07 /* CreateCommunityViews */ = {
+			isa = PBXGroup;
+			children = (
+				A749C13B2B6DA894000E6E07 /* SelectCommunityNameView.swift */,
+			);
+			path = CreateCommunityViews;
+			sourceTree = "<group>";
+		};
 		A74BA86A2B47797F00F62D08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,14 +629,15 @@
 			children = (
 				A74BA89B2B477A9B00F62D08 /* AuthService.swift */,
 				A74BA8982B477A9B00F62D08 /* CommentService.swift */,
+				A749C13D2B6E1DAA000E6E07 /* CommunityService.swift */,
 				A74BA89C2B477A9B00F62D08 /* FetchService.swift */,
-				A74BA8972B477A9B00F62D08 /* PostService.swift */,
-				A74BA89A2B477A9B00F62D08 /* SearchService.swift */,
-				A74BA8992B477A9B00F62D08 /* UserService.swift */,
-				A7ACF8172B4EE92A00192B72 /* NotificationService.swift */,
 				A704D3802B5369C300F92AC6 /* MessageService.swift */,
+				A7ACF8172B4EE92A00192B72 /* NotificationService.swift */,
+				A74BA8972B477A9B00F62D08 /* PostService.swift */,
 				A73C8A142B5F32230016A026 /* ReplyService.swift */,
 				A7E788DF2B59E77C00DEAA24 /* ReportService.swift */,
+				A74BA89A2B477A9B00F62D08 /* SearchService.swift */,
+				A74BA8992B477A9B00F62D08 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1075,7 +1090,9 @@
 		A797919B2B62E2C7009B92C6 /* CommunityViews */ = {
 			isa = PBXGroup;
 			children = (
+				A749C13A2B6DA747000E6E07 /* CreateCommunityViews */,
 				A797919C2B62E2F6009B92C6 /* CommunityView.swift */,
+				A749C13F2B6E3B21000E6E07 /* YourCommunitiesView.swift */,
 			);
 			path = CommunityViews;
 			sourceTree = "<group>";
@@ -1366,6 +1383,7 @@
 				A7EF1F532B4B24EB00B0F12C /* PostImageExpandedView2.swift in Sources */,
 				A73C8A152B5F32230016A026 /* ReplyService.swift in Sources */,
 				A74BA9172B478F5C00F62D08 /* AltProfileHeader.swift in Sources */,
+				A749C13C2B6DA894000E6E07 /* SelectCommunityNameView.swift in Sources */,
 				A7E788E02B59E77C00DEAA24 /* ReportService.swift in Sources */,
 				A7CAC3692B5157B000199A19 /* CreateNewMessageViewHeader.swift in Sources */,
 				A7CAC37A2B523B1600199A19 /* MessageManager.swift in Sources */,
@@ -1396,6 +1414,7 @@
 				A74BA8C82B477C4700F62D08 /* SquareProfilePicture.swift in Sources */,
 				A74BA8FD2B478EA500F62D08 /* ProfileHeader.swift in Sources */,
 				A74BA9072B478EF200F62D08 /* CreateAccountView.swift in Sources */,
+				A749C1402B6E3B21000E6E07 /* YourCommunitiesView.swift in Sources */,
 				A797919F2B62EF75009B92C6 /* FirstHundredBadge.swift in Sources */,
 				A74BA91D2B478F7800F62D08 /* DeepLinkControllerView.swift in Sources */,
 				A73978592B56900000F2B225 /* StaticUserProfileLoader.swift in Sources */,
@@ -1435,6 +1454,7 @@
 				A73978462B563FED00F2B225 /* UploadChat.swift in Sources */,
 				A7EF1F5A2B4B2B1000B0F12C /* PostCellExpandedBody2.swift in Sources */,
 				A74BA8B72B477ADD00F62D08 /* ErrorMessageStrings.swift in Sources */,
+				A749C13E2B6E1DAA000E6E07 /* CommunityService.swift in Sources */,
 				A74BA90F2B478F0700F62D08 /* SelectUsernameAltView.swift in Sources */,
 				A7CAC3622B514DC700199A19 /* MessageView.swift in Sources */,
 				A739784E2B567C8400F2B225 /* StaticPostCell.swift in Sources */,

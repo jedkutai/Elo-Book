@@ -47,6 +47,16 @@ class Checks {
         return username.count >= 4 && username.rangeOfCharacter(from: usernameCharacterSet.inverted) == nil && username.count <= 16
     }
     
+    static func isValidCommunityName(_ name: String) -> Bool {
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty else {
+            return false
+        }
+        
+        let nameCharacterSet = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_- ")
+        return name.count >= 1 && name.rangeOfCharacter(from: nameCharacterSet.inverted) == nil && name.count <= 50
+    }
+    
     static func isUsernameAvailable (_ username: String) async -> Bool {
         do {
             let db = Firestore.firestore()

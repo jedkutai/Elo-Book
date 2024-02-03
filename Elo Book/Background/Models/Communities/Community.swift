@@ -11,6 +11,7 @@ import Firebase
 struct Community: Identifiable, Hashable, Codable {
     let id: String
     var communityName: String
+    var communityDisplayName: String
     var ownerId: String
     
     var memberIds: [String]

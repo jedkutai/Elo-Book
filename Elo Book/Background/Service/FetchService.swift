@@ -12,6 +12,20 @@ import Contacts
 import Combine
 
 struct FetchService {
+    static func fetchCommunitesByUser(user: User) async throws -> [Community] {
+        var communitiesFound: [Community] = []
+        if let communities = user.communities {
+            let snapshot = try await Firestore.firestore().collection("communities")
+                .whereField("id", in: communities)
+                .order(by: "communityName")
+                .getDocuments()
+            
+            let result = snapshot.documents.compactMap({ try? $0.data(as: Community.self) })
+            communitiesFound = result
+        }
+        
+        return communitiesFound
+    }
     static func fectchBlocksViaUserId(userId: String) async throws -> [Block] {
         let snapshot = try await Firestore.firestore().collection("blocks")
             .whereField("userId", isEqualTo: userId)

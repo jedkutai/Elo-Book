@@ -16,8 +16,10 @@ private enum SelectedTab {
 struct CommunityView: View {
     @Binding var user: User
     
-    
+    @State private var communities: [Community] = []
     @State private var canCreateCommunity: Bool = false
+    @State private var refreshCommunitiesView: Bool = false
+    @State private var failed: Bool = false
     
     @State private var selectedTab: SelectedTab = .communities
     @Environment(\.colorScheme) var colorScheme
@@ -41,7 +43,7 @@ struct CommunityView: View {
                     
                     if canCreateCommunity {
                         NavigationLink {
-                            // create community
+                            SelectCommunityNameView(user: $user, refreshCommunitiesView: $refreshCommunitiesView)
                         } label: {
                             Label("Create", systemImage: "plus.square")
                                 .foregroundStyle(Color(.systemBlue))
@@ -51,7 +53,7 @@ struct CommunityView: View {
                 .padding(.horizontal)
                 
                 TabView(selection: $selectedTab) {
-                    Text("Your Communities")
+                    YourCommunitiesView(user: $user, communities: $communities, refreshCommunitiesView: $refreshCommunitiesView)
                         .tag(SelectedTab.communities)
                     
                     Text("Find Communities")
@@ -62,15 +64,33 @@ struct CommunityView: View {
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
             }
             .onAppear {
-                if let communities = user.communities {
-                    if communities == 0 {
-                        canCreateCommunity = true
+                self.checkIfUserCanCreateCommunity()
+                Task {
+                    do {
+                        communities = try await FetchService.fetchCommunitesByUser(user: user)
+                    } catch {
+                        failed = true
                     }
-                } else {
-                    canCreateCommunity = true
                 }
+            }
+            .onChange(of: refreshCommunitiesView) {
+                self.checkIfUserCanCreateCommunity()
             }
         }
     }
+    
+    private func checkIfUserCanCreateCommunity() {
+        if let communitiesMade = user.communitiesMade {
+            if communitiesMade == 0 {
+                canCreateCommunity = true
+            } else {
+                canCreateCommunity = false
+            }
+        } else {
+            canCreateCommunity = true
+        }
+    }
+    
+    
 }
 
