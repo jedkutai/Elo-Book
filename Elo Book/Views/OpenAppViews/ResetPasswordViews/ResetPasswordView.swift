@@ -16,17 +16,7 @@ struct ResetPasswordView: View {
     var body: some View {
         NavigationStack {
             VStack {
-//                HStack {
-//                    Button {
-//                        dismiss()
-//                    } label: {
-//                        Image(systemName: "chevron.left")
-//                            .foregroundColor(colorScheme == .dark ? Theme.buttonColorDarkMode : Theme.buttonColor)
-//                    }
-//                    .padding(.horizontal)
-//                    
-//                    Spacer()
-//                }
+
                 
                 Spacer()
                 
@@ -53,7 +43,7 @@ struct ResetPasswordView: View {
                         }
                         
                     } label: {
-                        Text("Login")
+                        Text("Reset")
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
@@ -63,7 +53,7 @@ struct ResetPasswordView: View {
                             .padding(.top, 20)
                     }
                 } else {
-                    Text("Login")
+                    Text("Reset")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)

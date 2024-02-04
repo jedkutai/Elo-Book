@@ -27,6 +27,7 @@ struct SquareGroupChatPicture: View {
                     RoundedRectangle(cornerRadius: size.dimension / 8)
                         .stroke(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor, lineWidth: size.dimension / 8 * 0.3)
                 )
+                .padding(1)
 
         } else {
             Image(systemName: "person.3.fill")
@@ -36,8 +37,10 @@ struct SquareGroupChatPicture: View {
                 .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 .overlay(
                     RoundedRectangle(cornerRadius: size.dimension / 8)
-                        .stroke(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor, lineWidth: size.dimension / 8 * 0.3)
+                        .stroke(Color(.systemGray), lineWidth: size.dimension / 8 * 0.3)
                 )
+                .padding(1)
+            
         }
         
     }

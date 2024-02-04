@@ -55,6 +55,7 @@
 		A749C1402B6E3B21000E6E07 /* YourCommunitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C13F2B6E3B21000E6E07 /* YourCommunitiesView.swift */; };
 		A749C1432B6E4F05000E6E07 /* CommunityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C1422B6E4F05000E6E07 /* CommunityCell.swift */; };
 		A749C1452B6E512F000E6E07 /* CommunityProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C1442B6E512F000E6E07 /* CommunityProfilePicture.swift */; };
+		A749C1482B6EC938000E6E07 /* SingleCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A749C1472B6EC938000E6E07 /* SingleCommunityViewController.swift */; };
 		A74BA8772B4779A200F62D08 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86C2B4779A100F62D08 /* User.swift */; };
 		A74BA87A2B4779A200F62D08 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA86F2B4779A100F62D08 /* Follow.swift */; };
 		A74BA87B2B4779A200F62D08 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74BA8702B4779A100F62D08 /* Comment.swift */; };
@@ -282,6 +283,7 @@
 		A749C13F2B6E3B21000E6E07 /* YourCommunitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCommunitiesView.swift; sourceTree = "<group>"; };
 		A749C1422B6E4F05000E6E07 /* CommunityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityCell.swift; sourceTree = "<group>"; };
 		A749C1442B6E512F000E6E07 /* CommunityProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityProfilePicture.swift; sourceTree = "<group>"; };
+		A749C1472B6EC938000E6E07 /* SingleCommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCommunityViewController.swift; sourceTree = "<group>"; };
 		A74BA86C2B4779A100F62D08 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A74BA86F2B4779A100F62D08 /* Follow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
 		A74BA8702B4779A100F62D08 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -599,6 +601,14 @@
 				A749C1442B6E512F000E6E07 /* CommunityProfilePicture.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A749C1462B6EC8F4000E6E07 /* SingleCommunityView */ = {
+			isa = PBXGroup;
+			children = (
+				A749C1472B6EC938000E6E07 /* SingleCommunityViewController.swift */,
+			);
+			path = SingleCommunityView;
 			sourceTree = "<group>";
 		};
 		A74BA86A2B47797F00F62D08 /* Frameworks */ = {
@@ -1107,6 +1117,7 @@
 				A749C13F2B6E3B21000E6E07 /* YourCommunitiesView.swift */,
 				A749C1412B6E4EF4000E6E07 /* Components */,
 				A749C13A2B6DA747000E6E07 /* CreateCommunityViews */,
+				A749C1462B6EC8F4000E6E07 /* SingleCommunityView */,
 			);
 			path = CommunityViews;
 			sourceTree = "<group>";
@@ -1474,6 +1485,7 @@
 				A7CAC3622B514DC700199A19 /* MessageView.swift in Sources */,
 				A739784E2B567C8400F2B225 /* StaticPostCell.swift in Sources */,
 				A704D3702B52C52C00F92AC6 /* ThreadView.swift in Sources */,
+				A749C1482B6EC938000E6E07 /* SingleCommunityViewController.swift in Sources */,
 				A7CAC37C2B524F1F00199A19 /* SquareGroupChatPicture.swift in Sources */,
 				A74BA8952B477A6E00F62D08 /* IGTextFieldModifier.swift in Sources */,
 				A70651B22B49F16800A6CE3A /* FollowingView.swift in Sources */,

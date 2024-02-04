@@ -30,7 +30,7 @@ struct CommunityView: View {
                     Group {
                         switch selectedTab {
                         case .communities:
-                            Text("Communities")
+                            Text("Communities") // change this to searchbar
                         case .searchCommunites:
                             Text("Discover")
                         }

@@ -68,14 +68,14 @@ struct MainTabControllerView: View {
                     }
                     .tag(Tab.discover)
                 
-//                CommunityView(user: $user)
-//                    .tabItem {
-//                        VStack {
-//                            Image(systemName: "rectangle.3.group")
-//                            Text("Communities")
-//                        }
-//                    }
-//                    .tag(Tab.communities)
+                CommunityView(user: $user)
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "rectangle.3.group")
+                            Text("Communities")
+                        }
+                    }
+                    .tag(Tab.communities)
                 
                 UserProfileView(user: $user, refresh: $refresh)
                     .tabItem {

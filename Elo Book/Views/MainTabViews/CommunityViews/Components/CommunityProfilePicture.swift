@@ -25,6 +25,7 @@ struct CommunityProfilePicture: View {
                     RoundedRectangle(cornerRadius: size.dimension / 8)
                         .stroke(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor, lineWidth: size.dimension / 8 * 0.3)
                 )
+                .padding(1)
 
         } else {
             Image(systemName: "rectangle.3.group")
@@ -35,8 +36,9 @@ struct CommunityProfilePicture: View {
                 .foregroundStyle(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor)
                 .overlay(
                     RoundedRectangle(cornerRadius: size.dimension / 8)
-                        .stroke(colorScheme == .dark ? Theme.textColorDarkMode : Theme.textColor, lineWidth: size.dimension / 8 * 0.3)
+                        .stroke(Color(.systemGray), lineWidth: size.dimension / 8 * 0.3)
                 )
+                .padding(1)
         }
     }
 }

@@ -34,7 +34,11 @@ struct YourCommunitiesView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         ForEach(communities, id: \.id) { community in
-                            CommunityCell(community: community)
+                            NavigationLink {
+                                SingleCommunityViewController(user: $user, community: community)
+                            } label: {
+                                CommunityCell(community: community)
+                            }
                             
                             Divider()
                         }
