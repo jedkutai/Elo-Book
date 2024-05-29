@@ -142,7 +142,7 @@ struct DeleteAccountView: View {
             }
             
             
-            Text("Enter your email and passowrd to confirm deletion.")
+            Text("Enter your email and password to confirm deletion.")
                 .font(.footnote)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(Color(.systemGray))

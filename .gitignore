@@ -1,0 +1,17 @@
+# Ignore all .plist files
+*.plist
+
+# Other ignore rules can be added below
+.DS_Store
+*.log
+*.tmp
+*.swp
+
+# Ignore Xcode specific files
+*.xcuserstate
+*.xcworkspace
+*.xcuserdata
+
+# Ignore build products
+build/
+DerivedData/
